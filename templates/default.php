@@ -39,15 +39,17 @@ foreach ($optionmenu as $name => $opt) {
     $optionMenuHTML .= printOptionMenu($name, $opt);
 }
 
+$debug = true;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
     <head>
         <title>HUGnetLab</title>
-       <style>
+        <style>
            <?php include $filedir."/templates/default.css"; ?>
-       </style>
+        </style>
+        <script src="includes/jquery-1.7.1.min.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="header">&nbsp;</div>
@@ -81,6 +83,14 @@ foreach ($optionmenu as $name => $opt) {
     <div>HUGnetLab Version <?php print HUGNETLAB_VERSION; ?></div>
     <div>Page Generated <?php print date('r'); ?> in <?php print round(microtime(true) - $pageStartTime, 4); ?> s</div>
 </div>
+
+<?php if ($html->args()->debug): ?>
+<div>
+<h3>Debug Information</h3>
+<?php \HUGnet\VPrint::debug(); ?>
+</div>
+<?php endif; ?>
+
 </html>
 
 <?php
@@ -94,10 +104,11 @@ foreach ($optionmenu as $name => $opt) {
  */
 function printMenu($name, $task)
 {
+    global $html;
     if ($task == "menudivider") return "<hr />";
-    $sTask = getTask();
+    $sTask = $html->args()->task;
     if (empty($sTask)) $sTask = "home";
-    $option = getOption();
+    $option = $html->args()->option;
     if (trim(strtolower($task)) == $sTask) {
         $class = "active";
     }
@@ -120,7 +131,7 @@ function printOptionMenu($name, $option=null)
     if (!is_dir($filedir."/".$option)) return;
 
     if (empty($forceOption) || (trim(strtolower($forceOption)) == $option)) {
-        $sOption = getOption();
+        $sOption = $html->args()->option;
         if (trim(strtolower($option)) == $sOption) {
             $class = "active";
         }

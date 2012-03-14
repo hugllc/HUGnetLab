@@ -4,7 +4,7 @@
  *
  * <pre>
  * CoreUI is a user interface for the HUGnet cores.
- * Copyright (C) 2007 Hunt Utilities Group, LLC
+ * Copyright (C) 2012 Hunt Utilities Group, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,6 @@ $filedir = dirname(__FILE__);
 if (!isset($basedir)) $basedir = $filedir;
 
 $template = $_REQUEST["template"];
-
-require_once $filedir."/includes/arguments.php";
 require_once $filedir."/includes/network.php";
 /*
 if (mobileUA()) {
@@ -50,19 +48,20 @@ define("HUGNETLAB_VERSION", trim(file_get_contents(dirname(__FILE__)."/VERSION.T
 $uname = posix_uname();
 $host = trim($uname['nodename']);
 
-require_once 'HUGnetLib/hugnet.inc.php';
-require_once HUGNET_INCLUDE_PATH."/containers/ConfigContainer.php";
-$config = &ConfigContainer::singleton("/etc/hugnet/config.inc.php");
-$task = getTask();
-$option = getOption();
+require_once $filedir."/includes/hugnet.php";
+
+$task = $html->args()->task;
+$option = $html->args()->option;
+
 $menu_include = $filedir."/home/menu.inc.php";
 if (file_exists($filedir."/".$option."/".$task.".inc.php")) {
     $include = $filedir."/".$option."/".$task.".inc.php";
 } else {
     $include = $filedir."/".$option."/home.inc.php";
 }
-if (file_exists($filedir."/".$option."/menu.inc.php")) $menu_include = $filedir."/".$option."/menu.inc.php";
-
+if (file_exists($filedir."/".$option."/menu.inc.php")) {
+    $menu_include = $filedir."/".$option."/menu.inc.php";
+}
 
 ob_start();
 include $include;
@@ -76,11 +75,6 @@ if (trim(strtolower($template)) == "bare") {
 
     include $menu_include;
     $optionmenu = array(
-        "Home" => "home",
-        "HUGnet" => "hugnet",
-        "Lights" => "lights",
-        "Setup" => "setup",
-        "Debug" => "debug",
     );
     if (!file_exists($filedir."/templates/".$template.".php")) $template = "default";
     include $filedir."/templates/".$template.".php";
