@@ -48,6 +48,14 @@ $data = $dev->decodeData(
     (array)$prev[$dev]
 );
 $d = $dev->historyFactory($data);
-print json_encode($d->toArray());
+$out = $d->toArray();
+$ret = array("id" => $did, "Date" => date("Y-m-d H:i:s"));
+for ($i = 0; $i < 9; $i++) {
+    $ret["Data".$i] = $out["Data".$i];
+}
+header('Cache-Control: no-cache, must-revalidate');
+header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
+header('Content-type: application/json');
+print json_encode($ret);
 
 ?>
