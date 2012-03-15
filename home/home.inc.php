@@ -3,8 +3,8 @@
  * Setup Home
  *
  * <pre>
- * CoreUI is a user interface for the HUGnet cores.
- * Copyright (C) 2007 Hunt Utilities Group, LLC
+ * HUGnetLab is the user interface for the HUGnetLab Project
+ * Copyright (C) 2012 Hunt Utilities Group, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,13 +22,13 @@
  * </pre>
  *
  * @category   UI
- * @package    CoreUI
+ * @package    HUGnetLab
  * @subpackage Setup
  * @author     Scott Price <prices@hugllc.com>
- * @copyright  2007 Hunt Utilities Group, LLC
+ * @copyright  2012 Hunt Utilities Group, LLC
  * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version    SVN: $Id$
- * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
+ * @link       https://dev.hugllc.com/index.php/Project:HUGnetLab
  */
 if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 
@@ -85,7 +85,7 @@ for ($i = 0; $i < $sensors; $i++) {
     var k = 0;
     function poll()
     {
-        $.get("ajax/poll.php?id=<?php print dechex($dev->id); ?>",
+        $.get("ajax/poll.php?id=<?php print dechex($did); ?>",
             function(data) {
                 k = 1 - k;
                 $('#dataTable').prepend(

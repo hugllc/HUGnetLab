@@ -205,3 +205,9 @@ ul.hmenu li a.active, ul.hmenu li a:hover {
     color:#FFF;
     background:#800;
 }
+
+
+.leftHeader {
+    text-align: right;
+    padding-right: 3px;
+}
