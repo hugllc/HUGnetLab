@@ -49,7 +49,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 <?php
 
 $devices = explode(",", $html->args()->id);
-if (empty($html->args()->id)) {
+if ($html->args()->id == "") {
     return;
 }
 $dev = new DeviceContainer();
