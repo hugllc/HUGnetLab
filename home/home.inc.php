@@ -40,7 +40,7 @@ $sensors = 9;
 <form method="POST" action="<?php echo $url ?>">
 <table>
     <tr>
-        <td style="font-weight: bold;">Devices:</td>
+        <td style="font-weight: bold;">Device:</td>
         <td><input type="text" name="id" value="<?php print $html->args()->id; ?>" /></td>
     </tr>
     <tr>
@@ -50,22 +50,23 @@ $sensors = 9;
 </form>
 <?php
 
-$devices = explode(",", $html->args()->id);
+$device = hexdec($html->args()->id);
 if ($html->args()->id == "") {
     return;
 }
 $dev = new DeviceContainer();
-foreach (array_keys($devices) as $key) {
-    $did = hexdec($devices[$key]);
-    DevicesTable::insertDeviceID(array("DeviceID" => $did, "GatewayKey" => 0xFFFF));
-    $html->out("Getting configuration of ".sprintf("%06X", $did));
-    $ret = $html->system()->device($did)->network()->config();
+$dev->getRow($device);
+if (empty($dev->HWPartNum)) {
+    DevicesTable::insertDeviceID(array("DeviceID" => $device, "GatewayKey" => 0xFFFF));
+    $html->out("Getting configuration of ".sprintf("%06X", $device));
+    $ret = $html->system()->device($device)->network()->config();
     if (!is_object($ret) || strlen($ret->Reply()) == 0) {
     //    $html->out("Could not contact device ".sprintf("%06X", $devices[$key])));
+        print "Failed to find the device";
+        return;
     } else {
         $dev->fromAny($ret->Reply());
         $dev->updateRow();
-        break;
     }
 }
 ?>
@@ -85,7 +86,7 @@ for ($i = 0; $i < $sensors; $i++) {
     var k = 0;
     function poll()
     {
-        $.get("ajax/poll.php?id=<?php print dechex($did); ?>",
+        $.get("ajax/poll.php?id=<?php print dechex($dev->id); ?>",
             function(data) {
                 k = 1 - k;
                 $('#dataTable').prepend(
