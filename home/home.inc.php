@@ -34,6 +34,8 @@ if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
+$sensors = 9;
+
 ?>
 <form method="POST" action="<?php echo $url ?>">
 <table>
@@ -71,12 +73,12 @@ foreach (array_keys($devices) as $key) {
     <tr>
         <th>Date</th>
 <?php
-for ($i = 0; $i < 9; $i++) {
-    print "        <th>".$dev->sensor($i)->unitType."<br/>(".$dev->sensor($i)->units.")</th>";
+for ($i = 0; $i < $sensors; $i++) {
+    print "        <th>".$dev->sensor($i)->unitType."<br/>(".$dev->sensor($i)->storageUnit.")</th>";
 }
 ?>
     </tr>
-    <tbody id="dataTable">
+    <tbody id="dataTable" style="overflow: scroll; max-height: 800px;">
     </tbody>
 </table>
 <script lang="JavaScript">
@@ -88,15 +90,10 @@ for ($i = 0; $i < 9; $i++) {
                 k = 1 - k;
                 $('#dataTable').prepend(
                                 '<tr><td class="row'+k+'">' + data.Date + "</td>"
-                            + '<td class="row'+k+'">' + data.Data0 + "</td>"
-                            + '<td class="row'+k+'">' + data.Data1 + "</td>"
-                            + '<td class="row'+k+'">' + data.Data2 + "</td>"
-                            + '<td class="row'+k+'">' + data.Data3 + "</td>"
-                            + '<td class="row'+k+'">' + data.Data4 + "</td>"
-                            + '<td class="row'+k+'">' + data.Data5 + "</td>"
-                            + '<td class="row'+k+'">' + data.Data6 + "</td>"
-                            + '<td class="row'+k+'">' + data.Data7 + "</td>"
-                            + '<td class="row'+k+'">' + data.Data8 + "</td></tr>");
+                        <?php for ($i = 0; $i < $sensors; $i++): ?>
+                            + '<td class="row'+k+'">' + data.Data<?php print $i; ?> + "</td>"
+                        <?php endfor; ?>
+                            + "</tr>");
                 poll();
             }, "json");
     }
