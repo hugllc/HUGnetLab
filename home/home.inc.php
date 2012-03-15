@@ -86,7 +86,7 @@ for ($i = 0; $i < 9; $i++) {
         $.get("ajax/poll.php?id=<?php print dechex($dev->id); ?>",
             function(data) {
                 k = 1 - k;
-                $('#dataTable').append(
+                $('#dataTable').prepend(
                                 '<tr><td class="row'+k+'">' + data.Date + "</td>"
                             + '<td class="row'+k+'">' + data.Data0 + "</td>"
                             + '<td class="row'+k+'">' + data.Data1 + "</td>"
