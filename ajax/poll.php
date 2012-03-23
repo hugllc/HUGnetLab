@@ -49,7 +49,9 @@ $data = $dev->decodeData(
 );
 $d = $dev->historyFactory($data);
 $out = $d->toArray();
-$ret = array("id" => $did, "Date" => date("Y-m-d H:i:s"));
+$ret = array(
+    "id" => $did, "Date" => date("Y-m-d H:i:s"), "DataIndex" => $data["DataIndex"]
+);
 for ($i = 0; $i < 9; $i++) {
     $ret["Data".$i] = $out["Data".$i];
 }

@@ -50,6 +50,7 @@ $debug = true;
            <?php include $filedir."/templates/default.css"; ?>
         </style>
         <script src="includes/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="includes/jquery.tablesorter.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="header">&nbsp;</div>
@@ -77,12 +78,12 @@ $debug = true;
                 </td>
             </tr>
         </table>
+        <div class="copyright">
+            <div>&copy; Copyright 2012 <a href="http://www.hugllc.com">Hunt Utilities Group, LLC</a></div>
+            <div>HUGnetLab Version <?php print HUGNETLAB_VERSION; ?></div>
+            <div>Page Generated <?php print date('r'); ?> in <?php print round(microtime(true) - $pageStartTime, 4); ?> s</div>
+        </div>
     </body>
-<div class="copyright">
-    <div>&copy Copyright 2012 <a href="http://www.hugllc.com">Hunt Utilities Group, LLC</a></div>
-    <div>HUGnetLab Version <?php print HUGNETLAB_VERSION; ?></div>
-    <div>Page Generated <?php print date('r'); ?> in <?php print round(microtime(true) - $pageStartTime, 4); ?> s</div>
-</div>
 
 <?php if ($html->args()->debug): ?>
 <div>

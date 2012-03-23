@@ -3,8 +3,8 @@
  * Setup Home
  *
  * <pre>
- * HUGnetLab is the user interface for the HUGnetLab Project
- * Copyright (C) 2012 Hunt Utilities Group, LLC
+ * CoreUI is a user interface for the HUGnet cores.
+ * Copyright (C) 2007 Hunt Utilities Group, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,16 +22,33 @@
  * </pre>
  *
  * @category   UI
- * @package    HUGnetLab
+ * @package    CoreUI
  * @subpackage Setup
  * @author     Scott Price <prices@hugllc.com>
- * @copyright  2012 Hunt Utilities Group, LLC
+ * @copyright  2007 Hunt Utilities Group, LLC
  * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version    SVN: $Id$
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLab
  */
-if (!defined("_HUGNETLAB")) header("Location: ../index.php");
+
+
+include_once dirname(__FILE__)."/../includes/hugnet.php";
+require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
+
+$did = hexdec($html->args()->id);
+
+$dev = &$html->system()->device();
+$dev->load($did);
+$pkt = &$dev->network()->config();
+
+$dev->config()->decode($pkt->reply());
+$dev->store();
+
+header('Cache-Control: no-cache, must-revalidate');
+header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
+header('Content-type: application/json');
+
+print $dev->jsonEncode();
+
 
 ?>
-
-Home

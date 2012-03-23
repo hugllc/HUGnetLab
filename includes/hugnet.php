@@ -42,15 +42,29 @@ $args = \HUGnet\ui\HTMLArgs::factory(
     count($_REQUEST),
     array(
         "task" => array("name" => "task", "type" => "string", "default" => "home"),
-        "option" => array("name" => "option", "type" => "string", "default" => "home"),
+        "option" => array(
+            "name" => "option", "type" => "string", "default" => "home"
+        ),
         "id" => array("name" => "DeviceID", "type" => "string"),
-        "dev" => array("name" => "device", "type" => "string", "default" => "/dev/ttyUSB0"),
+        "dev" => array(
+            "name" => "device", "type" => "string", "default" => "/dev/ttyUSB0"
+        ),
+        "sock" => array(
+            "name" => "socket", "type" => "string", "default" => "/tmp/HUGnetRouter"
+        ),
     )
 );
 $config = $args->config();
+/*
 $config["network"]["default"] = array(
     "driver" => "Serial",
     "location" => $args->dev,
+);
+*/
+$config["network"]["default"] = array(
+    "driver" => "Socket",
+    "type" => AF_UNIX,
+    "location" => $args->socket,
 );
 $config["servers"] = array(
     array(

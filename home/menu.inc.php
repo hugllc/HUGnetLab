@@ -31,7 +31,9 @@
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
  */
 $taskmenu = array(
-    "Home" => "home",
+    "Home"        => "home",
+    "Device List" => "devlist",
+    "Poll"        => "poll",
 );
 
 ?>
