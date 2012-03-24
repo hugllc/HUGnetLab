@@ -45,11 +45,11 @@ $devices = array(0x1008, 0xFE, 0x67);
 <table id="devices" class="tablesorter">
     <thead>
     <tr>
+        <th class="{sorter: false}">Actions</th>
         <th class="{sorter: 'numeric'}">Serial #</th>
         <th class="{sorter: 'text'}">DeviceID</th>
         <th class="{sorter: 'text'}">Hardware</th>
         <th class="{sorter: 'text'}">Firmware</th>
-        <th class="{sorter: false}">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -67,6 +67,7 @@ $devices = array(0x1008, 0xFE, 0x67);
     }
     function getConfig(id)
     {
+        $('#Refresh'+ id).html("Working...");
         $.get("ajax/config.php?id="+id.toString(16), saveRow, "json");
     }
     function saveRow(data)
@@ -76,13 +77,13 @@ $devices = array(0x1008, 0xFE, 0x67);
             $('table#devices tbody').append('<tr id="dev'+data.id+'" class="row'+k+'"></tr>');
         }
         $('table#devices tr#dev'+data.id).html(
-              '<td class="id">' + data.id + '</td>'
+            '<td class="Actions">'
+               + '<button id="Refresh' + data.id + '" type="button" class="refresh" lang="JavaScript" onclick="getConfig(' + data.id + ');">Refresh</button>'
+            + '</td>'
+            + '<td class="id">' + data.id + '</td>'
             + '<td class="DeviceID">' + data.DeviceID + '</td>'
             + '<td class="Hardware">' + data.HWPartNum + '</td>'
             + '<td class="Firmware">' + data.FWPartNum + ' ' + data.FWVersion + '</td>'
-            + '<td class="Actions">'
-               + '<button type="button" class="button" lang="JavaScript" onclick="getConfig(' + data.id + ');">Refresh</button>'
-            + '</td>'
         );
         $('table#devices').trigger("update");
     }
@@ -90,7 +91,7 @@ $devices = array(0x1008, 0xFE, 0x67);
         <?php foreach($devices as $dev): ?>
             getDevice(<?php print $dev; ?>);
         <?php endforeach; ?>
-        $("#devices").tablesorter({sortList: [[0,0]]});
+        $("#devices").tablesorter({sortList: [[1,0]], headers: {0: {sorter: false}}});
     });
 </script>
 

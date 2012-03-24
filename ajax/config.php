@@ -42,7 +42,7 @@ $dev->load($did);
 $pkt = &$dev->network()->config();
 
 $dev->config()->decode($pkt->reply());
-$dev->store();
+$dev->store(true);
 
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');

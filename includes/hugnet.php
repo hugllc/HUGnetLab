@@ -54,24 +54,7 @@ $args = \HUGnet\ui\HTMLArgs::factory(
         ),
     )
 );
+
+$args->set("f", dirname(__FILE__)."/config.ini");
 $config = $args->config();
-/*
-$config["network"]["default"] = array(
-    "driver" => "Serial",
-    "location" => $args->dev,
-);
-*/
-$config["network"]["default"] = array(
-    "driver" => "Socket",
-    "type" => AF_UNIX,
-    "location" => $args->socket,
-);
-$config["servers"] = array(
-    array(
-        "driver" => "sqlite",
-        "file"   => sys_get_temp_dir()."/HUGnetLab.sq3",
-        "group"  => "default",
-        "filePerm" => 0666,
-    ),
-);
 $html = \HUGnet\ui\HTML::factory($config, $args);
