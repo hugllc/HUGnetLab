@@ -41,7 +41,9 @@ $sensors = 9;
 <table>
     <tr>
         <th>Device:</th>
-        <td><input type="text" name="id" value="<?php print $html->args()->id; ?>" /></td>
+        <td>
+            <input id="devid" type="text" name="id" value="0" />
+        </td>
     </tr>
     <tr>
         <th>Packet Count:</td>
@@ -52,12 +54,17 @@ $sensors = 9;
         <td><span id="recordCount">0</span></td>
     </tr>
     <tr>
-        <td colspan="2"><input type="submit" name="run" value="Start"/></td>
+        <td colspan="2">
+            <button type="button" lang="JavaScript" onclick="startPoll();">Start</button>
+            <button type="button" lang="JavaScript" onclick="stopPoll();">Stop</button>
+            <button type="button" lang="JavaScript" onclick="resetPoll();">Reset</button>
+        </td>
     </tr>
 </table>
 </form>
 <?php
 
+/*
 $device = hexdec($html->args()->id);
 if ($html->args()->id == "") {
     return;
@@ -77,16 +84,18 @@ if (empty($dev->HWPartNum)) {
         $dev->updateRow();
     }
 }
+*/
 ?>
+
 <table>
     <tr>
         <th>Date</th>
         <th>Index</th>
-<?php
+<?php/*
 for ($i = 0; $i < $sensors; $i++) {
     print "        <th>".$dev->sensor($i)->unitType."<br/>(".$dev->sensor($i)->storageUnit.")</th>";
 }
-?>
+*/?>
     </tr>
     <tbody id="dataTable" style="overflow: scroll; max-height: 800px;">
     </tbody>
@@ -96,30 +105,51 @@ for ($i = 0; $i < $sensors; $i++) {
     var dataIndex = 0;
     var packetCount = 0;
     var recordCount = 0;
+    var id = 0;
+
+    function startPoll()
+    {
+        id = $('input#devid').val();
+        poll();
+    }
+    function stopPoll()
+    {
+        id = 0;
+    }
+    function resetPoll()
+    {
+        $('#dataTable').html('');
+        packetCount = 0;
+        recordCount = 0;
+        $('#packetCount').text(0);
+        $('#recordCount').text(0);
+    }
+
     function poll()
     {
-        $.get("ajax/poll.php?id=<?php print dechex($dev->id); ?>",
-            function(data) {
-                if (data.DataIndex != dataIndex) {
-                    k = 1 - k;
-                    $('#dataTable').prepend(
-                                    '<tr><td class="row'+k+'">' + data.Date + "</td>"
-                                + '<td class="row'+k+'">' + data.DataIndex + "</td>"
-                            <?php for ($i = 0; $i < $sensors; $i++): ?>
-                                + '<td class="row'+k+'">' + data.Data<?php print $i; ?> + "</td>"
-                            <?php endfor; ?>
-                                + "</tr>");
-                    recordCount++;
-                    $('#recordCount').text(recordCount);
-                }
-                dataIndex = data.DataIndex;
-                packetCount++;
-                $('#packetCount').text(packetCount);
-                poll();
-            }, "json");
+        if (id > 0) {
+            $.get("ajax/poll.php?id="+id.toString(16),
+                function(data) {
+                    if (data.DataIndex != dataIndex) {
+                        k = 1 - k;
+                        $('#dataTable').prepend(
+                                        '<tr class="row'+k+'"><td class="date">' + data.Date + '</td>'
+                                    + '<td class="dataindex">' + data.DataIndex + '</td>'
+                                <?php for ($i = 0; $i < $sensors; $i++): ?>
+                                    + '<td class="data">' + data.Data<?php print $i; ?> + '</td>'
+                                <?php endfor; ?>
+                                    + '</tr>');
+                        recordCount++;
+                        $('#recordCount').text(recordCount);
+                    }
+                    dataIndex = data.DataIndex;
+                    packetCount++;
+                    $('#packetCount').text(packetCount);
+                    poll();
+                }, "json");
+        }
     }
     $(document).ready(function(){
-        poll();
     });
 </script>
 
