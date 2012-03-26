@@ -206,6 +206,13 @@ ul.hmenu li a.active, ul.hmenu li a:hover {
     background:#800;
 }
 
+th.leftproperty {
+    text-align: right;
+}
+
+button.backToList {
+    float: right;
+}
 
 .leftHeader {
     text-align: right;

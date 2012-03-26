@@ -48,7 +48,7 @@ header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
 header('Content-type: application/json');
 
-print $dev->jsonEncode();
+print $dev->json();
 
 
 ?>

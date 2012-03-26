@@ -50,6 +50,7 @@ $debug = true;
            <?php include $filedir."/templates/default.css"; ?>
         </style>
         <script src="includes/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="includes/jquery.metadata.js" type="text/javascript"></script>
         <script src="includes/jquery.tablesorter.js" type="text/javascript"></script>
     </head>
     <body>

@@ -40,8 +40,9 @@ $devices = array(0x1008, 0xFE, 0x67);
 
 
 ?>
-<h2>Device List</h2>
 <form method="POST" action="<?php echo $url ?>">
+<div id="listView" style="display: block;">
+<h2>Device List</h2>
 <table id="devices" class="tablesorter">
     <thead>
     <tr>
@@ -55,12 +56,54 @@ $devices = array(0x1008, 0xFE, 0x67);
     <tbody>
     </tbody>
 </table>
+</div>
+<div id="devView" style="display: none;">
+<button id="backToList" type="button" class="backToList" lang="JavaScript" onclick="showList();">Back To List</button>
+<h2>Device: <span id="devHeader"></span></h2>
+<table id="device">
+    <tbody id="devProperties">
+    <tr><th colspan="2">Properties</th>
+    <tr><th class="leftproperty">Serial #</th><td id="id"></td></tr>
+    <tr><th class="leftproperty">DeviceID</th><td id="DeviceID"></td></tr>
+    <tr><th class="leftproperty">RawSetup</th><td id="RawSetup"></td></tr>
+    <tr><th class="leftproperty">HWPartNum</th><td id="HWPartNum"></td></tr>
+    <tr><th class="leftproperty">FWPartNum</th><td id="FWPartNum"></td></tr>
+    <tr><th class="leftproperty">FWVersion</th><td id="FWVersion"></td></tr>
+    <tr><th class="leftproperty">Physical Sensors</th><td id="physicalSensors"></td></tr>
+    <tr><th class="leftproperty">Virtual Sensors</th><td id="virtualSensors"></td></tr>
+    <tr><th class="leftproperty">Active Sensors</th><td id="ActiveSensors"></td></tr>
+    </tbody>
+</table>
+</div>
 </form>
 <script lang="JavaScript">
     var k = 0;
     var dataIndex = 0;
     var packetCount = 0;
     var recordCount = 0;
+    var devices = new Array();
+    function showList()
+    {
+        $('div#devView').hide();
+        $('div#listView').show();
+    }
+    function showDevice(id)
+    {
+        $('div#devView').show();
+        $('div#listView').hide();
+        $('span#devHeader').html(devices[id].DeviceID);
+        setDevice(devices[id]);
+    }
+
+    function setDevice(data)
+    {
+        for (key in data) {
+            if ($('table#device tbody#devProperties td#'+key).length > 0) {
+                $('table#device tbody#devProperties td#'+key).html(data[key]);
+            }
+        }
+    }
+
     function getDevice(id)
     {
         $.get("ajax/getDevice.php?id="+id.toString(16), saveRow, "json");
@@ -72,6 +115,7 @@ $devices = array(0x1008, 0xFE, 0x67);
     }
     function saveRow(data)
     {
+        devices[data.id] = data;
         if ($('table#devices tbody tr#dev'+data.id).length == 0) {
             k = 1 - k;
             $('table#devices tbody').append('<tr id="dev'+data.id+'" class="row'+k+'"></tr>');
@@ -79,6 +123,7 @@ $devices = array(0x1008, 0xFE, 0x67);
         $('table#devices tr#dev'+data.id).html(
             '<td class="Actions">'
                + '<button id="Refresh' + data.id + '" type="button" class="refresh" lang="JavaScript" onclick="getConfig(' + data.id + ');">Refresh</button>'
+               + '<button id="Show' + data.id + '" type="button" class="show" lang="JavaScript" onclick="showDevice(' + data.id + ');">Show</button>'
             + '</td>'
             + '<td class="id">' + data.id + '</td>'
             + '<td class="DeviceID">' + data.DeviceID + '</td>'

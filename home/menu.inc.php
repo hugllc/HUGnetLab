@@ -32,7 +32,7 @@
  */
 $taskmenu = array(
     "Home"        => "home",
-    "Device List" => "devlist",
+    "Device List" => "device",
     "Poll"        => "poll",
 );
 
