@@ -33,26 +33,20 @@
 
 
 include_once dirname(__FILE__)."/../includes/hugnet.php";
+require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
 $did = hexdec($html->args()->id);
 
-$dev = &$html->system()->device();
+$device = &$html->system()->device($did);
+$device->load();
 
-if (empty($did)) {
-    $ids = $dev->ids();
-    $ret = array();
-    foreach ((array)$ids as $value) {
-        $ret[] = $value;
-    }
-    $ret = json_encode($ret);
-} else {
-    $dev->load($did);
-    $ret = $dev->json();
-}
+
+$pkt = $device->network()->loadFirmware();
+
 
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
 header('Content-type: application/json');
-print $ret;
+print json_encode($ret);
 
 ?>

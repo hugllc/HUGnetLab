@@ -40,10 +40,11 @@ $did = hexdec($html->args()->id);
 $dev = &$html->system()->device();
 $dev->load($did);
 $pkt = &$dev->network()->config();
-
-$dev->config()->decode($pkt->reply());
-$dev->store(true);
-
+if (strlen($pkt->reply()) > 0) {
+    $dev->config()->decode($pkt->reply());
+    $dev->setParam("LastContact", date("Y-m-d H:i:s"));
+    $dev->store(true);
+}
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
 header('Content-type: application/json');

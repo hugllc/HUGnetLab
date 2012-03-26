@@ -33,26 +33,42 @@
 
 
 include_once dirname(__FILE__)."/../includes/hugnet.php";
-
-$did = hexdec($html->args()->id);
-
-$dev = &$html->system()->device();
-
-if (empty($did)) {
-    $ids = $dev->ids();
-    $ret = array();
-    foreach ((array)$ids as $value) {
-        $ret[] = $value;
-    }
-    $ret = json_encode($ret);
-} else {
-    $dev->load($did);
-    $ret = $dev->json();
-}
+require_once "HUGnetLib/tables/FirmwareTable.php";
 
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
 header('Content-type: application/json');
-print $ret;
+
+$did = (int)$html->args()->id;
+$firmware = new FirmwareTable();
+
+/*\HUGnet\VPrint::debug(); */
+
+
+if (empty($did)) {
+    $path  = "http://www.int.hugllc.com/HUGnet/firmware";
+
+    $files = file($path."/manifest");
+    foreach ((array)$files as $file) {
+        if (!$firmware->checkFile($file)) {
+            // Load the firmware
+            $firmware->fromFile($file, $path);
+            // Insert it.
+            $firmware->insertRow(true);
+        }
+    }
+    $array = $firmware->selectIDs("1", array());
+    $ret = array();
+    foreach((array)$array as $key => $value) {
+        $ret[] = $value;
+    }
+} else {
+    $firmware->getRow($did);
+    $ret = $firmware->toDB();
+    unset($ret["Code"]);
+    unset($ret["Data"]);
+}
+
+print json_encode($ret);
 
 ?>

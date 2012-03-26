@@ -34,6 +34,11 @@ if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
+$sensors = 9;
+$devices = array(0x1008, 0xFE, 0x67);
+
+
+
 ?>
 <form method="POST" action="<?php echo $url ?>">
 <div id="listView" style="display: block;">
@@ -229,23 +234,12 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         $('table#devices tr#dev'+data.id).html(text);
         $('table#devices').trigger("update");
     }
-    /**
-     * Initializes the device list
-     *
-     * @return null
-     */
-    function initDevices()
-    {
-        $.get("ajax/getDevice.php", function (data) {
-            for (dev in data) {
-                getDevice(parseInt(data[dev]));
-            }
-        }, "json");
-    }
 
     $(document).ready(function(){
-        initDevices();
-        $("table#devices").tablesorter({sortList: [[1,0]]});
+        <?php foreach($devices as $dev): ?>
+            getDevice(<?php print $dev; ?>);
+        <?php endforeach; ?>
+        $("#devices").tablesorter({sortList: [[1,0]], headers: {0: {sorter: false}}});
     });
 </script>
 

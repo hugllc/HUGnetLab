@@ -36,24 +36,32 @@ include_once dirname(__FILE__)."/../includes/hugnet.php";
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
 $did = hexdec($html->args()->id);
-$pkt = $html->system()->device($did)->network()->poll();
 
-$dev = new DeviceContainer();
-$dev->getRow($did);
+$device = &$html->system()->device($did);
+$device->load();
+$pkt = $device->network()->poll();
+if (strlen($pkt->reply()) > 0) {
+    $device->setParam("LastPoll", date("Y-m-d H:i:s"));
+    $device->setParam("LastContact", date("Y-m-d H:i:s"));
+    $device->store();
 
-$data = $dev->decodeData(
-    $pkt->Reply(),
-    $pkt->Command(),
-    0,
-    (array)$prev[$dev]
-);
-$d = $dev->historyFactory($data);
-$out = $d->toArray();
-$ret = array(
-    "id" => $did, "Date" => date("Y-m-d H:i:s"), "DataIndex" => $data["DataIndex"]
-);
-for ($i = 0; $i < 9; $i++) {
-    $ret["Data".$i] = $out["Data".$i];
+    $dev = new DeviceContainer();
+    $dev->getRow($did);
+
+    $data = $dev->decodeData(
+        $pkt->Reply(),
+        $pkt->Command(),
+        0,
+        (array)$prev[$dev]
+    );
+    $d = $dev->historyFactory($data);
+    $out = $d->toArray();
+    $ret = array(
+        "id" => $did, "Date" => date("Y-m-d H:i:s"), "DataIndex" => $data["DataIndex"]
+    );
+    for ($i = 0; $i < 9; $i++) {
+        $ret["Data".$i] = $out["Data".$i];
+    }
 }
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
