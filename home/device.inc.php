@@ -35,9 +35,13 @@ if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
 ?>
-<form method="POST" action="<?php echo $url ?>">
+<form method="POST" action="javascript:void(0);">
 <div id="listView" style="display: block;">
 <h2>Device List</h2>
+<div>
+    <input type="text" id="newDevice" value="" />
+    <button type="button" lang="JavaScript" onclick="addDevice();">Add Device</button>
+</div>
 <table id="devices" class="tablesorter">
     <thead>
     <tr>
@@ -160,8 +164,14 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     function markupFirmware(data)
     {
         var firmware = data.FWPartNum + ' ' + data.FWVersion;
-        if (data.update != undefined) {
-            firmware = firmware + '<br /><button id="UpdateFirmware' + data.id + '" type="button" class="show" lang="JavaScript" onclick="updateFirmware(' + data.id + ', \'' + data.update + '\');">Update to ' + data.update + '</button>';
+        if ((data.update != undefined) || (data.bootloader)) {
+            firmware += '<br /><button id="UpdateFirmware' + data.id + '" type="button" class="show" lang="JavaScript" onclick="updateFirmware(' + data.id + ', \'' + data.update + '\');">';
+            if (data.update == undefined) {
+                firmware += 'Load Program';
+            } else {
+                firmware += 'Update to ' + data.update;
+            }
+            firmware += '</button>';
         }
         return firmware;
     }
@@ -277,7 +287,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         }, "json");
     }
 
-        /**
+    /**
      * Initializes the device list
      *
      * @return null
@@ -286,6 +296,20 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     {
         $('#UpdateFirmware'+ id).html("Updating...");
         $.get("<?php print AJAX_UPDATEFIRMWARE; ?>&id="+id.toString(16)+"&version="+version, saveRow, "json");
+    }
+
+    /**
+     * Initializes the device list
+     *
+     * @return null
+     */
+    function addDevice()
+    {
+        var id = parseInt($('#newDevice').val(), 16);
+        if (id > 0) {
+            $.get("<?php print AJAX_CONFIG; ?>&id="+id.toString(16), saveRow, "json");
+        }
+        $('#newDevice').val("");
     }
 
 

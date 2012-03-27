@@ -82,7 +82,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      */
     function startPoll()
     {
-        pollID = $('input#devid').val();
+        pollID = parseInt($('input#devid').val(), 16);
         $.get("<?php print AJAX_GETDEVICE; ?>&id="+pollID.toString(16), setupPoll, "json");
     }
     /**
@@ -133,12 +133,12 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         header += '<th>Date</th>';
         header += '<th>DataIndex</th>';
         for (i = 0; i < sensors; i++) {
+            header += '<th id="sensor' + i +'">';
+            header += 'Sensor ' + i + '<br />';
             if (data['sensors'][i]['units'] != undefined) {
-                header += '<th id="sensor' + i +'">';
-                header += 'Sensor ' + i + '<br />';
                 header += data['sensors'][i]['units'];
-                header += '</th>';
             }
+            header += '</th>';
         }
         header += '</tr>';
 

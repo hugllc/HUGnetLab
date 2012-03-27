@@ -42,7 +42,11 @@ if (empty($did)) {
 $device = &$html->system()->device($did);
 
 $device->firmware()->set("HWPartNum", $device->get("HWPartNum"));
-$device->firmware()->set("FWPartNum", $device->get("FWPartNum"));
+$FWPartNum = $device->get("FWPartNum");
+if ($FWPartNum === "0039-38-02-C") {
+    $FWPartNum = "0039-38-01-C";
+}
+$device->firmware()->set("FWPartNum", $FWPartNum);
 $device->firmware()->set("RelStatus", \FirmwareTable::DEV);
 $device->firmware()->getLatest();
 
