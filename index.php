@@ -50,34 +50,42 @@ $host = trim($uname['nodename']);
 
 require_once $filedir."/includes/hugnet.php";
 
-$task = $html->args()->task;
 $option = $html->args()->option;
 
-$menu_include = $filedir."/home/menu.inc.php";
-if (file_exists($filedir."/".$option."/".$task.".inc.php")) {
-    $include = $filedir."/".$option."/".$task.".inc.php";
-} else {
-    $include = $filedir."/".$option."/home.inc.php";
-}
 if (file_exists($filedir."/".$option."/menu.inc.php")) {
     $menu_include = $filedir."/".$option."/menu.inc.php";
+} else {
+    $menu_include = $filedir."/home/menu.inc.php";
+    $option = "home";
 }
 
-ob_start();
-include $include;
-$body = ob_get_clean();
 
-
-if (trim(strtolower($template)) == "bare") {
-    print $body;
+if (strtolower($option) === "ajax") {
+    $task = $html->args()->task;
+    if (file_exists($filedir."/ajax/".$task.".php")) {
+        include $filedir."/ajax/".$task.".php";
+    }
 } else {
-    $url = $_SERVER['SCRIPT_NAME']."?option=$option&task=$task";
-
     include $menu_include;
-    $optionmenu = array(
-    );
-    if (!file_exists($filedir."/templates/".$template.".php")) $template = "default";
-    include $filedir."/templates/".$template.".php";
+
+    $menuitems = array();
+    $bodyitems = array();
+    $index = 1;
+    $url = $_SERVER['SCRIPT_NAME']."?option=$option";
+    foreach ((array)$taskmenu as $name => $item) {
+        $menuitems[$index] = '<li><a href="#tabs-'.$index.'">'.$name.'</a></li>';
+        ob_start();
+        include $filedir."/".$option."/".$item.".inc.php";
+        $bodyitems[$index] = "<div id=\"tabs-".$index."\">\n".ob_get_clean()."\n</div>\n";
+        $index++;
+    }
+    $body  = "<div id=\"tabs\">\n<ul>\n".implode("\n", $menuitems)."\n</ul>\n";
+    $body .= implode("\n", $bodyitems)."\n</div>\n";
+    $header = "<script>\n\$(function(){\n\$('#tabs').tabs();\n});\n</script>";
+
+
+    if (!file_exists($filedir."/templates/".$template."/index.php")) $template = "default";
+    include $filedir."/templates/".$template."/index.php";
 }
 ?>
 

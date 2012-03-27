@@ -33,8 +33,7 @@
 $taskmenu = array(
     "Home"        => "home",
     "Device List" => "device",
-    "Poll"        => "poll",
-    "Firmware"    => "firmware",
+    "Read Data"   => "poll",
 );
 
 ?>
