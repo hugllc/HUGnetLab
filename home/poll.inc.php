@@ -135,8 +135,10 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         for (i = 0; i < sensors; i++) {
             header += '<th id="sensor' + i +'">';
             header += 'Sensor ' + i + '<br />';
-            if (data['sensors'][i]['units'] != undefined) {
-                header += data['sensors'][i]['units'];
+            if (data['sensors'][i] != undefined) {
+                if (data['sensors'][i]['units'] != undefined) {
+                    header += data['sensors'][i]['units'];
+                }
             }
             header += '</th>';
         }
