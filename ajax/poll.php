@@ -32,13 +32,12 @@
  */
 
 
-include_once dirname(__FILE__)."/../includes/hugnet.php";
+if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
 $did = hexdec($html->args()->id);
 
 $device = &$html->system()->device($did);
-$device->load();
 $pkt = $device->network()->poll();
 if (strlen($pkt->reply()) > 0) {
     $device->setParam("LastPoll", date("Y-m-d H:i:s"));
@@ -63,9 +62,6 @@ if (strlen($pkt->reply()) > 0) {
         $ret["Data".$i] = $out["Data".$i];
     }
 }
-header('Cache-Control: no-cache, must-revalidate');
-header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
-header('Content-type: application/json');
 print json_encode($ret);
 
 ?>

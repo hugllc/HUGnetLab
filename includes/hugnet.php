@@ -41,7 +41,7 @@ $args = \HUGnet\ui\HTMLArgs::factory(
     $_REQUEST,
     count($_REQUEST),
     array(
-        "task" => array("name" => "task", "type" => "string", "default" => "home"),
+        "task" => array("name" => "task", "type" => "string", "default" => ""),
         "option" => array(
             "name" => "option", "type" => "string", "default" => "home"
         ),

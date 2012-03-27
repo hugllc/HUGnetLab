@@ -32,12 +32,8 @@
  */
 
 
-include_once dirname(__FILE__)."/../includes/hugnet.php";
+if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 require_once "HUGnetLib/tables/FirmwareTable.php";
-
-header('Cache-Control: no-cache, must-revalidate');
-header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
-header('Content-type: application/json');
 
 $did = (int)$html->args()->id;
 $firmware = new FirmwareTable();
@@ -45,28 +41,21 @@ $firmware = new FirmwareTable();
 /*\HUGnet\VPrint::debug(); */
 
 
-if (empty($did)) {
-    $path  = "http://www.int.hugllc.com/HUGnet/firmware";
+$path  = "http://www.int.hugllc.com/HUGnet/firmware";
 
-    $files = file($path."/manifest");
-    foreach ((array)$files as $file) {
-        if (!$firmware->checkFile($file)) {
-            // Load the firmware
-            $firmware->fromFile($file, $path);
-            // Insert it.
-            $firmware->insertRow(true);
-        }
+$files = file($path."/manifest");
+foreach ((array)$files as $file) {
+    if (!$firmware->checkFile($file)) {
+        // Load the firmware
+        $firmware->fromFile($file, $path);
+        // Insert it.
+        $firmware->insertRow(true);
     }
-    $array = $firmware->selectIDs("1", array());
-    $ret = array();
-    foreach((array)$array as $key => $value) {
-        $ret[] = $value;
-    }
-} else {
-    $firmware->getRow($did);
-    $ret = $firmware->toDB();
-    unset($ret["Code"]);
-    unset($ret["Data"]);
+}
+$array = $firmware->selectIDs("1", array());
+$ret = array();
+foreach((array)$array as $key => $value) {
+    $ret[] = $value;
 }
 
 print json_encode($ret);

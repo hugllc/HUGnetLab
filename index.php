@@ -30,12 +30,17 @@
  * @version    SVN: $Id$
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
  */
-//$filedir = realpath(dirname(__FILE__));
 $filedir = dirname(__FILE__);
 if (!isset($basedir)) $basedir = $filedir;
 
+define("AJAX_CONFIG", "index.php?option=ajax&task=config");
+define("AJAX_FIRMWARE", "index.php?option=ajax&task=firmware");
+define("AJAX_GETDEVICE", "index.php?option=ajax&task=getDevice");
+define("AJAX_POLL", "index.php?option=ajax&task=poll");
+define("AJAX_UPDATEFIRMWARE", "index.php?option=ajax&task=updateFirmware");
+
+
 $template = $_REQUEST["template"];
-require_once $filedir."/includes/network.php";
 /*
 if (mobileUA()) {
     $template = "mobile";
@@ -52,15 +57,20 @@ require_once $filedir."/includes/hugnet.php";
 
 $option = $html->args()->option;
 
-if (file_exists($filedir."/".$option."/menu.inc.php")) {
-    $menu_include = $filedir."/".$option."/menu.inc.php";
-} else {
-    $menu_include = $filedir."/home/menu.inc.php";
-    $option = "home";
+if (strtolower($option) !== "ajax") {
+    if (file_exists($filedir."/".$option."/menu.inc.php")) {
+        $menu_include = $filedir."/".$option."/menu.inc.php";
+    } else {
+        $menu_include = $filedir."/home/menu.inc.php";
+        $option = "home";
+    }
 }
 
-
 if (strtolower($option) === "ajax") {
+    header('Cache-Control: no-cache, must-revalidate');
+    header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
+    header('Content-type: application/json');
+
     $task = $html->args()->task;
     if (file_exists($filedir."/ajax/".$task.".php")) {
         include $filedir."/ajax/".$task.".php";
@@ -81,7 +91,17 @@ if (strtolower($option) === "ajax") {
     }
     $body  = "<div id=\"tabs\">\n<ul>\n".implode("\n", $menuitems)."\n</ul>\n";
     $body .= implode("\n", $bodyitems)."\n</div>\n";
-    $header = "<script>\n\$(function(){\n\$('#tabs').tabs();\n});\n</script>";
+    $header = "
+    <script>
+        \$(function(){
+            \$('#tabs').tabs({
+                cookie: {
+                    // store cookie for a day, without, it would be a session cookie
+                    expires: 10
+                }
+            });
+        });
+    </script>";
 
 
     if (!file_exists($filedir."/templates/".$template."/index.php")) $template = "default";

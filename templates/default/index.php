@@ -50,6 +50,7 @@ foreach ($optionmenu as $name => $opt) {
         <link rel="stylesheet" href="templates/default/default.css" />
         <link rel="stylesheet" href="templates/jqueryui/pepper-grinder/jquery.ui.all.css" />
         <script src="includes/jquery-1.7.1.js" type="text/javascript"></script>
+        <script src="includes/jquery.cookie.js" type="text/javascript"></script>
         <script src="includes/jquery.metadata.js" type="text/javascript"></script>
         <script src="includes/jquery.tablesorter.js" type="text/javascript"></script>
         <script src="includes/ui/jquery.ui.core.js" type="text/javascript"></script>

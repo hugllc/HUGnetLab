@@ -84,12 +84,16 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 </table>
 </div>
 </form>
+<div><span style="font-weight: bold;">Last Firmware Check:</span> <span id="lastFirmwareCheck">Never</span></div>
+
+
 <script lang="JavaScript">
     var k = 0;
     var dataIndex = 0;
     var packetCount = 0;
     var recordCount = 0;
     var devices = new Array();
+
     /**
      * Shows the list of endpoints
      *
@@ -143,12 +147,24 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             });
         }
         var actions = '<button id="RefreshDev" type="button" class="refresh" lang="JavaScript" onclick="getConfigDev(' + data.id + ');">Refresh</button>';
-        if (data.loadable) {
-            actions = actions + '<button id="UpdateFirmware' + data.id + '" type="button" class="show" lang="JavaScript" onclick="updateFirmware(' + data.id + ');">Update Firmware</button>';
-        }
+        actions = actions + markupFirmware(data);
         $('table#device tbody td#actions').html(actions);
     }
-
+    /**
+     * Sets up the single device table with the data given
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function markupFirmware(data)
+    {
+        var firmware = data.FWPartNum + ' ' + data.FWVersion;
+        if (data.update != undefined) {
+            firmware = firmware + '<br /><button id="UpdateFirmware' + data.id + '" type="button" class="show" lang="JavaScript" onclick="updateFirmware(' + data.id + ', \'' + data.update + '\');">Update to ' + data.update + '</button>';
+        }
+        return firmware;
+    }
     /**
      * Gets infomration about a device.  This is retrieved from the database only.
      *
@@ -158,7 +174,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      */
     function getDevice(id)
     {
-        $.get("ajax/getDevice.php?id="+id.toString(16), saveRow, "json");
+        $.get("<?php print AJAX_GETDEVICE; ?>&id="+id.toString(16), saveRow, "json");
     }
     /**
      * Gets infomration about a device.  This is retrieved directly from the device
@@ -172,7 +188,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     function getConfig(id)
     {
         $('#Refresh'+ id).html("Working...");
-        $.get("ajax/config.php?id="+id.toString(16), saveRow, "json");
+        $.get("<?php print AJAX_CONFIG; ?>&id="+id.toString(16), saveRow, "json");
     }
     /**
      * Gets infomration about a device.  This is retrieved directly from the device.
@@ -186,7 +202,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     function getConfigDev(id)
     {
         $('#RefreshDev').html("Working...");
-        $.get("ajax/config.php?id="+id.toString(16), saveDevRow, "json");
+        $.get("<?php print AJAX_CONFIG; ?>&id="+id.toString(16), saveDevRow, "json");
     }
     /**
      * Saves the json data returned from getDevice.php and config.php
@@ -224,7 +240,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         text = text + '<td class="id">' + data.id + '</td>'
             + '<td class="DeviceID">' + data.DeviceID + '</td>'
             + '<td class="Hardware">' + data.HWPartNum + '</td>'
-            + '<td class="Firmware">' + data.FWPartNum + ' ' + data.FWVersion + '</td>';
+            + '<td class="Firmware">' + markupFirmware(data) + '</td>';
 
         $('#Refresh'+data.id).button();
 
@@ -238,15 +254,44 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      */
     function initDevices()
     {
-        $.get("ajax/getDevice.php", function (data) {
+        $.get("<?php print AJAX_GETDEVICE; ?>", function (data) {
             for (dev in data) {
                 getDevice(parseInt(data[dev]));
             }
         }, "json");
     }
 
+    /**
+     * Initializes the device list
+     *
+     * @return null
+     */
+    function checkFirmware()
+    {
+        $.get("<?php print AJAX_FIRMWARE; ?>", function (data) {
+            var d = new Date();
+            $("#lastFirmwareCheck").html(d.toLocaleDateString()+' '+d.toLocaleTimeString());
+            $("#lastFirmwareCheck").show();
+            setTimeout('checkFirmware()', 86400000);
+            initDevices();
+        }, "json");
+    }
+
+        /**
+     * Initializes the device list
+     *
+     * @return null
+     */
+    function updateFirmware(id, version)
+    {
+        $('#UpdateFirmware'+ id).html("Updating...");
+        $.get("<?php print AJAX_UPDATEFIRMWARE; ?>&id="+id.toString(16)+"&version="+version, saveRow, "json");
+    }
+
+
     $(document).ready(function(){
         initDevices();
+        checkFirmware();
         $("table#devices").tablesorter({sortList: [[1,0]]});
     });
 </script>

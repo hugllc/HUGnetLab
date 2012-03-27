@@ -32,21 +32,29 @@
  */
 
 
-include_once dirname(__FILE__)."/../includes/hugnet.php";
-require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
+if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 
 $did = hexdec($html->args()->id);
 
+if (empty($did)) {
+    return;
+}
 $device = &$html->system()->device($did);
-$device->load();
 
+$device->firmware()->set("HWPartNum", $device->get("HWPartNum"));
+$device->firmware()->set("FWPartNum", $device->get("FWPartNum"));
+$device->firmware()->set("RelStatus", \FirmwareTable::DEV);
+$device->firmware()->getLatest();
 
-$pkt = $device->network()->loadFirmware();
+$firmware =& $device->firmware();
+$device->network()->loadFirmware($firmware);
 
-
-header('Cache-Control: no-cache, must-revalidate');
-header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
-header('Content-type: application/json');
-print json_encode($ret);
+$pkt = &$device->network()->config();
+if (strlen($pkt->reply()) > 0) {
+    $device->config()->decode($pkt->reply());
+    $device->setParam("LastContact", date("Y-m-d H:i:s"));
+    $device->store(true);
+}
+print $device->json();
 
 ?>

@@ -31,8 +31,7 @@
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLab
  */
 
-
-include_once dirname(__FILE__)."/../includes/hugnet.php";
+if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
 $did = hexdec($html->args()->id);
@@ -45,10 +44,6 @@ if (strlen($pkt->reply()) > 0) {
     $dev->setParam("LastContact", date("Y-m-d H:i:s"));
     $dev->store(true);
 }
-header('Cache-Control: no-cache, must-revalidate');
-header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
-header('Content-type: application/json');
-
 print $dev->json();
 
 

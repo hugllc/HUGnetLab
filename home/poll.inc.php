@@ -128,7 +128,7 @@ for ($i = 0; $i < $sensors; $i++) {
     function poll()
     {
         if (id > 0) {
-            $.get("ajax/poll.php?id="+id.toString(16),
+            $.get("<?php print AJAX_POLL; ?>&id="+id.toString(16),
                 function(data) {
                     if (data.DataIndex != dataIndex) {
                         k = 1 - k;

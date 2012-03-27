@@ -32,6 +32,7 @@
  */
 
 
+if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 include_once dirname(__FILE__)."/../includes/hugnet.php";
 
 $did = hexdec($html->args()->id);
@@ -50,9 +51,6 @@ if (empty($did)) {
     $ret = $dev->json();
 }
 
-header('Cache-Control: no-cache, must-revalidate');
-header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
-header('Content-type: application/json');
 print $ret;
 
 ?>
