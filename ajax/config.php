@@ -37,11 +37,19 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 $did = hexdec($html->args()->id);
 
 $dev = &$html->system()->device();
+$new = false;
 $dev->load($did);
+if ($dev->get("DeviceID") === "000000") {
+    /* This means that the device is new */
+    $new = true;
+}
 $pkt = &$dev->network()->config();
 if (strlen($pkt->reply()) > 0) {
     $dev->config()->decode($pkt->reply());
     $dev->setParam("LastContact", date("Y-m-d H:i:s"));
+    if ($new) {
+        $dev->set("id", 0);
+    }
     $dev->store(true);
 }
 print $dev->json();

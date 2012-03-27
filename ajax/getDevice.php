@@ -48,6 +48,15 @@ if (empty($did)) {
     $ret = json_encode($ret);
 } else {
     $dev->load($did);
+    if ($dev->get("DeviceID") === "000000") {
+        $pkt = &$dev->network()->config();
+        if (strlen($pkt->reply()) > 0) {
+            $dev->config()->decode($pkt->reply());
+            $dev->setParam("LastContact", date("Y-m-d H:i:s"));
+            $dev->set("id", 0);
+            $dev->store(true);
+        }
+    }
     $ret = $dev->json();
 }
 
