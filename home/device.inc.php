@@ -44,12 +44,12 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 </div>
 <table id="devices" class="tablesorter">
     <thead>
-    <tr>
-        <th class="{sorter: false}">Actions</th>
-        <th class="{sorter: 'numeric'}">Serial #</th>
-        <th class="{sorter: 'text'}">DeviceID</th>
-        <th class="{sorter: 'text'}">Hardware</th>
-        <th class="{sorter: 'text'}">Firmware</th>
+    <tr id="devicesHead">
+        <th class="{sorter: false}" id="actions">Actions</th>
+        <th class="{sorter: 'numeric'}" id="id">Serial #</th>
+        <th class="{sorter: 'text'}" id="DeviceID">DeviceID</th>
+        <th class="{sorter: 'text'}" id="HWPartNum">Hardware</th>
+        <th class="{sorter: 'text'}" id="Firmware">Firmware</th>
     </tr>
     </thead>
     <tbody>
@@ -239,21 +239,29 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      */
     function saveRow(data)
     {
-        devices[data.id] = data;
-        if ($('table#devices tbody tr#dev'+data.id).length == 0) {
+        devices[data['id']] = data;
+        /* Insert the row if it is not already there */
+        if ($('table#devices tbody tr#dev'+data['id']).length == 0) {
             k = 1 - k;
-            $('table#devices tbody').append('<tr id="dev'+data.id+'" class="row'+k+'"></tr>');
+            $('table#devices tbody').append('<tr id="dev'+data['id']+'" class="row'+k+'"></tr>');
         }
-        var actions = '<button id="Refresh' + data.id + '" type="button" class="refresh" lang="JavaScript" onclick="getConfig(' + data.id + ');">Refresh</button>'
-                    + '<button id="Show' + data.id + '" type="button" class="show" lang="JavaScript" onclick="showDevice(' + data.id + ');">Show</button>';
-        var text = '<td class="Actions">' + actions + '</td>';
-        text = text + '<td class="id">' + data.id + '</td>'
-            + '<td class="DeviceID">' + data.DeviceID + '</td>'
-            + '<td class="Hardware">' + data.HWPartNum + '</td>'
-            + '<td class="Firmware">' + markupFirmware(data) + '</td>';
+        /* These are two special fields we are adding */
+        data['actions'] = '<button id="Refresh' + data['id'] + '" type="button" class="refresh" lang="JavaScript" onclick="getConfig(' + data['id'] + ');">Refresh</button>'
+                    + '<button id="Show' + data['id'] + '" type="button" class="show" lang="JavaScript" onclick="showDevice(' + data['id'] + ');">Show</button>';
+        data['Firmware'] = markupFirmware(data);
 
-        $('#Refresh'+data.id).button();
-
+        /* Run through the header */
+        var text = '';
+        $('table#devices tr#devicesHead th').each(function() {
+            var key = $(this).attr('id');
+            text += '<td class="' + key + '">';
+            if (data[key] == undefined) {
+                text += '-';
+            } else {
+                text += data[key];
+            }
+            text += '</td>';
+        });
         $('table#devices tr#dev'+data.id).html(text);
         $('table#devices').trigger("update");
     }
