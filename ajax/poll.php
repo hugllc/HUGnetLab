@@ -59,7 +59,7 @@ if (strlen($pkt->reply()) > 0) {
         "id" => $did, "Date" => date("Y-m-d H:i:s"), "DataIndex" => $data["DataIndex"]
     );
     for ($i = 0; $i < 9; $i++) {
-        $ret["Data".$i] = $out["Data".$i];
+        $ret["Data"][$i] = $out["Data".$i];
     }
 }
 print json_encode($ret);

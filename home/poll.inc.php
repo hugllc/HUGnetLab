@@ -34,23 +34,21 @@ if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
-$sensors = 9;
-
 ?>
-<form method="POST" action="<?php echo $url ?>">
+<form method="POST" action="javascript:void(0);">
 <table>
     <tr>
-        <th>Device:</th>
+        <th class="leftproperty">Device:</th>
         <td>
             <input id="devid" type="text" name="id" value="0" />
         </td>
     </tr>
     <tr>
-        <th>Packet Count:</td>
+        <th class="leftproperty">Packet Count:</td>
         <td><span id="packetCount">0</span></td>
     </tr>
     <tr>
-        <th>Record Count:</td>
+        <th class="leftproperty">Record Count:</td>
         <td><span id="recordCount">0</span></td>
     </tr>
     <tr>
@@ -62,42 +60,11 @@ $sensors = 9;
     </tr>
 </table>
 </form>
-<?php
 
-/*
-$device = hexdec($html->args()->id);
-if ($html->args()->id == "") {
-    return;
-}
-$dev = new DeviceContainer();
-$dev->getRow($device);
-if (empty($dev->HWPartNum)) {
-    DevicesTable::insertDeviceID(array("DeviceID" => $device, "GatewayKey" => 0xFFFF));
-    $html->out("Getting configuration of ".sprintf("%06X", $device));
-    $ret = $html->system()->device($device)->network()->config();
-    if (!is_object($ret) || strlen($ret->Reply()) == 0) {
-    //    $html->out("Could not contact device ".sprintf("%06X", $devices[$key])));
-        print "Failed to find the device";
-        return;
-    } else {
-        $dev->fromAny($ret->Reply());
-        $dev->updateRow();
-    }
-}
-*/
-?>
-
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Index</th>
-<?php/*
-for ($i = 0; $i < $sensors; $i++) {
-    print "        <th>".$dev->sensor($i)->unitType."<br/>(".$dev->sensor($i)->storageUnit.")</th>";
-}
-*/?>
-    </tr>
-    <tbody id="dataTable" style="overflow: scroll; max-height: 800px;">
+<table id="dataTable">
+    <thead id="dataHead">
+    </thead>
+    <tbody id="dataBody">
     </tbody>
 </table>
 <script lang="JavaScript">
@@ -105,49 +72,117 @@ for ($i = 0; $i < $sensors; $i++) {
     var dataIndex = 0;
     var packetCount = 0;
     var recordCount = 0;
-    var id = 0;
+    var pollID = 0;
+    var sensors = 9;
 
+    /**
+     * Starts the polling
+     *
+     * @return null
+     */
     function startPoll()
     {
-        id = $('input#devid').val();
-        poll();
+        pollID = $('input#devid').val();
+        $.get("<?php print AJAX_GETDEVICE; ?>&id="+pollID.toString(16), setupPoll, "json");
     }
+    /**
+     * Stops the polling
+     *
+     * @return null
+     */
     function stopPoll()
     {
-        id = 0;
+        pollID = 0;
     }
+    /**
+     * Resets everything
+     *
+     * @return null
+     */
     function resetPoll()
     {
-        $('#dataTable').html('');
+        $('#dataHead').html('');
+        $('#dataBody').html('');
         packetCount = 0;
         recordCount = 0;
         $('#packetCount').text(0);
         $('#recordCount').text(0);
     }
+    /**
+     * Adds a row to the database
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function setupPoll(data)
+    {
+        setHeader(data);
+        poll();
+    }
+    /**
+     * Adds a row to the database
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function setHeader(data)
+    {
+        var header = '<tr>';
+        header += '<th>Date</th>';
+        header += '<th>DataIndex</th>';
+        for (i = 0; i < sensors; i++) {
+            if (data['sensors'][i]['units'] != undefined) {
+                header += '<th id="sensor' + i +'">';
+                header += 'Sensor ' + i + '<br />';
+                header += data['sensors'][i]['units'];
+                header += '</th>';
+            }
+        }
+        header += '</tr>';
 
+        $('#dataTable #dataHead').html(header)
+    }
+    /**
+     * Polls for data once
+     *
+     * @return null
+     */
     function poll()
     {
-        if (id > 0) {
-            $.get("<?php print AJAX_POLL; ?>&id="+id.toString(16),
-                function(data) {
-                    if (data.DataIndex != dataIndex) {
-                        k = 1 - k;
-                        $('#dataTable').prepend(
-                                        '<tr class="row'+k+'"><td class="date">' + data.Date + '</td>'
-                                    + '<td class="dataindex">' + data.DataIndex + '</td>'
-                                <?php for ($i = 0; $i < $sensors; $i++): ?>
-                                    + '<td class="data">' + data.Data<?php print $i; ?> + '</td>'
-                                <?php endfor; ?>
-                                    + '</tr>');
-                        recordCount++;
-                        $('#recordCount').text(recordCount);
-                    }
-                    dataIndex = data.DataIndex;
-                    packetCount++;
-                    $('#packetCount').text(packetCount);
-                    poll();
-                }, "json");
+        if (pollID > 0) {
+            $.get("<?php print AJAX_POLL; ?>&id="+pollID.toString(16), addRow, "json");
         }
+    }
+    /**
+     * Adds a row to the database
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function addRow(data)
+    {
+        if (data.DataIndex != dataIndex) {
+            k = 1 - k;
+            var row = '<tr class="row'+k+'"><td class="date">' + data.Date + '</td>'
+                    + '<td class="dataindex">' + data.DataIndex + '</td>';
+            for (i = 0; i < sensors; i++) {
+                if ($('#dataHead th#sensor' + i).length > 0) {
+                    row = row + '<td class="data">' + data.Data[i] + '</td>';
+                }
+            }
+            row = row + '</tr>';
+
+            $('#dataTable #dataBody').prepend(row);
+            recordCount++;
+            $('#recordCount').text(recordCount);
+        }
+        dataIndex = data.DataIndex;
+        packetCount++;
+        $('#packetCount').text(packetCount);
+        poll();
     }
     $(document).ready(function(){
     });

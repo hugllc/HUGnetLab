@@ -229,6 +229,12 @@ button.backToList {
     text-align: right;
     padding-right: 3px;
 }
+/* Device polling stuff */
+
+td.dataindex {
+    text-align: center;
+}
+
 
 /* JQuery Table Sorter Stuff */
 th.header {
