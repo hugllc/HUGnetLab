@@ -51,7 +51,6 @@ if (empty($did)) {
     $ret = $dev->json();
 }
 
-//var_dump(json_decode($ret, true));
 print $ret;
 
 ?>
