@@ -226,6 +226,8 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             + '<td class="Hardware">' + data.HWPartNum + '</td>'
             + '<td class="Firmware">' + data.FWPartNum + ' ' + data.FWVersion + '</td>';
 
+        $('#Refresh'+data.id).button();
+
         $('table#devices tr#dev'+data.id).html(text);
         $('table#devices').trigger("update");
     }

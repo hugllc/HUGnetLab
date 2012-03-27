@@ -55,6 +55,7 @@ foreach ($optionmenu as $name => $opt) {
         <script src="includes/ui/jquery.ui.core.js" type="text/javascript"></script>
         <script src="includes/ui/jquery.ui.widget.js" type="text/javascript"></script>
         <script src="includes/ui/jquery.ui.tabs.js" type="text/javascript"></script>
+        <script src="includes/ui/jquery.ui.button.js" type="text/javascript"></script>
         <?php print $header; ?>
     </head>
     <body>
