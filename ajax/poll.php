@@ -44,9 +44,7 @@ if (strlen($pkt->reply()) > 0) {
     $device->setParam("LastContact", date("Y-m-d H:i:s"));
     $device->store();
 
-    $dev = new DeviceContainer();
-    $dev->getRow($did);
-
+    $dev = new DeviceContainer($device->get("RawSetup"));
     $data = $dev->decodeData(
         $pkt->Reply(),
         $pkt->Command(),
