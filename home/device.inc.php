@@ -83,7 +83,18 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     </tbody>
     </table>
 <table id="deviceSensors">
-    <tbody id="devSensorProperties">
+    <thead>
+    <tr>
+        <th colspan="4">Sensors</th>
+    </tr>
+    <tr id="deviceSensorHead">
+        <th id="sensor">#</th>
+        <th id="location">Location</th>
+        <th id="type">Type</th>
+        <th id="units">Units</th>
+    </tr>
+    </thead>
+    <tbody id="devSensorData">
     </tbody>
 </table>
 </div>
@@ -149,6 +160,27 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                     $(this).html(data['params'][key]);
                 }
             });
+        }
+        if (data['sensors'] != undefined) {
+            $('#deviceSensors #devSensorData').html('');
+            for (i = 0; i < data['totalSensors']; i++) {
+                if (data['sensors'][i] != undefined) {
+                    /* Run through the header */
+                    var text = '<tr id="sensor' + i + '" class="row'+(i & 1)+'">';
+                    $('#deviceSensors tr#deviceSensorHead th').each(function() {
+                        var key = $(this).attr('id');
+                        text += '<td class="' + key + '">';
+                        if (data['sensors'][i][key] == undefined) {
+                            text += '-';
+                        } else {
+                            text += data['sensors'][i][key];
+                        }
+                        text += '</td>';
+                    });
+                    text += '</tr>';
+                    $('#deviceSensors #devSensorData').append(text);
+                }
+            }
         }
         var actions = '<button id="RefreshDev" type="button" class="refresh" lang="JavaScript" onclick="getConfigDev(' + data.id + ');">Refresh</button>';
         actions = actions + markupFirmware(data);

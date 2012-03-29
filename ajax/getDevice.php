@@ -59,7 +59,6 @@ if (empty($did)) {
     }
     $ret = $dev->json();
 }
-
 print $ret;
 
 ?>

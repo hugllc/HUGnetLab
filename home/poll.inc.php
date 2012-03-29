@@ -139,10 +139,6 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 if (data['sensors'][i]['units'] != undefined) {
                     header += data['sensors'][i]['units'];
                 }
-            } else if (i < 5) {
-                header += '&deg;C';
-            } else {
-                header += 'V';
             }
             header += '</th>';
         }
