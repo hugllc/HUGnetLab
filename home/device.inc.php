@@ -35,9 +35,9 @@ if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
 ?>
-<form method="POST" action="javascript:void(0);">
 <div id="listView" style="display: block;">
 <h2>Device List</h2>
+<form id="devicesForm" method="POST" action="javascript:void(0);">
 <div>
     <input type="text" id="newDevice" value="" />
     <button type="button" lang="JavaScript" onclick="addDevice();">Add Device</button>
@@ -56,14 +56,19 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     </tbody>
 </table>
 </div>
+</form>
 <div id="devView" style="display: none;">
 <button id="backToList" type="button" class="backToList" lang="JavaScript" onclick="showList();">Back To List</button>
 <h2>Device: <span id="devHeader"></span></h2>
+<form id="deviceForm" method="POST" action="javascript:void(0);">
 <table id="device">
     <tbody id="devProperties">
     <tr><th colspan="2">Properties</th>
     <tr><th class="leftproperty">Serial #</th><td id="id"></td></tr>
     <tr><th class="leftproperty">DeviceID</th><td id="DeviceID"></td></tr>
+    <tr><th class="leftproperty">DeviceName</th><td id="DeviceName"></td></tr>
+    <tr><th class="leftproperty">DeviceLocation</th><td id="DeviceLocation"></td></tr>
+    <tr><th class="leftproperty">DeviceJob</th><td id="DeviceJob"></td></tr>
     <tr><th class="leftproperty">RawSetup</th><td id="RawSetup"></td></tr>
     <tr><th class="leftproperty">HWPartNum</th><td id="HWPartNum"></td></tr>
     <tr><th class="leftproperty">FWPartNum</th><td id="FWPartNum"></td></tr>
@@ -77,6 +82,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     <tr><th class="leftproperty">Last Contact</th><td id="LastContact"></td></tr>
     <tr><th class="leftproperty">Last Poll</th><td id="LastPoll"></td></tr>
     <tr><th class="leftproperty">Last History</th><td id="LastHistory"></td></tr>
+    <tr><th class="leftproperty">Last Modified</th><td id="LastModified"></td></tr>
     </tbody>
     <tbody>
     <tr><th class="leftproperty">Actions</th><td id="actions"></td>
@@ -100,14 +106,26 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 </div>
 </form>
 <div><span style="font-weight: bold;">Last Firmware Check:</span> <span id="lastFirmwareCheck">Never</span></div>
-
-
+<div id="testDiv"></div>
 <script lang="JavaScript">
     var k = 0;
     var dataIndex = 0;
     var packetCount = 0;
     var recordCount = 0;
     var devices = new Array();
+
+    $('#deviceForm').submit(function() {
+        // Get all the forms elements and their values in one step
+        var id = parseInt($('#device #id').text());
+        $('#SaveDev').text('Working...');
+        $.post(
+            "index.php?option=ajax&task=postDevice&id="+id.toString(16),
+            $("#deviceForm").serialize(),
+            saveDevRow,
+            "json"
+        );
+        return false;
+    });
 
     /**
      * Shows the list of endpoints
@@ -148,7 +166,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             if (data[key] == undefined) {
                 $(this).html("-");
             } else {
-                $(this).html(data[key]);
+                $(this).html(editDeviceValue(data, key));
             }
         });
         if (data['params'] != undefined) {
@@ -173,7 +191,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                         if (data['sensors'][i][key] == undefined) {
                             text += '-';
                         } else {
-                            text += data['sensors'][i][key];
+                            text += editSensorValue(data['sensors'][i], key, i);
                         }
                         text += '</td>';
                     });
@@ -183,8 +201,70 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             }
         }
         var actions = '<button id="RefreshDev" type="button" class="refresh" lang="JavaScript" onclick="getConfigDev(' + data.id + ');">Refresh</button>';
-        actions = actions + markupFirmware(data);
+        actions += '<button id="SaveDev" type="submit" class="submit" lang="JavaScript">Save</button>';
+        //actions = actions + markupFirmware(data);
         $('table#device tbody td#actions').html(actions);
+    }
+    /**
+     * Sets up the single device table with the data given
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function editDeviceValue(dData, key)
+    {
+        var text = dData[key];
+        var field = 'device['+key+']';
+        if ((key == 'DeviceName')
+            || (key == 'DeviceJob')
+            || (key == 'DeviceLocation')
+        ) {
+            text = '<input type="text" name="'+field+'" '
+                 + 'value="' + dData[key] + '" />';
+        }
+        return text;
+    }
+    /**
+     * Sets up the single device table with the data given
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function editSensorValue(sData, key, index)
+    {
+        var text = sData[key];
+        var field = 'sensors['+index+']['+key+']';
+        if (key == 'location') {
+            text = '<input type="text" name="'+field+'" '
+                 + 'value="' + sData[key] + '" />';
+        } else if (key == 'type') {
+            if (sData['otherTypes'].length == undefined) {
+                text  = '<select name="'+field+'" >';
+                for (q in sData['otherTypes'])
+                {
+                    text += '<option value="'+q+'"';
+                    if (q == sData['type']) {
+                        text += ' selected="selected" ';
+                    }
+                    text += '>'+sData['otherTypes'][q]+'</option>';
+                }
+                text += '</select>';
+            }
+        }
+        return text;
+    }
+    /**
+     * Sets up the single device table with the data given
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function saveDev()
+    {
+
     }
     /**
      * Sets up the single device table with the data given

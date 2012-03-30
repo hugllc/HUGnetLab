@@ -130,15 +130,23 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     function setHeader(data)
     {
         var header = '<tr>';
+        var defaultHeader;
         header += '<th>Date</th>';
         header += '<th>DataIndex</th>';
         for (i = 0; i < sensors; i++) {
-            header += '<th id="sensor' + i +'">';
-            header += 'Sensor ' + i + '<br />';
-            if (data['sensors'][i] != undefined) {
-                if (data['sensors'][i]['units'] != undefined) {
-                    header += data['sensors'][i]['units'];
+           header += '<th id="sensor' + i +'">';
+           defaultHeader = 'Sensor ' + i + '<br />';
+           if (data['sensors'][i] != undefined) {
+                if (data['sensors'][i]['location'].length > 0) {
+                    header += data['sensors'][i]['location']+'<br />';
+                } else {
+                    header += defaultHeader;
                 }
+                if (data['sensors'][i]['storageUnit'] != undefined) {
+                    header += data['sensors'][i]['storageUnit'];
+                }
+            } else {
+                header += defaultHeader;
             }
             header += '</th>';
         }

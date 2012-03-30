@@ -37,32 +37,26 @@ include_once dirname(__FILE__)."/../includes/hugnet.php";
 
 $did = hexdec($html->args()->id);
 
-$dev = &$html->system()->device();
+$dev = &$html->system()->device($did);
 
-if (empty($did)) {
-    $ids = $dev->ids();
-    $ret = array();
-    foreach ((array)$ids as $value) {
-        $ret[] = $value;
-    }
-    $ret = json_encode($ret);
-} else {
-    $dev->load($did);
-    if ($dev->get("DeviceID") === "000000") {
-        $pkt = &$dev->network()->config();
-        if (strlen($pkt->reply()) > 0) {
-            $dev->config()->decode($pkt->reply());
-            $dev->setParam("LastContact", date("Y-m-d H:i:s"));
-            $dev->set("id", 0);
-            $dev->store(true);
+
+$device = &$_POST["device"];
+if (is_array($device)) {
+    $dev->setParam("LastModified", date("Y-m-d H:i:s"));
+    $dev->change($device);
+}
+
+$sensors = &$_POST["sensors"];
+if (is_array($sensors)) {
+    $totalSensors = $dev->get("totalSensors");
+    for ($i = 0; $i < $totalSensors; $i++) {
+        if (is_array($sensors[$i])) {
+            $dev->sensor($i)->change($sensors[$i]);
         }
     }
-    $ret = $dev->json();
-}
-if ($html->args()->d > 0) {
-    var_dump(json_decode($ret, true));
 }
 
-print $ret;
+
+print $html->system()->device($did)->json();
 
 ?>

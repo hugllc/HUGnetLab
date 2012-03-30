@@ -44,14 +44,14 @@ if (strlen($pkt->reply()) > 0) {
     $device->setParam("LastContact", date("Y-m-d H:i:s"));
     $device->store();
 
-    $dev = new DeviceContainer($device->get("RawSetup"));
-    $data = $dev->decodeData(
+    //$dev = new DeviceContainer($device->get("RawSetup"));
+    $data = $device->decodeData(
         $pkt->Reply(),
         $pkt->Command(),
         0,
         (array)$prev[$dev]
     );
-    $d = $dev->historyFactory($data);
+    $d = $device->historyFactory($data);
     $out = $d->toArray();
     $ret = array(
         "id" => $did, "Date" => date("Y-m-d H:i:s"), "DataIndex" => $data["DataIndex"]
