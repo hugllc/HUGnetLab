@@ -48,6 +48,14 @@ body {
     margin-bottom: 0px;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
 h1.header {
     text-align: left;
     padding: 10px;

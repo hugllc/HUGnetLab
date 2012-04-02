@@ -39,7 +39,6 @@ $did = hexdec($html->args()->id);
 
 $dev = &$html->system()->device($did);
 
-
 $device = &$_POST["device"];
 if (is_array($device)) {
     $dev->setParam("LastModified", date("Y-m-d H:i:s"));

@@ -97,6 +97,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         <th id="sensor">#</th>
         <th id="location">Location</th>
         <th id="type">Type</th>
+        <th id="extraDefault">Parameters</th>
         <th id="units">Units</th>
     </tr>
     </thead>
@@ -124,6 +125,16 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             saveDevRow,
             "json"
         );
+        /*
+        $.post(
+            "index.php?option=ajax&task=postDevice&id="+id.toString(16),
+            $("#deviceForm").serialize(),
+            function(data) {
+                $("#testDiv").append('<pre>'+data+'</pre>');
+            },
+            "text"
+        );
+        */
         return false;
     });
 
@@ -252,8 +263,55 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 }
                 text += '</select>';
             }
+        } else if (key == 'extraDefault') {
+            text = '';
+            for (p in sData[key]) {
+                text += editExtraValue(sData, p, index);
+            }
         }
         return text;
+    }
+    /**
+     * Sets up the single device table with the data given
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function editExtraValue(sData, key, index)
+    {
+        var etext;
+        var efield = 'sensors['+index+'][extra]['+key+']';
+        var evalue;
+        if ((sData["extra"] == undefined)
+            || (sData["extra"][key] == undefined)
+        ) {
+            evalue = sData["extraDefault"][key];
+        } else {
+            evalue = sData["extra"][key];
+        }
+        var type = sData["extraValues"][key];
+        etext  = '<div class="nowrap">';
+        etext += '<span class="bold">'+sData["extraText"][key]+':</span>';
+        if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
+            etext += '<input type="text" name="'+efield+'" '
+                 + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
+        } else if (type instanceof Array) {
+            etext += '<select name="'+field+'" >';
+            for (q in type)
+            {
+                etext += '<option value="'+q+'"';
+                if (q == evalue) {
+                    etext += ' selected="selected" ';
+                }
+                etext += '>'+type[q]+'</option>';
+            }
+            etext += '</select>';
+        } else {
+            etext += evalue;
+        }
+        etext += '</div>';
+        return etext;
     }
     /**
      * Sets up the single device table with the data given
