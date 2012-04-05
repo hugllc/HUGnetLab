@@ -64,28 +64,28 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 <table id="device">
     <tbody id="devProperties">
     <tr><th colspan="2">Properties</th>
-    <tr><th class="leftproperty">Serial #</th><td id="id"></td></tr>
-    <tr><th class="leftproperty">DeviceID</th><td id="DeviceID"></td></tr>
-    <tr><th class="leftproperty">DeviceName</th><td id="DeviceName"></td></tr>
-    <tr><th class="leftproperty">DeviceLocation</th><td id="DeviceLocation"></td></tr>
-    <tr><th class="leftproperty">DeviceJob</th><td id="DeviceJob"></td></tr>
-    <tr><th class="leftproperty">RawSetup</th><td id="RawSetup"></td></tr>
-    <tr><th class="leftproperty">HWPartNum</th><td id="HWPartNum"></td></tr>
-    <tr><th class="leftproperty">FWPartNum</th><td id="FWPartNum"></td></tr>
-    <tr><th class="leftproperty">FWVersion</th><td id="FWVersion"></td></tr>
-    <tr><th class="leftproperty">Physical Sensors</th><td id="physicalSensors"></td></tr>
-    <tr><th class="leftproperty">Virtual Sensors</th><td id="virtualSensors"></td></tr>
-    <tr><th class="leftproperty">Active Sensors</th><td id="ActiveSensors"></td></tr>
+    <tr><th class="leftproperty">Serial #</th><td id="id" class="row0"></td></tr>
+    <tr><th class="leftproperty">DeviceID</th><td id="DeviceID" class="row1"></td></tr>
+    <tr><th class="leftproperty">DeviceName</th><td id="DeviceName" class="row0"></td></tr>
+    <tr><th class="leftproperty">DeviceLocation</th><td id="DeviceLocation" class="row1"></td></tr>
+    <tr><th class="leftproperty">DeviceJob</th><td id="DeviceJob" class="row0"></td></tr>
+    <tr><th class="leftproperty">RawSetup</th><td id="RawSetup" class="row1"></td></tr>
+    <tr><th class="leftproperty">HWPartNum</th><td id="HWPartNum" class="row0"></td></tr>
+    <tr><th class="leftproperty">FWPartNum</th><td id="FWPartNum" class="row1"></td></tr>
+    <tr><th class="leftproperty">FWVersion</th><td id="FWVersion" class="row0"></td></tr>
+    <tr><th class="leftproperty">Physical Sensors</th><td id="physicalSensors" class="row1"></td></tr>
+    <tr><th class="leftproperty">Virtual Sensors</th><td id="virtualSensors" class="row0"></td></tr>
+    <tr><th class="leftproperty">Active Sensors</th><td id="ActiveSensors" class="row1"></td></tr>
     </tbody>
     <tbody id="devParameters">
     <tr><th colspan="2">Parameters</th>
-    <tr><th class="leftproperty">Last Contact</th><td id="LastContact"></td></tr>
-    <tr><th class="leftproperty">Last Poll</th><td id="LastPoll"></td></tr>
-    <tr><th class="leftproperty">Last History</th><td id="LastHistory"></td></tr>
-    <tr><th class="leftproperty">Last Modified</th><td id="LastModified"></td></tr>
+    <tr><th class="leftproperty">Last Contact</th><td id="LastContact" class="row0"></td></tr>
+    <tr><th class="leftproperty">Last Poll</th><td id="LastPoll" class="row1"></td></tr>
+    <tr><th class="leftproperty">Last History</th><td id="LastHistory" class="row0"></td></tr>
+    <tr><th class="leftproperty">Last Modified</th><td id="LastModified" class="row1"></td></tr>
     </tbody>
     <tbody>
-    <tr><th class="leftproperty">Actions</th><td id="actions"></td>
+    <tr><th class="leftproperty">Actions</th><td id="actions" class="row0"></td>
     </tbody>
     </table>
 <table id="deviceSensors">
@@ -260,6 +260,19 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                         text += ' selected="selected" ';
                     }
                     text += '>'+sData['otherTypes'][q]+'</option>';
+                }
+                text += '</select>';
+            }
+        } else if (key == 'units') {
+            if (sData['validUnits'].length == undefined) {
+                text  = '<select name="'+field+'" >';
+                for (q in sData['validUnits'])
+                {
+                    text += '<option value="'+q+'"';
+                    if (q == sData['units']) {
+                        text += ' selected="selected" ';
+                    }
+                    text += '>'+sData['validUnits'][q]+'</option>';
                 }
                 text += '</select>';
             }
