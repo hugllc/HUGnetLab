@@ -142,8 +142,8 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 } else {
                     header += defaultHeader;
                 }
-                if (data['sensors'][i]['storageUnit'] != undefined) {
-                    header += data['sensors'][i]['storageUnit'];
+                if (data['sensors'][i]['units'] != undefined) {
+                    header += data['sensors'][i]['units'];
                 }
             } else {
                 header += defaultHeader;

@@ -51,6 +51,7 @@ if (strlen($pkt->reply()) > 0) {
         0,
         (array)$prev[$dev]
     );
+    $device->setUnits($data);
     $d = $device->historyFactory($data);
     $out = $d->toArray();
     $ret = array(
