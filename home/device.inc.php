@@ -100,6 +100,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         <th id="dataType">Data Type</th>
         <th id="extraDefault">Parameters</th>
         <th id="units">Units</th>
+        <th id="minmax">Graph Min/Max</th>
     </tr>
     </thead>
     <tbody id="devSensorData">
@@ -200,11 +201,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                     $('#deviceSensors tr#deviceSensorHead th').each(function() {
                         var key = $(this).attr('id');
                         text += '<td class="' + key + '">';
-                        if (data['sensors'][i][key] == undefined) {
-                            text += '-';
-                        } else {
-                            text += editSensorValue(data['sensors'][i], key, i);
-                        }
+                        text += editSensorValue(data['sensors'][i], key, i);
                         text += '</td>';
                     });
                     text += '</tr>';
@@ -251,6 +248,11 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         if (key == 'location') {
             text = '<input type="text" name="'+field+'" '
                  + 'value="' + sData[key] + '" />';
+        } else if (key == 'minmax') {
+            text = 'Min:<input type="text" name="sensors['+index+'][min]" '
+                 + 'value="' + sData['min'] + '" size="10" />'
+                 + '<br />Max:<input type="text" name="sensors['+index+'][max]" '
+                 + 'value="' + sData['max'] + '" size="10" />';
         } else if (key == 'type') {
             if (sData['otherTypes'].length == undefined) {
                 text  = '<select name="'+field+'" >';
@@ -295,7 +297,10 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             for (p in sData[key]) {
                 text += editExtraValue(sData, p, index);
             }
+        } else if (sData[key] == undefined) {
+            text = '-';
         }
+
         return text;
     }
     /**

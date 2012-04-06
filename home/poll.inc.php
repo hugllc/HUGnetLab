@@ -35,6 +35,11 @@ if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
 ?>
+<!-- These are the scripts we need -->
+<link rel="stylesheet" href="includes/jqplot/jquery.jqplot.css" />
+<script src="includes/jqplot/jquery.jqplot.js" type="text/javascript"></script>
+<script type="text/javascript" src="includes/jqplot/plugins/jqplot.meterGaugeRenderer.min.js"></script>
+
 <form method="POST" action="javascript:void(0);">
 <table>
     <tr>
@@ -60,8 +65,9 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     </tr>
 </table>
 </form>
-
-<table id="dataTable">
+<div id="charts">
+</div>
+<table id="dataTable" style="clear: both;">
     <thead id="dataHead">
     </thead>
     <tbody id="dataBody">
@@ -74,6 +80,10 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     var recordCount = 0;
     var pollID = 0;
     var sensors = 0;
+    var units = [];
+    var labels = [];
+    var graphMin = [];
+    var graphMax = [];
 
     /**
      * Starts the polling
@@ -103,6 +113,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     {
         $('#dataHead').html('');
         $('#dataBody').html('');
+        $('#charts').html('');
         packetCount = 0;
         recordCount = 0;
         $('#packetCount').text(0);
@@ -138,21 +149,37 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             if ((data['sensors'][i] != undefined)
                 && (data['sensors'][i]['dataType'] != 'ignore')
             ) {
+                labels[i] = 'Sensor ' + i;
+                units[i] = 'Unknown';
+                graphMin[i] = 0;
+                graphMax[i] = 150;
                 header += '<th id="sensor' + i +'">';
-                defaultHeader = 'Sensor ' + i + '<br />';
+                defaultHeader = labels[i] + '<br />';
                 if ((data['sensors'][i] != undefined)) {
                     if (data['sensors'][i]['location'].length > 0) {
                         header += data['sensors'][i]['location']+'<br />';
+                        labels[i] = data['sensors'][i]['location'];
                     } else {
                         header += defaultHeader;
                     }
                     if (data['sensors'][i]['units'] != undefined) {
                         header += data['sensors'][i]['units'];
+                        units[i] = data['sensors'][i]['units'];
                     }
+                    if (data['sensors'][i]['max'] != undefined) {
+                        graphMax[i] = parseInt(data['sensors'][i]['max']);
+                    }
+                    if (data['sensors'][i]['min'] != undefined) {
+                        graphMin[i] = parseInt(data['sensors'][i]['min']);
+                    }
+
                 } else {
                     header += defaultHeader;
                 }
                 header += '</th>';
+                if ($('#chart'+i).length == 0) {
+                    $('#charts').append('<div id="chart'+i+'" style="width:250px;height:170px; float: left;"></div>');
+                }
             }
         }
         header += '</tr>';
@@ -181,11 +208,31 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     {
         if (data.DataIndex != dataIndex) {
             k = 1 - k;
+            var plot = [];
             var row = '<tr class="row'+k+'"><td class="date">' + data.Date + '</td>'
                     + '<td class="dataindex">' + data.DataIndex + '</td>';
             for (i = 0; i < sensors; i++) {
                 if ($('#dataHead th#sensor' + i).length > 0) {
                     row = row + '<td class="data">' + data.Data[i] + '</td>';
+                    if (($('#chart' + i).length > 0)
+                        && (data.Data[i] != undefined)
+                        && (labels[i] != undefined)
+                        && (units[i] != undefined)
+                    ) {
+                        $('#chart'+i).html("");
+                        plot[i] = $.jqplot('chart'+i,[[data.Data[i]]],{
+                            title: labels[i],
+                            seriesDefaults: {
+                                renderer: $.jqplot.MeterGaugeRenderer,
+                                rendererOptions: {
+                                    min: graphMin[i],
+                                    max: graphMax[i],
+                                    label: units[i],
+                                }
+                            }
+                        });
+                    }
+
                 }
             }
             row = row + '</tr>';
@@ -193,6 +240,8 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             $('#dataTable #dataBody').prepend(row);
             recordCount++;
             $('#recordCount').text(recordCount);
+
+
         }
         dataIndex = data.DataIndex;
         packetCount++;
