@@ -46,8 +46,8 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     <thead>
     <tr id="devicesHead">
         <th class="{sorter: false}" id="actions">Actions</th>
-        <th class="{sorter: 'numeric'}" id="id">Serial #</th>
         <th class="{sorter: 'text'}" id="DeviceID">DeviceID</th>
+        <th class="{sorter: 'numeric'}" id="id">Serial #</th>
         <th class="{sorter: 'text'}" id="HWPartNum">Hardware</th>
         <th class="{sorter: 'text'}" id="Firmware">Firmware</th>
     </tr>
@@ -101,6 +101,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         <th id="extraDefault">Parameters</th>
         <th id="units">Units</th>
         <th id="minmax">Graph Min/Max</th>
+        <th id="decimals">Decimal Places</th>
     </tr>
     </thead>
     <tbody id="devSensorData">
@@ -248,6 +249,9 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         if (key == 'location') {
             text = '<input type="text" name="'+field+'" '
                  + 'value="' + sData[key] + '" />';
+        } else if (key == 'decimals') {
+            text = '<input type="text" name="'+field+'" '
+                 + 'value="' + sData[key] + '" size="5" maxlength="3"/>';
         } else if (key == 'minmax') {
             text = 'Min:<input type="text" name="sensors['+index+'][min]" '
                  + 'value="' + sData['min'] + '" size="10" />'

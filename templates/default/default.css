@@ -272,3 +272,37 @@ th.headerSortDown {
     min-height: 500px !important;
 }
 
+/* JQuery jqplot stuff */
+
+.jqplot-target {
+    background: inherit;
+    color: #000000;
+    font-weight: bold;
+}
+
+.jqplot-axis {
+    color: #123456 !important;
+    background: #000000;
+}
+
+.jqplot-axis-tick {
+    color: #000000;
+}
+
+.plot {
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.jqplot-meterGauge-label {
+    font-size: 10pt;
+    color: #A00000 !important;
+}
+
+.jqplot-meterGauge-tick {
+    font-size: 10pt;
+    color: #000000 !important;
+}
+
+

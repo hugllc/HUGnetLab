@@ -178,7 +178,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 }
                 header += '</th>';
                 if ($('#chart'+i).length == 0) {
-                    $('#charts').append('<div id="chart'+i+'" style="width:250px;height:170px; float: left;"></div>');
+                    $('#charts').append('<div id="chart'+i+'" class="plot" style="width:250px;height:170px; float: left;"></div>');
                 }
             }
         }
@@ -228,6 +228,10 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                                     min: graphMin[i],
                                     max: graphMax[i],
                                     label: units[i],
+                                    background: '#EEEEEE',
+                                    ringColor: '#000000',
+                                    needleColor: '#FF0000',
+                                    textColor: '#000000',
                                 }
                             }
                         });
