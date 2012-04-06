@@ -278,17 +278,18 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 text += '</select>';
             }
         } else if (key == 'dataType') {
-            text  = '<select name="'+field+'" >';
-            var types = ['raw', 'diff', 'ignore'];
-            for (q in types)
-            {
-                text += '<option value="'+types[q]+'"';
-                if (types[q] == sData['dataType']) {
-                    text += ' selected="selected" ';
+            if (sData['dataTypes'].length == undefined) {
+                text  = '<select name="'+field+'" >';
+                for (q in sData['dataTypes'])
+                {
+                    text += '<option value="'+q.replace('&', '&amp;')+'"';
+                    if (q == sData['dataType']) {
+                        text += ' selected="selected" ';
+                    }
+                    text += '>'+sData['dataTypes'][q]+'</option>';
                 }
-                text += '>'+types[q]+'</option>';
+                text += '</select>';
             }
-            text += '</select>';
         } else if (key == 'extraDefault') {
             text = '';
             for (p in sData[key]) {
