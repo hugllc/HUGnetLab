@@ -97,6 +97,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         <th id="sensor">#</th>
         <th id="location">Location</th>
         <th id="type">Type</th>
+        <th id="dataType">Data Type</th>
         <th id="extraDefault">Parameters</th>
         <th id="units">Units</th>
     </tr>
@@ -276,6 +277,18 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 }
                 text += '</select>';
             }
+        } else if (key == 'dataType') {
+            text  = '<select name="'+field+'" >';
+            var types = ['raw', 'diff', 'ignore'];
+            for (q in types)
+            {
+                text += '<option value="'+types[q]+'"';
+                if (types[q] == sData['dataType']) {
+                    text += ' selected="selected" ';
+                }
+                text += '>'+types[q]+'</option>';
+            }
+            text += '</select>';
         } else if (key == 'extraDefault') {
             text = '';
             for (p in sData[key]) {

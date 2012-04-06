@@ -73,7 +73,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     var packetCount = 0;
     var recordCount = 0;
     var pollID = 0;
-    var sensors = 9;
+    var sensors = 0;
 
     /**
      * Starts the polling
@@ -131,24 +131,29 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     {
         var header = '<tr>';
         var defaultHeader;
+        sensors = data['totalSensors'];
         header += '<th>Date</th>';
         header += '<th>DataIndex</th>';
         for (i = 0; i < sensors; i++) {
-           header += '<th id="sensor' + i +'">';
-           defaultHeader = 'Sensor ' + i + '<br />';
-           if (data['sensors'][i] != undefined) {
-                if (data['sensors'][i]['location'].length > 0) {
-                    header += data['sensors'][i]['location']+'<br />';
+            if ((data['sensors'][i] != undefined)
+                && (data['sensors'][i]['dataType'] != 'ignore')
+            ) {
+                header += '<th id="sensor' + i +'">';
+                defaultHeader = 'Sensor ' + i + '<br />';
+                if ((data['sensors'][i] != undefined)) {
+                    if (data['sensors'][i]['location'].length > 0) {
+                        header += data['sensors'][i]['location']+'<br />';
+                    } else {
+                        header += defaultHeader;
+                    }
+                    if (data['sensors'][i]['units'] != undefined) {
+                        header += data['sensors'][i]['units'];
+                    }
                 } else {
                     header += defaultHeader;
                 }
-                if (data['sensors'][i]['units'] != undefined) {
-                    header += data['sensors'][i]['units'];
-                }
-            } else {
-                header += defaultHeader;
+                header += '</th>';
             }
-            header += '</th>';
         }
         header += '</tr>';
 
