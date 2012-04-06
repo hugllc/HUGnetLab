@@ -255,7 +255,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 text  = '<select name="'+field+'" >';
                 for (q in sData['otherTypes'])
                 {
-                    text += '<option value="'+q+'"';
+                    text += '<option value="'+q.replace('&', '&amp;')+'"';
                     if (q == sData['type']) {
                         text += ' selected="selected" ';
                     }
@@ -268,7 +268,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 text  = '<select name="'+field+'" >';
                 for (q in sData['validUnits'])
                 {
-                    text += '<option value="'+q+'"';
+                    text += '<option value="'+q.replace('&', '&amp;')+'"';
                     if (q == sData['units']) {
                         text += ' selected="selected" ';
                     }
@@ -313,7 +313,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             etext += '<select name="'+field+'" >';
             for (q in type)
             {
-                etext += '<option value="'+q+'"';
+                etext += '<option value="'+q.replace('&', '&amp;')+'"';
                 if (q == evalue) {
                     etext += ' selected="selected" ';
                 }
