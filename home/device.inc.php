@@ -91,7 +91,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 <table id="deviceSensors">
     <thead>
     <tr>
-        <th colspan="4">Sensors</th>
+        <th colspan="8">Sensors</th>
     </tr>
     <tr id="deviceSensorHead">
         <th id="sensor">#</th>
