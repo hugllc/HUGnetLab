@@ -84,6 +84,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     var labels = [];
     var graphMin = [];
     var graphMax = [];
+    var plot = [];
 
     /**
      * Starts the polling
@@ -118,6 +119,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         recordCount = 0;
         $('#packetCount').text(0);
         $('#recordCount').text(0);
+        plot = [];
     }
     /**
      * Adds a row to the database
@@ -208,7 +210,6 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     {
         if (data.DataIndex != dataIndex) {
             k = 1 - k;
-            var plot = [];
             var row = '<tr class="row'+k+'"><td class="date">' + data.Date + '</td>'
                     + '<td class="dataindex">' + data.DataIndex + '</td>';
             for (i = 0; i < sensors; i++) {
