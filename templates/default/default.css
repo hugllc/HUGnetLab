@@ -52,6 +52,10 @@ body {
     font-weight: bold;
 }
 
+.indent {
+    padding-left: 2em;
+}
+
 .nowrap {
     white-space: nowrap;
 }
@@ -304,5 +308,6 @@ th.headerSortDown {
     font-size: 10pt;
     color: #000000 !important;
 }
+
 
 

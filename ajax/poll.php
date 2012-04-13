@@ -35,30 +35,35 @@
 if (!defined("_HUGNETLAB")) header("Location: ../index.php");
 require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 
-$did = hexdec($html->args()->id);
+$devs = explode(",", $html->args()->id);
+$ret = array();
 
-$device = &$html->system()->device($did);
-$pkt = $device->network()->poll();
-if (strlen($pkt->reply()) > 0) {
-    $device->setParam("LastPoll", date("Y-m-d H:i:s"));
-    $device->setParam("LastContact", date("Y-m-d H:i:s"));
-    $device->store();
+foreach ($devs as $dev) {
+    $did = hexdec($dev);
 
-    //$dev = new DeviceContainer($device->get("RawSetup"));
-    $data = $device->decodeData(
-        $pkt->Reply(),
-        $pkt->Command(),
-        0,
-        (array)$prev[$dev]
-    );
-    $device->setUnits($data);
-    $d = $device->historyFactory($data);
-    $out = $d->toArray();
-    $ret = array(
-        "id" => $did, "Date" => date("Y-m-d H:i:s"), "DataIndex" => $data["DataIndex"]
-    );
-    for ($i = 0; $i < 9; $i++) {
-        $ret["Data"][$i] = $out["Data".$i];
+    $device = &$html->system()->device($did);
+    $pkt = $device->network()->poll();
+    if (strlen($pkt->reply()) > 0) {
+        $device->setParam("LastPoll", date("Y-m-d H:i:s"));
+        $device->setParam("LastContact", date("Y-m-d H:i:s"));
+        $device->store();
+
+        //$dev = new DeviceContainer($device->get("RawSetup"));
+        $data = $device->decodeData(
+            $pkt->Reply(),
+            $pkt->Command(),
+            0,
+            (array)$prev[$dev]
+        );
+        $device->setUnits($data);
+        $d = $device->historyFactory($data);
+        $out = $d->toArray();
+        $ret["Date"]      = date("Y-m-d H:i:s");
+        $ret["DataIndex"] = $data["DataIndex"];
+
+        for ($i = 0; $i < 9; $i++) {
+            $ret["Data"][$did.".".$i] = $out["Data".$i];
+        }
     }
 }
 print json_encode($ret);

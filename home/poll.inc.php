@@ -41,29 +41,23 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
 <script type="text/javascript" src="includes/jqplot/plugins/jqplot.meterGaugeRenderer.min.js"></script>
 
 <form method="POST" action="javascript:void(0);">
-<table>
+<table style="float: right;">
     <tr>
-        <th class="leftproperty">Device:</th>
-        <td>
-            <input id="devid" type="text" name="id" value="0" />
-        </td>
-    </tr>
-    <tr>
-        <th class="leftproperty">Packet Count:</td>
         <td><span id="packetCount">0</span></td>
+        <th class="rightproperty">Packet Count</td>
     </tr>
     <tr>
-        <th class="leftproperty">Record Count:</td>
         <td><span id="recordCount">0</span></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <button type="button" lang="JavaScript" onclick="startPoll();">Start</button>
-            <button type="button" lang="JavaScript" onclick="stopPoll();">Stop</button>
-            <button type="button" lang="JavaScript" onclick="resetPoll();">Reset</button>
-        </td>
+        <th class="rightproperty">Record Count</td>
     </tr>
 </table>
+<div id="pollDevs">
+</div>
+<div>
+    <button type="button" lang="JavaScript" onclick="startPoll();">Start</button>
+    <button type="button" lang="JavaScript" onclick="stopPoll();">Stop</button>
+    <button type="button" lang="JavaScript" onclick="resetPoll();">Reset</button>
+</div>
 </form>
 <div id="charts">
 </div>
@@ -78,7 +72,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     var dataIndex = 0;
     var packetCount = 0;
     var recordCount = 0;
-    var pollID = 0;
+    var pollID = '';
     var sensors = 0;
     var units = [];
     var labels = [];
@@ -93,8 +87,15 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      */
     function startPoll()
     {
-        pollID = parseInt($('input#devid').val(), 16);
-        $.get("<?php print AJAX_GETDEVICE; ?>&id="+pollID.toString(16), setupPoll, "json");
+        var devs = [];
+        //$.get("<?php print AJAX_GETDEVICE; ?>&id="+pollID.toString(16), setupPoll, "json");
+        $('div#pollDevs input.pollDev').each(function() {
+            var key = parseInt($(this).attr('value'));
+            if ($(this).prop("checked")) {
+                devs[parseInt(key)] = parseInt(key);
+            }
+        });
+        setupPoll(devs);
     }
     /**
      * Stops the polling
@@ -103,7 +104,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      */
     function stopPoll()
     {
-        pollID = 0;
+        pollID = '';
     }
     /**
      * Resets everything
@@ -120,6 +121,27 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         $('#packetCount').text(0);
         $('#recordCount').text(0);
         plot = [];
+        showPollDevs();
+    }
+    /**
+     * Resets everything
+     *
+     * @return null
+     */
+    function showPollDevs()
+    {
+        for (dev in devices) {
+            if ($('#pollDevs #pollDev'+devices[dev].id).length == 0) {
+                $('#pollDevs').append('<div id="pollDev'+devices[dev].id+'" class="device"></div>');
+            }
+            var devDiv = '<div class="bold"><input onChange="showhideSensors(this);" id="pollDev'+devices[dev].id+'" type="checkbox" name="dev'+devices[dev].id+'" value="'+devices[dev].id+'" class="pollDev"/>'+devices[dev].DeviceID+':  '+devices[dev].DeviceName+'</div>';
+            devDiv += '<div id="pollDev'+devices[dev].id+'Sensors" style="display: none;">';
+            for (sensor in devices[dev]['sensors']) {
+                devDiv += '<div class="indent"><input id="pollDev'+devices[dev].id+'Sensor" type="checkbox" name="dev'+devices[dev].id+'Sensor'+sensor+'" value="'+sensor+'" class="pollDevSensor"/> Sensor'+sensor+':  '+devices[dev]['sensors'][sensor].location+'</div>'
+            }
+            devDiv += '</div>';
+            $('#pollDevs #pollDev'+devices[dev].id).html(devDiv);
+        }
     }
     /**
      * Adds a row to the database
@@ -128,9 +150,30 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      *
      * @return null
      */
-    function setupPoll(data)
+    function showhideSensors(me)
     {
-        setHeader(data);
+        input = '#'+me.id;
+        if (me.checked) {
+            $(input+'Sensors').show();
+        } else {
+            $(input+'Sensors').hide();
+        }
+    }
+    /**
+     * Adds a row to the database
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function setupPoll(devs)
+    {
+        var sep = '';
+        for (id in devs) {
+            pollID += sep + devs[id].toString(16);
+            sep = ',';
+        }
+        setHeader(devs);
         poll();
     }
     /**
@@ -140,53 +183,76 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      *
      * @return null
      */
-    function setHeader(data)
+    function setHeader(devs)
     {
         var header = '<tr>';
         var defaultHeader;
-        sensors = data['totalSensors'];
         header += '<th>Date</th>';
         header += '<th>DataIndex</th>';
-        for (i = 0; i < sensors; i++) {
-            if ((data['sensors'][i] != undefined)
-                && (data['sensors'][i]['dataType'] != 'ignore')
-            ) {
-                labels[i] = 'Sensor ' + i;
-                units[i] = 'Unknown';
-                graphMin[i] = 0;
-                graphMax[i] = 150;
-                header += '<th id="sensor' + i +'">';
-                defaultHeader = labels[i] + '<br />';
-                if ((data['sensors'][i] != undefined)) {
-                    if (data['sensors'][i]['location'].length > 0) {
-                        header += data['sensors'][i]['location']+'<br />';
-                        labels[i] = data['sensors'][i]['location'];
-                    } else {
-                        header += defaultHeader;
-                    }
-                    if (data['sensors'][i]['units'] != undefined) {
-                        header += data['sensors'][i]['units'];
-                        units[i] = data['sensors'][i]['units'];
-                    }
-                    if (data['sensors'][i]['max'] != undefined) {
-                        graphMax[i] = parseInt(data['sensors'][i]['max']);
-                    }
-                    if (data['sensors'][i]['min'] != undefined) {
-                        graphMin[i] = parseInt(data['sensors'][i]['min']);
-                    }
-
-                } else {
-                    header += defaultHeader;
-                }
-                header += '</th>';
-                if ($('#chart'+i).length == 0) {
-                    $('#charts').append('<div id="chart'+i+'" class="plot" style="width:250px;height:170px; float: left;"></div>');
-                }
-            }
+        for (id in devs) {
+            header += setHeaderSensors(devices[devs[id]]);
         }
         header += '</tr>';
 
         $('#dataTable #dataHead').html(header)
+    }
+    /**
+     * Adds a row to the database
+     *
+     * @param data The data to use to set up the device
+     *
+     * @return null
+     */
+    function setHeaderSensors(data)
+    {
+        var devHeader = '';
+        dev = data['id'];
+        var key;
+        $('div#pollDevs input#pollDev'+dev+'Sensor').each(function() {
+            if (!$(this).prop("checked")) {
+                return;
+            }
+            i = $(this).prop('value');
+            if ((data['sensors'][i] != undefined)
+                && (data['sensors'][i]['dataType'] != 'ignore')
+            ) {
+                key = dev+'.' + i;
+                labels[key] = 'Sensor ' + i;
+                units[key] = 'Unknown';
+                graphMin[key] = 0;
+                graphMax[key] = 150;
+                devHeader += '<th id="'+ key +'">';
+                defaultHeader = labels[key] + '<br />';
+                if ((data['sensors'][i] != undefined)) {
+                    if (data['sensors'][i]['location'].length > 0) {
+                        devHeader += data['sensors'][i]['location']+'<br />';
+                        labels[key] = data['sensors'][i]['location'];
+                    } else {
+                        devHeader += defaultHeader;
+                    }
+                    if (data['sensors'][i]['units'] != undefined) {
+                        devHeader += data['sensors'][i]['units'];
+                        units[key] = data['sensors'][i]['units'];
+                    }
+                    if (data['sensors'][i]['max'] != undefined) {
+                        graphMax[key] = parseInt(data['sensors'][i]['max']);
+                    }
+                    if (data['sensors'][i]['min'] != undefined) {
+                        graphMin[key] = parseInt(data['sensors'][i]['min']);
+                    }
+
+                } else {
+                    devHeader += defaultHeader;
+                }
+                devHeader += '</th>';
+                /*
+                if ($('#chart'+i).length == 0) {
+                    $('#charts').append('<div id="chart'+i+'" class="plot" style="width:250px;height:170px; float: left;"></div>');
+                }
+                */
+            }
+        });
+        return devHeader;
     }
     /**
      * Polls for data once
@@ -195,8 +261,8 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
      */
     function poll()
     {
-        if (pollID > 0) {
-            $.get("<?php print AJAX_POLL; ?>&id="+pollID.toString(16), addRow, "json");
+        if (pollID.length > 0) {
+            $.get("<?php print AJAX_POLL; ?>&id="+pollID, addRow, "json");
         }
     }
     /**
@@ -212,8 +278,9 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
             k = 1 - k;
             var row = '<tr class="row'+k+'"><td class="date">' + data.Date + '</td>'
                     + '<td class="dataindex">' + data.DataIndex + '</td>';
-            for (i = 0; i < sensors; i++) {
-                if ($('#dataHead th#sensor' + i).length > 0) {
+            $('#dataTable #dataHead th').each(function() {
+                i = $(this).prop('id');
+                if (data.Data[i] != undefined) {
                     row = row + '<td class="data">' + data.Data[i] + '</td>';
                     if (($('#chart' + i).length > 0)
                         && (data.Data[i] != undefined)
@@ -237,9 +304,9 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                             }
                         });
                     }
-
                 }
-            }
+
+            });
             row = row + '</tr>';
 
             $('#dataTable #dataBody').prepend(row);
@@ -253,7 +320,13 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         $('#packetCount').text(packetCount);
         poll();
     }
+    /**
+     * This function runs when the document is ready
+     */
     $(document).ready(function(){
+        $('#pollDevs').text("HELLO");
+        /*
+        */
     });
 </script>
 

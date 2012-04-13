@@ -116,7 +116,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     var dataIndex = 0;
     var packetCount = 0;
     var recordCount = 0;
-    var devices = new Array();
+    var devices = [];
 
     $('#deviceForm').submit(function() {
         // Get all the forms elements and their values in one step
