@@ -50,6 +50,9 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         <td><span id="recordCount">0</span></td>
         <th class="rightproperty">Record Count</td>
     </tr>
+    <tr>
+        <td colspan="2"><input type="checkbox" id="showGraphs" name="showGraphs" value="true" /> Show Graphs</td>
+    </tr>
 </table>
 <div style="border: 2px solid grey; width: 400px;">
 <h2>Choose your sensors</h2>
@@ -81,7 +84,6 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     var labels = [];
     var graphMin = [];
     var graphMax = [];
-    var plot = [];
 
     /**
      * Starts the polling
@@ -225,10 +227,8 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                 return;
             }
             i = $(this).prop('value');
-            if ((data['sensors'][i] != undefined)
-                && (data['sensors'][i]['dataType'] != 'ignore')
-            ) {
-                key = dev+'.' + i;
+            if (data['sensors'][i] != undefined) {
+                key = dev + '.' + i;
                 labels[key] = 'Sensor ' + i;
                 units[key] = 'Unknown';
                 graphMin[key] = 0;
@@ -257,11 +257,9 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
                     devHeader += defaultHeader;
                 }
                 devHeader += '</th>';
-                /*
-                if ($('#chart'+i).length == 0) {
-                    $('#charts').append('<div id="chart'+i+'" class="plot" style="width:250px;height:170px; float: left;"></div>');
+                if ($('#showGraphs').prop('checked') && ($('#chart'+key).length == 0)) {
+                    $('#charts').append('<div id="chart'+key+'" class="plot" style="width:250px;height:170px; float: left;"></div>');
                 }
-                */
             }
         });
         return devHeader;
@@ -288,19 +286,19 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
     {
         if (data.DataIndex != dataIndex) {
             k = 1 - k;
+            var plot = [];
             var row = '<tr class="row'+k+'"><td class="date">' + data.Date + '</td>'
                     + '<td class="dataindex">' + data.DataIndex + '</td>';
             $('#dataTable #dataHead th').each(function() {
                 i = $(this).prop('id');
-                if (data.Data[i] != undefined) {
-                    row = row + '<td class="data">' + data.Data[i] + '</td>';
-                    if (($('#chart' + i).length > 0)
-                        && (data.Data[i] != undefined)
+                var key = i.replace('.', '\\.');
+                if ((data.Data != undefined) && (data.Data[i] != undefined)) {
+                    row += '<td class="data">' + data.Data[i] + '</td>';
+                    if (($('#chart' + key).length > 0)
                         && (labels[i] != undefined)
                         && (units[i] != undefined)
                     ) {
-                        $('#chart'+i).html("");
-                        plot[i] = $.jqplot('chart'+i,[[data.Data[i]]],{
+                        plot[i] = $.jqplot('chart'+key,[[data.Data[i]]],{
                             title: labels[i],
                             seriesDefaults: {
                                 renderer: $.jqplot.MeterGaugeRenderer,
