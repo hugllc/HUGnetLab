@@ -51,7 +51,10 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         <th class="rightproperty">Record Count</td>
     </tr>
 </table>
+<div style="border: 2px solid grey; width: 400px;">
+<h2>Choose your sensors</h2>
 <div id="pollDevs">
+</div>
 </div>
 <div>
     <button type="button" lang="JavaScript" onclick="startPoll();">Start</button>
@@ -133,14 +136,23 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         for (dev in devices) {
             if ($('#pollDevs #pollDev'+devices[dev].id).length == 0) {
                 $('#pollDevs').append('<div id="pollDev'+devices[dev].id+'" class="device"></div>');
+                var devDiv = '<div class="bold"><input onChange="showhideSensors(this);" id="pollDev'+devices[dev].id+'" type="checkbox" name="dev'+devices[dev].id+'" value="'+devices[dev].id+'" class="pollDev"/><span id="pollDev'+devices[dev].id+'"></span></div>';
+                devDiv += '<div id="pollDev'+devices[dev].id+'Sensors" style="display: none;">';
+                devDiv += '</div>';
+                $('#pollDevs #pollDev'+devices[dev].id).html(devDiv);
             }
-            var devDiv = '<div class="bold"><input onChange="showhideSensors(this);" id="pollDev'+devices[dev].id+'" type="checkbox" name="dev'+devices[dev].id+'" value="'+devices[dev].id+'" class="pollDev"/>'+devices[dev].DeviceID+':  '+devices[dev].DeviceName+'</div>';
-            devDiv += '<div id="pollDev'+devices[dev].id+'Sensors" style="display: none;">';
+            $('#pollDevs span#pollDev'+devices[dev].id).html(devices[dev].DeviceID+':  '+devices[dev].DeviceName);
+
             for (sensor in devices[dev]['sensors']) {
-                devDiv += '<div class="indent"><input id="pollDev'+devices[dev].id+'Sensor" type="checkbox" name="dev'+devices[dev].id+'Sensor'+sensor+'" value="'+sensor+'" class="pollDevSensor"/> Sensor'+sensor+':  '+devices[dev]['sensors'][sensor].location+'</div>'
+                if ($('#pollDevs span#pollDev'+devices[dev].id+'Sensor'+sensor).length == 0) {
+                    $('#pollDevs #pollDev'+devices[dev].id+'Sensors').append('<div id="pollDev'+devices[dev].id+'Sensor'+sensor+'" class="indent"><input id="pollDev'+devices[dev].id+'Sensor" type="checkbox" name="dev'+devices[dev].id+'Sensor'+sensor+'" value="'+sensor+'" class="pollDevSensor"/><span id="pollDev'+devices[dev].id+'Sensor'+sensor+'"></span></div>');
+                }
+                $('#pollDevs span#pollDev'+devices[dev].id+'Sensor'+sensor).html(
+                    'Sensor'+sensor+':  '+devices[dev]['sensors'][sensor].location
+                    +' ('+devices[dev]['sensors'][sensor].units+')'
+                );
             }
-            devDiv += '</div>';
-            $('#pollDevs #pollDev'+devices[dev].id).html(devDiv);
+
         }
     }
     /**

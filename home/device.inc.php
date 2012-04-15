@@ -470,6 +470,7 @@ require_once HUGNET_INCLUDE_PATH."/containers/DeviceContainer.php";
         });
         $('table#devices tr#dev'+data.id).html(text);
         $('table#devices').trigger("update");
+        showPollDevs();
     }
     /**
      * Initializes the device list
