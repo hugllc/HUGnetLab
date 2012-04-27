@@ -1,0 +1,12 @@
+Source: hugnetlab
+Section: hugnet
+Priority: optional
+Maintainer: Scott Price <prices@hugllc.com>
+Homepage: http://dev.huglc.com/
+Version: %VERSION%
+Package: hugnetlab
+Architecture: all
+Depends: php5 (>= 5.3.2), php5-sqlite, hugnetlib (>> 0.9.6), php5-mysql | php5-mysqli, lighttpd | apache2
+Breaks: hugnetcoreui
+Recommends: php5-mysqli, lighttpd
+Description: This is the HUGnet User Interface

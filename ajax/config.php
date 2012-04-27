@@ -45,12 +45,22 @@ if ($dev->get("DeviceID") === "000000") {
 }
 $pkt = &$dev->network()->config();
 if (strlen($pkt->reply()) > 0) {
-    $dev->config()->decode($pkt->reply());
+    $dev->decode($pkt->reply());
     $dev->setParam("LastContact", date("Y-m-d H:i:s"));
     if ($new) {
         $dev->set("id", 0);
     }
     $dev->store(true);
+    $sensors = $dev->get("physicalSensors");
+    for ($i = 0; $i < $sensors; $i++) {
+        $pkt = $dev->network()->sensorConfig($i);
+        if (strlen($pkt->reply()) > 0) {
+            $dev->sensor($i)->decode($pkt->reply());
+            $dev->sensor($i)->change(array());
+        } else {
+            break;
+        }
+    }
 }
 print $dev->json();
 
