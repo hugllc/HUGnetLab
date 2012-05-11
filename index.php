@@ -4,7 +4,7 @@
  *
  * <pre>
  * CoreUI is a user interface for the HUGnet cores.
- * Copyright (C) 2012 Hunt Utilities Group, LLC
+ * Copyright (C) 2007 Hunt Utilities Group, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,82 +30,43 @@
  * @version    SVN: $Id$
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
  */
-$filedir = dirname(__FILE__);
-if (!isset($basedir)) $basedir = $filedir;
-
-define("AJAX_CONFIG", "index.php?option=ajax&task=config");
-define("AJAX_FIRMWARE", "index.php?option=ajax&task=firmware");
-define("AJAX_GETDEVICE", "index.php?option=ajax&task=getDevice");
-define("AJAX_POLL", "index.php?option=ajax&task=poll");
-define("AJAX_UPDATEFIRMWARE", "index.php?option=ajax&task=updateFirmware");
-
-
-$template = $_REQUEST["template"];
-/*
-if (mobileUA()) {
-    $template = "mobile";
-}
-*/
-$pageStartTime = microtime(true);
-define("_HUGNETLAB", true);
-define("HUGNETLAB_VERSION", trim(file_get_contents(dirname(__FILE__)."/VERSION.TXT")));
-
-$uname = posix_uname();
-$host = trim($uname['nodename']);
-
-require_once $filedir."/includes/hugnet.php";
-
-$option = $html->args()->option;
-
-if (strtolower($option) !== "ajax") {
-    if (file_exists($filedir."/".$option."/menu.inc.php")) {
-        $menu_include = $filedir."/".$option."/menu.inc.php";
-    } else {
-        $menu_include = $filedir."/home/menu.inc.php";
-        $option = "home";
-    }
-}
-
-if (strtolower($option) === "ajax") {
-    header('Cache-Control: no-cache, must-revalidate');
-    header('Expires: Sat, 4 Apr 1998 05:00:00 GMT');
-    header('Content-type: application/json');
-
-    $task = $html->args()->task;
-    if (file_exists($filedir."/ajax/".$task.".php")) {
-        include $filedir."/ajax/".$task.".php";
-    }
-} else {
-    include $menu_include;
-
-    $menuitems = array();
-    $bodyitems = array();
-    $index = 1;
-    $url = $_SERVER['SCRIPT_NAME']."?option=$option";
-    foreach ((array)$taskmenu as $name => $item) {
-        $menuitems[$index] = '<li><a href="#tabs-'.$index.'">'.$name.'</a></li>';
-        ob_start();
-        include $filedir."/".$option."/".$item.".inc.php";
-        $bodyitems[$index] = "<div id=\"tabs-".$index."\">\n".ob_get_clean()."\n</div>\n";
-        $index++;
-    }
-    $body  = "<div id=\"tabs\">\n<ul>\n".implode("\n", $menuitems)."\n</ul>\n";
-    $body .= implode("\n", $bodyitems)."\n</div>\n";
-    $header = "
-    <script>
-        \$(function(){
-            \$('#tabs').tabs({
-                cookie: {
-                    // store cookie for a day, without, it would be a session cookie
-                    expires: 10
-                }
-            });
-        });
-    </script>";
-
-
-    if (!file_exists($filedir."/templates/".$template."/index.php")) $template = "default";
-    include $filedir."/templates/".$template."/index.php";
-}
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+    <head>
+        <title>HUGnetLab</title>
+        <link rel="stylesheet" href="templates/default/default.css" />
+        <link rel="stylesheet" href="templates/jqueryui/pepper-grinder/jquery.ui.all.css" />
+        <script src="includes/jquery-1.7.1.js" type="text/javascript"></script>
+        <script src="includes/jquery.cookie.js" type="text/javascript"></script>
+        <script src="includes/jquery.metadata.js" type="text/javascript"></script>
+        <script src="includes/jquery.tablesorter.js" type="text/javascript"></script>
+        <script src="includes/ui/jquery.ui.core.js" type="text/javascript"></script>
+        <script src="includes/ui/jquery.ui.widget.js" type="text/javascript"></script>
+        <script src="includes/ui/jquery.ui.tabs.js" type="text/javascript"></script>
+        <script src="includes/ui/jquery.ui.button.js" type="text/javascript"></script>
+        <script src="includes/backbone.js" type="text/javascript"></script>
+        <script src="includes/mustache.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="header"><h1 class="header">HUGnetLab</h2></div>
+        <div class="body">
+            <?php echo $body?>
+        </div>
+        <div class="copyright">
+            <div>&copy; Copyright 2012 <a href="http://www.hugllc.com">Hunt Utilities Group, LLC</a></div>
+            <div>HUGnetLab Version <?php print HUGNETLAB_VERSION; ?></div>
+            <div>Page Generated <?php print date('r'); ?> in <?php print round(microtime(true) - $pageStartTime, 4); ?> s</div>
+        </div>
+    </body>
 
+<?php if ($html->args()->debug): ?>
+<div>
+<h3>Debug Information</h3>
+<?php \HUGnet\VPrint::debug(); ?>
+</div>
+<?php endif; ?>
+
+</html>
+
+?>

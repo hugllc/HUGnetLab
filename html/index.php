@@ -1,10 +1,10 @@
 <?php
 /**
- * Setup Home
+ * Main index
  *
  * <pre>
  * CoreUI is a user interface for the HUGnet cores.
- * Copyright (C) 2007 Hunt Utilities Group, LLC
+ * Copyright (C) 2012 Hunt Utilities Group, LLC
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,41 +23,43 @@
  *
  * @category   UI
  * @package    CoreUI
- * @subpackage Setup
+ * @subpackage Main
  * @author     Scott Price <prices@hugllc.com>
  * @copyright  2007 Hunt Utilities Group, LLC
  * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version    SVN: $Id$
- * @link       https://dev.hugllc.com/index.php/Project:HUGnetLab
+ * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
  */
+$pageStartTime = microtime(true);
+define("_HUGNETLAB", true);
+define("HUGNETLAB_VERSION", trim(file_get_contents("HUGnetLab/VERSION.TXT", true)));
+
+require_once "HUGnetLab/Mustache.php";
+require_once "HUGnetLab/hugnet.php";
+
+$tempfile = "default";
+
+$main = new Mustache(
+    file_get_contents(
+        dirname(__FILE__)."/HUGnetLab/template/".$tempfile."/index.html"
+    )
+);
+
+$tData = array(
+    "HUGnetLabVersion" => HUGNETLAB_VERSION,
+);
 
 
-if (!defined("_HUGNETLAB")) header("Location: ../index.php");
-require_once "HUGnetLib/tables/FirmwareTable.php";
+$uname = posix_uname();
+$tData["host"] = trim($uname['nodename']);
 
-$did = (int)$html->args()->id;
-$firmware = new FirmwareTable();
-
-/*\HUGnet\VPrint::debug(); */
+require_once "HUGnetLab/hugnet.php";
 
 
-$path  = "http://www.int.hugllc.com/HUGnet/firmware";
-
-$files = file($path."/manifest");
-foreach ((array)$files as $file) {
-    if (!$firmware->checkFile($file)) {
-        // Load the firmware
-        $firmware->fromFile($file, $path);
-        // Insert it.
-        $firmware->insertRow(true);
-    }
-}
-$array = $firmware->selectIDs("1", array());
-$ret = array();
-foreach((array)$array as $key => $value) {
-    $ret[] = $value;
-}
-
-print json_encode($ret);
+$tData["pageDate"] = date("r");
+$tData["pageTime"] = round(microtime(true) - $pageStartTime, 4);
+$tData["debug"] = \HUGnet\VPrint::debug();
+print $main->render(null, $tData);
 
 ?>
+

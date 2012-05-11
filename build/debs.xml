@@ -6,8 +6,8 @@
     <property name="deb.source" value="${basedir}/"/>
     <property name="deb.staging" value="${basedir}/build/deb"/>
     <property name="deb.release" value="" />
-    <property name="deb.prefix" value="/usr/local" />
-    <property name="deb.versionfile" value="${basedir}/VERSION.TXT" />
+    <property name="deb.prefix" value="/usr" />
+    <property name="deb.versionfile" value="${basedir}/include/VERSION.TXT" />
 
     <exec executable="grep" failonerror="true"
         outputproperty="deb.version" errorproperty="deb.versionerror">
@@ -36,16 +36,11 @@
         <copy file="${deb.source}/index.php" todir="${deb.staging}/var/www" />
         <copy file="${deb.source}/VERSION.TXT" todir="${deb.staging}/var/www" />
         <copy todir="${deb.staging}${deb.prefix}/var/www">
-            <fileset dir="${deb.source}/ajax/"/>
+            <fileset dir="${deb.source}/html/"/>
         </copy>
-        <copy todir="${deb.staging}${deb.prefix}/var/www">
-            <fileset dir="${deb.source}/home/"/>
-        </copy>
-        <copy todir="${deb.staging}${deb.prefix}/var/www">
-            <fileset dir="${deb.source}/includes/"/>
-        </copy>
-        <copy todir="${deb.staging}${deb.prefix}/var/www">
-            <fileset dir="${deb.source}/templates/"/>
+        <mkdir dir="${deb.staging}${deb.prefix}/share/php/HUGnetLab"/>
+        <copy todir="${deb.staging}${deb.prefix}/share/php/HUGnetLab">
+            <fileset dir="${deb.source}/include/"/>
         </copy>
         <chmod file="${deb.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.staging}/DEBIAN/prerm" perm="ugo+rx"/>
