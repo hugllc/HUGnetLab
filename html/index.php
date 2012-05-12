@@ -37,23 +37,31 @@ define("HUGNETLAB_VERSION", trim(file_get_contents("HUGnetLab/VERSION.TXT", true
 require_once "HUGnetLab/Mustache.php";
 require_once "HUGnetLab/hugnet.php";
 
-$tempfile = "default";
+$tempDir = "default";
 
-$main = new Mustache(
-    file_get_contents(
-        dirname(__FILE__)."/HUGnetLab/template/".$tempfile."/index.html"
-    )
-);
-
-$tData = array(
-    "HUGnetLabVersion" => HUGNETLAB_VERSION,
-);
-
+ob_start();
+ob_clean();
+include dirname(__FILE__)."/HUGnetLab/template/".$tempDir."/index.php";
+$mainTemplate = ob_get_contents();
+ob_end_clean();
 
 $uname = posix_uname();
-$tData["host"] = trim($uname['nodename']);
+$tData = array(
+    "HUGnetLabVersion" => HUGNETLAB_VERSION,
+    "host" => trim($uname['nodename']),
+);
 
-require_once "HUGnetLab/hugnet.php";
+$templateFile = dirname(__FILE__)."/HUGnetLab/template/".$tempDir."/templates.php";
+if (file_exists($templateFile)) {
+    ob_start();
+    ob_clean();
+    include $templateFile;
+    $tData["templates"] = ob_get_contents();
+    ob_end_clean();
+}
+
+$main = new Mustache($mainTemplate);
+
 
 
 $tData["pageDate"] = date("r");

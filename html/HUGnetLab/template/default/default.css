@@ -89,6 +89,9 @@ div.menu a {
     white-space:nowrap;
 }
 
+.template {
+    display: none;
+}
 
 div.menu a:hover {
     background:#e5dabd;

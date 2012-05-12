@@ -7,3 +7,5 @@ old/
 *.kate*
 build/
 rel/
+*.ini
+*.old

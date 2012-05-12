@@ -76,13 +76,14 @@
             <div>HUGnetLab Version {{HUGnetLabVersion}}</div>
             <div>Page Generated {{pageDate}} in {{pageTime}} s</div>
         </div>
+        {{#debug}}
+        <div>
+        <h3>Debug Information</h3>
+        {{debug}}
+        </div>
+        {{/debug}}
+        {{{templates}}}
     </body>
-{{#debug}}
-<div>
-<h3>Debug Information</h3>
-{{debug}}
-</div>
-{{/debug}}
 </html>
 
 <!--
