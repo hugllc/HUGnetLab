@@ -42,12 +42,20 @@
         <script src="/HUGnetLib/contrib/jquery.tablesorter.js" type="text/javascript"></script>
         <link rel="stylesheet" href="/HUGnetLib/contrib/css/pepper-grinder/jquery-ui.css" />
         <script src="/HUGnetLib/contrib/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib/json2.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib/underscore-min.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib/backbone.js" type="text/javascript"></script>
         <script src="/HUGnetLib/contrib/mustache.js" type="text/javascript"></script>
         <script src="/HUGnetLib/hugnet.js" type="text/javascript"></script>
         {{header}}
         <script lang="JavaScript">
             $(document).ready(function(){
-                var device = new HUGnetDevice(0xFE0000, "#dev1008");
+                $('#dev1008').html("HERE");
+                var device = new HUGnetDevice({
+                    id: 0xFE0000,
+                    target: '#dev1008'
+                });
+                device.set({DeviceName: "Hello There"});
             });
 
             $(function(){
@@ -64,9 +72,32 @@
         <div id="header"><h1 class="header">HUGnetLab</h1></div>
         <div class="body">
             <div id="tabs">
-            <table>
-                <tr id="dev1008"></tr>
-            </table>
+                <ul>
+                    <li><a href="#tabs-home">Home</a>
+                    <li><a href="#tabs-devices">Devices</a>
+                    <li><a href="#tabs-pollsetup">Poll Setup</a>
+                    <li><a href="#tabs-poll">Poll</a>
+                </ul>
+                <div id="tabs-home">
+                </div>
+                <div id="tabs-devices">
+                    <table>
+                        <tr>
+                            <th>Actions</th>
+                            <th>Name</th>
+                            <th>ID</th>
+                            <th>Serial #</th>
+                            <th>Hardware</th>
+                            <th>Firmware</th>
+                        </tr>
+                        <tr id="dev1008"></tr>
+                    </table>
+                </div>
+                <div id="tabs-pollsetup">
+                </div>
+                <div id="tabs-poll">
+                </div>
+            </div>
         </div>
         <div class="copyright">
             <div>&copy; Copyright 2012 <a href="http://www.hugllc.com">Hunt Utilities Group, LLC</a></div>
