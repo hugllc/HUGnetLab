@@ -36,21 +36,18 @@
     <head>
         <title>HUGnetLab on {{host}}</title>
         <link rel="stylesheet" href="HUGnetLab/template/default/default.css" />
-        <script src="HUGnetLab/jquery-1.7.1.js" type="text/javascript"></script>
-        <script src="HUGnetLab/jquery.cookie.js" type="text/javascript"></script>
-        <script src="HUGnetLab/jquery.metadata.js" type="text/javascript"></script>
-        <script src="HUGnetLab/jquery.tablesorter.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="HUGnetLab/pepper-grinder/jquery.ui.all.css" />
-        <script src="HUGnetLab/ui/jquery.ui.core.js" type="text/javascript"></script>
-        <script src="HUGnetLab/ui/jquery.ui.widget.js" type="text/javascript"></script>
-        <script src="HUGnetLab/ui/jquery.ui.tabs.js" type="text/javascript"></script>
-        <script src="HUGnetLab/ui/jquery.ui.button.js" type="text/javascript"></script>
-        <script src="HUGnetLab/mustache.js" type="text/javascript"></script>
-        <script src="HUGnetLab/hugnet.device.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib/jquery.min.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib/jquery.cookie.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib/jquery.metadata.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib/jquery.tablesorter.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="/HUGnetLib/contrib/css/pepper-grinder/jquery-ui.css" />
+        <script src="/HUGnetLib/contrib/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib/mustache.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/hugnet.js" type="text/javascript"></script>
         {{header}}
         <script lang="JavaScript">
             $(document).ready(function(){
-                var device = new HUGnetDevice(0x1008, "#dev1008");
+                var device = new HUGnetDevice(0xFE0000, "#dev1008");
             });
 
             $(function(){
