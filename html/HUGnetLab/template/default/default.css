@@ -57,6 +57,7 @@ body {
     border: thick solid grey;
     background: white;
     z-index: 100;
+    overflow: auto;
 }
 
 .indent {
