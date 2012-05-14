@@ -50,8 +50,8 @@
         {{header}}
         <script lang="JavaScript">
             $(document).ready(function(){
-                var list = new DeviceList();
-                list.render();
+                var device = new DevicesView({el:  "#tabs-devices"});
+                $("#devTable").tablesorter();
             });
 
             $(function(){
@@ -77,8 +77,6 @@
                 <div id="tabs-home">
                 </div>
                 <div id="tabs-devices">
-                <div id="DeviceList">
-                </div>
                 </div>
                 <div id="tabs-pollsetup">
                 </div>
@@ -100,30 +98,3 @@
         {{{templates}}}
     </body>
 </html>
-
-<!--
-    $menuitems = array();
-    $bodyitems = array();
-    $index = 1;
-    $url = $_SERVER['SCRIPT_NAME']."?option=$option";
-    foreach ((array)$taskmenu as $name => $item) {
-        $menuitems[$index] = '<li><a href="#tabs-'.$index.'">'.$name.'</a></li>';
-        ob_start();
-        include $filedir."/".$option."/".$item.".inc.php";
-        $bodyitems[$index] = "<div id=\"tabs-".$index."\">\n".ob_get_clean()."\n</div>\n";
-        $index++;
-    }
-    $body  = "<div id=\"tabs\">\n<ul>\n".implode("\n", $menuitems)."\n</ul>\n";
-    $body .= implode("\n", $bodyitems)."\n</div>\n";
-    $header = "
-    <script>
-        \$(function(){
-            \$('#tabs').tabs({
-                cookie: {
-                    // store cookie for a day, without, it would be a session cookie
-                    expires: 10
-                }
-            });
-        });
-    </script>";
--->

@@ -52,12 +52,23 @@ body {
     font-weight: bold;
 }
 
+.popup {
+    position: absolute;
+    border: thick solid grey;
+    background: white;
+    z-index: 100;
+}
+
 .indent {
     padding-left: 2em;
 }
 
 .nowrap {
     white-space: nowrap;
+}
+
+.working {
+    background: yellow;
 }
 
 h1.header {
