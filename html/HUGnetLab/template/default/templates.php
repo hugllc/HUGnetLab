@@ -1,15 +1,29 @@
 <!--
  * This is the template file
 -->
-<script type="text/template" id="deviceRow">
-    <td>{{{actions}}}</td>
-    <td>{{id}}</td>
-    <td>{{DeviceID}}</td>
-    <td>{{DeviceName}}</td>
-    <td>{{HWPartNum}}</td>
-    <td>{{FWPartNum}} {{FWVersion}}</td>
+<script type="text/template" id="DeviceListTemplate">
+    <table>
+        <tr>
+            <th>Actions</th>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Serial #</th>
+            <th>Hardware</th>
+            <th>Firmware</th>
+        </tr>
+    {{#devices}}
+        <tr>
+            <td>{{{actions}}}</td>
+            <td>{{DeviceName}}</td>
+            <td>{{id}}</td>
+            <td>{{DeviceID}}</td>
+            <td>{{HWPartNum}}</td>
+            <td>{{FWPartNum}} {{FWVersion}}</td>
+        </tr>
+    {{/devices}}
+    </table>
 </script>
-<script type="text/template" id="deviceProperties">
+<script type="text/template" id="DevicePropertiesTemplate">
     <th>Serial #</th><td>{{id}}</td>
     <th>Device ID</th><td>{{DeviceID}}</td>
     <th>Name</th><td>{{DeviceName}}</td>

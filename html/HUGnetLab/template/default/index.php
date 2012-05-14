@@ -50,12 +50,8 @@
         {{header}}
         <script lang="JavaScript">
             $(document).ready(function(){
-                $('#dev1008').html("HERE");
-                var device = new HUGnetDevice({
-                    id: 0xFE0000,
-                    target: '#dev1008'
-                });
-                device.set({DeviceName: "Hello There"});
+                var list = new DeviceList();
+                list.render();
             });
 
             $(function(){
@@ -81,17 +77,8 @@
                 <div id="tabs-home">
                 </div>
                 <div id="tabs-devices">
-                    <table>
-                        <tr>
-                            <th>Actions</th>
-                            <th>Name</th>
-                            <th>ID</th>
-                            <th>Serial #</th>
-                            <th>Hardware</th>
-                            <th>Firmware</th>
-                        </tr>
-                        <tr id="dev1008"></tr>
-                    </table>
+                <div id="DeviceList">
+                </div>
                 </div>
                 <div id="tabs-pollsetup">
                 </div>
