@@ -60,6 +60,10 @@ body {
     overflow: auto;
 }
 
+div.saving button.SaveDevice {
+    background: yellow;
+    color: black;
+}
 .indent {
     padding-left: 2em;
 }

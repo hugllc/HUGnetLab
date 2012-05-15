@@ -14,11 +14,24 @@
 </script>
 <script type="text/template" id="DevicePropertiesTemplate">
     <div>
+        <form id="deviceForm" method="POST" action="javascript:void(0);">
+        <button class="SaveDevice" style="float: right; margin: 10px;">Save</button>
         <button class="cancel" style="float: right; margin: 10px;">Back to List</button>
         <table>
             <tr class="row0"><th>Serial #</th><td>{{id}}</td></tr>
             <tr class="row1"><th>Device ID</th><td>{{DeviceID}}</td></tr>
-            <tr class="row0"><th>Name</th><td>{{DeviceName}}</td></tr>
+            <tr class="row0">
+                <th>Name</th>
+                <td><input type="text" class="DeviceName" value="{{DeviceName}}" /></td>
+            </tr>
+            <tr class="row1">
+                <th>Location</th>
+                <td><input type="text" class="DeviceLocation" value="{{DeviceLocation}}" /></td>
+            </tr>
+            <tr class="row0">
+                <th>Job</th>
+                <td><input type="text" class="DeviceJob" value="{{DeviceJob}}" /></td>
+            </tr>
             <tr class="row1"><th>Hardware</th><td>{{HWPartNum}}</td></tr>
             <tr class="row0"><th>Firmware</th><td>{{FWPartNum}}</td></tr>
             <tr class="row1"><th>Version</th><td>{{FWVersion}}</td></tr>
@@ -28,6 +41,7 @@
             <tr class="row0"><th>LastContact</th><td>{{LastContact}}</td></tr>
             {{/params}}
         </table>
+        </form>
     </div>
 </script>
 <script type="text/template" id="DeviceListTemplate">
