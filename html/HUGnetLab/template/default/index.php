@@ -51,6 +51,12 @@
         <script lang="JavaScript">
             $(document).ready(function(){
                 var device = new DevicesView({el:  "#tabs-devices"});
+                var data = new DataPointsView({
+                    el:  "#tabs-poll",
+                    header: [ "test1", "test2" ],
+                    data: [ "Data1008.3", "Data1008.4" ],
+                    device: [ 0xAC , 0x1008 ],
+                });
                 $("#devTable").tablesorter();
             });
 
@@ -71,14 +77,11 @@
                 <ul>
                     <li><a href="#tabs-home">Home</a>
                     <li><a href="#tabs-devices">Devices</a>
-                    <li><a href="#tabs-pollsetup">Poll Setup</a>
                     <li><a href="#tabs-poll">Poll</a>
                 </ul>
                 <div id="tabs-home">
                 </div>
                 <div id="tabs-devices">
-                </div>
-                <div id="tabs-pollsetup">
                 </div>
                 <div id="tabs-poll">
                 </div>
@@ -95,6 +98,7 @@
         {{debug}}
         </div>
         {{/debug}}
-        {{{templates}}}
+        <?php require dirname(__FILE__)."/templates.devices.php"; ?>
+        <?php require dirname(__FILE__)."/templates.data.php"; ?>
     </body>
 </html>

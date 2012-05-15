@@ -66,7 +66,7 @@ body {
     overflow: auto;
 }
 
-div.saving button.SaveDevice {
+div.saving .save {
     background: yellow;
     color: black;
 }
@@ -173,6 +173,12 @@ td.left div.logo {
 
 .center {
     text-align: center;
+}
+.right {
+    text-align: right;
+}
+.left {
+    text-align: left;
 }
 
 th {

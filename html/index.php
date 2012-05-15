@@ -51,15 +51,6 @@ $tData = array(
     "host" => trim($uname['nodename']),
 );
 
-$templateFile = dirname(__FILE__)."/HUGnetLab/template/".$tempDir."/templates.php";
-if (file_exists($templateFile)) {
-    ob_start();
-    ob_clean();
-    include $templateFile;
-    $tData["templates"] = ob_get_contents();
-    ob_end_clean();
-}
-
 $main = new Mustache($mainTemplate);
 
 
