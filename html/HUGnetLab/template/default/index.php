@@ -77,13 +77,13 @@
                 <ul>
                     <li><a href="#tabs-home">Home</a>
                     <li><a href="#tabs-devices">Devices</a>
-                    <li><a href="#tabs-poll">Poll</a>
+                    <li><a href="#tabs-polls">Poll</a>
                 </ul>
                 <div id="tabs-home">
                 </div>
                 <div id="tabs-devices">
                 </div>
-                <div id="tabs-poll">
+                <div id="tabs-polls">
                 </div>
             </div>
         </div>
