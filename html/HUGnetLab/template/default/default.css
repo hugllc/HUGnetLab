@@ -52,6 +52,12 @@ body {
     font-weight: bold;
 }
 
+.buttons {
+    margin: 5px;
+}
+.floatright {
+    float: right;
+}
 .popup {
     position: absolute;
     border: thick solid grey;

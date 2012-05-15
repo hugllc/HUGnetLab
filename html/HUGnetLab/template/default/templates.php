@@ -15,9 +15,11 @@
 <script type="text/template" id="DevicePropertiesTemplate">
     <div>
         <form id="deviceForm" method="POST" action="javascript:void(0);">
-        <button class="SaveDevice" style="float: right; margin: 10px;">Save</button>
-        <button class="cancel" style="float: right; margin: 10px;">Back to List</button>
-        <table>
+        <div class="buttons floatright">
+            <button class="SaveDevice">Save</button>
+            <button class="cancel">Back to List</button>
+        </div>
+        <table style="width:100%;">
             <tr class="row0"><th>Serial #</th><td>{{id}}</td></tr>
             <tr class="row1"><th>Device ID</th><td>{{DeviceID}}</td></tr>
             <tr class="row0">
