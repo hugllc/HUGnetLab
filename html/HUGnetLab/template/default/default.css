@@ -78,6 +78,13 @@ div.saving .save {
     white-space: nowrap;
 }
 
+.parameter {
+    white-space: nowrap;
+    margin-top: 2px;
+    margin-right: 2px;
+    text-align: right;
+}
+
 .working {
     background: yellow;
 }

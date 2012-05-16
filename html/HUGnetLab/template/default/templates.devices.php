@@ -10,13 +10,14 @@
                     <td><%= HWPartNum %></td>
                     <td><%= FWPartNum %> <%= FWVersion %></td>
         </script>
+        <script type="text/template" id="DevicePropertiesTitleTemplate">
+            Device <%= DeviceID %>:<%= DeviceName %>
+        </script>
         <script type="text/template" id="DevicePropertiesTemplate">
                 <form id="deviceForm" method="POST" action="javascript:void(0);">
                 <div class="buttons floatright">
                     <button class="SaveDevice save">Save</button>
-                    <button class="cancel">Back to List</button>
                 </div>
-                <h2>Edit Device <%= DeviceID %>: <%= DeviceName %></h2>
                 <table style="width:100%;">
                     <tr class="row0"><th>Serial #</th><td><%= id %></td></tr>
                     <tr class="row1"><th>Device ID</th><td><%= DeviceID %></td></tr>
@@ -42,7 +43,7 @@
                 </form>
                 <form id="sensorForm" method="POST" action="javascript:void(0);">
                 <input type="submit" value="Save Sensors" class="save"/>
-                <table>
+                <table style="width: 100%;">
                     <thead>
                     <tr>
                         <th colspan="8">Sensors</th>
@@ -53,9 +54,6 @@
                         <th>Type</th>
                         <th>Data<br />Type</th>
                         <th>Parameters</th>
-                        <th>Units</th>
-                        <th>Graph Min/Max</th>
-                        <th>Decimal</br>Places</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -105,7 +103,7 @@
                                         evalue = sensor.extra[key];
                                     }
                                     var type = sensor.extraValues[key];
-                                    etext  = '<div class="nowrap">';
+                                    etext  = '<div class="parameter">';
                                     etext += '<span class="bold">'+sensor.extraText[key]+':</span>';
                                     if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
                                         etext += '<input type="text" name="'+efield+'" '
@@ -128,8 +126,8 @@
                                     print(etext);
                                 }
                                 %>
-                            </td>
-                            <td class="center">
+                            <div class="parameter">
+                                <span class="bold">Units:</span>
                                 <select name="sensor[<%= sensor.sensor %>][units]" onChange="submit();">
                                     <% for (key in sensor.validUnits) { %>
                                         <option value="<%- sensor.validUnits[key] %>" <% if (sensor.validUnits[key] == sensor.units) print('selected="selected"'); %>>
@@ -137,21 +135,23 @@
                                         </option>
                                     <% } %>
                                 </select>
-                            </td>
-                            <td class="right">
-                                <!-- Sensor Min / Max Parameters -->
-                                <span class="bold">Min:</span><input type="text" name="sensor[<%= sensor.sensor %>][max]" value="<%= sensor.min %>" size="6" /> <br />
-                                <span class="bold">Max:</span><input type="text" name="sensor[<%= sensor.sensor %>][max]" value="<%= sensor.max %>" size="6" />
-                            </td>
-                            <td class="center">
-                                <!-- Sensor Decimal Places -->
+                            </div>
+                            <div class="parameter">
+                                <span class="bold">Graph Min:</span><input type="text" name="sensor[<%= sensor.sensor %>][max]" value="<%= sensor.min %>" size="6" /> <br />
+                            </div>
+                            <div class="parameter">
+                                <span class="bold">Graph Max:</span><input type="text" name="sensor[<%= sensor.sensor %>][max]" value="<%= sensor.max %>" size="6" />
+                            </div>
+                            <div class="parameter">
+                                <span class="bold">Decimal Places:</span>
                                 <select name="sensor[<%= sensor.sensor %>][units]" onChange="submit();">
-                                    <% for (j = 0; j < sensor.maxDecimals; j++) { %>
+                                    <% for (j = 0; j <= sensor.maxDecimals; j++) { %>
                                         <option value="<%- j %>" <% if (j == sensor.decimals) print('selected="selected"'); %>>
                                             <%= j %>
                                         </option>
                                     <% } %>
                                 </select>
+                            </div>
                             </td>
                         </tr>
                     <% } %>
