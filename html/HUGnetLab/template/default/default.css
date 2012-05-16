@@ -306,6 +306,12 @@ th.headerSortDown {
 .ui-tabs .ui-tabs-panel {
     min-height: 500px !important;
 }
+#tabs li {
+    white-space: nowrap;
+}
+#tabs {
+    margin-top: 1em;
+}
 
 /* JQuery jqplot stuff */
 

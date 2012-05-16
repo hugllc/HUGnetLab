@@ -50,14 +50,40 @@
         {{header}}
         <script lang="JavaScript">
             $(document).ready(function(){
-                var device = new DevicesView({el:  "#tabs-devices"});
-                var data = new DataPointsView({
-                    el:  "#tabs-poll",
-                    header: [ "test1", "test2" ],
-                    data: [ "Data1008.3", "Data1008.4" ],
-                    device: [ 0xAC , 0x1008 ],
+                var tabs = $('#tabs').tabs({
+                    tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
                 });
-                $("#devTable").tablesorter();
+                var device = new DevicesView({
+                    parent: "#tabs-devices",
+                    index: 0,
+                });
+                $("#tabs-devices").html(device.render().el);
+                var data = {};
+                var index = 1;
+                for (; index < 3; index++) {
+                    var tag = "#tabs-test" + index;
+                    data[index] = new DataPointsView({
+                        parent: tag,
+                        id: index,
+                        data: [
+                            { device: 0x1008, field: "Date",      name: "Date",         class: "" },
+                            { device: 0x1008, field: "DataIndex", name: "Index",        class: "center" },
+                            { device: 0x1008, field: "172.4",     name: "AC Field 4",   class: "center" },
+                            { device: 0xAC,   field: "172.0",     name: "AC Field 1",   class: "center" },
+                            { device: 0x1008, field: "4104.4",    name: "1008 Field 2", class: "center" }
+                        ],
+                    });
+                    tabs.tabs("add", tag, "Test " + index, index);
+                    $(tag).html(data[index].render().el);
+                    data[index].bind(
+                        'remove',
+                        function ()
+                        {
+                            tabs.tabs( "remove", this.parent );
+                        },
+                        data[index]
+                    );
+                }
             });
 
             $(function(){
@@ -75,15 +101,11 @@
         <div class="body">
             <div id="tabs">
                 <ul>
-                    <li><a href="#tabs-home">Home</a>
                     <li><a href="#tabs-devices">Devices</a>
-                    <li><a href="#tabs-polls">Poll</a>
                 </ul>
                 <div id="tabs-home">
                 </div>
                 <div id="tabs-devices">
-                </div>
-                <div id="tabs-polls">
                 </div>
             </div>
         </div>
