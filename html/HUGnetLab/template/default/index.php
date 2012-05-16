@@ -40,7 +40,7 @@
         <script src="/HUGnetLib/contrib/jquery.cookie.js" type="text/javascript"></script>
         <script src="/HUGnetLib/contrib/jquery.metadata.js" type="text/javascript"></script>
         <script src="/HUGnetLib/contrib/jquery.tablesorter.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="/HUGnetLib/contrib/css/pepper-grinder/jquery-ui.css" />
+        <link rel="stylesheet" href="HUGnetLab/template/default/pepper-grinder/jquery-ui.css" />
         <script src="/HUGnetLib/contrib/jquery-ui.min.js" type="text/javascript"></script>
         <script src="/HUGnetLib/contrib/json2.js" type="text/javascript"></script>
         <script src="/HUGnetLib/contrib/underscore-min.js" type="text/javascript"></script>
