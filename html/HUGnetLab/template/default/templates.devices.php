@@ -8,26 +8,26 @@
                     <button class="SaveDevice save">Save</button>
                 </div>
                 <table style="width:100%;">
-                    <tr class="row0"><th>Serial #</th><td><%= id %></td></tr>
-                    <tr class="row1"><th>Device ID</th><td><%= DeviceID %></td></tr>
-                    <tr class="row0">
+                    <tr class="odd"><th>Serial #</th><td><%= id %></td></tr>
+                    <tr class="even"><th>Device ID</th><td><%= DeviceID %></td></tr>
+                    <tr class="odd">
                         <th>Name</th>
                         <td><input type="text" class="DeviceName" value="<%= DeviceName %>"/></td>
                     </tr>
-                    <tr class="row1">
+                    <tr class="even">
                         <th>Location</th>
                         <td><input type="text" class="DeviceLocation" value="<%= DeviceLocation %>" /></td>
                     </tr>
-                    <tr class="row0">
+                    <tr class="odd">
                         <th>Job</th>
                         <td><input type="text" class="DeviceJob" value="<%= DeviceJob %>" /></td>
                     </tr>
-                    <tr class="row1"><th>Hardware</th><td><%= HWPartNum %></td></tr>
-                    <tr class="row0"><th>Firmware</th><td><%= FWPartNum %></td></tr>
-                    <tr class="row1"><th>Version</th><td><%= FWVersion %></td></tr>
-                    <tr class="row0"><th>Raw Setup</th><td><%= RawSetup %></td></tr>
+                    <tr class="even"><th>Hardware</th><td><%= HWPartNum %></td></tr>
+                    <tr class="odd"><th>Firmware</th><td><%= FWPartNum %></td></tr>
+                    <tr class="even"><th>Version</th><td><%= FWVersion %></td></tr>
+                    <tr class="odd"><th>Raw Setup</th><td><%= RawSetup %></td></tr>
                     <tr><th colspan="2">Properties</th></tr>
-                    <tr class="row0"><th>LastContact</th><td><%= params.LastContact %></td></tr>
+                    <tr class="odd"><th>LastContact</th><td><%= params.LastContact %></td></tr>
                 </table>
                 </form>
                 <form id="sensorForm" method="POST" action="javascript:void(0);">
@@ -48,7 +48,7 @@
                     <tbody>
                     <% for (i = 0; i < totalSensors; i++) { %>
                         <% sensor = sensors[i]; %>
-                        <tr class="row<% print(i % 2); %>">
+                        <tr class="<% if (i % 2) { print("odd") } else { print("even") } %>">
                             <td class="center">
                                 <!-- Sensor Number -->
                                 <%= sensor.sensor %>
