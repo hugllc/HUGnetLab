@@ -200,11 +200,11 @@ div.topbar {
     font-weight: bold;
     line-height: 60px;
 }
-.row0 {
+tr.odd {
     background: #f7f3de;
 }
 
-.row1 {
+tr.even {
     background-color: #d9d6c4;
 }
 

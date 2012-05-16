@@ -1,15 +1,4 @@
 <!--  These are our tempaltes -->
-        <script type="text/template" id="DeviceEntryTemplate">
-                    <td>
-                        <button class="properties">View</button>
-                        <button class="refresh">Refresh</button>
-                    </td>
-                    <td><%= DeviceName %></td>
-                    <td><%= DeviceID %></td>
-                    <td><%= id %></td>
-                    <td><%= HWPartNum %></td>
-                    <td><%= FWPartNum %> <%= FWVersion %></td>
-        </script>
         <script type="text/template" id="DevicePropertiesTitleTemplate">
             Device <%= DeviceID %>:<%= DeviceName %>
         </script>
@@ -175,4 +164,15 @@
                     <tbody id="DeviceList">
                     </tbody>
                 </table>
+        </script>
+        <script type="text/template" id="DeviceEntryTemplate">
+                    <td>
+                        <button class="properties">View</button>
+                        <button class="refresh">Refresh</button>
+                    </td>
+                    <td><%= DeviceName %></td>
+                    <td><%= DeviceID %></td>
+                    <td><%= id %></td>
+                    <td><%= HWPartNum %></td>
+                    <td><%= FWPartNum %> <%= FWVersion %></td>
         </script>

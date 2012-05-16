@@ -47,54 +47,8 @@
         <script src="/HUGnetLib/contrib/backbone.js" type="text/javascript"></script>
         <script src="/HUGnetLib/contrib/mustache.js" type="text/javascript"></script>
         <script src="/HUGnetLib/hugnet.js" type="text/javascript"></script>
+        <script src="HUGnetLab/hugnetlab.js" type="text/javascript"></script>
         {{header}}
-        <script lang="JavaScript">
-            $(document).ready(function(){
-                var tabs = $('#tabs').tabs({
-                    tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
-                });
-                var device = new DevicesView({
-                    parent: "#tabs-devices",
-                    index: 0,
-                });
-                $("#tabs-devices").html(device.render().el);
-                var data = {};
-                var index = 1;
-                for (; index < 3; index++) {
-                    var tag = "#tabs-test" + index;
-                    data[index] = new DataPointsView({
-                        parent: tag,
-                        id: index,
-                        data: [
-                            { device: 0x1008, field: "Date",      name: "Date",         class: "" },
-                            { device: 0x1008, field: "DataIndex", name: "Index",        class: "center" },
-                            { device: 0x1008, field: "172.4",     name: "AC Field 4",   class: "center" },
-                            { device: 0xAC,   field: "172.0",     name: "AC Field 1",   class: "center" },
-                            { device: 0x1008, field: "4104.4",    name: "1008 Field 2", class: "center" }
-                        ],
-                    });
-                    tabs.tabs("add", tag, "Test " + index, index);
-                    $(tag).html(data[index].render().el);
-                    data[index].bind(
-                        'remove',
-                        function ()
-                        {
-                            tabs.tabs( "remove", this.parent );
-                        },
-                        data[index]
-                    );
-                }
-            });
-
-            $(function(){
-                $('#tabs').tabs({
-                    cookie: {
-                        // store cookie for a day, without, it would be a session cookie
-                        expires: 10
-                    }
-                });
-            });
-        </script>
     </head>
     <body>
         <div id="header"><h1 class="header">HUGnetLab</h1></div>
