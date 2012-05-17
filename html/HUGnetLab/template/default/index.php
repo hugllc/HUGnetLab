@@ -47,9 +47,10 @@
         <div class="body">
             <div id="tabs">
                 <ul>
+                    <li><a href="#tabs-tests">Tests</a>
                     <li><a href="#tabs-devices">Devices</a>
                 </ul>
-                <div id="tabs-home">
+                <div id="tabs-tests">
                 </div>
                 <div id="tabs-devices">
                 </div>
@@ -68,5 +69,6 @@
         {{/debug}}
         <?php require dirname(__FILE__)."/templates.devices.php"; ?>
         <?php require dirname(__FILE__)."/templates.data.php"; ?>
+        <?php require dirname(__FILE__)."/templates.tests.php"; ?>
     </body>
 </html>

@@ -39,8 +39,14 @@ $(document).ready(function(){
         index: 0,
     });
     $("#tabs-devices").html(device.render().el);
+    var device = new TestsView({
+        parent: "#tabs-tests",
+        index: 0,
+    });
+    $("#tabs-tests").html(device.render().el);
+
     var data = {};
-    var index = 1;
+    var index = 2;
     for (; index < 3; index++) {
         var tag = "#tabs-test" + index;
         data[index] = new DataPointsView({
