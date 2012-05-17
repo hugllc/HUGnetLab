@@ -39,7 +39,7 @@
         <link rel="stylesheet" href="HUGnetLab/template/default/pepper-grinder/jquery-ui.css" />
         <script src="/HUGnetLib/contrib.js" type="text/javascript"></script>
         <script src="/HUGnetLib/hugnet.js" type="text/javascript"></script>
-        <script src="HUGnetLab/hugnetlab.js" type="text/javascript"></script>
+        <script src="HUGnetLab/template/default/hugnetlab.js" type="text/javascript"></script>
         {{header}}
     </head>
     <body>
