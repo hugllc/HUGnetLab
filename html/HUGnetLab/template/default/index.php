@@ -31,21 +31,13 @@
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
  */
 -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
     <head>
         <title>HUGnetLab on {{host}}</title>
         <link rel="stylesheet" href="HUGnetLab/template/default/default.css" />
-        <script src="/HUGnetLib/contrib/jquery.min.js" type="text/javascript"></script>
-        <script src="/HUGnetLib/contrib/jquery.cookie.js" type="text/javascript"></script>
-        <script src="/HUGnetLib/contrib/jquery.metadata.js" type="text/javascript"></script>
-        <script src="/HUGnetLib/contrib/jquery.tablesorter.js" type="text/javascript"></script>
         <link rel="stylesheet" href="HUGnetLab/template/default/pepper-grinder/jquery-ui.css" />
-        <script src="/HUGnetLib/contrib/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="/HUGnetLib/contrib/json2.js" type="text/javascript"></script>
-        <script src="/HUGnetLib/contrib/underscore-min.js" type="text/javascript"></script>
-        <script src="/HUGnetLib/contrib/backbone.js" type="text/javascript"></script>
-        <script src="/HUGnetLib/contrib/mustache.js" type="text/javascript"></script>
+        <script src="/HUGnetLib/contrib.js" type="text/javascript"></script>
         <script src="/HUGnetLib/hugnet.js" type="text/javascript"></script>
         <script src="HUGnetLab/hugnetlab.js" type="text/javascript"></script>
         {{header}}
