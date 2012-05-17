@@ -192,6 +192,9 @@ th {
     background: #AAA;
 }
 
+textarea {
+    width: 100%;
+}
 div.topbar {
     background: lightgreen;
     text-align: center;

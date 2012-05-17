@@ -28,54 +28,96 @@
  * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
  */
-$(document).ready(function(){
+$(function ()
+{
     "use strict";
 
-    var tabs = $('#tabs').tabs({
-        tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
-    });
-    var device = new DevicesView({
-        parent: "#tabs-devices",
-        index: 0,
-    });
-    $("#tabs-devices").html(device.render().el);
-    var device = new TestsView({
-        parent: "#tabs-tests",
-        index: 0,
-    });
-    $("#tabs-tests").html(device.render().el);
+    /**
+    * This is the model that stores the devices.
+    *
+    * @category   JavaScript
+    * @package    HUGnetLib
+    * @subpackage Tests
+    * @author     Scott Price <prices@hugllc.com>
+    * @copyright  2012 Hunt Utilities Group, LLC
+    * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
+    * @version    Release: 0.9.7
+    * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
+    */
+    window.HUGnetLab = Backbone.View.extend({
+        data: {},
+        tabs: undefined,
+        initialize: function ()
+        {
+            this.render();
+        },
+        render: function ()
+        {
+            this.tabs = $('#tabs').tabs({
+                tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
+                cookie: {
+                    // store a session cookie
+                    expires: 10
+                }
+            });
+            var device = new DevicesView({
+                parent: "#tabs-devices",
+            });
+            this.tabs.tabs("add", '#tabs-devices', 'Device Information');
+            $('#tabs-devices').html(device.render().el);
+            var tests = new TestsView({
+                parent: "#tabs-tests",
+            });
+            this.tabs.tabs("add", '#tabs-tests', 'Test Definitions');
+            $('#tabs-tests').html(tests.render().el);
 
-    var data = {};
-    var index = 2;
-    for (; index < 3; index++) {
-        var tag = "#tabs-test" + index;
-        data[index] = new DataPointsView({
-            parent: tag,
-            id: index,
-            data: [
-                { device: 0x1008, field: "Date",      name: "Date",         class: "" },
-                { device: 0x1008, field: "DataIndex", name: "Index",        class: "center" },
-                { device: 0x1008, field: "172.4",     name: "AC Field 4",   class: "center" },
-                { device: 0xAC,   field: "172.0",     name: "AC Field 1",   class: "center" },
-                { device: 0x1008, field: "4104.4",    name: "1008 Field 2", class: "center" }
-            ],
-        });
-        tabs.tabs("add", tag, "Test " + index, index);
-        $(tag).html(data[index].render().el);
-        data[index].bind(
-            'remove',
-            function ()
-            {
-                tabs.tabs( "remove", this.parent );
-            },
-            data[index]
-        );
-    }
-    $("#tabs-devices .tablesorter th").trigger('click');
-    $('#tabs').tabs({
-        cookie: {
-            // store cookie for a day, without, it would be a session cookie
-            expires: 10
+            var data = {};
+            tests.bind(
+                "run",
+                function (test)
+                {
+                    this.testTab(test, 'run');
+                },
+                this
+            );
+            tests.bind(
+                "view",
+                function (test)
+                {
+                    this.testTab(test, 'view');
+                },
+                this
+            )
+        },
+        testTab: function (test, mode)
+        {
+            var tag = "#tabs-test" + test.get("id");
+            if (this.data[tag] !== undefined) {
+                alert('Tab for "' + test.get("name") + '" is already open');
+                return;
+            }
+            this.data[tag] = new DataPointsView({
+                parent: tag,
+                mode: mode,
+                id: test.get("id"),
+                data: test.get("fields"),
+            });
+            this.tabs.tabs("add", tag, 'Test "' + test.get("name") + '"');
+            $(tag).html(this.data[tag].render().el);
+            this.data[tag].bind(
+                'remove',
+                function (tab)
+                {
+                    this.tabs.tabs( "remove", tab );
+                    delete this.data[tab];
+                },
+                this
+            );
         }
     });
+});
+
+$(document).ready(function(){
+    "use strict";
+    var iface = new HUGnetLab();
 });
