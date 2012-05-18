@@ -55,7 +55,7 @@ $(function ()
         {
             var self = this;
             this.tabs = $('#tabs').tabs({
-                tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
+                tabTemplate: '<li><a href="#{href}">#{label}</a></li>',
                 cookie: {
                     // store a session cookie
                     expires: 10
@@ -72,6 +72,13 @@ $(function ()
             this.tabs.tabs("add", '#tabs-tests', 'Test Definitions');
             $('#tabs-tests').html(tests.render().el);
 
+            /* Further tabs will have a close button */
+            this.tabs.tabs("option", "tabTemplate", '<li style="white-space: nowrap;"><a href="#{href}">#{label}</a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>');
+            /* close icon: removing the tab on click */
+            $( "#tabs span.ui-icon-close" ).live( "click", function() {
+                var index = $( "li", self.tabs ).index( $( this ).parent() );
+                self.tabs.tabs( "remove", index );
+            });
             /* This selects a newly added tab */
             this.tabs.tabs({
                 add: function(event, ui) {
