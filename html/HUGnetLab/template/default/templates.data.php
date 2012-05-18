@@ -25,7 +25,12 @@
 <script type="text/template" id="DataPointListViewTemplate">
         <form id="pollForm" method="POST" action="javascript:void(0);">
         <h2>View Test <%= id %></h2>
-        <button class="exit floatright">Exit Test</button>
+        <div class="floatright">
+            <button class="exit">Exit View</button>
+            <div>
+                <span class="bold">Refresh:</span><input type="checkbox" class="autorefresh" value="5" />
+            </div>
+        </div>
         <table id="devTable">
             <thead>
             <tr>
