@@ -53,6 +53,7 @@ $(function ()
         },
         render: function ()
         {
+            var self = this;
             this.tabs = $('#tabs').tabs({
                 tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
                 cookie: {
@@ -70,6 +71,13 @@ $(function ()
             });
             this.tabs.tabs("add", '#tabs-tests', 'Test Definitions');
             $('#tabs-tests').html(tests.render().el);
+
+            /* This selects a newly added tab */
+            this.tabs.tabs({
+                add: function(event, ui) {
+                    self.tabs.tabs('select', '#' + ui.panel.id);
+                }
+            });
 
             var data = {};
             tests.bind(
