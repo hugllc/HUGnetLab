@@ -10,7 +10,6 @@
         <h2>Run Test <%= id %></h2>
         <button class="startPoll">Start Polling</button>
         <button class="stopPoll">Stop Polling</button>
-        <button class="exit floatright">Exit Test</button>
         <table id="devTable">
             <thead>
             <tr>
@@ -26,7 +25,6 @@
         <form id="pollForm" method="POST" action="javascript:void(0);">
         <h2>View Test <%= id %></h2>
         <div class="floatright">
-            <button class="exit">Exit View</button>
             <div>
                 <span class="bold">Refresh:</span><input type="checkbox" class="autorefresh" value="5" />
             </div>

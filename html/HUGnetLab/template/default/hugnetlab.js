@@ -73,12 +73,16 @@ $(function ()
             $('#tabs-tests').html(tests.render().el);
 
             /* Further tabs will have a close button */
-            this.tabs.tabs("option", "tabTemplate", '<li style="white-space: nowrap;"><a href="#{href}">#{label}</a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>');
+            this.tabs.tabs("option", "tabTemplate", '<li style="white-space: nowrap;"><a href="#{href}">#{label}</a> <span name="#{href}" class="ui-icon ui-icon-close">Remove Tab</span></li>');
             /* close icon: removing the tab on click */
-            $( "#tabs span.ui-icon-close" ).live( "click", function() {
+            $( "#tabs span.ui-icon-close" ).live( "click", function(event, ui) {
                 var index = $( "li", self.tabs ).index( $( this ).parent() );
+                var id = $( this ).attr("name");
+                self.data[id].exit();
+                delete self.data[id];
                 self.tabs.tabs( "remove", index );
             });
+
             /* This selects a newly added tab */
             this.tabs.tabs({
                 add: function(event, ui) {
@@ -106,6 +110,7 @@ $(function ()
         },
         testTab: function (test, mode)
         {
+            var self = this;
             var tag = "#tabs-test" + test.get("id");
             if (this.data[tag] !== undefined) {
                 alert('Tab for "' + test.get("name") + '" is already open');
@@ -119,15 +124,6 @@ $(function ()
             });
             this.tabs.tabs("add", tag, 'Test "' + test.get("name") + '"');
             $(tag).html(this.data[tag].render().el);
-            this.data[tag].bind(
-                'remove',
-                function (tab)
-                {
-                    this.tabs.tabs( "remove", tab );
-                    delete this.data[tab];
-                },
-                this
-            );
         }
     });
 });
