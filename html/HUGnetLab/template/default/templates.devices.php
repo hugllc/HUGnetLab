@@ -145,7 +145,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Graph Max</th>
+                        <th>Decimals</th>
                         <td>
                             <select name="decimals" onChange="submit();">
                                 <% for (j = 0; j <= maxDecimals; j++) { %>
