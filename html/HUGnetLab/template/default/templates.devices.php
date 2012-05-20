@@ -8,145 +8,46 @@
                     <button class="SaveDevice save">Save</button>
                 </div>
                 <table style="width:100%;">
-                    <tr class="odd"><th>Serial #</th><td><%= id %></td></tr>
-                    <tr class="even"><th>Device ID</th><td><%= DeviceID %></td></tr>
+                    <tr class="odd"><th class="right">Serial #</th><td><%= id %></td></tr>
+                    <tr class="even"><th class="right">Device ID</th><td><%= DeviceID %></td></tr>
                     <tr class="odd">
-                        <th>Name</th>
+                        <th class="right">Name</th>
                         <td><input type="text" class="DeviceName" value="<%= DeviceName %>"/></td>
                     </tr>
                     <tr class="even">
-                        <th>Location</th>
+                        <th class="right">Location</th>
                         <td><input type="text" class="DeviceLocation" value="<%= DeviceLocation %>" /></td>
                     </tr>
                     <tr class="odd">
-                        <th>Job</th>
+                        <th class="right">Job</th>
                         <td><input type="text" class="DeviceJob" value="<%= DeviceJob %>" /></td>
                     </tr>
-                    <tr class="even"><th>Hardware</th><td><%= HWPartNum %></td></tr>
-                    <tr class="odd"><th>Firmware</th><td><%= FWPartNum %></td></tr>
-                    <tr class="even"><th>Version</th><td><%= FWVersion %></td></tr>
-                    <tr class="odd"><th>Raw Setup</th><td><%= RawSetup %></td></tr>
+                    <tr class="even"><th class="right">Hardware</th><td><%= HWPartNum %></td></tr>
+                    <tr class="odd"><th class="right">Firmware</th><td><%= FWPartNum %></td></tr>
+                    <tr class="even"><th class="right">Version</th><td><%= FWVersion %></td></tr>
+                    <tr class="odd"><th class="right">Raw Setup</th><td><%= RawSetup %></td></tr>
                     <tr><th colspan="2">Properties</th></tr>
-                    <tr class="odd"><th>LastContact</th><td><%= params.LastContact %></td></tr>
-                </table>
-                </form>
-                <form id="sensorForm" method="POST" action="javascript:void(0);">
-                <input type="submit" value="Save Sensors" class="save"/>
-                <table style="width: 100%;">
-                    <thead>
-                    <tr>
-                        <th colspan="8">Sensors</th>
+                    <tr class="odd">
+                        <th class="right">Last Contact</th>
+                        <td>
+                            <% var d = new Date(params.LastContact * 1000); print(d.toString()) %>
+                        </td>
                     </tr>
-                    <tr id="deviceSensorHead">
-                        <th>#</th>
-                        <th>Location</th>
-                        <th>Type</th>
-                        <th>Data<br />Type</th>
-                        <th>Parameters</th>
+                    <tr class="odd">
+                        <th class="right">Last Poll</th>
+                        <td>
+                            <% var d = new Date(params.LastPoll * 1000); print(d.toString()) %>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <% for (i = 0; i < totalSensors; i++) { %>
-                        <% sensor = sensors[i]; %>
-                        <tr class="<% if (i % 2) { print("odd") } else { print("even") } %>">
-                            <td class="center">
-                                <!-- Sensor Number -->
-                                <%= sensor.sensor %>
-                            </td>
-                            <td>
-                                <!-- Sensor Name -->
-                                <input type="text" name="sensor[<%= sensor.sensor %>][location]" value="<%= sensor.location %>" />
-                            </td>
-                            <td>
-                                <!-- Sensor Type -->
-                                <select name="sensor[<%= sensor.sensor %>][type]">
-                                    <% for (key in sensor.otherTypes) { %>
-                                        <option value="<%- sensor.otherTypes[key] %>" <% if (sensor.otherTypes[key] == sensor.type) print('selected="selected"'); %>>
-                                            <%= sensor.otherTypes[key] %>
-                                        </option>
-                                    <% } %>
-                                </select>
-                            </td>
-                            <td class="center">
-                                <!-- Sensor dataType -->
-                                <select name="sensor[<%= sensor.sensor %>][dataType]">
-                                    <% for (key in sensor.dataTypes) { %>
-                                        <option value="<%- sensor.dataTypes[key] %>" <% if (sensor.dataTypes[key] == sensor.dataType) print('selected="selected"'); %>>
-                                            <%= sensor.dataTypes[key] %>
-                                        </option>
-                                    <% } %>
-                                </select>
-                            </td>
-                            <td class="right">
-                                <!-- Sensor Extra Parameters -->
-                                <%
-                                for (key in sensor.extraDefault) {
-                                    var etext;
-                                    var efield = 'sensors['+sensor.sensor+'][extra]['+key+']';
-                                    var evalue;
-                                    if ((sensor.extra == undefined)
-                                        || (sensor.extra[key] == undefined)
-                                    ) {
-                                        evalue = sensor.extraDefault[key];
-                                    } else {
-                                        evalue = sensor.extra[key];
-                                    }
-                                    var type = sensor.extraValues[key];
-                                    etext  = '<div class="parameter">';
-                                    etext += '<span class="bold">'+sensor.extraText[key]+':</span>';
-                                    if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
-                                        etext += '<input type="text" name="'+efield+'" '
-                                            + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
-                                    } else if (typeof type === 'object') {
-                                        etext += '<select name="'+efield+'" >';
-                                        for (q in type)
-                                        {
-                                            etext += '<option value="'+q.replace('&', '&amp;')+'"';
-                                            if (q == evalue) {
-                                                etext += ' selected="selected" ';
-                                            }
-                                            etext += '>'+type[q]+'</option>';
-                                        }
-                                        etext += '</select>';
-                                    } else {
-                                        etext += evalue;
-                                    }
-                                    etext += '</div>';
-                                    print(etext);
-                                }
-                                %>
-                            <div class="parameter">
-                                <span class="bold">Units:</span>
-                                <select name="sensor[<%= sensor.sensor %>][units]" onChange="submit();">
-                                    <% for (key in sensor.validUnits) { %>
-                                        <option value="<%- sensor.validUnits[key] %>" <% if (sensor.validUnits[key] == sensor.units) print('selected="selected"'); %>>
-                                            <%= sensor.validUnits[key] %>
-                                        </option>
-                                    <% } %>
-                                </select>
-                            </div>
-                            <div class="parameter">
-                                <span class="bold">Graph Min:</span><input type="text" name="sensor[<%= sensor.sensor %>][max]" value="<%= sensor.min %>" size="6" /> <br />
-                            </div>
-                            <div class="parameter">
-                                <span class="bold">Graph Max:</span><input type="text" name="sensor[<%= sensor.sensor %>][max]" value="<%= sensor.max %>" size="6" />
-                            </div>
-                            <div class="parameter">
-                                <span class="bold">Decimal Places:</span>
-                                <select name="sensor[<%= sensor.sensor %>][units]" onChange="submit();">
-                                    <% for (j = 0; j <= sensor.maxDecimals; j++) { %>
-                                        <option value="<%- j %>" <% if (j == sensor.decimals) print('selected="selected"'); %>>
-                                            <%= j %>
-                                        </option>
-                                    <% } %>
-                                </select>
-                            </div>
-                            </td>
-                        </tr>
-                    <% } %>
-                    </tbody>
+                    <tr class="odd">
+                        <th class="right">Last Config</th>
+                        <td>
+                            <% var d = new Date(params.LastConfig * 1000); print(d.toString()) %>
+                        </td>
+                    </tr>
+                    <tr><th colspan="2">Sensors</th></tr>
+                    <tr><td colspan="2"><%= sensors %></th></tr>
                 </table>
-                <input type="submit" value="Save Sensors" class="save"/>
                 </form>
         </script>
         <script type="text/template" id="DeviceListTemplate">
@@ -175,4 +76,148 @@
                     <td><%= id %></td>
                     <td><%= HWPartNum %></td>
                     <td><%= FWPartNum %> <%= FWVersion %></td>
+        </script>
+<!--  These are our tempaltes -->
+        <script type="text/template" id="DeviceSensorPropertiesTitleTemplate">
+            Device <%= sensor %>:<%= location %>
+        </script>
+        <script type="text/template" id="DeviceSensorPropertiesTemplate">
+                <form id="sensorForm" method="POST" action="javascript:void(0);">
+                <div class="buttons floatright">
+                    <button class="save">Save</button>
+                </div>
+                <table style="width: 100%;">
+                    <tbody>
+                    <tr><th>Sensor #</th><td><%= sensor %></td></tr>
+                    <tr><th>Sensor ID</th><td><% print(parseInt(id).toString(16).toUpperCase()); %></td></tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>
+                            <input type="text" name="location" value="<%= location %>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>
+                            <select name="type">
+                                <% for (key in otherTypes) { %>
+                                    <option value="<%- otherTypes[key] %>" <% (otherTypes[key] == type) && print('selected="selected"'); %>>
+                                        <%= otherTypes[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Data Type</th>
+                        <td>
+                            <select name="dataType">
+                                <% for (key in dataTypes) { %>
+                                    <option value="<%- dataTypes[key] %>" <% (dataTypes[key] == dataType) && print('selected="selected"'); %>>
+                                        <%= dataTypes[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Units</th>
+                        <td>
+                            <select name="units" onChange="submit();">
+                                <% for (key in validUnits) { %>
+                                    <option value="<%- validUnits[key] %>" <% (validUnits[key] == units) && print('selected="selected"'); %>>
+                                        <%= validUnits[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Graph Min</th>
+                        <td>
+                            <input type="text" name="min" value="<%= min %>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Graph Max</th>
+                        <td>
+                            <input type="text" name="max" value="<%= max %>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Graph Max</th>
+                        <td>
+                            <select name="decimals" onChange="submit();">
+                                <% for (j = 0; j <= maxDecimals; j++) { %>
+                                    <option value="<%- j %>" <% (j == decimals) && print('selected="selected"'); %>>
+                                        <%= j %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Sensor Extra Parameters -->
+                    <%
+                    for (key in extraDefault) {
+                        var etext;
+                        var efield = 'extra['+key+']';
+                        var evalue;
+                        if ((extra == undefined)
+                            || (extra[key] == undefined)
+                        ) {
+                            evalue = extraDefault[key];
+                        } else {
+                            evalue = extra[key];
+                        }
+                        var type = extraValues[key];
+                        etext  = '<tr>';
+                        etext += '<th>'+extraText[key]+'</th><td>';
+                        if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
+                            etext += '<input type="text" name="'+efield+'" '
+                                + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
+                        } else if (typeof type === 'object') {
+                            etext += '<select name="'+efield+'" >';
+                            for (q in type)
+                            {
+                                etext += '<option value="'+q.replace('&', '&amp;')+'"';
+                                if (q == evalue) {
+                                    etext += ' selected="selected" ';
+                                }
+                                etext += '>'+type[q]+'</option>';
+                            }
+                            etext += '</select>';
+                        } else {
+                            etext += evalue;
+                        }
+                        etext += '</td></tr>';
+                        print(etext);
+                    }
+                    %>
+                    </tr>
+                </table>
+                </form>
+        </script>
+        <script type="text/template" id="DeviceSensorListTemplate">
+                <table id="sensorTable" style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%;">Action</th>
+                        <th style="width: 5%;">#</th>
+                        <th>Name</th>
+                        <th style="width: 5%;">Type</th>
+                        <th style="width: 10%;">Data Type</th>
+                    </tr>
+                    </thead>
+                    <tbody id="DeviceList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="DeviceSensorEntryTemplate">
+                    <td>
+                        <button class="properties">Edit</button>
+                    </td>
+                    <td class="center"><%= (parseInt(sensor) + 1) %></td>
+                    <td><% (location.length > 0) ? print(location) : print("Sensor " + (parseInt(sensor) + 1)); %></td>
+                    <td class="center"><%= type %></td>
+                    <td class="center"><%= dataType %></td>
         </script>
