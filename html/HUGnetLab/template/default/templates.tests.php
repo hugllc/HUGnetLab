@@ -28,22 +28,8 @@
                             </select>
                         </td>
                     </tr>
-                    <%  var i;
-                        for (i = 0; i < fieldcount; i++) { %>
-                    <tr><th colspan="2">Field <%= (i+1) %></th></tr>
-                    <tr class="<% if (i % 0) { print('odd'); } else { print('even'); } %>">
-                        <th>Name</th>
-                        <td><input type="text" name="fields<%= i %>name" size="10" value="<%= fields[i]['name'] %>" /></td>
-                    </tr>
-                    <tr class="<% if (i % 0) { print('even'); } else { print('odd'); } %>">
-                        <th>DeviceID</th>
-                        <td><input type="text" name="fields<%= i %>device" size="10" value="<%= fields[i]['device'] %>" /></td>
-                    </tr>
-                    <tr class="<% if (i % 0) { print('odd'); } else { print('even'); } %>">
-                        <th>Field</th>
-                        <td><input type="text" name="fields<%= i %>field" size="10" value="<%= fields[i]['field'] %>" /></td>
-                    </tr>
-                    <%  }  %>
+                    <tr><th colspan="2">Fields</th></tr>
+                    <tr><td colspan="2"><%= fields %></td></tr>
                 </table>
                 <div>
                     <button class="save">Save</button>
@@ -60,6 +46,7 @@
                         <th class="{sorter: false}">Actions</th>
                         <th class="{sorter: 'numeric'}">#</th>
                         <th class="{sorter: 'text'}">Name</th>
+                        <th class="{sorter: 'numeric'}">Fields</th>
                         <th class="{sorter: 'text'}">Created</th>
                         <th class="{sorter: 'text'}">Last Modified</th>
                     </tr>
@@ -76,6 +63,53 @@
                         </td>
                         <td><%= id %></td>
                         <td><%= name %></td>
+                        <td class="center"><%= fieldcount %></td>
                         <td><%= created %></td>
                         <td><%= modified %></td>
+        </script>
+        <script type="text/template" id="TestFieldListTemplate">
+                <table id="fieldTable" style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%;">Actions</th>
+                        <th style="width: 5%;">#</th>
+                        <th>Name</th>
+                        <th style="width: 5%;">Device</th>
+                        <th style="width: 5%;">Field</th>
+                    </tr>
+                    </thead>
+                    <tbody class="here">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="TestFieldEntryTemplate">
+                        <td><button class="properties">Edit</button></td>
+                        <td class="center"><%= id %></td>
+                        <td><%= name %></td>
+                        <td class="center"><%= device %></td>
+                        <td class="center"><%= field %></td>
+        </script>
+        <script type="text/template" id="TestFieldPropertiesTitleTemplate">
+            Field <%= id %>:<%= name %>
+        </script>
+        <script type="text/template" id="TestFieldPropertiesTemplate">
+                <form id="testFieldForm" method="POST" action="javascript:void(0);">
+                <table style="width:100%;">
+                    <tr class="odd">
+                        <th>Name</th>
+                        <td><input type="text" class="name" name="name" required="required" value="<%= name %>"/></td>
+                    </tr>
+                    <tr class="even">
+                        <th>Device</th>
+                        <td><input type="text" class="device" name="device" required="required" value="<%= device %>"/></td>
+                    </tr>
+                    <tr class="odd">
+                        <th>Field</th>
+                        <td><input type="text" class="field" name="field" required="required" value="<%= field %>"/></td>
+                    </tr>
+                </table>
+                <div>
+                    <button class="save">Save</button>
+                </div>
+                </form>
         </script>
