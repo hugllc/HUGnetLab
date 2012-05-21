@@ -62,18 +62,27 @@ $(function ()
                     expires: 10
                 }
             });
-            var tests = new HUGnet.Tests ({
+            this.tests = new HUGnet.TestSuite({
                 el: "#tabs-tests",
+                tests: HUGnetLab.Tests,
             });
-            var config = new HUGnet.Config ({
+            this.config = new HUGnet.Config({
                 el: "#tabs-config",
+                devices: HUGnetLab.Devices,
             });
 
         }
     });
 });
 
+HUGnetLab.Devices = new HUGnet.Devices();
+HUGnetLab.Devices.fetch();
+HUGnetLab.Tests = new HUGnet.Tests();
+HUGnetLab.Tests.fetch();
+
 $(document).ready(function(){
     "use strict";
+
+
     var iface = new HUGnetLab.main();
 });
