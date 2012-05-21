@@ -52,8 +52,14 @@
             <div id="tabs">
                 <nav>
                 <ul>
+                    <li><a href="#tabs-tests">Tests</a></li>
+                    <li><a href="#tabs-config">Configuration</a></li>
                 </ul>
                 </nav>
+                <div id="tabs-tests">
+                </div>
+                <div id="tabs-config">
+                </div>
             </div>
         </div>
         </section>

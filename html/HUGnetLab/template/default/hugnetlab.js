@@ -62,69 +62,13 @@ $(function ()
                     expires: 10
                 }
             });
-            var device = new HUGnet.DevicesView({
-                parent: "#tabs-devices",
+            var tests = new HUGnet.Tests ({
+                el: "#tabs-tests",
             });
-            this.tabs.tabs("add", '#tabs-devices', 'Device Information');
-            $('#tabs-devices').html(device.render().el);
-            var tests = new HUGnet.TestsView({
-                parent: "#tabs-tests",
-            });
-            this.tabs.tabs("add", '#tabs-tests', 'Test Definitions');
-            $('#tabs-tests').html(tests.render().el);
-
-            /* Further tabs will have a close button */
-            this.tabs.tabs("option", "tabTemplate", '<li style="white-space: nowrap;"><a href="#{href}">#{label}</a> <span name="#{href}" class="ui-icon ui-icon-close">Remove Tab</span></li>');
-            /* close icon: removing the tab on click */
-            $( "#tabs span.ui-icon-close" ).live( "click", function(event, ui) {
-                var index = $( "li", self.tabs ).index( $( this ).parent() );
-                var id = $( this ).attr("name");
-                self.data[id].exit();
-                delete self.data[id];
-                self.tabs.tabs( "remove", index );
+            var config = new HUGnet.Config ({
+                el: "#tabs-config",
             });
 
-            /* This selects a newly added tab */
-            this.tabs.tabs({
-                add: function(event, ui) {
-                    self.tabs.tabs('select', '#' + ui.panel.id);
-                }
-            });
-
-            var data = {};
-            tests.bind(
-                "run",
-                function (test)
-                {
-                    this.testTab(test, 'run');
-                },
-                this
-            );
-            tests.bind(
-                "view",
-                function (test)
-                {
-                    this.testTab(test, 'view');
-                },
-                this
-            )
-        },
-        testTab: function (test, mode)
-        {
-            var self = this;
-            var tag = "#tabs-test" + test.get("id");
-            if (this.data[tag] !== undefined) {
-                alert('Tab for "' + test.get("name") + '" is already open');
-                return;
-            }
-            this.data[tag] = new HUGnet.DataPointsView({
-                parent: tag,
-                mode: mode,
-                id: test.get("id"),
-                data: test.get("fields"),
-            });
-            this.tabs.tabs("add", tag, 'Test "' + test.get("name") + '"');
-            $(tag).html(this.data[tag].render().el);
         }
     });
 });
