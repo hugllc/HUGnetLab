@@ -5,7 +5,7 @@
             <td class="<%= fieldClass %>"><%= data %></td>
 </script>
 
-<script type="text/template" id="DataPointListRunTemplate">
+<script type="text/template" id="DataPollTemplate">
         <form id="pollForm" method="POST" action="javascript:void(0);">
         <h2>Run Test <%= id %></h2>
         <button class="startPoll">Start Polling</button>
@@ -21,7 +21,7 @@
         </table>
         </form>
 </script>
-<script type="text/template" id="DataPointListViewTemplate">
+<script type="text/template" id="DataViewTemplate">
         <form id="pollForm" method="POST" action="javascript:void(0);">
         <h2>View Test <%= id %></h2>
         <div class="floatright">
