@@ -60,6 +60,7 @@
                         <th class="{sorter: 'numeric'}">Serial #</th>
                         <th class="{sorter: 'text'}">Hardware</th>
                         <th class="{sorter: 'text'}">Firmware</th>
+                        <th class="{sorter: 'text'}">Type</th>
                     </tr>
                     </thead>
                     <tbody id="DeviceList">
@@ -72,10 +73,11 @@
                         <button class="refresh">Refresh</button>
                     </td>
                     <td><%= DeviceName %></td>
-                    <td><%= DeviceID %></td>
-                    <td><%= id %></td>
-                    <td><%= HWPartNum %></td>
-                    <td><%= FWPartNum %> <%= FWVersion %></td>
+                    <td class="center"><%= DeviceID %></td>
+                    <td class="center"><%= id %></td>
+                    <td class="center"><%= HWPartNum %></td>
+                    <td class="center"><%= FWPartNum %> <%= FWVersion %></td>
+                    <td class="center"><%= type %></td>
         </script>
 <!--  These are our tempaltes -->
         <script type="text/template" id="DeviceSensorPropertiesTitleTemplate">
