@@ -37,6 +37,7 @@
         <meta charset="UTF-8">
         <title>HUGnetLab on {{host}}</title>
         <link rel="stylesheet" href="HUGnetLab/template/default/default.css" />
+        <link rel="stylesheet" href="HUGnetLab/template/default/jquery.jqplot.css" />
         <link rel="stylesheet" href="HUGnetLab/template/default/pepper-grinder/jquery-ui.css" />
         <script src="/HUGnetLib/contrib.js" type="text/javascript"></script>
         <script src="/HUGnetLib/hugnet.js" type="text/javascript"></script>

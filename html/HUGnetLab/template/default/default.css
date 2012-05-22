@@ -326,38 +326,13 @@ th.headerSortDown {
 #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 #add_tab { cursor: pointer; }
 
-/* JQuery jqplot stuff */
-
-.jqplot-target {
-    background: inherit;
-    color: #000000;
-    font-weight: bold;
+/* Flot Stuff */
+#flot-legend {
+    background: white;
+    width: 600px;
 }
-
-.jqplot-axis {
-    color: #123456 !important;
-    background: #000000;
+#flot-choice {
+    background: white;
+    float: right;
+    width: 100px;
 }
-
-.jqplot-axis-tick {
-    color: #000000;
-}
-
-.plot {
-    margin-bottom: 30px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.jqplot-meterGauge-label {
-    font-size: 10pt;
-    color: #A00000 !important;
-}
-
-.jqplot-meterGauge-tick {
-    font-size: 10pt;
-    color: #000000 !important;
-}
-
-
-
