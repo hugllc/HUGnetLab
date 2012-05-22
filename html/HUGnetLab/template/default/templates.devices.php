@@ -30,19 +30,19 @@
                     <tr class="odd">
                         <th class="right">Last Contact</th>
                         <td>
-                            <% var d = new Date(params.LastContact * 1000); print(d.toString()) %>
+                            <%= formatDate(params.LastContact) %>
                         </td>
                     </tr>
                     <tr class="odd">
                         <th class="right">Last Poll</th>
                         <td>
-                            <% var d = new Date(params.LastPoll * 1000); print(d.toString()) %>
+                            <%= formatDate(params.LastPoll) %>
                         </td>
                     </tr>
                     <tr class="odd">
                         <th class="right">Last Config</th>
                         <td>
-                            <% var d = new Date(params.LastConfig * 1000); print(d.toString()) %>
+                            <%= formatDate(params.LastConfig) %>
                         </td>
                     </tr>
                     <tr><th colspan="2">Sensors</th></tr>
