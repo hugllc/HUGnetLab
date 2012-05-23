@@ -150,11 +150,7 @@
                         <th>Decimals</th>
                         <td>
                             <select name="decimals" onChange="submit();">
-                                <% for (j = 0; j <= maxDecimals; j++) { %>
-                                    <option value="<%- j %>" <% (j == decimals) && print('selected="selected"'); %>>
-                                        <%= j %>
-                                    </option>
-                                <% } %>
+                                <%= selectInt(0, maxDecimals, 1, decimals) %>
                             </select>
                         </td>
                     </tr>
