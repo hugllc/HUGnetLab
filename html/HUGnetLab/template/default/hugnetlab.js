@@ -64,21 +64,18 @@ $(function ()
             });
             this.tests = new HUGnet.TestSuite({
                 el: "#tabs-tests",
-                tests: HUGnetLab.Tests,
+                tests: HUGnetLab.Devices,
             });
             this.config = new HUGnet.Config({
                 el: "#tabs-config",
                 devices: HUGnetLab.Devices,
             });
-
         }
     });
 });
 
 HUGnetLab.Devices = new HUGnet.Devices();
 HUGnetLab.Devices.fetch();
-HUGnetLab.Tests = new HUGnet.Tests();
-HUGnetLab.Tests.fetch();
 
 $(document).ready(function(){
     "use strict";

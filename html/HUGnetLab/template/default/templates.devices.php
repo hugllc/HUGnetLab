@@ -33,7 +33,7 @@
                             <%= formatDate(params.LastContact) %>
                         </td>
                     </tr>
-                    <tr class="odd">
+                    <tr class="even">
                         <th class="right">Last Poll</th>
                         <td>
                             <%= formatDate(params.LastPoll) %>
@@ -43,6 +43,12 @@
                         <th class="right">Last Config</th>
                         <td>
                             <%= formatDate(params.LastConfig) %>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <th class="right">Last Modified</th>
+                        <td>
+                            <%= formatDate(params.LastModified) %>
                         </td>
                     </tr>
                     <tr><th colspan="2">Sensors</th></tr>
@@ -69,7 +75,7 @@
         </script>
         <script type="text/template" id="DeviceEntryTemplate">
                     <td>
-                        <button class="properties">View</button>
+                        <button class="properties">Edit</button>
                         <button class="refresh">Refresh</button>
                     </td>
                     <td><%= DeviceName %></td>
@@ -101,7 +107,7 @@
                     <tr>
                         <th>Type</th>
                         <td>
-                            <select name="type">
+                            <select name="type" class="type">
                                 <% for (key in otherTypes) { %>
                                     <option value="<%- otherTypes[key] %>" <% (otherTypes[key] == type) && print('selected="selected"'); %>>
                                         <%= otherTypes[key] %>

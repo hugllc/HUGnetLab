@@ -46,7 +46,6 @@
                         <th class="{sorter: false}">Actions</th>
                         <th class="{sorter: 'numeric'}">#</th>
                         <th class="{sorter: 'text'}">Name</th>
-                        <th class="{sorter: 'numeric'}">Fields</th>
                         <th class="{sorter: 'text'}">Created</th>
                         <th class="{sorter: 'text'}">Last Modified</th>
                     </tr>
@@ -57,15 +56,13 @@
         </script>
         <script type="text/template" id="TestEntryTemplate">
                         <td>
-                            <button class="properties">Edit</button>
                             <button class="run">Run</button>
                             <button class="view">View</button>
                         </td>
-                        <td><%= id %></td>
-                        <td><%= name %></td>
-                        <td class="center"><%= fieldcount %></td>
-                        <td><%= created %></td>
-                        <td><%= modified %></td>
+                        <td><%= DeviceID %></td>
+                        <td><%= DeviceName %></td>
+                        <td><%= formatDate(params.Created) %></td>
+                        <td><%= formatDate(params.LastModified) %></td>
         </script>
         <script type="text/template" id="TestFieldListTemplate">
                 <table id="fieldTable" style="width: 100%;">
