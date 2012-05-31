@@ -210,6 +210,7 @@
                         <th>Name</th>
                         <th style="width: 5%;">Type</th>
                         <th style="width: 10%;">Data Type</th>
+                        <th style="width: 10%;">Decimals</th>
                     </tr>
                     </thead>
                     <tbody id="DeviceList">
@@ -224,4 +225,5 @@
                     <td><% (location.length > 0) ? print(location) : print("Sensor " + (parseInt(sensor) + 1)); %></td>
                     <td class="center"><%= type %></td>
                     <td class="center"><%= dataType %></td>
+                    <td class="center"><%= decimals %></td>
         </script>
