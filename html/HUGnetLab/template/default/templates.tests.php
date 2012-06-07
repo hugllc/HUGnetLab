@@ -37,15 +37,24 @@
                 </form>
         </script>
         <script type="text/template" id="TestListTemplate">
+                <h2 class="run stopped">
+                    Tests are STOPPED.
+                </h2>
+                <h2 class="stop running">
+                    Tests are RUNNING.
+                </h2>
                 <div>
                     <button class="new">New Test</button>
+                    <button class="run">Run Tests</button>
+                    <button class="stop">Stop Tests</button>
                 </div>
                 <table id="devTable" class="tablesorter">
                     <thead>
                     <tr>
                         <th class="{sorter: false}">Actions</th>
-                        <th class="{sorter: 'numeric'}">#</th>
+                        <th class="{sorter: 'numeric'}">Test ID</th>
                         <th class="{sorter: 'text'}">Name</th>
+                        <th class="{sorter: 'text'}">Data Interval<br>(Seconds)</th>
                         <th class="{sorter: 'text'}">Created</th>
                         <th class="{sorter: 'text'}">Last Modified</th>
                     </tr>
@@ -56,11 +65,11 @@
         </script>
         <script type="text/template" id="TestEntryTemplate">
                         <td>
-                            <button class="run">Run</button>
                             <button class="view">View</button>
                         </td>
-                        <td><%= DeviceID %></td>
+                        <td class="center"><%= DeviceID %></td>
                         <td><%= DeviceName %></td>
+                        <td class="center"><%= PollInterval %></td>
                         <td><%= formatDate(params.Created) %></td>
                         <td><%= formatDate(params.LastModified) %></td>
         </script>

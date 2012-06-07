@@ -22,10 +22,14 @@
                         <th class="right">Job</th>
                         <td><input type="text" class="DeviceJob" value="<%= DeviceJob %>" /></td>
                     </tr>
-                    <tr class="even"><th class="right">Hardware</th><td><%= HWPartNum %></td></tr>
-                    <tr class="odd"><th class="right">Firmware</th><td><%= FWPartNum %></td></tr>
-                    <tr class="even"><th class="right">Version</th><td><%= FWVersion %></td></tr>
-                    <tr class="odd"><th class="right">Raw Setup</th><td><%= RawSetup %></td></tr>
+                    <tr class="even">
+                        <th class="right">Data Interval</th>
+                        <td><input type="text" class="PollInterval" value="<%= PollInterval %>" /></td>
+                    </tr>
+                    <tr class="odd"><th class="right">Hardware</th><td><%= HWPartNum %></td></tr>
+                    <tr class="even"><th class="right">Firmware</th><td><%= FWPartNum %></td></tr>
+                    <tr class="odd"><th class="right">Version</th><td><%= FWVersion %></td></tr>
+                    <tr class="even"><th class="right">Raw Setup</th><td><%= RawSetup %></td></tr>
                     <tr><th colspan="2">Properties</th></tr>
                     <tr class="odd">
                         <th class="right">Last Contact</th>
