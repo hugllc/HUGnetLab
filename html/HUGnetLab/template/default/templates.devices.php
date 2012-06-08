@@ -55,8 +55,8 @@
                             <%= formatDate(params.LastModified) %>
                         </td>
                     </tr>
-                    <tr><th colspan="2">Sensors</th></tr>
-                    <tr><td colspan="2"><%= sensors %></th></tr>
+                    <tr><th colspan="2">Channels</th></tr>
+                    <tr><td colspan="2"><%= channels %></th></tr>
                 </table>
                 </form>
         </script>
@@ -89,7 +89,42 @@
                     <td class="center"><%= FWPartNum %> <%= FWVersion %></td>
                     <td class="center"><%= type %></td>
         </script>
-<!--  These are our tempaltes -->
+
+        <script type="text/template" id="DeviceChannelListTemplate">
+                <table id="channelTable" style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th>Label</th>
+                        <th style="width: 5%;">Units</th>
+                        <th style="width: 10%;">Decimals</th>
+                    </tr>
+                    </thead>
+                    <tbody id="channelList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="DeviceChannelEntryTemplate">
+                    <td class="center"><%= channel %></td>
+                    <td><input type="text" name="label" value="<%= label %>"/></td>
+                    <td class="center">
+                        <select name="units"">
+                            <% for (key in validUnits) { %>
+                                <option value="<%- validUnits[key] %>" <% (validUnits[key] == units) && print('selected="selected"'); %>>
+                                    <%= validUnits[key] %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </td>
+                    <td class="center">
+                        <select name="decimals">
+                            <%= selectInt(0, maxDecimals, 1, decimals) %>
+                        </select>
+                    </td>
+        </script>
+
+
+        <!--  These are our tempaltes -->
         <script type="text/template" id="DeviceSensorPropertiesTitleTemplate">
             Device <%= sensor %>:<%= location %>
         </script>
