@@ -55,7 +55,12 @@
                             <%= formatDate(params.LastModified) %>
                         </td>
                     </tr>
-                    <tr><th colspan="2">Channels</th></tr>
+                    <tr>
+                        <td colspan="2">
+                            <button class="sensorList">Edit Sensors</button>
+                        </td>
+                    </tr>
+                    <tr><th colspan="2">Output Channels</th></tr>
                     <tr><td colspan="2"><%= channels %></th></tr>
                 </table>
                 </form>
@@ -167,38 +172,6 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <th>Units</th>
-                        <td>
-                            <select name="units" onChange="submit();">
-                                <% for (key in validUnits) { %>
-                                    <option value="<%- validUnits[key] %>" <% (validUnits[key] == units) && print('selected="selected"'); %>>
-                                        <%= validUnits[key] %>
-                                    </option>
-                                <% } %>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Graph Min</th>
-                        <td>
-                            <input type="text" name="min" value="<%= min %>"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Graph Max</th>
-                        <td>
-                            <input type="text" name="max" value="<%= max %>"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Decimals</th>
-                        <td>
-                            <select name="decimals" onChange="submit();">
-                                <%= selectInt(0, maxDecimals, 1, decimals) %>
-                            </select>
-                        </td>
-                    </tr>
                     <!-- Sensor Extra Parameters -->
                     <%
                     for (key in extraDefault) {
@@ -249,7 +222,7 @@
                         <th>Name</th>
                         <th style="width: 5%;">Type</th>
                         <th style="width: 10%;">Data Type</th>
-                        <th style="width: 10%;">Decimals</th>
+                        <th style="width: 10%;">Units</th>
                     </tr>
                     </thead>
                     <tbody id="DeviceList">
@@ -264,5 +237,5 @@
                     <td><% (location.length > 0) ? print(location) : print("Sensor " + (parseInt(sensor) + 1)); %></td>
                     <td class="center"><%= type %></td>
                     <td class="center"><%= dataType %></td>
-                    <td class="center"><%= decimals %></td>
+                    <td class="center"><%= storageUnit %></td>
         </script>
