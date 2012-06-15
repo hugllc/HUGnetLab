@@ -248,7 +248,7 @@
                     <td>
                         <button class="properties">Edit</button>
                     </td>
-                    <td class="center"><%= (parseInt(sensor) + 1) %></td>
+                    <td class="center"><%= sensor %></td>
                     <td><% (location.length > 0) ? print(location) : print("Sensor " + (parseInt(sensor) + 1)); %></td>
                     <td class="center"><%= type %></td>
                     <td class="center"><%= dataType %></td>
