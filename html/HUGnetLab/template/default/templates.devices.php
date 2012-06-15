@@ -143,9 +143,15 @@
                     <tr><th>Sensor #</th><td><%= sensor %></td></tr>
                     <tr><th>Sensor ID</th><td><% print(parseInt(id).toString(16).toUpperCase()); %></td></tr>
                     <tr>
-                        <th>Name</th>
+                        <th>Label</th>
                         <td>
                             <input type="text" name="location" value="<%= location %>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Driver</th>
+                        <td>
+                            <%= longName %>
                         </td>
                     </tr>
                     <tr>
