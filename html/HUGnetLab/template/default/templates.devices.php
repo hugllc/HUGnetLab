@@ -66,6 +66,7 @@
                 </form>
         </script>
         <script type="text/template" id="DeviceListTemplate">
+                <form id="deviceListForm" method="POST" action="javascript:void(0);">
                 <table id="devTable" class="tablesorter">
                     <thead>
                     <tr>
@@ -81,11 +82,15 @@
                     <tbody id="DeviceList">
                     </tbody>
                 </table>
+                </form>
         </script>
         <script type="text/template" id="DeviceEntryTemplate">
                     <td>
-                        <button class="properties">Edit</button>
-                        <button class="refresh">Refresh</button>
+                        <select class="action">
+                            <option value="">Action</option>
+                            <option value="refresh">Refresh</option>
+                            <option value="properties">Edit</option>
+                        </select>
                     </td>
                     <td><%= DeviceName %></td>
                     <td class="center"><%= DeviceID %></td>
