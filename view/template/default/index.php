@@ -46,7 +46,7 @@
     </head>
     <body>
         <header>
-        <div id="header"><h1 class="header">HUGnetLab</h1></div>
+        <div id="header"><h1 class="header">HUGnetView</h1></div>
         </header>
         <section>
         <div class="body">
@@ -54,12 +54,9 @@
                 <nav>
                 <ul>
                     <li><a href="#tabs-tests">Tests</a></li>
-                    <li><a href="#tabs-config">Configuration</a></li>
                 </ul>
                 </nav>
                 <div id="tabs-tests">
-                </div>
-                <div id="tabs-config">
                 </div>
             </div>
         </div>
@@ -77,7 +74,6 @@
         </div>
         {{/debug}}
         </footer>
-        <?php require dirname(__FILE__)."/templates.devices.php"; ?>
         <?php require dirname(__FILE__)."/templates.data.php"; ?>
         <?php require dirname(__FILE__)."/templates.tests.php"; ?>
     </body>

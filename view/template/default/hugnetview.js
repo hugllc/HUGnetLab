@@ -28,7 +28,7 @@
  * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
  */
-var HUGnetLab = {};
+var HUGnetView = {};
 $(function ()
 {
     "use strict";
@@ -45,7 +45,7 @@ $(function ()
     * @version    Release: 0.9.7
     * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
     */
-    HUGnetLab.main = Backbone.View.extend({
+    HUGnetView.main = Backbone.View.extend({
         data: {},
         tabs: undefined,
         initialize: function ()
@@ -64,22 +64,21 @@ $(function ()
             });
             this.tests = new HUGnet.TestSuite({
                 el: "#tabs-tests",
-                tests: HUGnetLab.Devices,
-            });
-            this.config = new HUGnet.Config({
-                el: "#tabs-config",
-                devices: HUGnetLab.Devices,
+                tests: HUGnetView.Devices,
+                url: 'index.php'
             });
         }
     });
 });
 
-HUGnetLab.Devices = new HUGnet.Devices();
-HUGnetLab.Devices.fetch();
+HUGnetView.Devices = new HUGnet.Devices({
+    url: 'index.php'
+});
+HUGnetView.Devices.fetch();
 
 $(document).ready(function(){
     "use strict";
 
 
-    var iface = new HUGnetLab.main();
+    var iface = new HUGnetView.main();
 });
