@@ -94,10 +94,18 @@
             <arg line="-av ${deb.outputfile}
                         ${deb.postloc}main/"/>
         </exec>
+        <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
+            <arg line="-av ${deb.view.outputfile}
+                        ${deb.postloc}main/"/>
+        </exec>
     </target>
     <target name="testpost" description="post the deb" depends="build">
         <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
             <arg line="-av ${deb.outputfile}
+                        ${deb.postloc}testing/"/>
+        </exec>
+        <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
+            <arg line="-av ${deb.view.outputfile}
                         ${deb.postloc}testing/"/>
         </exec>
     </target>
