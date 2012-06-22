@@ -1,0 +1,357 @@
+<!--
+/**
+ *   <pre>
+ *   CoreUI is a user interface for the HUGnet cores.
+ *   Copyright (C) 2007 Hunt Utilities Group, LLC
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License
+ *   as published by the Free Software Foundation; either version 3
+ *   of the License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *   </pre>
+ *
+ *   @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ *   @package CoreUI
+ *   @subpackage CSS
+ *   @copyright 2007 Hunt Utilities Group, LLC
+ *   @author Scott Price <prices@hugllc.com>
+ *   @version $Id$
+ *
+ */
+-->
+body {
+    background-color: #d9d6c4;
+    font-size: 9pt;
+}
+.body {
+    background-color:#205700; /*#453821;*/
+    min-width: 800px !important;
+    padding: 5px;
+    margin-top: 0px;
+}
+#header {
+    padding: 0px;
+    min-width: 800px !important;
+    height: 50px;
+    /*background: url(../images/header.jpg) no-repeat;*/
+    background-color:#205700; /*#453821;*/
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.stopped {
+    text-align: center;
+    background: red;
+    color: black;
+}
+.running {
+    text-align: center;
+    background: green;
+    color: white;
+}
+.buttons {
+    margin: 5px;
+}
+.floatright {
+    float: right;
+}
+.popup {
+    position: absolute;
+    border: thick solid grey;
+    background: white;
+    z-index: 100;
+    overflow: auto;
+}
+
+div.saving .save {
+    background: yellow;
+    color: black;
+}
+.indent {
+    padding-left: 2em;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.parameter {
+    white-space: nowrap;
+    margin-top: 2px;
+    margin-right: 2px;
+    text-align: right;
+}
+
+.working {
+    background: yellow;
+}
+
+h1.header {
+    text-align: left;
+    padding: 10px;
+    color: #f8f7f6;
+}
+
+#nodename {
+    color: white;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+div.menu a {
+    display: block;
+    line-height: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    padding-left: .5em;
+    padding-right: .5em;
+    margin-left:.5em;
+    margin-right: .5em;
+    color: #fff;
+    background: #205700;
+    white-space:nowrap;
+}
+
+.template {
+    display: none;
+}
+
+div.menu a:hover {
+    background:#e5dabd;
+    color: #000;
+}
+
+div.menu a.active {
+    background:#e5dabd;
+    color: #000;
+}
+
+div.menu div.divider {
+    display: block;
+    line-height: 25px;
+    text-decoration: none;
+    padding-left: .5em;
+    padding-right: .5em;
+    margin-left:.5em;
+    margin-right: .5em;
+    background: transparent;
+}
+
+div.menu div.header {
+    display: block;
+    line-height: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    padding-left: .5em;
+    padding-right: .5em;
+    margin-left:.5em;
+    margin-right: .5em;
+    color: #fff;
+    background: #205700;
+    font-size:110%;
+}
+
+div.menu {
+    margin-top: 10px;
+}
+
+table td.body {
+  padding: 2px;
+  /*background: url(../images/main_bg.jpg) repeat-y;*/
+  vertical-align: top;
+  background-color: transparent;
+}
+
+td.left {
+    background: #205700;
+    width: 175px !important;
+}
+
+td.left div.logo {
+    text-align: center;
+    margin: 5px;
+}
+
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.left {
+    text-align: left;
+}
+
+th {
+    background: #AAA;
+}
+
+textarea {
+    width: 100%;
+}
+div.topbar {
+    background: lightgreen;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 200%;
+    font-weight: bold;
+    line-height: 60px;
+}
+tr.odd {
+    background: #f7f3de;
+}
+
+tr.even {
+    background-color: #d9d6c4;
+}
+
+.h1 {
+    font-size: 150%;
+}
+
+.h2 {
+    font-size: 125%;
+}
+
+h1 {
+    text-align: center;
+}
+
+.hmenu {
+    background:#205700;
+}
+
+ul.hmenu
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul.hmenu li
+{
+    background-image: none;
+    padding-left: 0px;
+    padding-right: 0px;
+    float: left;
+    margin: 0;
+    line-height: 1.5em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+ul.hmenu li a
+{
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background: transparent;
+    border-right: 2px solid #205700;
+}
+
+ul.hmenu li a.active, ul.hmenu li a:hover {
+    background:#e5dabd;
+    color: #000;
+}
+
+.warning {
+    color:#800;
+}
+
+.error {
+    color:#FFF;
+    background:#800;
+}
+
+th.leftproperty {
+    text-align: right;
+}
+
+button.backToList {
+    float: right;
+}
+
+.leftHeader {
+    text-align: right;
+    padding-right: 3px;
+}
+/* Device polling stuff */
+
+td.dataindex {
+    text-align: center;
+}
+
+
+/* JQuery Table Sorter Stuff */
+th.header {
+    background-image: url(images/sort_small.png);
+    cursor: pointer;
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+    padding-left: 2px;
+}
+
+th.headerSortUp {
+    background-image: url(images/sort_small_asc.png);
+    background-color: #205700;
+    color: white;
+}
+
+th.headerSortDown {
+    background-image: url(images/sort_small_desc.png);
+    background-color: #205700;
+    color: white;
+}
+
+/* JQuery Tabs stuff */
+.ui-tabs .ui-tabs-panel {
+    min-height: 500px !important;
+}
+#tabs li {
+    white-space: nowrap;
+}
+#tabs {
+    margin-top: 1em;
+}
+#tabs { margin-top: 1em; }
+#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+#add_tab { cursor: pointer; }
+
+/* Flot Stuff */
+#flot-legend {
+    background: white;
+    width: 600px;
+}
+#flot-choice {
+    background: white;
+    float: right;
+    width: 100px;
+}
+
+/* Time Picker stuff */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
