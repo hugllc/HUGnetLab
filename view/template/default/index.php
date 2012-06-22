@@ -35,7 +35,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>HUGnetView</title>
+        <title>HUGnetView&#153;</title>
         <link rel="stylesheet" href="template/default/default.css" />
         <link rel="stylesheet" href="template/default/jquery.jqplot.css" />
         <link rel="stylesheet" href="template/default/pepper-grinder/jquery-ui.css" />
@@ -46,7 +46,7 @@
     </head>
     <body>
         <header>
-        <div id="header"><h1 class="header">HUGnetView</h1></div>
+        <div id="header"><h1 class="header">HUGnetView&#153;</h1></div>
         </header>
         <section>
         <div class="body">
