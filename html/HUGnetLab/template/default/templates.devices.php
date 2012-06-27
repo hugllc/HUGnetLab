@@ -150,7 +150,18 @@
                 <table style="width: 100%;">
                     <tbody>
                     <tr><th>Sensor #</th><td><%= sensor %></td></tr>
-                    <tr><th>Sensor ID</th><td><% print(parseInt(id).toString(16).toUpperCase()); %></td></tr>
+                    <tr>
+                        <th>Sensor ID</th>
+                        <td>
+                            <select name="id" class="id">
+                                <% for (key in validIds) { %>
+                                    <option value="<%- key %>" <% (key == id) && print('selected="selected"'); %>>
+                                        <% print(parseInt(key, 10).toString(16).toUpperCase()) %>:<%= validIds[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <th>Label</th>
                         <td>
@@ -236,8 +247,6 @@
                         <th style="width: 5%;">#</th>
                         <th>Name</th>
                         <th style="width: 5%;">Type</th>
-                        <th style="width: 10%;">Data Type</th>
-                        <th style="width: 10%;">Units</th>
                     </tr>
                     </thead>
                     <tbody id="DeviceList">
@@ -251,6 +260,4 @@
                     <td class="center"><%= sensor %></td>
                     <td><% (location.length > 0) ? print(location) : print("Sensor " + (parseInt(sensor) + 1)); %></td>
                     <td class="center"><%= type %></td>
-                    <td class="center"><%= dataType %></td>
-                    <td class="center"><%= storageUnit %></td>
         </script>
