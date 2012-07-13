@@ -77,6 +77,7 @@
         </div>
         {{/debug}}
         </footer>
+        <?php require dirname(__FILE__)."/templates.inputTables.php"; ?>
         <?php require dirname(__FILE__)."/templates.devices.php"; ?>
         <?php require dirname(__FILE__)."/templates.data.php"; ?>
         <?php require dirname(__FILE__)."/templates.tests.php"; ?>
