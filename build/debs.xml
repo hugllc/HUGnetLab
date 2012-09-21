@@ -28,6 +28,8 @@
 
     <target name="clean" description="Clean up and create artifact directories">
         <delete dir="${deb.staging}" failonerror="false"/>
+        <delete dir="${deb.view.staging}" failonerror="false"/>
+        <delete dir="${deb.system.staging}" failonerror="false"/>
         <delete failonerror="false">
             <fileset dir="${deb.builddir}" includes="*.deb"/>
         </delete>
