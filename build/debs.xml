@@ -8,6 +8,9 @@
     <property name="deb.view.setup" value="${basedir}/deb/view"/>
     <property name="deb.view.source" value="${basedir}/view"/>
     <property name="deb.view.staging" value="${basedir}/build/view/deb"/>
+    <property name="deb.system.setup" value="${basedir}/deb/system"/>
+    <property name="deb.system.source" value="${basedir}/system"/>
+    <property name="deb.system.staging" value="${basedir}/build/system/deb"/>
     <property name="deb.release" value="" />
     <property name="deb.prefix" value="/usr" />
     <property name="deb.versionfile" value="${basedir}/include/VERSION.TXT" />
@@ -20,6 +23,7 @@
     <property name="deb.builddir" value="${basedir}/rel" />
     <property name="deb.outputfile" value="${deb.builddir}/HUGnetLab_${deb.version}${deb.release}_all.deb" />
     <property name="deb.view.outputfile" value="${deb.builddir}/HUGnetView_${deb.version}${deb.release}_all.deb" />
+    <property name="deb.system.outputfile" value="${deb.builddir}/HUGnetSystem_${deb.version}${deb.release}_all.deb" />
     <property name="deb.postloc" value="hugnet.int.hugllc.com:/home/reprepro/incoming/" />
 
     <target name="clean" description="Clean up and create artifact directories">
@@ -69,6 +73,20 @@
                     replace="${deb.version}"
         />
     </target>
+    <target name="setupsystem" description="Copy all of the files to build the deb">
+        <echo>Setting up for HUGnetLabSystem 'v${deb.version}'</echo>
+
+        <mkdir dir="${deb.system.staging}"/>
+        <copy todir="${deb.system.staging}">
+            <fileset dir="${deb.system.setup}"/>
+        </copy>
+        <chmod file="${deb.system.staging}/DEBIAN/postinst" perm="ugo+rx"/>
+        <chmod file="${deb.system.staging}/DEBIAN/prerm" perm="ugo+rx"/>
+        <replaceregexp file="${deb.system.staging}/DEBIAN/control"
+                    match="%VERSION%"
+                    replace="${deb.version}"
+        />
+    </target>
     <target name="deb" description="build the deb">
         <mkdir dir="${deb.builddir}"/>
         <exec executable="dpkg" failonerror="true">
@@ -81,6 +99,13 @@
         <exec executable="dpkg" failonerror="true">
             <arg line="-b ${deb.view.staging}
                        ${deb.view.outputfile}"/>
+        </exec>
+    </target>
+    <target name="debsystem" description="build the deb">
+        <mkdir dir="${deb.builddir}"/>
+        <exec executable="dpkg" failonerror="true">
+            <arg line="-b ${deb.system.staging}
+                       ${deb.system.outputfile}"/>
         </exec>
     </target>
     <target name="sign" description="sign the deb">
@@ -98,6 +123,10 @@
             <arg line="-av ${deb.view.outputfile}
                         ${deb.postloc}main/"/>
         </exec>
+        <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
+            <arg line="-av ${deb.system.outputfile}
+                        ${deb.postloc}main/"/>
+        </exec>
     </target>
     <target name="testpost" description="post the deb" depends="build">
         <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
@@ -108,11 +137,16 @@
             <arg line="-av ${deb.view.outputfile}
                         ${deb.postloc}testing/"/>
         </exec>
+        <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
+            <arg line="-av ${deb.system.outputfile}
+                        ${deb.postloc}testing/"/>
+        </exec>
     </target>
     <target name="postclean" description="build the deb">
         <delete dir="${deb.staging}"/>
         <delete dir="${deb.view.staging}"/>
+        <delete dir="${deb.system.staging}"/>
     </target>
-    <target name="build" depends="clean,setup,setupview,deb,debview"/>
+    <target name="build" depends="clean,setup,setupview,setupsystem,deb,debview,debsystem"/>
 
 </project>
