@@ -1,9 +1,76 @@
 #!/bin/sh
 
-lighty-enable-mod fastcgi && /etc/init.d/lighttpd force-reload
-if [ -e "/var/www/index.html" ]; then
-    mv -f /var/www/index.html /var/www/index.html.old
+
+create_ini() {
+    FILE=/etc/hugnet/config.ini
+    SERIALPORT=/dev/ttyUSB0
+    ROUTERSOCK=/tmp/HUGnetRouter
+    MYSQLSOCK=/var/run/mysqld/mysqld.sock
+    MYSQLDB=HUGnet
+    MYSQLUSER=${1}
+    MYSQLPW=${2}
+    FIRMWARE=http://hugnet.int.hugllc.com/downloads/firmware/test
+    GATEWAY=6
+
+    cat << EOF > ${FILE}
+uuid = "`uuidgen`"
+GatewayKey = ${GATEWAY}
+
+[firmware]
+url = ${FIRMWARE}
+
+[network]
+default["driver"] = "Socket"
+default["type"]   = AF_UNIX
+default["location"] = "${ROUTERSOCK}"
+default["filePerms"] = 0666
+
+[router]
+default["driver"] = "Serial"
+default["location"] = "${SERIALPORT}"
+
+local["driver"] = "SocketServer"
+local["type"] = AF_UNIX
+local["location"] = "${ROUTERSOCK}"
+local["bus"] = 1
+local["force"] = 1
+local["perms"] = 0666
+
+forward = true
+
+[servers]
+
+default["db"] = ${MYSQLDB}
+default["driver"] = "mysql"
+default["socket"] = "${MYSQLSOCK}"
+default["user"] = "${MYSQLUSER}"
+default["group"] = "default"
+default["password"] = '${MYSQLPW}'
+
+EOF
+
+}
+
+db_get hugnetlab-system/mysql-root-username
+mysql_root_username=${RET}
+db_get hugnetlab-system/mysql-root-password
+mysql_root_password=${RET}
+
+db_get hugnetlab-system/mysql-username
+mysql_username=${RET:-HUGnet}
+db_get hugnetlab-system/mysql-password
+if [ -n "$RET" ]; then
+        mysql_password=`perl -le 'print crypt($ARGV[0], join("", map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..2)))' "$RET"`
+else
+        mysql_password="*"
 fi
+
+if [ ! -f "/etc/hugnet/config.ini" ]; then
+    mkdir -p /etc/hugnet
+    create_ini ${mysql_username} ${mysql_password}
+fi
+
+
 
 
 exit $?

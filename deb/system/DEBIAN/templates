@@ -1,0 +1,24 @@
+Template: hugnetlab-system/mysql-root-username
+Type: string
+Default:
+Description: Database administrator:
+ This is the username that is used to connect to the mysql server so that a
+ database can be created.
+
+Template: hugnetlab-system/mysql-root-password
+Type: password
+Default:
+Description: Database administrator password:
+ The password to connect as the administrative user.
+
+Template: hugnetlab-system/mysql-username
+Type: string
+Default: HUGnet
+Description: Username for mysql server:
+ This is the username that is used to connect to the mysql server normally
+
+Template: hugnetlab-system/mysql-password
+Type: password
+Default:
+Description: Password for connecting to the mysql server
+ If you leave this field empty a password will be automatically generated for you
