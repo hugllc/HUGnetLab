@@ -1,10 +1,13 @@
 Source: hugnetlab
-Section: hugnet
-Priority: optional
+Section: contrib/science
+Priority: extra
 Maintainer: Scott Price <prices@hugllc.com>
 Homepage: http://dev.huglc.com/
 Version: %VERSION%
-Package: hugnetlab-system
+Package: hugnetlab
 Architecture: all
-Depends: apache2, openssh-server, conspy, mysql-server, phpmyadmin
+Pre-Depends: debconf
+Depends: apache2, openssh-server, conspy, mysql-server, phpmyadmin, debconf, hugnetlab-ui, hugnetscripts
 Description: This is a meta package to install the hugnet lab system on a computer.
+ This installs the HUGnetLab system, setting everything up so that it should run
+ properly out of the box.

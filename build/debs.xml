@@ -21,9 +21,9 @@
             />
     </exec>
     <property name="deb.builddir" value="${basedir}/rel" />
-    <property name="deb.outputfile" value="${deb.builddir}/HUGnetLab_${deb.version}${deb.release}_all.deb" />
+    <property name="deb.outputfile" value="${deb.builddir}/HUGnetLabUI_${deb.version}${deb.release}_all.deb" />
     <property name="deb.view.outputfile" value="${deb.builddir}/HUGnetView_${deb.version}${deb.release}_all.deb" />
-    <property name="deb.system.outputfile" value="${deb.builddir}/HUGnetSystem_${deb.version}${deb.release}_all.deb" />
+    <property name="deb.system.outputfile" value="${deb.builddir}/HUGnetLab_${deb.version}${deb.release}_all.deb" />
     <property name="deb.postloc" value="hugnet.int.hugllc.com:/home/reprepro/incoming/" />
 
     <target name="clean" description="Clean up and create artifact directories">
@@ -52,6 +52,7 @@
         </copy>
         <chmod file="${deb.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.staging}/DEBIAN/prerm" perm="ugo+rx"/>
+        <chmod file="${deb.staging}/DEBIAN/postrm" perm="ugo+rx"/>
         <replaceregexp file="${deb.staging}/DEBIAN/control"
                     match="%VERSION%"
                     replace="${deb.version}"
@@ -70,6 +71,7 @@
         </copy>
         <chmod file="${deb.view.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.view.staging}/DEBIAN/prerm" perm="ugo+rx"/>
+        <chmod file="${deb.view.staging}/DEBIAN/postrm" perm="ugo+rx"/>
         <replaceregexp file="${deb.view.staging}/DEBIAN/control"
                     match="%VERSION%"
                     replace="${deb.version}"
@@ -84,6 +86,8 @@
         </copy>
         <chmod file="${deb.system.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.system.staging}/DEBIAN/prerm" perm="ugo+rx"/>
+        <chmod file="${deb.system.staging}/DEBIAN/postrm" perm="ugo+rx"/>
+        <chmod file="${deb.system.staging}/DEBIAN/config" perm="ugo+rx"/>
         <replaceregexp file="${deb.system.staging}/DEBIAN/control"
                     match="%VERSION%"
                     replace="${deb.version}"

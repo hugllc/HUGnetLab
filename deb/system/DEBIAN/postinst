@@ -1,15 +1,24 @@
-#!/bin/sh
+#!/bin/bash -e
 
+. /usr/share/debconf/confmodule
+
+export PATH=$PATH:/sbin:/usr/sbin:/bin:/usr/bin
+
+# This command can be used as pipe to syslog. With "-s" it also logs to stderr.
+ERR_LOGGER="logger -p daemon.err -t hugnetlab -i -s"
 
 create_ini()
 {
+    db_get hugnetlab/mysql_user
+    MYSQLDB=${RET}
+    MYSQLUSER=${RET}
+    db_get hugnetlab/mysql_pw
+    MYSQLPW=${RET}
+
     FILE=/etc/hugnet/config.ini
     SERIALPORT=/dev/ttyUSB0
     ROUTERSOCK=/tmp/HUGnetRouter
     MYSQLSOCK=/var/run/mysqld/mysqld.sock
-    MYSQLDB=HUGnet
-    MYSQLUSER=${1}
-    MYSQLPW=${2}
     FIRMWARE=http://hugnet.int.hugllc.com/downloads/firmware/test
     GATEWAY=6
 
@@ -54,45 +63,47 @@ EOF
 
 create_db()
 {
-root=${1}
-rootpw=${2}
-user=${3}
-pw=${4}
+    db_get hugnetlab/mysql_root_user
+    ruser=${RET}
+    db_get hugnetlab/mysql_root_pw
+    rpw=${RET}
+    db_get hugnetlab/mysql_user
+    user=${RET}
+    db_get hugnetlab/mysql_pw
+    pw=${RET}
 
-mysql -u ${root} -p ${rootpw} << EOF
+    tfile=`mktemp`
+
+    cat << EOF > ${tfile}
 CREATE USER '${user}'@'localhost' IDENTIFIED BY '${pw}';
-
 GRANT USAGE ON * . * TO '${user}'@'localhost' IDENTIFIED BY '${pw}' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
-
-CREATE DATABASE IF NOT EXISTS `${user}` ;
-
-GRANT ALL PRIVILEGES ON `${user}` . * TO '${user}'@'localhost';
-
+CREATE DATABASE IF NOT EXISTS \`${user}\` ;
+GRANT ALL PRIVILEGES ON \`${user}\` . * TO '${user}'@'localhost';
+FLUSH PRIVILEGES;
 EOF
+
+    mysql -u${ruser} -p${rpw} < ${tfile} > /dev/null 2>&1 || true
+    rm -f ${tfile}
+    return 0
 }
 
-db_get hugnetlab-system/mysql-root-username
-mysql_root_username=${RET}
-db_get hugnetlab-system/mysql-root-password
-mysql_root_password=${RET}
+service hugnet_router stop > /dev/null 2>&1 || true
+service hugnet_gatherer stop > /dev/null 2>&1 || true
+service hugnet_updater stop > /dev/null 2>&1 || true
 
-db_get hugnetlab-system/mysql-username
-mysql_username=${RET:-HUGnet}
-db_get hugnetlab-system/mysql-password
-if [ -n "$RET" ]; then
-        mysql_password=`perl -le 'print crypt($ARGV[0], join("", map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..2)))' "$RET"`
-else
-        mysql_password="*"
-fi
 
-create_db ${mysql_root_username} ${mysql_root_password} ${mysql_username} ${mysql_password}
+
 
 if [ ! -f "/etc/hugnet/config.ini" ]; then
-    mkdir -p /etc/hugnet
-    create_ini ${mysql_username} ${mysql_password}
+    create_db
+    mkdir -p /etc/hugnet | $ERR_LOGGER
+    create_ini
 fi
 
+service hugnet_router start > /dev/null 2>&1 || true
+service hugnet_gatherer start > /dev/null 2>&1 || true
+service hugnet_updater start > /dev/null 2>&1 || true
 
 
 
-exit $?
+exit 0
