@@ -1,7 +1,8 @@
 #!/bin/sh
 
 
-create_ini() {
+create_ini()
+{
     FILE=/etc/hugnet/config.ini
     SERIALPORT=/dev/ttyUSB0
     ROUTERSOCK=/tmp/HUGnetRouter
@@ -51,6 +52,25 @@ EOF
 
 }
 
+create_db()
+{
+root=${1}
+rootpw=${2}
+user=${3}
+pw=${4}
+
+mysql -u ${root} -p ${rootpw} << EOF
+CREATE USER '${user}'@'localhost' IDENTIFIED BY '${pw}';
+
+GRANT USAGE ON * . * TO '${user}'@'localhost' IDENTIFIED BY '${pw}' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+
+CREATE DATABASE IF NOT EXISTS `${user}` ;
+
+GRANT ALL PRIVILEGES ON `${user}` . * TO '${user}'@'localhost';
+
+EOF
+}
+
 db_get hugnetlab-system/mysql-root-username
 mysql_root_username=${RET}
 db_get hugnetlab-system/mysql-root-password
@@ -64,6 +84,8 @@ if [ -n "$RET" ]; then
 else
         mysql_password="*"
 fi
+
+create_db ${mysql_root_username} ${mysql_root_password} ${mysql_username} ${mysql_password}
 
 if [ ! -f "/etc/hugnet/config.ini" ]; then
     mkdir -p /etc/hugnet
