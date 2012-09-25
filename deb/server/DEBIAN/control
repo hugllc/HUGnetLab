@@ -8,7 +8,7 @@ Package: hugnetlab-server
 Architecture: all
 Breaks: hugnetlab
 Pre-Depends: debconf
-Depends: apache2, openssh-server, conspy, mysql-server, phpmyadmin, debconf, hugnetscripts
+Depends: apache2, openssh-server, conspy, mysql-server, phpmyadmin, debconf, hugnetscripts, hugnetlib-webapi
 Description: This is a meta package to install the hugnet lab aggregation server on a computer.
  This installs the HUGnetLab aggregation server on a computer.  This computer will
  hold a database with the records from multiple HUGnetLab installs.  The other computers

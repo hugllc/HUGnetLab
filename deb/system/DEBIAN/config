@@ -7,7 +7,8 @@ export PATH=$PATH:/sbin:/usr/sbin:/bin:/usr/bin
 # This command can be used as pipe to syslog. With "-s" it also logs to stderr.
 ERR_LOGGER="logger -p daemon.err -t hugnetlab -i -s"
 
-
+db_input high hugnetlab/device || true
+db_go
 
 db_input critical hugnetlab/mysql_root_user || true
 db_go
@@ -15,10 +16,10 @@ db_go
 db_input critical hugnetlab/mysql_root_pw || true
 db_go
 
-db_input medium hugnetlab/mysql_user || true
+db_input high hugnetlab/mysql_user || true
 db_go
 
-db_input medium hugnetlab/mysql_pw || true
+db_input high hugnetlab/mysql_pw || true
 db_go
 
 

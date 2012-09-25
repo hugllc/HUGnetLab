@@ -14,13 +14,16 @@ create_ini()
     MYSQLUSER=${RET}
     db_get hugnetlab/mysql_pw
     MYSQLPW=${RET}
+    db_get hugnetlab/device
+    SERIALPORT=${RET}
 
     FILE=/etc/hugnet/config.ini
-    SERIALPORT=/dev/ttyUSB0
     ROUTERSOCK=/tmp/HUGnetRouter
     MYSQLSOCK=/var/run/mysqld/mysqld.sock
     FIRMWARE=http://hugnet.int.hugllc.com/downloads/firmware/test
     GATEWAY=6
+
+
 
     cat << EOF > ${FILE}
 uuid = "`uuidgen`"
@@ -28,6 +31,11 @@ GatewayKey = ${GATEWAY}
 
 [firmware]
 url = ${FIRMWARE}
+
+; This should only be filled out if there is a master server.
+; [master]
+; uuid = put master uuid here
+; url = put master url here
 
 [network]
 default["driver"] = "Socket"

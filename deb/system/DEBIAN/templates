@@ -1,3 +1,9 @@
+Template: hugnetlab/device
+Type: string
+Default: /dev/ttyUSB0
+Description: The serial device to use:
+ This is the serial device to use.
+
 Template: hugnetlab/mysql_root_user
 Type: string
 Default: root
