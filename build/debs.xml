@@ -11,6 +11,9 @@
     <property name="deb.system.setup" value="${basedir}/deb/system"/>
     <property name="deb.system.source" value="${basedir}/system"/>
     <property name="deb.system.staging" value="${basedir}/build/system/deb"/>
+    <property name="deb.server.setup" value="${basedir}/deb/server"/>
+    <property name="deb.server.source" value="${basedir}/server"/>
+    <property name="deb.server.staging" value="${basedir}/build/server/deb"/>
     <property name="deb.release" value="" />
     <property name="deb.prefix" value="/usr" />
     <property name="deb.versionfile" value="${basedir}/include/VERSION.TXT" />
@@ -24,6 +27,7 @@
     <property name="deb.outputfile" value="${deb.builddir}/HUGnetLabUI_${deb.version}${deb.release}_all.deb" />
     <property name="deb.view.outputfile" value="${deb.builddir}/HUGnetView_${deb.version}${deb.release}_all.deb" />
     <property name="deb.system.outputfile" value="${deb.builddir}/HUGnetLab_${deb.version}${deb.release}_all.deb" />
+    <property name="deb.server.outputfile" value="${deb.builddir}/HUGnetLabServer_${deb.version}${deb.release}_all.deb" />
     <property name="deb.postloc" value="hugnet.int.hugllc.com:/home/reprepro/incoming/" />
 
     <target name="clean" description="Clean up and create artifact directories">
@@ -93,6 +97,22 @@
                     replace="${deb.version}"
         />
     </target>
+    <target name="setupserver" description="Copy all of the files to build the deb">
+        <echo>Setting up for HUGnetLabServer 'v${deb.version}'</echo>
+
+        <mkdir dir="${deb.server.staging}"/>
+        <copy todir="${deb.server.staging}">
+            <fileset dir="${deb.server.setup}"/>
+        </copy>
+        <chmod file="${deb.server.staging}/DEBIAN/postinst" perm="ugo+rx"/>
+        <chmod file="${deb.server.staging}/DEBIAN/prerm" perm="ugo+rx"/>
+        <chmod file="${deb.server.staging}/DEBIAN/postrm" perm="ugo+rx"/>
+        <chmod file="${deb.server.staging}/DEBIAN/config" perm="ugo+rx"/>
+        <replaceregexp file="${deb.server.staging}/DEBIAN/control"
+                    match="%VERSION%"
+                    replace="${deb.version}"
+        />
+    </target>
     <target name="deb" description="build the deb">
         <mkdir dir="${deb.builddir}"/>
         <exec executable="dpkg" failonerror="true">
@@ -114,6 +134,13 @@
                        ${deb.system.outputfile}"/>
         </exec>
     </target>
+    <target name="debserver" description="build the deb">
+        <mkdir dir="${deb.builddir}"/>
+        <exec executable="dpkg" failonerror="true">
+            <arg line="-b ${deb.server.staging}
+                       ${deb.server.outputfile}"/>
+        </exec>
+    </target>
     <target name="sign" description="sign the deb">
         <exec executable="dpkg-sig" failonerror="true" dir="${deb.builddir}">
             <arg line="-s builder
@@ -133,6 +160,10 @@
             <arg line="-av ${deb.system.outputfile}
                         ${deb.postloc}main/"/>
         </exec>
+        <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
+            <arg line="-av ${deb.server.outputfile}
+                        ${deb.postloc}main/"/>
+        </exec>
     </target>
     <target name="testpost" description="post the deb" depends="build">
         <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
@@ -147,12 +178,16 @@
             <arg line="-av ${deb.system.outputfile}
                         ${deb.postloc}testing/"/>
         </exec>
+        <exec executable="rsync" failonerror="true" dir="${deb.builddir}">
+            <arg line="-av ${deb.server.outputfile}
+                        ${deb.postloc}testing/"/>
+        </exec>
     </target>
     <target name="postclean" description="build the deb">
         <delete dir="${deb.staging}"/>
         <delete dir="${deb.view.staging}"/>
         <delete dir="${deb.system.staging}"/>
     </target>
-    <target name="build" depends="clean,setup,setupview,setupsystem,deb,debview,debsystem"/>
+    <target name="build" depends="clean,setup,setupview,setupsystem,setupserver,deb,debview,debsystem,debserver"/>
 
 </project>

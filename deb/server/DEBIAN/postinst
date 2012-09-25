@@ -1,0 +1,109 @@
+#!/bin/bash -e
+
+. /usr/share/debconf/confmodule
+
+export PATH=$PATH:/sbin:/usr/sbin:/bin:/usr/bin
+
+# This command can be used as pipe to syslog. With "-s" it also logs to stderr.
+ERR_LOGGER="logger -p daemon.err -t hugnetlab -i -s"
+
+create_ini()
+{
+    db_get hugnetlab/mysql_user
+    MYSQLDB=${RET}
+    MYSQLUSER=${RET}
+    db_get hugnetlab/mysql_pw
+    MYSQLPW=${RET}
+
+    FILE=/etc/hugnet/config.ini
+    SERIALPORT=/dev/ttyUSB0
+    ROUTERSOCK=/tmp/HUGnetRouter
+    MYSQLSOCK=/var/run/mysqld/mysqld.sock
+    FIRMWARE=http://hugnet.int.hugllc.com/downloads/firmware/test
+    GATEWAY=6
+
+    cat << EOF > ${FILE}
+uuid = "`uuidgen`"
+GatewayKey = ${GATEWAY}
+
+[firmware]
+url = ${FIRMWARE}
+
+[network]
+default["driver"] = "Socket"
+default["type"]   = AF_UNIX
+default["location"] = "${ROUTERSOCK}"
+default["filePerms"] = 0666
+
+[router]
+default["driver"] = "Serial"
+default["location"] = "${SERIALPORT}"
+
+local["driver"] = "SocketServer"
+local["type"] = AF_UNIX
+local["location"] = "${ROUTERSOCK}"
+local["bus"] = 1
+local["force"] = 1
+local["perms"] = 0666
+
+forward = true
+
+[servers]
+
+default["db"] = ${MYSQLDB}
+default["driver"] = "mysql"
+default["socket"] = "${MYSQLSOCK}"
+default["user"] = "${MYSQLUSER}"
+default["group"] = "default"
+default["password"] = '${MYSQLPW}'
+
+EOF
+
+}
+
+create_db()
+{
+    db_get hugnetlab/mysql_root_user
+    ruser=${RET}
+    db_get hugnetlab/mysql_root_pw
+    rpw=${RET}
+    db_get hugnetlab/mysql_user
+    user=${RET}
+    db_get hugnetlab/mysql_pw
+    pw=${RET}
+
+    tfile=`mktemp`
+
+    cat << EOF > ${tfile}
+CREATE USER '${user}'@'localhost' IDENTIFIED BY '${pw}';
+GRANT USAGE ON * . * TO '${user}'@'localhost' IDENTIFIED BY '${pw}' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+CREATE DATABASE IF NOT EXISTS \`${user}\` ;
+GRANT ALL PRIVILEGES ON \`${user}\` . * TO '${user}'@'localhost';
+FLUSH PRIVILEGES;
+EOF
+
+    mysql -u${ruser} -p${rpw} < ${tfile} > /dev/null 2>&1 || true
+    rm -f ${tfile}
+    return 0
+}
+
+service hugnet_router stop > /dev/null 2>&1 || true
+service hugnet_gatherer stop > /dev/null 2>&1 || true
+service hugnet_updater stop > /dev/null 2>&1 || true
+
+
+
+
+if [ ! -f "/etc/hugnet/config.ini" ]; then
+    create_db
+    mkdir -p /etc/hugnet | $ERR_LOGGER
+    create_ini
+fi
+
+service hugnet_router start > /dev/null 2>&1 || true
+service hugnet_gatherer start > /dev/null 2>&1 || true
+service hugnet_updater start > /dev/null 2>&1 || true
+
+
+
+exit 0

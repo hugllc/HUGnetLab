@@ -1,0 +1,15 @@
+Source: hugnetlab
+Section: contrib/science
+Priority: extra
+Maintainer: Scott Price <prices@hugllc.com>
+Homepage: http://dev.huglc.com/
+Version: %VERSION%
+Package: hugnetlab-server
+Architecture: all
+Breaks: hugnetlab
+Pre-Depends: debconf
+Depends: apache2, openssh-server, conspy, mysql-server, phpmyadmin, debconf, hugnetscripts
+Description: This is a meta package to install the hugnet lab aggregation server on a computer.
+ This installs the HUGnetLab aggregation server on a computer.  This computer will
+ hold a database with the records from multiple HUGnetLab installs.  The other computers
+ will check in with the server and push data up to it.

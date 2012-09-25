@@ -6,6 +6,7 @@ Homepage: http://dev.huglc.com/
 Version: %VERSION%
 Package: hugnetlab
 Architecture: all
+Breaks: hugnetlab-server
 Pre-Depends: debconf
 Depends: apache2, openssh-server, conspy, mysql-server, phpmyadmin, debconf, hugnetlab-ui, hugnetscripts
 Description: This is a meta package to install the hugnet lab system on a computer.
