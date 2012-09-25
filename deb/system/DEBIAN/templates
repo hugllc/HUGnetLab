@@ -1,6 +1,6 @@
 Template: hugnetlab/device
 Type: string
-Default: /dev/ttyUSB0
+Default: /dev/ttyUSB
 Description: The serial device to use:
  This is the serial device to use.
 
