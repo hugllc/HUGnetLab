@@ -46,6 +46,7 @@ default["filePerms"] = 0666
 [router]
 default["driver"] = "Serial"
 default["location"] = "${SERIALPORT}"
+default["quiet"] = 1
 
 local["driver"] = "SocketServer"
 local["type"] = AF_UNIX
