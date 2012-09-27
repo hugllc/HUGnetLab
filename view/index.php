@@ -35,7 +35,9 @@ define("_HUGNETLAB", true);
 define("HUGNETLAB_VERSION", trim(file_get_contents("HUGnetLab/VERSION.TXT", true)));
 
 $action = $_REQUEST["action"];
-$task = $_REQUEST["task"];
+$task   = $_REQUEST["task"];
+$format = strtolower($_REQUEST["format"]);
+$id     = strtoupper($_REQUEST["id"]);
 
 $tasks = array(
     "device" => array("get", "ids", "getall"),
@@ -56,6 +58,13 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     );
     $ctx = stream_context_create($params);
     $response = file_get_contents($url, false, $ctx);
+    if (($task === "history") && ($format === "csv")) {
+        header('Content-type: text/csv');
+        header(
+            'Content-disposition: attachment;'
+            .'filename=HUGnetLab.'.$id.'.csv'
+        );
+    }
     print $response;
     unset($response);
     unset($params);
