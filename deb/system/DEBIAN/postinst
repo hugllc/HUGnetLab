@@ -20,7 +20,7 @@ create_ini()
     FILE=/etc/hugnet/config.ini
     ROUTERSOCK=/tmp/HUGnetRouter
     MYSQLSOCK=/var/run/mysqld/mysqld.sock
-    FIRMWARE=http://hugnet.int.hugllc.com/downloads/firmware/test
+    FIRMWARE=http://downloads.hugllc.com/firmware
     GATEWAY=6
 
 
