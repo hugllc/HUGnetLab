@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=bash /etc/hugnet/hugnet_calibration.sh
+GenericName[en_US]=
+GenericName=
+Icon=exec
+MimeType=
+Name[en_US]=HUGnet Calibration
+Name=HUGnet Calibration
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=none
+X-KDE-SubstituteUID=false
+X-KDE-Username=
