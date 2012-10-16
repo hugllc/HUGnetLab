@@ -16,46 +16,86 @@ create_ini()
     MYSQLPW=${RET}
 
     FILE=/etc/hugnet/config.ini
-    SERIALPORT=/dev/ttyUSB0
     ROUTERSOCK=/tmp/HUGnetRouter
     MYSQLSOCK=/var/run/mysqld/mysqld.sock
-    FIRMWARE=http://hugnet.int.hugllc.com/downloads/firmware/test
+    FIRMWARE=http://downloads.hugllc.com/firmware
     GATEWAY=6
 
     cat << EOF > ${FILE}
+
+; The general HUGnet config file.  This file contains all of the configuration
+; to get the basic system off the ground.
+;
+; This is the general section.
+
+; Every data collector has a unique UUID.  This way they can keep track of eachother
+; as well as have some security.
 uuid = "`uuidgen`"
 GatewayKey = ${GATEWAY}
 
+; How verbose the software is.  Integer from 0-10.  For testing only.
+verbose = 0
+
+; Enable debugging.  0 = disabled, 1 = enabled.  For testing only
+debug = 0
+
+; The firmware section
 [firmware]
+; This is the URL that the firmware is downloaded from
 url = ${FIRMWARE}
 
+; This should only be filled out for the slaves.
+[slaves]
+;name[uuid] = uuid of slave 'name'
+
+
+; This section is for the network connection for everything but the router.
+; There should be only one network section here.
 [network]
+; Network driver to use.
 default["driver"] = "Socket"
+; Type of socket to use.  AF_UNIX or AF_INET
 default["type"]   = AF_UNIX
+; Location to get to the socket.  Either a file name or URL
 default["location"] = "${ROUTERSOCK}"
+; Permissions to attach to the file.
 default["filePerms"] = 0666
 
+; This section is for the router.  It can have multiple connections.
 [router]
-default["driver"] = "Serial"
-default["location"] = "${SERIALPORT}"
-
+; This is the socket server for the other processes to get to the HUGnet bus
+; Network driver to use
 local["driver"] = "SocketServer"
+; Type of socket to use.  AF_UNIX or AF_INET
 local["type"] = AF_UNIX
+; Location to get to the socket.  Either a file name or URL
 local["location"] = "${ROUTERSOCK}"
+; In bus mode, any data that comes in one interface goes out all of the other
+; interfaces.  0 to disable, 1 to enable.
 local["bus"] = 1
+; This forces the removal of the old socket file if it exists.
+; 1 forces removal, 0 errors out if file exists.
 local["force"] = 1
+; Permissions to attach to the file.
 local["perms"] = 0666
+; Whether or not to forward packets.  0 = don't forward, 1 = forward
+forward = 1
 
-forward = true
-
+; The database servers
 [servers]
 
+; The database to use.  'HUGnet' is the default
 default["db"] = ${MYSQLDB}
+; The driver to use.
 default["driver"] = "mysql"
+; The socket or URL to connect to.
 default["socket"] = "${MYSQLSOCK}"
+; The user to connect as
 default["user"] = "${MYSQLUSER}"
-default["group"] = "default"
+; The password to use to connect
 default["password"] = '${MYSQLPW}'
+; This is used if there are multiple database connections.
+default["group"] = "default"
 
 EOF
 
