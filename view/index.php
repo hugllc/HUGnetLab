@@ -77,7 +77,9 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     $mainTemplate = ob_get_contents();
     ob_end_clean();
 
-    $uname = posix_uname();
+    if (function_exists("posix_uname")) {
+        $uname = posix_uname();
+    }
     $tData = array(
         "HUGnetLabVersion" => HUGNETLAB_VERSION,
         "host" => trim($uname['nodename']),
