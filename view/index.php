@@ -65,8 +65,11 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
             'Content-disposition: attachment;'
             .'filename=HUGnetLab.'.$id.'.csv'
         );
+    } else {
+        header('Content-type: application/json');
     }
     print $response;
+
     unset($response);
     unset($params);
     unset($ctx);
