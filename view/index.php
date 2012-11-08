@@ -33,6 +33,7 @@
 $pageStartTime = microtime(true);
 define("_HUGNETLAB", true);
 define("HUGNETLAB_VERSION", trim(file_get_contents("HUGnetLab/VERSION.TXT", true)));
+define("HUGNETLIB_VERSION", trim(file_get_contents("HUGnetLib/VERSION.TXT", true)));
 
 $action = $_REQUEST["action"];
 $task   = $_REQUEST["task"];
@@ -46,7 +47,7 @@ $tasks = array(
 );
 $tempDir = "default";
 
-$url = "http://localhost/HUGnetLib/index.php";
+$url = "http://hugnetlab.int.hugllc.com/HUGnetLib/index.php";
 
 if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     $url .= "?".http_build_query($_GET);
@@ -82,6 +83,7 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     }
     $tData = array(
         "HUGnetLabVersion" => HUGNETLAB_VERSION,
+        "HUGnetLibVersion" => HUGNETLIB_VERSION,
         "host" => trim($uname['nodename']),
     );
 

@@ -33,6 +33,7 @@
 $pageStartTime = microtime(true);
 define("_HUGNETLAB", true);
 define("HUGNETLAB_VERSION", trim(file_get_contents("HUGnetLab/VERSION.TXT", true)));
+define("HUGNETLIB_VERSION", trim(file_get_contents("HUGnetLib/VERSION.TXT", true)));
 
 require_once "HUGnetLab/Mustache.php";
 require_once "HUGnetLab/hugnet.php";
@@ -50,6 +51,7 @@ if (function_exists("posix_uname")) {
 }
 $tData = array(
     "HUGnetLabVersion" => HUGNETLAB_VERSION,
+    "HUGnetLibVersion" => HUGNETLIB_VERSION,
     "host" => trim($uname['nodename']),
 );
 
