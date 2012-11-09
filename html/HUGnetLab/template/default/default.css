@@ -339,14 +339,26 @@ th.headerSortDown {
 /* Flot Stuff */
 #flot-legend {
     background: white;
-    width: 600px;
-}
-#flot-choice {
-    background: white;
-    float: right;
-    width: 100px;
+    width: 800px;
 }
 
+ul#flot-choice {
+    background: white;
+    list-style: none;
+    display: block;
+    padding: 0.5em;
+    width: 800px;
+}
+ul#flot-choice li {
+    display: inline-block;
+    margin: 2px;
+    line-height: 110%;
+    padding: 2px;
+}
+#flot-graph {
+    width: 800px;
+    height: 300px;
+}
 /* Time Picker stuff */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }

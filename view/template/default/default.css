@@ -339,12 +339,25 @@ th.headerSortDown {
 /* Flot Stuff */
 #flot-legend {
     background: white;
-    width: 600px;
+    width: 800px;
 }
-#flot-choice {
+
+ul#flot-choice {
     background: white;
-    float: right;
-    width: 100px;
+    list-style: none;
+    display: block;
+    padding: 0.5em;
+    width: 800px;
+}
+ul#flot-choice li {
+    display: inline-block;
+    margin: 2px;
+    line-height: 110%;
+    padding: 2px;
+}
+#flot-graph {
+    width: 800px;
+    height: 300px;
 }
 
 /* Time Picker stuff */
