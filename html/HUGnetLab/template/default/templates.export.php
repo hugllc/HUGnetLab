@@ -5,12 +5,12 @@
         <form id="exportForm" method="POST" action="javascript:void(0);">
         <h2>Export <%= DeviceName %> Data</h2>
         <p>
-            <span style="font-weight: bold;">Note:</span>
+            <span class="bold">Note:</span>
             All dates in the CSV file will be UTC dates.
             The dates in the fields are in your local timezone.
         </p>
         <p>
-            <span style="font-weight: bold;">Maximum Records Returned: </span> <%= csvlimit %>
+            <span class="bold">Maximum Records Returned: </span> <%= csvlimit %>
         </p>
         <div>
             <div>
@@ -23,9 +23,19 @@
                     <label for="since" class="bold">From </label><input id="since" type="text" class="since" value="<%= sinceDate %>" />
                     <label for="until" class="bold">To </label><input id="until" type="text" class="until" value="<%= untilDate %>" />
                 </div>
+                <div>
+                    <label for="order" class="bold">Order: </label>
+                    <select id="order">
+                        <option value="1">Date Descending</option>
+                        <option value="0">Date Ascending</option>
+                    <select>
+                </div>
                 <div><button class="exportCSV">Export as CSV</button></div>
             </div>
         </div>
+        <p>
+            <span class="bold">CSV URL: </span> <span id="csvurl"><%= csvurl %></span>
+        </p>
         </form>
 </script>
 
