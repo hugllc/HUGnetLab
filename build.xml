@@ -4,6 +4,7 @@
 <project name="CoreUI" default="build" basedir=".">
     <property name="source" value="."/>
     <include file="${basedir}/build/debs.xml"/>
+    <include file="${basedir}/build/package.xml"/>
 
     <target name="clean" description="Clean up and create artifact directories">
         <delete dir="${basedir}/build/api"/>
@@ -120,6 +121,7 @@
 
     <target name="build" depends="clean,pdepend,phpmd,phpcpd,phpcs,phpdoc,phploc,phpcb"/>
     <target name="deb" depends="deb.build"/>
+    <target name="package" depends="package.build"/>
     <target name="post" depends="deb.post"/>
     <target name="testpost" depends="deb.testpost"/>
 
