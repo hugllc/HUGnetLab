@@ -14,11 +14,11 @@
         <h2>View Test <%= DeviceName %></h2>
         <div>
             <div>
-                <div><a href="<%= csvurl %>">Export as CSV</a></div>
+                <div><button class="exportCSV">Export as CSV</button></div>
                 <div><label for="autorefresh" class="bold">Update with new data:</label><input id="autorefresh" type="checkbox" class="autorefresh" value="5" /></div>
                 <div>
-                    <label for="since" class="bold">From </label><input id="since" type="text" class="since" value="<%= since %>" />
-                    <label for="until" class="bold">To </label><input id="until" type="text" class="until" value="<%= until %>" />
+                    <label for="since" class="bold">From </label><input id="since" type="text" class="since" value="<%= sinceDate %>" />
+                    <label for="until" class="bold">To </label><input id="until" type="text" class="until" value="<%= untilDate %>" />
                     <input type="submit" name="submit" value="Go" />
                 </div>
             </div>
