@@ -48,6 +48,7 @@
         <?php require dirname(__FILE__)."/templates.inputTables.php"; ?>
         <?php require dirname(__FILE__)."/templates.devices.php"; ?>
         <?php require dirname(__FILE__)."/templates.data.php"; ?>
+        <?php require dirname(__FILE__)."/templates.export.php"; ?>
         <?php require dirname(__FILE__)."/templates.tests.php"; ?>
     </body>
 </html>

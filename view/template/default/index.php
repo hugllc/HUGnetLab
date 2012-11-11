@@ -44,5 +44,6 @@
         </footer>
         <?php require dirname(__FILE__)."/templates.data.php"; ?>
         <?php require dirname(__FILE__)."/templates.tests.php"; ?>
+        <?php require dirname(__FILE__)."/templates.export.php"; ?>
     </body>
 </html>

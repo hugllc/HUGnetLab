@@ -47,7 +47,8 @@ $tasks = array(
 );
 $tempDir = "default";
 
-$url = "http://hugnetlab.int.hugllc.com/HUGnetLib/index.php";
+//$url = "http://hugnetlab.int.hugllc.com/HUGnetLib/index.php";
+$url = "http://192.168.13.11/HUGnetLib/index.php";
 
 if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     $url .= "?".http_build_query($_GET);

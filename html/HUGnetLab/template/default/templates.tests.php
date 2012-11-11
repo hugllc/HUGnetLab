@@ -66,6 +66,7 @@
         <script type="text/template" id="TestEntryTemplate">
                         <td>
                             <button class="view">View</button>
+                            <button class="export">Export</button>
                         </td>
                         <td class="center"><%= DeviceID %></td>
                         <td><%= DeviceName %></td>
