@@ -9,3 +9,4 @@ build/
 rel/
 *.ini
 *.old
+view/configuration.php
