@@ -123,6 +123,7 @@
     <target name="deb" depends="deb.build"/>
     <target name="package" depends="package.build"/>
     <target name="post" depends="deb.post"/>
+    <target name="rcpost" depends="deb.rcpost"/>
     <target name="testpost" depends="deb.testpost"/>
 
 
