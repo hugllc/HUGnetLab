@@ -7,7 +7,7 @@ Version: %VERSION%
 Package: hugnetlab-ui
 Architecture: all
 Pre-Depends: debconf
-Depends: php5 (>= 5.3.2), php5-sqlite, hugnetlib (>> 0.9.6), hugnetlib-webapi (>> 0.9.6), php5-mysql, apache2, debconf
-Breaks: hugnetcoreui
+Depends: php5 (>= 5.3.2), php5-sqlite, hugnetlib (>> 0.9.10), hugnetlib-webapi (>> 0.9.10), php5-mysql, apache2, debconf
+Breaks: hugnetlab-server
 Recommends: php5-mysql
 Description: This is the HUGnet User Interface
