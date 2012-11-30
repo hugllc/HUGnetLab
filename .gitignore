@@ -10,3 +10,5 @@ rel/
 *.ini
 *.old
 view/configuration.php
+.kdev4
+*.kdev4
