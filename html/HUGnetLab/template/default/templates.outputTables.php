@@ -1,10 +1,10 @@
 <!--  These are our tempaltes -->
-        <script type="text/template" id="InputTableListTemplate">
-                <form id="inputTableListForm" method="POST" action="javascript:void(0);">
+        <script type="text/template" id="OutputTableListTemplate">
+                <form id="outputTableListForm" method="POST" action="javascript:void(0);">
                 <div>
-                    <button class="new">New Input Table</button>
+                    <button class="new">New Output Table</button>
                 </div>
-                <table id="inputTableTable" class="tablesorter">
+                <table id="outputTableTable" class="tablesorter">
                     <thead>
                     <tr>
                         <th class="{sorter: false}">Actions</th>
@@ -14,12 +14,12 @@
                         <th class="{sorter: 'text'}">Desc</th>
                     </tr>
                     </thead>
-                    <tbody id="InputTableList">
+                    <tbody id="OutputTableList">
                     </tbody>
                 </table>
                 </form>
         </script>
-        <script type="text/template" id="InputTableEntryTemplate">
+        <script type="text/template" id="OutputTableEntryTemplate">
                     <td>
                         <select class="action">
                             <option value="">Action</option>
@@ -33,13 +33,13 @@
         </script>
 
         <!--  These are our tempaltes -->
-        <script type="text/template" id="InputTablePropertiesTitleTemplate">
+        <script type="text/template" id="OutputTablePropertiesTitleTemplate">
             Input Table <%= id %>:<%= name %>
         </script>
-        <script type="text/template" id="InputTablePropertiesTemplate">
+        <script type="text/template" id="OutputTablePropertiesTemplate">
                 <form id="sensorForm" method="POST" action="javascript:void(0);">
                 <div class="buttons floatright">
-                    <button class="SaveInputTable">Save</button>
+                    <button class="SaveOutputTable">Save</button>
                 </div>
                 <table style="width: 100%;">
                     <tbody>

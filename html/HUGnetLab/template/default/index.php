@@ -45,6 +45,8 @@
         </div>
         {{/debug}}
         </footer>
+        <?php require dirname(__FILE__)."/templates.processTables.php"; ?>
+        <?php require dirname(__FILE__)."/templates.outputTables.php"; ?>
         <?php require dirname(__FILE__)."/templates.inputTables.php"; ?>
         <?php require dirname(__FILE__)."/templates.devices.php"; ?>
         <?php require dirname(__FILE__)."/templates.data.php"; ?>

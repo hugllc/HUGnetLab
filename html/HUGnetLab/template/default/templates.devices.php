@@ -58,6 +58,8 @@
                     <tr>
                         <td colspan="2">
                             <button class="inputList">Edit Inputs</button>
+                            <button class="outputList">Edit Outputs</button>
+                            <button class="processList">Edit Processes</button>
                         </td>
                     </tr>
                     <tr><th colspan="2">Output Channels</th></tr>
@@ -249,3 +251,229 @@
                     <td><% (location.length > 0) ? print(location) : print("Input " + (parseInt(input) + 1)); %></td>
                     <td class="center"><%= type %></td>
         </script>
+        <!--  These are our tempaltes -->
+        <script type="text/template" id="DeviceOutputPropertiesTitleTemplate">
+            Device <%= input %>:<%= location %>
+        </script>
+        <script type="text/template" id="DeviceOutputPropertiesTemplate">
+                <form id="inputForm" method="POST" action="javascript:void(0);">
+                <div class="buttons floatright">
+                    <button class="save">Save</button>
+                </div>
+                <table style="width: 100%;">
+                    <tbody>
+                    <tr><th>Input #</th><td><%= input %></td></tr>
+                    <tr>
+                        <th>Input ID</th>
+                        <td>
+                            <select name="id" class="id">
+                                <% for (key in validIds) { %>
+                                    <option value="<%- key %>" <% (key == id) && print('selected="selected"'); %>>
+                                        <% print(parseInt(key, 10).toString(16).toUpperCase()) %>:<%= validIds[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Label</th>
+                        <td>
+                            <input type="text" name="location" value="<%= location %>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Driver</th>
+                        <td>
+                            <%= longName %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>
+                            <select name="type" class="type">
+                                <% for (key in otherTypes) { %>
+                                    <option value="<%- otherTypes[key] %>" <% (otherTypes[key] == type) && print('selected="selected"'); %>>
+                                        <%= otherTypes[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Input Extra Parameters -->
+                    <%
+                    for (key in extraDefault) {
+                        var etext;
+                        var efield = 'extra['+key+']';
+                        var evalue;
+                        if ((extra == undefined)
+                            || (extra[key] == undefined)
+                        ) {
+                            evalue = extraDefault[key];
+                        } else {
+                            evalue = extra[key];
+                        }
+                        var type = extraValues[key];
+                        etext  = '<tr>';
+                        etext += '<th>'+extraText[key]+'</th><td>';
+                        if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
+                            etext += '<input type="text" name="'+efield+'" '
+                                + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
+                        } else if (typeof type === 'object') {
+                            etext += '<select name="'+efield+'" >';
+                            for (q in type)
+                            {
+                                etext += '<option value="'+q.replace('&', '&amp;')+'"';
+                                if (q == evalue) {
+                                    etext += ' selected="selected" ';
+                                }
+                                etext += '>'+type[q]+'</option>';
+                            }
+                            etext += '</select>';
+                        } else {
+                            etext += evalue;
+                        }
+                        etext += '</td></tr>';
+                        print(etext);
+                    }
+                    %>
+                    </tr>
+                </table>
+                </form>
+        </script>
+        <script type="text/template" id="DeviceOutputListTemplate">
+                <table id="inputTable" style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%;">Action</th>
+                        <th style="width: 5%;">#</th>
+                        <th>Name</th>
+                        <th style="width: 5%;">Type</th>
+                    </tr>
+                    </thead>
+                    <tbody id="DeviceList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="DeviceOutputEntryTemplate">
+                    <td>
+                        <button class="properties">Edit</button>
+                    </td>
+                    <td class="center"><%= input %></td>
+                    <td><% (location.length > 0) ? print(location) : print("Input " + (parseInt(input) + 1)); %></td>
+                    <td class="center"><%= type %></td>
+        </script>
+
+
+                <!--  These are our tempaltes -->
+        <script type="text/template" id="DeviceProcessPropertiesTitleTemplate">
+            Device <%= input %>:<%= location %>
+        </script>
+        <script type="text/template" id="DeviceProcessPropertiesTemplate">
+                <form id="inputForm" method="POST" action="javascript:void(0);">
+                <div class="buttons floatright">
+                    <button class="save">Save</button>
+                </div>
+                <table style="width: 100%;">
+                    <tbody>
+                    <tr><th>Input #</th><td><%= input %></td></tr>
+                    <tr>
+                        <th>Input ID</th>
+                        <td>
+                            <select name="id" class="id">
+                                <% for (key in validIds) { %>
+                                    <option value="<%- key %>" <% (key == id) && print('selected="selected"'); %>>
+                                        <% print(parseInt(key, 10).toString(16).toUpperCase()) %>:<%= validIds[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Label</th>
+                        <td>
+                            <input type="text" name="location" value="<%= location %>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Driver</th>
+                        <td>
+                            <%= longName %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>
+                            <select name="type" class="type">
+                                <% for (key in otherTypes) { %>
+                                    <option value="<%- otherTypes[key] %>" <% (otherTypes[key] == type) && print('selected="selected"'); %>>
+                                        <%= otherTypes[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Input Extra Parameters -->
+                    <%
+                    for (key in extraDefault) {
+                        var etext;
+                        var efield = 'extra['+key+']';
+                        var evalue;
+                        if ((extra == undefined)
+                            || (extra[key] == undefined)
+                        ) {
+                            evalue = extraDefault[key];
+                        } else {
+                            evalue = extra[key];
+                        }
+                        var type = extraValues[key];
+                        etext  = '<tr>';
+                        etext += '<th>'+extraText[key]+'</th><td>';
+                        if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
+                            etext += '<input type="text" name="'+efield+'" '
+                                + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
+                        } else if (typeof type === 'object') {
+                            etext += '<select name="'+efield+'" >';
+                            for (q in type)
+                            {
+                                etext += '<option value="'+q.replace('&', '&amp;')+'"';
+                                if (q == evalue) {
+                                    etext += ' selected="selected" ';
+                                }
+                                etext += '>'+type[q]+'</option>';
+                            }
+                            etext += '</select>';
+                        } else {
+                            etext += evalue;
+                        }
+                        etext += '</td></tr>';
+                        print(etext);
+                    }
+                    %>
+                    </tr>
+                </table>
+                </form>
+        </script>
+        <script type="text/template" id="DeviceProcessListTemplate">
+                <table id="inputTable" style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%;">Action</th>
+                        <th style="width: 5%;">#</th>
+                        <th>Name</th>
+                        <th style="width: 5%;">Type</th>
+                    </tr>
+                    </thead>
+                    <tbody id="DeviceList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="DeviceProcessEntryTemplate">
+                    <td>
+                        <button class="properties">Edit</button>
+                    </td>
+                    <td class="center"><%= input %></td>
+                    <td><% (location.length > 0) ? print(location) : print("Input " + (parseInt(input) + 1)); %></td>
+                    <td class="center"><%= type %></td>
+        </script>
+
+
