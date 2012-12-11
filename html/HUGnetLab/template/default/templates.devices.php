@@ -57,7 +57,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <button class="sensorList">Edit Sensors</button>
+                            <button class="inputList">Edit Inputs</button>
                         </td>
                     </tr>
                     <tr><th colspan="2">Output Channels</th></tr>
@@ -139,19 +139,19 @@
 
 
         <!--  These are our tempaltes -->
-        <script type="text/template" id="DeviceSensorPropertiesTitleTemplate">
-            Device <%= sensor %>:<%= location %>
+        <script type="text/template" id="DeviceInputPropertiesTitleTemplate">
+            Device <%= input %>:<%= location %>
         </script>
-        <script type="text/template" id="DeviceSensorPropertiesTemplate">
-                <form id="sensorForm" method="POST" action="javascript:void(0);">
+        <script type="text/template" id="DeviceInputPropertiesTemplate">
+                <form id="inputForm" method="POST" action="javascript:void(0);">
                 <div class="buttons floatright">
                     <button class="save">Save</button>
                 </div>
                 <table style="width: 100%;">
                     <tbody>
-                    <tr><th>Sensor #</th><td><%= sensor %></td></tr>
+                    <tr><th>Input #</th><td><%= input %></td></tr>
                     <tr>
-                        <th>Sensor ID</th>
+                        <th>Input ID</th>
                         <td>
                             <select name="id" class="id">
                                 <% for (key in validIds) { %>
@@ -186,19 +186,7 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <th>Data Type</th>
-                        <td>
-                            <select name="dataType">
-                                <% for (key in dataTypes) { %>
-                                    <option value="<%- dataTypes[key] %>" <% (dataTypes[key] == dataType) && print('selected="selected"'); %>>
-                                        <%= dataTypes[key] %>
-                                    </option>
-                                <% } %>
-                            </select>
-                        </td>
-                    </tr>
-                    <!-- Sensor Extra Parameters -->
+                    <!-- Input Extra Parameters -->
                     <%
                     for (key in extraDefault) {
                         var etext;
@@ -239,8 +227,8 @@
                 </table>
                 </form>
         </script>
-        <script type="text/template" id="DeviceSensorListTemplate">
-                <table id="sensorTable" style="width: 100%;">
+        <script type="text/template" id="DeviceInputListTemplate">
+                <table id="inputTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th style="width: 10%;">Action</th>
@@ -253,11 +241,11 @@
                     </tbody>
                 </table>
         </script>
-        <script type="text/template" id="DeviceSensorEntryTemplate">
+        <script type="text/template" id="DeviceInputEntryTemplate">
                     <td>
                         <button class="properties">Edit</button>
                     </td>
-                    <td class="center"><%= sensor %></td>
-                    <td><% (location.length > 0) ? print(location) : print("Sensor " + (parseInt(sensor) + 1)); %></td>
+                    <td class="center"><%= input %></td>
+                    <td><% (location.length > 0) ? print(location) : print("Input " + (parseInt(input) + 1)); %></td>
                     <td class="center"><%= type %></td>
         </script>
