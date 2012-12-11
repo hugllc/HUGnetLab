@@ -75,14 +75,14 @@
                     </tr>
                     <!-- Sensor Extra Parameters -->
                     <%
-                    for (key in specs) {
+                    for (key in params) {
                         var etext;
-                        var efield = 'specs['+key+']';
-                        var evalue = specs[key]['value'];
-                        var valid  = specs[key]['valid'];
-                        var size   = specs[key]['size']
+                        var efield = 'params['+key+']';
+                        var evalue = params[key]['value'];
+                        var valid  = params[key]['valid'];
+                        var size   = params[key]['size']
                         etext  = '<tr>';
-                        etext += '<th class="right">'+specs[key]['desc']+'</th><td>';
+                        etext += '<th class="right">'+params[key]['desc']+'</th><td>';
                         if (!isNaN(size)) {
                             etext += '<input type="text" name="'+efield+'" '
                                 + 'value="' + evalue + '" size="'+(size+2)+'" maxlength="'+size+'"/>';
