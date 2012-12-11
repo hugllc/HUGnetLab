@@ -62,7 +62,7 @@
                             <button class="processList">Edit Processes</button>
                         </td>
                     </tr>
-                    <tr><th colspan="2">Output Channels</th></tr>
+                    <tr><th colspan="2">Data Channels</th></tr>
                     <tr><td colspan="2"><%= channels %></th></tr>
                 </table>
                 </form>
