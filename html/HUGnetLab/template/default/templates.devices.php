@@ -112,6 +112,7 @@
                     <tr>
                         <th style="width: 5%;">#</th>
                         <th>Label</th>
+                        <th style="width: 5%;">Data Type</th>
                         <th style="width: 5%;">Units</th>
                         <th style="width: 10%;">Decimals</th>
                     </tr>
@@ -124,7 +125,17 @@
                     <td class="center"><%= channel %></td>
                     <td><input type="text" name="label" value="<%= label %>"/></td>
                     <td class="center">
-                        <select name="units"">
+                        <select name="dataType">
+                            <option value="raw" <% (dataType == "raw") && print('selected="selected"'); %>>
+                                Raw
+                            </option>
+                            <option value="ignore" <% (dataType == "ignore") && print('selected="selected"'); %>>
+                                Ignore
+                            </option>
+                        </select>
+                    </td>
+                    <td class="center">
+                        <select name="units">
                             <% for (key in validUnits) { %>
                                 <option value="<%- validUnits[key] %>" <% (validUnits[key] == units) && print('selected="selected"'); %>>
                                     <%= validUnits[key] %>
