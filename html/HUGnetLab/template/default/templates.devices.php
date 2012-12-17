@@ -259,7 +259,7 @@
                         <button class="properties">Edit</button>
                     </td>
                     <td class="center"><%= input %></td>
-                    <td><% (location.length > 0) ? print(location) : print("Input " + (parseInt(input) + 1)); %></td>
+                    <td><% (location.length > 0) ? print(location) : print("Input " + parseInt(input)); %></td>
                     <td class="center"><%= type %></td>
         </script>
         <!--  These are our tempaltes -->
@@ -369,8 +369,8 @@
                     <td>
                         <button class="properties">Edit</button>
                     </td>
-                    <td class="center"><%= input %></td>
-                    <td><% (location.length > 0) ? print(location) : print("Input " + (parseInt(input) + 1)); %></td>
+                    <td class="center"><%= output %></td>
+                    <td><% (location.length > 0) ? print(location) : print("Output " + parseInt(output)); %></td>
                     <td class="center"><%= type %></td>
         </script>
 
@@ -482,8 +482,8 @@
                     <td>
                         <button class="properties">Edit</button>
                     </td>
-                    <td class="center"><%= input %></td>
-                    <td><% (location.length > 0) ? print(location) : print("Input " + (parseInt(input) + 1)); %></td>
+                    <td class="center"><%= process %></td>
+                    <td><% (location.length > 0) ? print(location) : print("Process " + parseInt(process)); %></td>
                     <td class="center"><%= type %></td>
         </script>
 
