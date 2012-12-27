@@ -273,7 +273,7 @@
                 </div>
                 <table style="width: 100%;">
                     <tbody>
-                    <tr><th>Input #</th><td><%= input %></td></tr>
+                    <tr><th>Output #</th><td><%= output %></td></tr>
                     <tr>
                         <th>Input ID</th>
                         <td>
@@ -386,7 +386,7 @@
                 </div>
                 <table style="width: 100%;">
                     <tbody>
-                    <tr><th>Input #</th><td><%= input %></td></tr>
+                    <tr><th>Process #</th><td><%= process %></td></tr>
                     <tr>
                         <th>Input ID</th>
                         <td>
