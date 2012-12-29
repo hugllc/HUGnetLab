@@ -63,7 +63,7 @@
                         </td>
                     </tr>
                     <tr><th colspan="2">Data Channels</th></tr>
-                    <tr><td colspan="2"><%= channels %></th></tr>
+                    <tr><td colspan="2"><%= dataChannels %></th></tr>
                 </table>
                 </form>
         </script>
@@ -106,7 +106,7 @@
                     <td class="center"><%= type %></td>
         </script>
 
-        <script type="text/template" id="DeviceChannelListTemplate">
+        <script type="text/template" id="DeviceDataChannelListTemplate">
                 <table id="channelTable" style="width: 100%;">
                     <thead>
                     <tr>
@@ -121,7 +121,7 @@
                     </tbody>
                 </table>
         </script>
-        <script type="text/template" id="DeviceChannelEntryTemplate">
+        <script type="text/template" id="DeviceDataChannelEntryTemplate">
                     <td class="center"><%= channel %></td>
                     <td><input type="text" name="label" value="<%= label %>"/></td>
                     <td class="center">
