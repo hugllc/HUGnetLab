@@ -61,7 +61,6 @@ $main = new Mustache($mainTemplate);
 
 $tData["pageDate"] = date("r");
 $tData["pageTime"] = round(microtime(true) - $pageStartTime, 4);
-$tData["debug"] = \HUGnet\VPrint::debug();
 print $main->render(null, $tData);
 
 ?>
