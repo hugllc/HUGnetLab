@@ -41,10 +41,13 @@ $format = strtolower($_REQUEST["format"]);
 $id     = strtoupper($_REQUEST["id"]);
 
 $tasks = array(
-    "device" => array("get", "ids", "getall"),
-    "sensor" => array("get", "ids"),
-    "history" => array(""),
+    "device" => array("get", "list"),
+    "deviceinput" => array("get", "list"),
+    "deviceoutput" => array("get", "list"),
+    "deviceprocess" => array("get", "list"),
+    "history" => array("get", "last"),
 );
+
 $tempDir = "default";
 
 if (file_exists(dirname(__FILE__)."/configuration.php")) {
@@ -52,6 +55,13 @@ if (file_exists(dirname(__FILE__)."/configuration.php")) {
 } else {
     die("No configuration found");
 }
+if (is_string($task)) {
+    $task = trim(strtolower($task));
+}
+if (is_string($action)) {
+    $action = trim(strtolower($action));
+}
+
 
 if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     $url .= "?".http_build_query($_GET);

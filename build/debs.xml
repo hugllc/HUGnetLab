@@ -78,6 +78,7 @@
         <copy todir="${deb.view.staging}${deb.prefix}/share/php/HUGnetLab">
             <fileset dir="${deb.source}/include"/>
         </copy>
+        <delete file="${deb.view.staging}/var/www/configuration.php" failonerror="false"/>
         <chmod file="${deb.view.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.view.staging}/DEBIAN/prerm" perm="ugo+rx"/>
         <chmod file="${deb.view.staging}/DEBIAN/postrm" perm="ugo+rx"/>
