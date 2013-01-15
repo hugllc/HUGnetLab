@@ -55,6 +55,18 @@
                             <%= formatDate(params.LastModified) %>
                         </td>
                     </tr>
+                    <tr class="odd">
+                        <th class="right">Last Push to Master</th>
+                        <td>
+                            <%= formatDate(params.LastMasterPush) %>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <th class="right">Last History to Master</th>
+                        <td>
+                            <%= formatDate(params.LastMasterHistoryPush) %>
+                        </td>
+                    </tr>
                     <tr>
                         <td colspan="2">
                             <button class="inputList">Edit Inputs</button>
