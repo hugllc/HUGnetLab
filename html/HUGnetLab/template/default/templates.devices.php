@@ -87,10 +87,10 @@
                                     <th>Control Channels</th>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td style="vertical-align: top;">
                                         <%= dataChannels %>
                                     </td>
-                                    <td>
+                                    <td style="vertical-align: top;">
                                         <%= controlChannels %>
                                     </td>
                                 </tr>
@@ -196,7 +196,7 @@
         </script>
         <script type="text/template" id="DeviceControlChannelEntryTemplate">
                     <td class="center"><%= channel %></td>
-                    <td><input type="text" name="label" value="<%= label %>"/><% (epChannel == null) && print("(Virtual)"); %>
+                    <td><input type="text" name="label" value="<%= label %>"/>
         </script>
 
 
