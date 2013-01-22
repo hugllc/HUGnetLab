@@ -74,8 +74,29 @@
                             <button class="processList">Edit Processes</button>
                         </td>
                     </tr>
-                    <tr><th colspan="2">Data Channels</th></tr>
-                    <tr><td colspan="2"><%= dataChannels %></th></tr>
+                    <tr>
+                        <th colspan="2">
+                            Channels
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table style="width:100%;">
+                                <tr>
+                                    <th>Data Channels</th>
+                                    <th>Control Channels</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <%= dataChannels %>
+                                    </td>
+                                    <td>
+                                        <%= controlChannels %>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
                 </form>
         </script>
@@ -119,7 +140,7 @@
         </script>
 
         <script type="text/template" id="DeviceDataChannelListTemplate">
-                <table id="channelTable" style="width: 100%;">
+                <table id="dataChannelTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th style="width: 5%;">#</th>
@@ -160,6 +181,22 @@
                             <%= selectInt(0, maxDecimals, 1, decimals) %>
                         </select>
                     </td>
+        </script>
+        <script type="text/template" id="DeviceControlChannelListTemplate">
+                <table id="controlChannelTable" style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th>Label</th>
+                    </tr>
+                    </thead>
+                    <tbody id="channelList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="DeviceControlChannelEntryTemplate">
+                    <td class="center"><%= channel %></td>
+                    <td><input type="text" name="label" value="<%= label %>"/><% (epChannel == null) && print("(Virtual)"); %>
         </script>
 
 
