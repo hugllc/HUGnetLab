@@ -17,11 +17,14 @@ This project is broken up into the following directories:
 
 ### Requirements
 #### HUGnetLab
-The HUGnetLib Web API must be installed on the same computer as HUGnetLab.
+ - HUGnetLib Web API must be installed on the same computer as HUGnetLab.
+ - Web Server with PHP
 
 #### HUGnetView
 The HUGnetView software is configurable as to where it gets its data.  It must be pointed
 to a computer with HUGnetLab on it.
+
+ - Web Server with PHP
 
 ### Setup
 
@@ -48,12 +51,22 @@ created by running 'ant deb'.  The debs will be in the ./rel directory.
 
 This uses a HUGnet javascript library that is incuded in HUGnetLib.
 
-## Contributing changes
+## Contributing Changes
+
+_All commit messages need to reference bugs in the Mantis bug tracker (see below)_
 
 Changes can be contributed by either:
 
 1. Using git to create patches and emailing them to patches@hugllc.com
 2. Creating another github repository to make your changes to and submitting pull requests.
+
+## Git Checkins
+All git checkins MUST REFERENCE A BUG in Mantis.  This can be done in a number of ways.
+The commit message should contain one of the following forms:
+
+- bug #XXXX
+- fixed #XXXX
+- fixes #XXXX
 
 ## Filing Bug Reports
 The bug tracker for this project is at http://dev.hugllc.com/bugs/ .  If you want an
