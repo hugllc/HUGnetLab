@@ -17,9 +17,19 @@
                 <div><button class="exportCSV">Export as CSV</button></div>
                 <div><label for="autorefresh" class="bold">Update with new data:</label><input id="autorefresh" type="checkbox" class="autorefresh" value="5" /></div>
                 <div>
-                    <button class="minute30">30 Minutes</button>
-                    <button class="minute240">4 Hours</button>
-                    <button class="minute720">12 Hours</button>
+                    <label for="setPeriod" class="bold">Period Length:</label>
+                    <select id="setPeriod">
+                        <option value="0">Custom</option>
+                        <option value="15">15 Minutes</option>
+                        <option value="30">30 Minutes</option>
+                        <option value="45">45 Minutes</option>
+                        <option value="60">60 Minutes</option>
+                        <option value="120">2 Hours</option>
+                        <option value="240">4 Hours</option>
+                        <option value="480">8 Hours</option>
+                        <option value="720">12 Hours</option>
+                        <option value="1440">24 Hours</option>
+                    </select>
                 </div>
                 <div>
                     <label for="since" class="bold">From </label><input id="since" type="text" class="since" value="<%= sinceDate %>" />
