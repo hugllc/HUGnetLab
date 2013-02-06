@@ -41,9 +41,8 @@ $format = strtolower($_REQUEST["format"]);
 $id     = strtoupper($_REQUEST["id"]);
 
 $tasks = array(
-    "device" => array("get", "ids", "getall"),
-    "sensor" => array("get", "ids"),
-    "history" => array(""),
+    "device" => array("get", "list"),
+    "history" => array("get", "last"),
 );
 $tempDir = "default";
 
