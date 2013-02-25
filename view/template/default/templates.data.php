@@ -32,8 +32,8 @@
                     </select>
                 </div>
                 <div>
-                    <label for="since" class="bold">From </label><input id="since" type="text" class="since" value="<%= sinceDate %>" />
-                    <label for="until" class="bold">To </label><input id="until" type="text" class="until" value="<%= untilDate %>" />
+                    <label for="since" class="bold">From </label><input id="since<%= id %>" type="text" class="since" value="<%= sinceDate %>" />
+                    <label for="until" class="bold">To </label><input id="until<%= id %>" type="text" class="until" value="<%= untilDate %>" />
                     <label for="type" class="bold">Type </label>
                     <select id="type">
                         <option value="30SEC">30 Second Average</option>
