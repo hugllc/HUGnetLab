@@ -10,7 +10,7 @@
                         <th class="{sorter: false}">Actions</th>
                         <th class="{sorter: 'numeric'}">ID</th>
                         <th class="{sorter: 'text'}">Name</th>
-                        <th class="{sorter: 'text'}">Arch</th>
+                        <th class="{sorter: 'text'}">Type</th>
                         <th class="{sorter: 'text'}">Desc</th>
                     </tr>
                     </thead>
@@ -56,12 +56,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="right">Arch</th>
+                        <th class="right">Type</th>
                         <td>
                             <select name="arch" class="type">
-                                <% for (key in {"ADuC":"ADuC"}) { %>
+                                <% for (key in archs) { %>
                                     <option value="<%- key %>" <% (key == arch) && print('selected="selected"'); %>>
-                                        <%= key %>
+                                        <%= archs[key] %>
                                     </option>
                                 <% } %>
                             </select>
