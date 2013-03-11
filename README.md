@@ -55,6 +55,9 @@ This uses a HUGnet javascript library that is incuded in HUGnetLib.
 
 _All commit messages need to reference bugs in the Mantis bug tracker (see below)_
 
+_All patches or pull requests MUST BE AGAINST THE LATEST CODE.  They will not be accepted
+if they are not_
+
 Changes can be contributed by either:
 
 1. Using git to create patches and emailing them to patches@hugllc.com
