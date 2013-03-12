@@ -4,3 +4,6 @@ url = "http://localhost//HUGnetLib/HUGnetLibAPI.php"
 
 ; The template to use
 template = "default"
+
+; The title of the default template
+title = "HUGnetView™"

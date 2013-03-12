@@ -43,6 +43,8 @@ $id     = strtoupper($_REQUEST["id"]);
 $config = array(
     "template" => "default",
     "url" => "HUGnetLib/HUGnetLibAPI.php",
+    "title" => "HUGnetView™",
+
 );
 
 $error = null;
@@ -102,6 +104,7 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
         "HUGnetLabVersion" => HUGNETLAB_VERSION,
         "HUGnetLibVersion" => HUGNETLIB_VERSION,
         "host" => trim($uname['nodename']),
+        "title" => $config["title"],
     );
     if (is_string($error)) {
         $tData["error"] = trim($error);
