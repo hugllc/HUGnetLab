@@ -45,19 +45,22 @@ $config = array(
     "url" => "HUGnetLib/HUGnetLibAPI.php",
 );
 
+$error = null;
+
 $tasks = array(
     "device" => array("get", "list"),
     "history" => array("get", "last"),
 );
-if (!file_exists(dirname(__FILE__)."/template/".$config["template"])) {
-    $config["template"] = "default";
-}
 
 $file = dirname(__FILE__)."/configuration.ini";
 if (file_exists($file)) {
     $config = array_merge($config, (array)parse_ini_file($file, true));
-} else {
-    die("No configuration found");
+}
+
+if (!file_exists(dirname(__FILE__)."/template/".$config["template"])) {
+    $error = "Template '".$config["template"]."' not found.  Using default.";
+    $config["template"] = "default";
+
 }
 
 if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
@@ -100,6 +103,9 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
         "HUGnetLibVersion" => HUGNETLIB_VERSION,
         "host" => trim($uname['nodename']),
     );
+    if (is_string($error)) {
+        $tData["error"] = trim($error);
+    }
 
     $main = new Mustache($mainTemplate);
 

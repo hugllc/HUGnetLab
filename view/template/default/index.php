@@ -12,6 +12,7 @@
         {{header}}
     </head>
     <body>
+        <div>{{error}}</div>
         <header>
         <div id="header"><h1 class="header">HUGnetView&#153;</h1></div>
         </header>
