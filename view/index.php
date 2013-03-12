@@ -40,20 +40,28 @@ $task   = $_REQUEST["task"];
 $format = strtolower($_REQUEST["format"]);
 $id     = strtoupper($_REQUEST["id"]);
 
+$config = array(
+    "template" => "default",
+    "url" => "HUGnetLib/HUGnetLibAPI.php",
+);
+
 $tasks = array(
     "device" => array("get", "list"),
     "history" => array("get", "last"),
 );
-$tempDir = "default";
+if (!file_exists(dirname(__FILE__)."/template/".$config["template"])) {
+    $config["template"] = "default";
+}
 
-if (file_exists(dirname(__FILE__)."/configuration.php")) {
-    include dirname(__FILE__)."/configuration.php";
+$file = dirname(__FILE__)."/configuration.ini";
+if (file_exists($file)) {
+    $config = array_merge($config, (array)parse_ini_file($file, true));
 } else {
     die("No configuration found");
 }
 
 if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
-    $url .= "?".http_build_query($_GET);
+    $url = $config["url"]."?".http_build_query($_GET);
     $params = array(
         'http' => array(
             'method' => 'POST',
@@ -80,7 +88,7 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     include_once "HUGnetLab/Mustache.php";
     ob_start();
     ob_clean();
-    include dirname(__FILE__)."/template/".$tempDir."/index.php";
+    include dirname(__FILE__)."/template/".$config["template"]."/index.php";
     $mainTemplate = ob_get_contents();
     ob_end_clean();
 
