@@ -30,6 +30,7 @@
                     <tr class="even"><th class="right">Firmware</th><td><%= FWPartNum %></td></tr>
                     <tr class="odd"><th class="right">Version</th><td><%= FWVersion %></td></tr>
                     <tr class="even"><th class="right">Raw Setup</th><td><%= RawSetup %></td></tr>
+                    <tr class="odd"><th class="right">Driver</th><td><%= Driver %></td></tr>
                     <tr><th colspan="2">Properties</th></tr>
                     <tr class="odd">
                         <th class="right">Last Contact</th>
