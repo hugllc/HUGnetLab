@@ -26,11 +26,11 @@
                 <div>
                     <label for="type" class="bold">Type: </label>
                     <select id="type">
-                        <option value="30SEC">30 Second Average</option>
-                        <option value="1MIN">1 Minute Average</option>
-                        <option value="5MIN">5 Minute Average</option>
-                        <option value="15MIN">15 Minute Average</option>
-                        <option value="history">History</option>
+                        <% for (key in averageTypes) { %>
+                            <option value="<%- averageTypes[key] %>" <% (averageTypes[key] == type) && print('selected="selected"'); %>>
+                                <%= averageTypes[key] %>
+                            </option>
+                        <% } %>
                     </select>
                 </div>
                 <div>
