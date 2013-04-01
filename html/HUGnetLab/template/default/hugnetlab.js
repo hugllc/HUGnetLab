@@ -86,7 +86,7 @@ $(document).ready(function(){
         async: false,
         contentType: 'text',
         success: function (data) {
-            $('body').append('<div>' + data + '<\/div>');
+            $('body').append('<div>' + data + '</div>');
         }
     });
 
