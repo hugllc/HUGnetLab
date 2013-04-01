@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>HUGnetLab&#153; on {{host}}</title>
+        <title>{{title}}</title>
         <link rel="stylesheet" href="HUGnetLab/template/default/default.css" />
         <link rel="stylesheet" href="HUGnetLab/template/default/jquery.jqplot.css" />
         <link rel="stylesheet" href="HUGnetLab/template/default/pepper-grinder/jquery-ui.css" />
@@ -13,7 +13,7 @@
     </head>
     <body>
         <header>
-        <div id="header"><h1 class="header">HUGnetLab&#153;</h1></div>
+        <div id="header"><h1 class="header">{{title}}</h1></div>
         </header>
         <section>
         <div class="body">
@@ -46,12 +46,6 @@
         </div>
         {{/debug}}
         </footer>
-        <?php require dirname(__FILE__)."/templates.processTables.php"; ?>
-        <?php require dirname(__FILE__)."/templates.outputTables.php"; ?>
-        <?php require dirname(__FILE__)."/templates.inputTables.php"; ?>
-        <?php require dirname(__FILE__)."/templates.devices.php"; ?>
-        <?php require dirname(__FILE__)."/templates.data.php"; ?>
-        <?php require dirname(__FILE__)."/templates.export.php"; ?>
-        <?php require dirname(__FILE__)."/templates.tests.php"; ?>
+        <div id="template"></div>
     </body>
 </html>

@@ -1,0 +1,9 @@
+
+; This should be the absolute web path to HUGnetLibAPI.php
+url = "http://localhost//HUGnetLib/HUGnetLibAPI.php"
+
+; The template to use
+template = "default"
+
+; The title of the default template
+title = "HUGnetLab™"

@@ -80,6 +80,15 @@ HUGnetLab.Devices.fetch();
 $(document).ready(function(){
     "use strict";
 
+    $.ajax({
+        url: 'HUGnetLab/template/default/templates.php',
+        method: 'GET',
+        async: false,
+        contentType: 'text',
+        success: function (data) {
+            $('body').append('<div>' + data + '<\/div>');
+        }
+    });
 
     var iface = new HUGnetLab.main();
 });
