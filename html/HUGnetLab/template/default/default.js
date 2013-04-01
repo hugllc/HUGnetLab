@@ -28,54 +28,6 @@
  * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
  */
-var HUGnetLab = {};
-$(function ()
-{
-    "use strict";
-
-    /**
-    * This is the model that stores the devices.
-    *
-    * @category   JavaScript
-    * @package    HUGnetLib
-    * @subpackage Tests
-    * @author     Scott Price <prices@hugllc.com>
-    * @copyright  2012 Hunt Utilities Group, LLC
-    * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
-    * @version    Release: 0.9.7
-    * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
-    */
-    HUGnetLab.main = Backbone.View.extend({
-        data: {},
-        tabs: undefined,
-        initialize: function ()
-        {
-            this.render();
-        },
-        render: function ()
-        {
-            var self = this;
-            this.tabs = $('#tabs').tabs({
-                tabTemplate: '<li><a href="#{href}">#{label}</a></li>',
-                cookie: {
-                    // store a session cookie
-                    expires: 10
-                }
-            });
-            this.tests = new HUGnet.TestSuite({
-                el: "#tabs-tests",
-                tests: HUGnetLab.Devices,
-            });
-            this.config = new HUGnet.Config({
-                el: "#tabs-config",
-                devices: HUGnetLab.Devices,
-            });
-        }
-    });
-});
-
-HUGnetLab.Devices = new HUGnet.Devices();
-HUGnetLab.Devices.fetch();
 
 $(document).ready(function(){
     "use strict";
@@ -89,6 +41,4 @@ $(document).ready(function(){
             $('body').append('<div>' + data + '</div>');
         }
     });
-
-    var iface = new HUGnetLab.main();
 });

@@ -66,11 +66,7 @@ if (!file_exists($template_dir."/index.php")) {
     $template_dir = dirname(__FILE__)."/HUGnetLab/template/default";
 }
 
-ob_start();
-ob_clean();
-include $template_dir."/index.php";
-$mainTemplate = ob_get_contents();
-ob_end_clean();
+$mainTemplate = get_file($template_dir."/index.php");
 
 $tData = array(
     "HUGnetLabVersion" => HUGNETLAB_VERSION,
@@ -80,11 +76,38 @@ $tData = array(
     "error" => $error,
 );
 
+$plugins = array("tests", "config");
+foreach ($plugins as $name) {
+    $value = get_file("HUGnetLab/plugins/".$name.".php");
+    $value = trim($value);
+    if (!empty($value)) {
+        $tData[$name] = $value;
+    }
+}
 $main = new Mustache($mainTemplate);
 
 $tData["pageDate"] = date("r");
 $tData["pageTime"] = round(microtime(true) - $pageStartTime, 4);
 print $main->render(null, $tData);
+
+
+/**
+ * This gets the content of a file
+ *
+ * @param string $name The name of the file
+ *
+ * @return string The contents of the file
+ */
+function get_file($name)
+{
+    ob_start();
+    ob_clean();
+    @include $name;
+    $return = ob_get_contents();
+    ob_end_clean();
+    return (string)$return;
+}
+
 
 ?>
 

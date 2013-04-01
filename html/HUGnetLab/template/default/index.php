@@ -8,7 +8,9 @@
         <link rel="stylesheet" href="HUGnetLab/template/default/pepper-grinder/jquery-ui.css" />
         <script src="/HUGnetLib/contrib.js" type="text/javascript"></script>
         <script src="/HUGnetLib/hugnet.js" type="text/javascript"></script>
-        <script src="HUGnetLab/template/default/hugnetlab.js" type="text/javascript"></script>
+        <!-- This default.js must be loaded before hugnetlab.js.  It loads the underscore templates -->
+        <script src="HUGnetLab/template/default/default.js" type="text/javascript"></script>
+        <script src="HUGnetLab/hugnetlab.js" type="text/javascript"></script>
         {{header}}
     </head>
     <body>
@@ -20,21 +22,19 @@
             <div id="tabs">
                 <nav>
                 <ul>
-                    <li><a href="#tabs-tests">Tests</a></li>
-                    <li><a href="#tabs-config">Configuration</a></li>
+                    {{#tests}}<li><a href="#tabs-tests">Tests</a></li>{{/tests}}
+                    {{#config}}<li><a href="#tabs-config">Configuration</a></li>{{/config}}
                 </ul>
                 </nav>
-                <div id="tabs-tests">
-                </div>
-                <div id="tabs-config">
-                </div>
+                {{#tests}}<div id="tabs-tests">{{{tests}}}</div>{{/tests}}
+                {{#config}}<div id="tabs-config">{{{config}}}</div>{{/config}}
             </div>
         </div>
         </section>
         <footer>
         <div class="copyright">
             <span style="float: right; padding: 5px;"><a href="http://www.hugllc.com"><img src="HUGnetLab/template/default/images/PoweredBy.png" alt="Powered by HUGnetLab&#153;" /></a></span>
-            <div>&copy; Copyright 2012 <a href="http://www.hugllc.com">Hunt Utilities Group, LLC</a></div>
+            <div>&copy; Copyright 2013 <a href="http://www.hugllc.com">Hunt Utilities Group, LLC</a></div>
             <div>HUGnetLab Version {{HUGnetLabVersion}}</div>
             <div>API Version {{HUGnetLibVersion}}</div>
             <div>Page Generated {{pageDate}} in {{pageTime}} s</div>
