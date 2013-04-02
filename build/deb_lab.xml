@@ -22,18 +22,10 @@
         <copy todir="${deb.lab.staging}">
             <fileset dir="${deb.lab.setup}"/>
         </copy>
-        <mkdir dir="${deb.lab.staging}/var/www"/>
-        <copy todir="${deb.lab.staging}/var/www">
-            <fileset dir="${deb.lab.source}/html"/>
-        </copy>
-        <mkdir dir="${deb.lab.staging}${deb.prefix}/share/php/HUGnetLab"/>
-        <copy todir="${deb.lab.staging}${deb.prefix}/share/php/HUGnetLab">
-            <fileset dir="${deb.lab.source}/include"/>
-        </copy>
         <chmod file="${deb.lab.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.lab.staging}/DEBIAN/prerm" perm="ugo+rx"/>
         <chmod file="${deb.lab.staging}/DEBIAN/postrm" perm="ugo+rx"/>
-        <replaceregexp file="${deb.lab.staging}/DEBIAN/control"
+        <replaceregexp file="${deb.lab.staging}/DEBIAN/control" byline="yes"
                     match="%VERSION%"
                     replace="${deb.version}"
         />

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -e "/var/www/index.html" ]; then
+    mv -f /var/www/index.html /var/www/index.old
+fi
+
+
+exit $?

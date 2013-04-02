@@ -7,6 +7,8 @@ Version: %VERSION%
 Package: hugnetlab-ui
 Architecture: all
 Pre-Depends: debconf
-Depends: php5 (>= 5.3.2), php5-sqlite, hugnetlib (>> 0.10.0), hugnetlib-webapi (>> 0.10.0), php5-mysql, apache2, debconf
-Breaks: hugnetlab-server
-Description: This is the HUGnet User Interface
+Depends: hugnetlab-common (= %VERSION%),
+         hugnetlab-plugin-tests (= %VERSION%),
+         hugnetlab-plugin-config (= %VERSION%)
+Breaks: hugnetlab-server,hugnetlab-datacollector,hugnetview
+Description: This is a meta package to install the HUGnetLab user interface

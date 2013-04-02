@@ -26,7 +26,7 @@
         <chmod file="${deb.server.staging}/DEBIAN/prerm" perm="ugo+rx"/>
         <chmod file="${deb.server.staging}/DEBIAN/postrm" perm="ugo+rx"/>
         <chmod file="${deb.server.staging}/DEBIAN/config" perm="ugo+rx"/>
-        <replaceregexp file="${deb.server.staging}/DEBIAN/control"
+        <replaceregexp file="${deb.server.staging}/DEBIAN/control" byline="yes"
                     match="%VERSION%"
                     replace="${deb.version}"
         />
