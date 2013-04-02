@@ -29,8 +29,9 @@
  * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link       http://dev.hugllc.com/index.php/Project:HUGnetLab
  */
+?>
 <script type="text/javascript">
     $(document).ready(function(){
         var tests = new HUGnetLab.tests();
     });
-</script>',
+</script>
