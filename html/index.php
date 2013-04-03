@@ -38,10 +38,17 @@ define("HUGNETLIB_VERSION", trim(file_get_contents("HUGnetLib/VERSION.TXT", true
 require_once "HUGnetLab/Mustache.php";
 require_once "HUGnetLab/hugnet.php";
 
+$action = $_REQUEST["action"];
+$task   = $_REQUEST["task"];
+$format = strtolower($_REQUEST["format"]);
+$id     = strtoupper($_REQUEST["id"]);
+
+
 if (function_exists("posix_uname")) {
     $uname = posix_uname();
     $on = " on ".trim($uname['nodename']);
 }
+
 $config = array(
     "template" => "default",
     "url" => "http://localhost/HUGnetLib/HUGnetLibAPI.php",
@@ -61,35 +68,61 @@ if (file_exists($file)) {
     $config = array_merge($config, (array)parse_ini_file($file, true));
 }
 
-$template_dir = dirname(__FILE__)."/HUGnetLab/template/".$config["template"];
-if (!file_exists($template_dir."/index.php")) {
-    $template_dir = dirname(__FILE__)."/HUGnetLab/template/default";
-}
-
-$mainTemplate = get_file($template_dir."/index.php");
-
-$tData = array(
-    "HUGnetLabVersion" => HUGNETLAB_VERSION,
-    "HUGnetLibVersion" => HUGNETLIB_VERSION,
-    "host" => trim($uname['nodename']),
-    "title" => $config["title"],
-    "error" => $error,
-);
-
-$plugins = array("tests", "config");
-foreach ($plugins as $name) {
-    $value = get_file("HUGnetLab/plugins/".$name.".php");
-    $value = trim($value);
-    if (!empty($value)) {
-        $tData[$name] = $value;
+if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
+    $url = $config["url"]."?".http_build_query($_GET);
+    $params = array(
+        'http' => array(
+            'method' => 'POST',
+            'content' => http_build_query($_POST)."\n",
+        )
+    );
+    $ctx = stream_context_create($params);
+    $response = file_get_contents($url, false, $ctx);
+    if (($task === "history") && ($format === "csv")) {
+        header('Content-type: text/csv');
+        header(
+            'Content-disposition: attachment;'
+            .'filename=HUGnetLab.'.$id.'.csv'
+        );
+    } else {
+        header('Content-type: application/json');
     }
+    print $response;
+
+    unset($response);
+    unset($params);
+    unset($ctx);
+} else {
+
+    $template_dir = dirname(__FILE__)."/HUGnetLab/template/".$config["template"];
+    if (!file_exists($template_dir."/index.php")) {
+        $template_dir = dirname(__FILE__)."/HUGnetLab/template/default";
+    }
+
+    $mainTemplate = get_file($template_dir."/index.php");
+
+    $tData = array(
+        "HUGnetLabVersion" => HUGNETLAB_VERSION,
+        "HUGnetLibVersion" => HUGNETLIB_VERSION,
+        "host" => trim($uname['nodename']),
+        "title" => $config["title"],
+        "error" => $error,
+    );
+
+    $plugins = array("tests", "config", "view");
+    foreach ($plugins as $name) {
+        $value = get_file("HUGnetLab/plugins/".$name.".php");
+        $value = trim($value);
+        if (!empty($value)) {
+            $tData[$name] = $value;
+        }
+    }
+    $main = new Mustache($mainTemplate);
+
+    $tData["pageDate"] = date("r");
+    $tData["pageTime"] = round(microtime(true) - $pageStartTime, 4);
+    print $main->render(null, $tData);
 }
-$main = new Mustache($mainTemplate);
-
-$tData["pageDate"] = date("r");
-$tData["pageTime"] = round(microtime(true) - $pageStartTime, 4);
-print $main->render(null, $tData);
-
 
 /**
  * This gets the content of a file

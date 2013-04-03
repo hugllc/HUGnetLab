@@ -22,12 +22,23 @@
             <div id="tabs">
                 <nav>
                 <ul>
+                    {{#view}}<li><a href="#tabs-view">View Tests</a></li>{{/view}}
                     {{#tests}}<li><a href="#tabs-tests">Tests</a></li>{{/tests}}
                     {{#config}}<li><a href="#tabs-config">Configuration</a></li>{{/config}}
                 </ul>
                 </nav>
+                {{#view}}<div id="tabs-view">{{{view}}}</div>{{/view}}
                 {{#tests}}<div id="tabs-tests">{{{tests}}}</div>{{/tests}}
                 {{#config}}<div id="tabs-config">{{{config}}}</div>{{/config}}
+                <script type="text/javascript">
+                    var tabs = $('#tabs').tabs({
+                        tabTemplate: '<li><a href="#{href}">#{label}</a></li>',
+                        cookie: {
+                            // store a session cookie
+                            expires: 10
+                        }
+                    });
+                </script>
             </div>
         </div>
         </section>

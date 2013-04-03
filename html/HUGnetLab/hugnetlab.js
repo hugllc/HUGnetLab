@@ -45,6 +45,42 @@ $(function ()
     * @version    Release: 0.9.7
     * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
     */
+    HUGnetLab.view = Backbone.View.extend({
+        data: {},
+        tabs: undefined,
+        devices: {},
+        initialize: function (options)
+        {
+            this.devices = new HUGnet.Devices({
+                url: 'index.php'
+            });
+            this.devices.fetch();
+            this.render();
+        },
+        render: function ()
+        {
+            var self = this;
+            this.tests = new HUGnet.TestSuite({
+                el: "#tabs-view",
+                id: "tabs-view",
+                tests: this.devices,
+                url: 'index.php',
+                readonly: true
+            });
+        }
+    });
+    /**
+    * This is the model that stores the devices.
+    *
+    * @category   JavaScript
+    * @package    HUGnetLib
+    * @subpackage Tests
+    * @author     Scott Price <prices@hugllc.com>
+    * @copyright  2012 Hunt Utilities Group, LLC
+    * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
+    * @version    Release: 0.9.7
+    * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
+    */
     HUGnetLab.tests = Backbone.View.extend({
         data: {},
         tabs: undefined,
@@ -55,20 +91,10 @@ $(function ()
         render: function ()
         {
             var self = this;
-            this.tabs = $('#tabs').tabs({
-                tabTemplate: '<li><a href="#{href}">#{label}</a></li>',
-                cookie: {
-                    // store a session cookie
-                    expires: 10
-                }
-            });
             this.tests = new HUGnet.TestSuite({
                 el: "#tabs-tests",
+                id: "tabs-tests",
                 tests: HUGnetLab.Devices,
-            });
-            this.config = new HUGnet.Config({
-                el: "#tabs-config",
-                devices: HUGnetLab.Devices,
             });
         }
     });

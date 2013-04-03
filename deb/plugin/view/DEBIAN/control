@@ -4,10 +4,10 @@ Priority: extra
 Maintainer: Scott Price <prices@hugllc.com>
 Homepage: http://dev.huglc.com/
 Version: %VERSION%
-Package: hugnetlab-plugin-tests
+Package: hugnetlab-plugin-view
 Architecture: all
 Pre-Depends: debconf
-Breaks: hugnetlab-plugin-view
 Depends: hugnetlab-common (= %VERSION%)
+Breaks: hugnetlab-plugin-tests, hugnetlab-plugin-config
 Description: The plugin for configuration of a HUGnetLab system
  This is where everything is configured

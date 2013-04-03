@@ -24,6 +24,7 @@
     <include file="${basedir}/build/deb_view.xml"/>
     <include file="${basedir}/build/deb_plugin_config.xml"/>
     <include file="${basedir}/build/deb_plugin_tests.xml"/>
+    <include file="${basedir}/build/deb_plugin_view.xml"/>
 
 
 
@@ -34,11 +35,11 @@
         </delete>
     </target>
 
-    <target name="setup" depends="server.setup,lab.setup,system.setup,view.setup,common.setup,plugin_config.setup,plugin_tests.setup" />
-    <target name="deb" depends="server.deb,lab.deb,system.deb,view.deb,common.deb,plugin_config.deb,plugin_tests.deb" />
-    <target name="post" depends="build,server.post,lab.post,system.post,view.post,common.post,plugin_config.post,plugin_tests.post" />
-    <target name="testpost" depends="build,server.testpost,lab.testpost,system.testpost,view.testpost,common.testpost,plugin_config.testpost,plugin_tests.testpost" />
-    <target name="rcpost" depends="build,server.rcpost,lab.rcpost,system.rcpost,view.rcpost,common.rcpost,plugin_config.rcpost,plugin_tests.rcpost" />
+    <target name="setup" depends="server.setup,lab.setup,system.setup,view.setup,common.setup,plugin_config.setup,plugin_tests.setup,plugin_view.setup" />
+    <target name="deb" depends="server.deb,lab.deb,system.deb,view.deb,common.deb,plugin_config.deb,plugin_tests.deb,plugin_view.deb" />
+    <target name="post" depends="build,server.post,lab.post,system.post,view.post,common.post,plugin_config.post,plugin_tests.post,plugin_view.post" />
+    <target name="testpost" depends="build,server.testpost,lab.testpost,system.testpost,view.testpost,common.testpost,plugin_config.testpost,plugin_tests.testpost,plugin_view.testpost" />
+    <target name="rcpost" depends="build,server.rcpost,lab.rcpost,system.rcpost,view.rcpost,common.rcpost,plugin_config.rcpost,plugin_tests.rcpost,plugin_view.rcpost" />
 
     <target name="postclean">
         <delete dir="${deb.staging}"/>

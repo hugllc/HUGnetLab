@@ -16,7 +16,7 @@
     </target>
 
     <target name="setup" description="Copy all of the files to build the deb">
-        <echo>Setting up for HUGnetLab 'v${deb.version}'</echo>
+        <echo>Setting up for HUGnetLab Config Plugin'v${deb.version}'</echo>
 
         <mkdir dir="${deb.plugin_config.staging}"/>
         <copy todir="${deb.plugin_config.staging}">
