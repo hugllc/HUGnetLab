@@ -32,11 +32,10 @@
  */
 $pageStartTime = microtime(true);
 define("_HUGNETLAB", true);
-define("HUGNETLAB_VERSION", trim(file_get_contents("HUGnetLab/VERSION.TXT", true)));
-define("HUGNETLIB_VERSION", trim(file_get_contents("HUGnetLib/VERSION.TXT", true)));
+define("HUGNETLAB_VERSION", trim(@file_get_contents("HUGnetLab/VERSION.TXT", true)));
+define("HUGNETLIB_VERSION", trim(@file_get_contents("HUGnetLib/VERSION.TXT", true)));
 
 require_once "HUGnetLab/Mustache.php";
-require_once "HUGnetLab/hugnet.php";
 
 $action = $_REQUEST["action"];
 $task   = $_REQUEST["task"];
@@ -103,12 +102,13 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
 
     $tData = array(
         "HUGnetLabVersion" => HUGNETLAB_VERSION,
-        "HUGnetLibVersion" => HUGNETLIB_VERSION,
         "host" => trim($uname['nodename']),
         "title" => $config["title"],
         "error" => $error,
     );
-
+    if (defined("HUGNETLIB_VERSION")) {
+        $tData["HUGnetLibVersion"] = HUGNETLIB_VERSION;
+    }
     $plugins = array("tests", "config", "view");
     foreach ($plugins as $name) {
         $value = get_file("HUGnetLab/plugins/".$name.".php");

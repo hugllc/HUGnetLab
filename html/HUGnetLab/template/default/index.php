@@ -48,7 +48,9 @@
             <span style="float: right; padding: 5px;"><a href="http://www.hugllc.com"><img src="HUGnetLab/template/default/images/PoweredBy.png" alt="Powered by HUGnetLab&#153;" /></a></span>
             <div>&copy; Copyright 2013 <a href="http://www.hugllc.com">Hunt Utilities Group, LLC</a></div>
             <div>HUGnetLab Version {{HUGnetLabVersion}}</div>
+            {{#HUGnetLibVersion}}
             <div>API Version {{HUGnetLibVersion}}</div>
+            {{/HUGnetLibVersion}}
             <div>Page Generated {{pageDate}} in {{pageTime}} s</div>
         </div>
         {{#debug}}
@@ -58,6 +60,5 @@
         </div>
         {{/debug}}
         </footer>
-        <div id="template"></div>
     </body>
 </html>

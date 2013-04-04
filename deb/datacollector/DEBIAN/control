@@ -4,16 +4,15 @@ Priority: extra
 Maintainer: Scott Price <prices@hugllc.com>
 Homepage: http://dev.huglc.com/
 Version: %VERSION%
-Package: hugnetlab
+Package: hugnetdatacollector
 Architecture: all
-Breaks: hugnetserver,hugnetdatacollector
+Breaks: hugnetlab-server, hugnetlab
 Pre-Depends: debconf
 Depends: apache2, openssh-server, conspy, mysql-server, phpmyadmin, debconf,
-        hugnetfirmware, hugnetscripts-datacollector,
+        hugnetfirmware, hugnetlab-data, hugnetscripts-datacollector,
         hugnetlib (>> 0.11.1), hugnetlib-webapi (>> 0.11.1),
         hugnetlab-common (= %VERSION%),
-        hugnetlab-plugin-tests (= %VERSION%),
         hugnetlab-plugin-config (= %VERSION%)
-Description: This is a meta package to install the hugnet lab system on a computer.
- This installs the HUGnetLab system, setting everything up so that it should run
+Description: This is a meta package to install the hugnet data collector on a computer.
+ This installs the HUGnetLab datacollector, setting everything up so that it should run
  properly out of the box.

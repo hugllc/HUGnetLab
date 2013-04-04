@@ -3,10 +3,10 @@
 
 <project name="deb.lab" default="build" basedir=".">
     <property name="deb.lab.setup" value="${deb.setup}/lab"/>
-    <property name="deb.lab.source" value="${basedir}/"/>
+    <property name="deb.lab.source" value="${basedir}/lab"/>
     <property name="deb.lab.staging" value="${deb.staging}/lab/deb"/>
 
-    <property name="deb.lab.outputfile" value="${deb.builddir}/HUGnetLabUI_${deb.version}${deb.release}_all.deb" />
+    <property name="deb.lab.outputfile" value="${deb.builddir}/HUGnetLab_${deb.version}${deb.release}_all.deb" />
 
     <target name="clean" description="Clean up and create artifact directories">
         <delete dir="${deb.lab.staging}" failonerror="false"/>
@@ -25,6 +25,7 @@
         <chmod file="${deb.lab.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.lab.staging}/DEBIAN/prerm" perm="ugo+rx"/>
         <chmod file="${deb.lab.staging}/DEBIAN/postrm" perm="ugo+rx"/>
+        <chmod file="${deb.lab.staging}/DEBIAN/config" perm="ugo+rx"/>
         <replaceregexp file="${deb.lab.staging}/DEBIAN/control" byline="yes"
                     match="%VERSION%"
                     replace="${deb.version}"

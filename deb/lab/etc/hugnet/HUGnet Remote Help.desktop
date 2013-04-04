@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=bash /etc/hugnet/hugnet_remote_help.sh
+GenericName[en_US]=
+GenericName=
+Icon=exec
+MimeType=
+Name[en_US]=HUGnet Remote Help
+Name=HUGnet Remote Help
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=none
+X-KDE-SubstituteUID=false
+X-KDE-Username=
