@@ -86,6 +86,10 @@ $(function ()
         tabs: undefined,
         initialize: function ()
         {
+            if (!HUGnetLab.Devices) {
+                HUGnetLab.Devices = new HUGnet.Devices();
+                HUGnetLab.Devices.fetch();
+            }
             this.render();
         },
         render: function ()
@@ -115,6 +119,10 @@ $(function ()
         tabs: undefined,
         initialize: function ()
         {
+            if (!HUGnetLab.Devices) {
+                HUGnetLab.Devices = new HUGnet.Devices();
+                HUGnetLab.Devices.fetch();
+            }
             this.render();
         },
         render: function ()
@@ -126,6 +134,3 @@ $(function ()
         }
     });
 });
-
-HUGnetLab.Devices = new HUGnet.Devices();
-HUGnetLab.Devices.fetch();
