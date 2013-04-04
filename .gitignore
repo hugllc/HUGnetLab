@@ -13,3 +13,4 @@ view/configuration.php
 view/configuration.ini
 .kdev4
 *.kdev4
+include/plugins/*.php

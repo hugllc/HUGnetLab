@@ -24,7 +24,7 @@
         </copy>
         <mkdir dir="${deb.plugin_tests.staging}${deb.prefix}/share/php/HUGnetLab/plugins/"/>
         <copy todir="${deb.plugin_tests.staging}${deb.prefix}/share/php/HUGnetLab/plugins/"
-              file="${deb.plugin_tests.source}/include/plugins/tests.php" />
+              file="${deb.plugin_tests.source}/plugins/tests.php" />
         <chmod file="${deb.plugin_tests.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.plugin_tests.staging}/DEBIAN/prerm" perm="ugo+rx"/>
         <chmod file="${deb.plugin_tests.staging}/DEBIAN/postrm" perm="ugo+rx"/>
