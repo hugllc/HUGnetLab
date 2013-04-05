@@ -25,6 +25,7 @@
     <include file="${basedir}/build/deb_plugin_config.xml"/>
     <include file="${basedir}/build/deb_plugin_tests.xml"/>
     <include file="${basedir}/build/deb_plugin_devices.xml"/>
+    <include file="${basedir}/build/deb_plugin_datacollectors.xml"/>
     <include file="${basedir}/build/deb_plugin_view.xml"/>
 
 
@@ -36,11 +37,11 @@
         </delete>
     </target>
 
-    <target name="setup" depends="server.setup,datacollector.setup,lab.setup,view.setup,common.setup,plugin_config.setup,plugin_tests.setup,plugin_view.setup,plugin_devices.setup" />
-    <target name="deb" depends="server.deb,datacollector.deb,lab.deb,view.deb,common.deb,plugin_config.deb,plugin_tests.deb,plugin_view.deb,plugin_devices.deb" />
-    <target name="post" depends="build,server.post,datacollector.post,lab.post,view.post,common.post,plugin_config.post,plugin_tests.post,plugin_view.post,plugin_devices.post" />
-    <target name="testpost" depends="build,server.testpost,datacollector.testpost,lab.testpost,view.testpost,common.testpost,plugin_config.testpost,plugin_tests.testpost,plugin_view.testpost,plugin_devices.testpost" />
-    <target name="rcpost" depends="build,server.rcpost,datacollector.rcpost,lab.rcpost,view.rcpost,common.rcpost,plugin_config.rcpost,plugin_tests.rcpost,plugin_view.rcpost,plugin_devices.rcpost" />
+    <target name="setup" depends="server.setup,datacollector.setup,lab.setup,view.setup,common.setup,plugin_config.setup,plugin_tests.setup,plugin_view.setup,plugin_devices.setup,plugin_datacollectors.setup" />
+    <target name="deb" depends="server.deb,datacollector.deb,lab.deb,view.deb,common.deb,plugin_config.deb,plugin_tests.deb,plugin_view.deb,plugin_devices.deb,plugin_datacollectors.deb" />
+    <target name="post" depends="build,server.post,datacollector.post,lab.post,view.post,common.post,plugin_config.post,plugin_tests.post,plugin_view.post,plugin_devices.post,plugin_datacollectors.post" />
+    <target name="testpost" depends="build,server.testpost,datacollector.testpost,lab.testpost,view.testpost,common.testpost,plugin_config.testpost,plugin_tests.testpost,plugin_view.testpost,plugin_devices.testpost,plugin_datacollectors.testpost" />
+    <target name="rcpost" depends="build,server.rcpost,datacollector.rcpost,lab.rcpost,view.rcpost,common.rcpost,plugin_config.rcpost,plugin_tests.rcpost,plugin_view.rcpost,plugin_devices.rcpost,plugin_datacollectors.rcpost" />
 
     <target name="postclean">
         <delete dir="${deb.staging}"/>

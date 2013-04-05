@@ -109,7 +109,9 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     if (defined("HUGNETLIB_VERSION")) {
         $tData["HUGnetLibVersion"] = HUGNETLIB_VERSION;
     }
-    $plugins = array("tests", "config", "view", "devices");
+    $plugins = array(
+        "tests", "config", "view", "devices", "datacollectors"
+    );
     foreach ($plugins as $name) {
         $value = get_file("HUGnetLab/plugins/".$name.".php");
         $value = trim($value);

@@ -1,0 +1,13 @@
+Source: hugnetlab
+Section: contrib/science
+Priority: extra
+Maintainer: Scott Price <prices@hugllc.com>
+Homepage: http://dev.huglc.com/
+Version: %VERSION%
+Package: hugnetlab-plugin-datacollectors
+Architecture: all
+Pre-Depends: debconf
+Breaks: hugnetlab-plugin-view
+Depends: hugnetlab-common (= %VERSION%)
+Description: The plugin for the datacollector list for the HUGnet System
+ This is where the datacollectors are viewed.
