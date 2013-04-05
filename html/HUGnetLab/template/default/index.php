@@ -24,10 +24,12 @@
                 {{^view}}
                 <nav>
                 <ul>
+                    {{#devices}}<li><a href="#tabs-devices">Devices</a></li>{{/devices}}
                     {{#tests}}<li><a href="#tabs-tests">Tests</a></li>{{/tests}}
                     {{#config}}<li><a href="#tabs-config">Configuration</a></li>{{/config}}
                 </ul>
                 </nav>
+                {{#devices}}<div id="tabs-devices">{{{devices}}}</div>{{/devices}}
                 {{#tests}}<div id="tabs-tests">{{{tests}}}</div>{{/tests}}
                 {{#config}}<div id="tabs-config">{{{config}}}</div>{{/config}}
                 <script type="text/javascript">
