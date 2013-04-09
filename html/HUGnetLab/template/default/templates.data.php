@@ -36,7 +36,7 @@
                     <label for="until" class="bold">To </label><input id="until" type="text" class="until" value="<%= untilDate %>" />
                     <select id="type">
                         <% for (key in averageTypes) { %>
-                            <option value="<%- averageTypes[key] %>" <% (averageTypes[key] == type) && print('selected="selected"'); %>>
+                            <option value="<%- key %>" <% (averageTypes[key] == type) && print('selected="selected"'); %>>
                                 <%= averageTypes[key] %>
                             </option>
                         <% } %>
