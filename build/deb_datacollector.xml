@@ -25,6 +25,7 @@
         <chmod file="${deb.datacollector.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.datacollector.staging}/DEBIAN/prerm" perm="ugo+rx"/>
         <chmod file="${deb.datacollector.staging}/DEBIAN/postrm" perm="ugo+rx"/>
+        <chmod file="${deb.datacollector.staging}/DEBIAN/config" perm="ugo+rx"/>
         <replaceregexp file="${deb.datacollector.staging}/DEBIAN/control" byline="yes"
                     match="%VERSION%"
                     replace="${deb.version}"

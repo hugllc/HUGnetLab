@@ -9,7 +9,7 @@ Architecture: all
 Breaks: hugnetlab-server, hugnetlab
 Pre-Depends: debconf
 Depends: apache2, openssh-server, conspy, mysql-server, phpmyadmin, debconf,
-        hugnetfirmware, hugnetlab-data, hugnetscripts-datacollector,
+        hugnetfirmware, hugnetscripts-datacollector,
         hugnetlib (>> 0.11.1), hugnetlib-webapi (>> 0.11.1),
         hugnetlab-common (= %VERSION%),
         hugnetlab-plugin-devices (= %VERSION%),
