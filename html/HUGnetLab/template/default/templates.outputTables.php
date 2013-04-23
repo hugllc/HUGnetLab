@@ -4,14 +4,14 @@
                 <div>
                     <button class="new">New Output Table</button>
                 </div>
-                <table id="outputTableTable" class="tablesorter">
+                <table id="outputTableTable" class="tablesorter {sortlist: [[1,0]]}">
                     <thead>
                     <tr>
-                        <th class="{sorter: false}">Actions</th>
-                        <th class="{sorter: 'numeric'}">ID</th>
-                        <th class="{sorter: 'text'}">Name</th>
-                        <th class="{sorter: 'text'}">Arch</th>
-                        <th class="{sorter: 'text'}">Desc</th>
+                        <th class="sorter-false">Actions</th>
+                        <th class="sorter-numeric">ID</th>
+                        <th class="sorter-text">Name</th>
+                        <th class="sorter-text">Arch</th>
+                        <th class="sorter-text">Desc</th>
                     </tr>
                     </thead>
                     <tbody id="OutputTableList">

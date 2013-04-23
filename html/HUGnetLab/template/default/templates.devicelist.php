@@ -1,15 +1,15 @@
 <!--  These are our tempaltes -->
         <script type="text/template" id="DeviceListViewTemplate">
-                <table id="devTable" class="tablesorter">
+                <table id="devTable" class="tablesorter {sortlist: [[1,0]]}">
                     <thead>
                     <tr>
-                        <th class="{sorter: false}">Actions</th>
-                        <th class="{sorter: 'text'}">ID</th>
-                        <th class="{sorter: 'text'}">Name</th>
-                        <th class="{sorter: 'text'}">Active</th>
-                        <th class="{sorter: 'text'}">Data Int<br />(Sec)</th>
-                        <th class="{sorter: 'text'}">Last Contact</th>
-                        <th class="{sorter: 'text'}">Last Modified</th>
+                        <th class="sorter-false">Actions</th>
+                        <th class="sorter-hex">ID</th>
+                        <th class="sorter-text">Name</th>
+                        <th class="sorter-text">Active</th>
+                        <th class="sorter-numeric">Data Int<br />(Sec)</th>
+                        <th class="sorter-usLongDate">Last Contact</th>
+                        <th class="sorter-usLongDate">Last Modified</th>
                     </tr>
                     </thead>
                     <tbody id="DeviceListView">

@@ -115,16 +115,16 @@
         </script>
         <script type="text/template" id="DeviceListTemplate">
                 <form id="deviceListForm" method="POST" action="javascript:void(0);">
-                <table id="devTable" class="tablesorter">
+                <table id="devTable" class="tablesorter {sortlist: [[2,0]]}">
                     <thead>
                     <tr>
-                        <th class="{sorter: false}">Actions</th>
-                        <th class="{sorter: 'text'}">Name</th>
-                        <th class="{sorter: 'text'}">ID</th>
-                        <th class="{sorter: 'numeric'}">Serial #</th>
-                        <th class="{sorter: 'text'}">Hardware</th>
-                        <th class="{sorter: 'text'}">Firmware</th>
-                        <th class="{sorter: 'text'}">Type</th>
+                        <th class="sorter-false">Actions</th>
+                        <th class="sorter-text">Name</th>
+                        <th class="sorter-hex">ID</th>
+                        <th class="sorter-numeric">Serial #</th>
+                        <th class="sorter-text">Hardware</th>
+                        <th class="sorter-text">Firmware</th>
+                        <th class="sorter-text">Type</th>
                     </tr>
                     </thead>
                     <tbody id="DeviceList">

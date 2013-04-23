@@ -4,14 +4,14 @@
                 <div>
                     <button class="new">New Process Table</button>
                 </div>
-                <table id="processTableTable" class="tablesorter">
+                <table id="processTableTable" class="tablesorter {sortlist: [[1,0]]}">
                     <thead>
                     <tr>
-                        <th class="{sorter: false}">Actions</th>
-                        <th class="{sorter: 'numeric'}">ID</th>
-                        <th class="{sorter: 'text'}">Name</th>
-                        <th class="{sorter: 'text'}">Arch</th>
-                        <th class="{sorter: 'text'}">Desc</th>
+                        <th class="sorter-false">Actions</th>
+                        <th class="sorter-numeric">ID</th>
+                        <th class="sorter-text">Name</th>
+                        <th class="sorter-text">Arch</th>
+                        <th class="sorter-text">Desc</th>
                     </tr>
                     </thead>
                     <tbody id="ProcessTableList">

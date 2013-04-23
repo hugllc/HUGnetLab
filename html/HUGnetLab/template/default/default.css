@@ -197,11 +197,6 @@ td.left div.logo {
 .left {
     text-align: left;
 }
-
-th {
-    background: #AAA;
-}
-
 textarea {
     width: 100%;
 }
@@ -212,6 +207,10 @@ div.topbar {
     font-size: 200%;
     font-weight: bold;
     line-height: 60px;
+}
+
+th {
+    background: #AAA;
 }
 tr.odd {
     background: #f7f3de;
@@ -300,6 +299,7 @@ td.dataindex {
 
 
 /* JQuery Table Sorter Stuff */
+/*
 th.header {
     background-image: url(images/sort_small.png);
     cursor: pointer;
@@ -321,7 +321,7 @@ th.headerSortDown {
     background-color: #205700;
     color: white;
 }
-
+*/
 /* JQuery Tabs stuff */
 .ui-tabs .ui-tabs-panel {
     min-height: 500px !important;

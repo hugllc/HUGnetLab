@@ -1,13 +1,13 @@
 <!--  These are our tempaltes -->
         <script type="text/template" id="DatacollectorListTemplate">
-                <table id="devTable" class="tablesorter">
+                <table id="devTable" class="tablesorter {sortlist: [[1,0]]}">
                     <thead>
                     <tr>
-                        <th class="{sorter: false}">Actions</th>
-                        <th class="{sorter: 'text'}">Gateway</th>
-                        <th class="{sorter: 'text'}">Name</th>
-                        <th class="{sorter: 'text'}">IP</th>
-                        <th class="{sorter: 'text'}">Last Contact</th>
+                        <th class="sorter-false">Actions</th>
+                        <th class="sorter-text">Gateway</th>
+                        <th class="sorter-text">Name</th>
+                        <th class="sorter-text">IP</th>
+                        <th class="sorter-text">Last Contact</th>
                     </tr>
                     </thead>
                     <tbody id="DeviceListView">
