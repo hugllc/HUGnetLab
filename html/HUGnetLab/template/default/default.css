@@ -312,6 +312,16 @@ td.dataindex {
 #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 #add_tab { cursor: pointer; }
 
+a.info {
+    width: 16px !important;
+    height: 16px !important;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACa0lEQVR4XqWTW0gUURzGv13XSlEjsbxAVwO7SFYvFUIQRBJITylUWqSBKAWGUfjQQ5DgbcvKCkKKCCoysPKldWm1F7OQghRBCCwoSDBb9zKXPbv92+/QiElvfXCYw//7/WZgZg5E5K8FID89Z33d8tUl97I3lg5xcc8Zu8X8QtEFoBLZJWObjtyR6o5haXn6Sa+q9mHhjB0ZsvPevJya072urHlu7zmfPBz8LM/ffJHrj4bkZu8w93rGjgxZ5yZu6KCicH9ddUHRnqxTB9YiakTxyj+AgztWYd/mTAwGAnrGjgxZOviTfE/ezrGS+n5p7H4tV5+MStvjD9Jy7b44ueTt4YydZsjSoetOvpxDxWUNxUthIT87HT/DNiKGwsQ3Ex/HJzDy7j0mvytEDcVOM2Tp0PWkpmXtXpKZi0yPnQQMmHYCSPkFy7LQ2fMMHo8HlkpDyLQhCYWYiiNrmQuhlFzQBT/TrkaflF/ok3qvX2rbfHKyPSC1zTfESVXTFanpCLDTTPn5PqFDV79ElwuwYnGEDIWIqZLXGGaDBpzMzpkIRZ1OwVJxOjruhB2ZkriCYScQNuwkFNNXWyk44T5szneapUPXrczQSCw8jThSkpB+CsL6KQInpr657sholg5dtzEz9WL85a1xd2oGgpE4ZkMWZoImomYMTsJRmzN2miFLh67zJ1YWlV+cKz3bLzWtfjl6eUBONHWJk8MNrXKsxa87MmTpLPwTeyd9tx9MT74NTf0QbC3MQ8aKlag43YmKM17kFazBlg25YEeGLB0A/zhMOdvHth2/K7Vdo+Lt/8ql95yxW3yY/vs4/waqxv8/pq3TqAAAAABJRU5ErkJggg==");
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
 /* Flot Stuff */
 #flot-legend {
     background: white;

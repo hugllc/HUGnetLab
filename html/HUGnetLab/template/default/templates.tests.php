@@ -69,7 +69,14 @@
                             <button class="export">Export</button>
                         </td>
                         <td class="center"><%= DeviceID %></td>
-                        <td><%= DeviceName %></td>
+                        <td>
+                            <%= DeviceName %>
+                            <%
+                                if (params.InfoLink) {
+                                    print('<a class="info" href="'+params.InfoLink+'" target="_blank"></a>');
+                                }
+                            %>
+                        </td>
                         <td class="center"><%= PollInterval %></td>
                         <td><%= formatDate(params.Created) %></td>
                         <td><%= formatDate(params.LastModified) %></td>
@@ -92,7 +99,9 @@
         <script type="text/template" id="TestFieldEntryTemplate">
                         <td><button class="properties">Edit</button></td>
                         <td class="center"><%= id %></td>
-                        <td><%= name %></td>
+                        <td>
+                            <%= name %>
+                        </td>
                         <td class="center"><%= device %></td>
                         <td class="center"><%= field %></td>
         </script>

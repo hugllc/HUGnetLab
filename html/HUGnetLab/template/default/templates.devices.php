@@ -27,6 +27,11 @@
                         <td><input type="text" class="PollInterval" value="<%= PollInterval %>" /></td>
                     </tr>
                     <tr class="odd">
+                        <th class="right">Info Link URL</th>
+                        <td><input type="text" class="params_InfoLink" value="<% (params.InfoLink) ? print(params.InfoLink) : ""; %>" /></td>
+                    </tr>
+
+                    <tr class="odd">
                         <th class="right">Role</th>
                         <td>
                             <select name="Role" class="Role">
