@@ -56,7 +56,7 @@
                         <th class="sorter-text">Name</th>
                         <th class="sorter-text">Data Interval<br>(Seconds)</th>
                         <th class="sorter-text">Created</th>
-                        <th class="sorter-text">Last Modified</th>
+                        <th class="sorter-text">Last Poll</th>
                     </tr>
                     </thead>
                     <tbody id="TestList">
@@ -79,7 +79,11 @@
                         </td>
                         <td class="center"><%= PollInterval %></td>
                         <td><%= formatDate(params.Created) %></td>
-                        <td><%= formatDate(params.LastModified) %></td>
+                        <td>
+                            <span class="<% (LatePoll) ? print('error') : print(''); %>">
+                                <%= formatDate(params.LastPoll) %>
+                            </span>
+                        </td>
         </script>
         <script type="text/template" id="TestFieldListTemplate">
                 <table id="fieldTable" style="width: 100%;">
