@@ -298,30 +298,6 @@ td.dataindex {
 }
 
 
-/* JQuery Table Sorter Stuff */
-/*
-th.header {
-    background-image: url(images/sort_small.png);
-    cursor: pointer;
-    font-weight: bold;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-    padding-left: 2px;
-}
-
-th.headerSortUp {
-    background-image: url(images/sort_small_asc.png);
-    background-color: #205700;
-    color: white;
-}
-
-th.headerSortDown {
-    background-image: url(images/sort_small_desc.png);
-    background-color: #205700;
-    color: white;
-}
-*/
 /* JQuery Tabs stuff */
 .ui-tabs .ui-tabs-panel {
     min-height: 500px !important;
