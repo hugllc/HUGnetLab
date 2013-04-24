@@ -48,22 +48,22 @@
                     <button class="run">Run Tests</button>
                     <button class="stop">Stop Tests</button>
                 </div>
-                <table id="devTable" class="tablesorter">
+                <table id="devTable" class="tablesorter {sortlist: [[1,0]]}">
                     <thead>
                     <tr>
-                        <th class="{sorter: false}">Actions</th>
-                        <th class="{sorter: 'numeric'}">Test ID</th>
-                        <th class="{sorter: 'text'}">Name</th>
-                        <th class="{sorter: 'text'}">Data Interval<br>(Seconds)</th>
-                        <th class="{sorter: 'text'}">Created</th>
-                        <th class="{sorter: 'text'}">Last Modified</th>
+                        <th class="sorter-false">Actions</th>
+                        <th class="sorter-hex">Test ID</th>
+                        <th class="sorter-text">Name</th>
+                        <th class="sorter-text">Data Interval<br>(Seconds)</th>
+                        <th class="sorter-text">Created</th>
+                        <th class="sorter-text">Last Modified</th>
                     </tr>
                     </thead>
                     <tbody id="TestList">
                     </tbody>
                 </table>
         </script>
-        <script type="text/template" id="TestEntryTemplate">
+        <script type="text/template" id="TestListEntryTemplate">
                         <td>
                             <button class="view">View</button>
                             <button class="export">Export</button>
