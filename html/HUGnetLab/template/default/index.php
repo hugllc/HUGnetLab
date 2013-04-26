@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>{{title}}</title>
+        <title>
+            {{title}}{{#host}} on {{host}}{{/host}}
+        </title>
         <link rel="stylesheet" href="HUGnetLab/template/default/default.css" />
         <link rel="stylesheet" href="HUGnetLab/template/default/theme.default.css" />
         <link rel="stylesheet" href="HUGnetLab/template/default/jquery.jqplot.css" />
