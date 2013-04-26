@@ -30,6 +30,15 @@
                         <th class="right">Info Link URL</th>
                         <td><input type="text" class="params_InfoLink" value="<% (params.InfoLink) ? print(params.InfoLink) : ""; %>" /></td>
                     </tr>
+                    <tr class="even">
+                        <th class="right">Active</th>
+                        <td>
+                            <select name="Active" class="Active">
+                               <option value="1" <% (Active == 1) && print('selected="selected"'); %>>Yes</option>
+                               <option value="0" <% (Active == 0) && print('selected="selected"'); %>>No</option>
+                            </select>
+                        </td>
+                    </tr>
 
                     <tr class="odd">
                         <th class="right">Role</th>
@@ -127,6 +136,7 @@
                         <th class="sorter-text">Name</th>
                         <th class="sorter-hex">ID</th>
                         <th class="sorter-numeric">Serial #</th>
+                        <th class="sorter-text">Active</th>
                         <th class="sorter-text">Hardware</th>
                         <th class="sorter-text">Firmware</th>
                         <th class="sorter-text">Type</th>
@@ -152,6 +162,7 @@
                     <td><%= DeviceName %></td>
                     <td class="center"><%= DeviceID %></td>
                     <td class="center"><%= id %></td>
+                    <td class="center"><% (Active == 1) ? print('Yes') : print('No'); %></td>
                     <td class="center"><%= HWPartNum %></td>
                     <td class="center"><%= FWPartNum %> <%= FWVersion %></td>
                     <td class="center"><%= type %></td>
