@@ -24,5 +24,9 @@
                         <td class="center"><%= GatewayKey %></td>
                         <td><%= name %></td>
                         <td><%= ip %></td>
-                        <td><%= formatDate(LastContact) %></td>
+                        <td>
+                            <span class="<% (LateCheckin) ? print('error') : print(''); %>">
+                                <%= formatDate(LastContact) %>
+                            </span>
+                        </td>
         </script>
