@@ -41,6 +41,10 @@
                         cookie: {
                             // store a session cookie
                             expires: 10
+                        },
+                        // This updates the tables when the tab is selected
+                        activate:function(e, ui) {
+                            $(ui.newPanel.selector + " .tablesorter").trigger("update");
                         }
                     });
                 </script>
