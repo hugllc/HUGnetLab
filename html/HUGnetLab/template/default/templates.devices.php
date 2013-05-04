@@ -342,10 +342,10 @@
         </script>
         <!--  These are our tempaltes -->
         <script type="text/template" id="DeviceOutputPropertiesTitleTemplate">
-            Device <%= input %>:<%= location %>
+            Device <%= output %>:<%= location %>
         </script>
         <script type="text/template" id="DeviceOutputPropertiesTemplate">
-                <form id="inputForm" method="POST" action="javascript:void(0);">
+                <form id="outputForm" method="POST" action="javascript:void(0);">
                 <div class="buttons floatright">
                     <button class="save">Save</button>
                 </div>
@@ -353,7 +353,7 @@
                     <tbody>
                     <tr><th>Output #</th><td><%= output %></td></tr>
                     <tr>
-                        <th>Input ID</th>
+                        <th>Output ID</th>
                         <td>
                             <select name="id" class="id">
                                 <% for (key in validIds) { %>
@@ -430,7 +430,7 @@
                 </form>
         </script>
         <script type="text/template" id="DeviceOutputListTemplate">
-                <table id="inputTable" style="width: 100%;">
+                <table id="outputTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th style="width: 10%;">Action</th>
@@ -455,10 +455,10 @@
 
                 <!--  These are our tempaltes -->
         <script type="text/template" id="DeviceProcessPropertiesTitleTemplate">
-            Device <%= input %>:<%= location %>
+            Device <%= process %>:<%= location %>
         </script>
         <script type="text/template" id="DeviceProcessPropertiesTemplate">
-                <form id="inputForm" method="POST" action="javascript:void(0);">
+                <form id="processForm" method="POST" action="javascript:void(0);">
                 <div class="buttons floatright">
                     <button class="save">Save</button>
                 </div>
@@ -466,7 +466,7 @@
                     <tbody>
                     <tr><th>Process #</th><td><%= process %></td></tr>
                     <tr>
-                        <th>Input ID</th>
+                        <th>Process ID</th>
                         <td>
                             <select name="id" class="id">
                                 <% for (key in validIds) { %>
@@ -543,7 +543,7 @@
                 </form>
         </script>
         <script type="text/template" id="DeviceProcessListTemplate">
-                <table id="inputTable" style="width: 100%;">
+                <table id="processTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th style="width: 10%;">Action</th>
