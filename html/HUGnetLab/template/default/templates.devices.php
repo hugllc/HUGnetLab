@@ -292,10 +292,11 @@
                         }
                         var type = extraValues[key];
                         etext  = '<tr>';
-                        etext += '<th>'+extraText[key]+'</th><td>';
+                        etext += '<th'+showInfo(extraDesc, key)+'>'+extraText[key]+'</th><td>';
                         if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
                             etext += '<input type="text" name="'+efield+'" '
-                                + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
+                                + 'value="' + evalue + '" size="'+(type+2)
+                                +'" maxlength="'+type+'"/>';
                         } else if (typeof type === 'object') {
                             etext += '<select name="'+efield+'" >';
                             for (q in type)
@@ -388,7 +389,7 @@
                             </select>
                         </td>
                     </tr>
-                    <!-- Input Extra Parameters -->
+                    <!-- Output Extra Parameters -->
                     <%
                     for (key in extraDefault) {
                         var etext;
@@ -403,7 +404,7 @@
                         }
                         var type = extraValues[key];
                         etext  = '<tr>';
-                        etext += '<th>'+extraText[key]+'</th><td>';
+                        etext += '<th'+showInfo(extraDesc, key)+'>'+extraText[key]+'</th><td>';
                         if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
                             etext += '<input type="text" name="'+efield+'" '
                                 + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
@@ -501,7 +502,7 @@
                             </select>
                         </td>
                     </tr>
-                    <!-- Input Extra Parameters -->
+                    <!-- Process Extra Parameters -->
                     <%
                     for (key in extraDefault) {
                         var etext;
@@ -516,7 +517,7 @@
                         }
                         var type = extraValues[key];
                         etext  = '<tr>';
-                        etext += '<th>'+extraText[key]+'</th><td>';
+                        etext += '<th'+showInfo(extraDesc, key)+'>'+extraText[key]+'</th><td>';
                         if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
                             etext += '<input type="text" name="'+efield+'" '
                                 + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';

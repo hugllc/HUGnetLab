@@ -49,6 +49,10 @@
                             $(ui.newPanel.selector + " .tablesorter").trigger("update");
                         }
                     });
+                    /* Set up the popups */
+                    $(document).ready(function(){
+                        $(document).tooltip();
+                    });
                 </script>
                 {{/view}}
             </div>
