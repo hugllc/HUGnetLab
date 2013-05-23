@@ -54,6 +54,20 @@ url = ${FIRMWARE}
 ; URL of the master server
 ;url = put master url here
 
+; This section is for the watchdog, if it is run
+[watchdog]
+; email address to send errors to:
+;email = me@mycompany.com
+; The wait time between emails (in seconds)
+email_wait = 1800
+; The max age a polled device can get to before it is an error (in seconds)
+max_poll_age = 600
+
+; This section is for the updater that pushes stuff up to the master server
+[updater]
+; This states whether or not to push raw history
+push_raw_history = 0
+
 ; This section is for the network connection for everything but the router.
 ; There should be only one network section here.
 [network]
