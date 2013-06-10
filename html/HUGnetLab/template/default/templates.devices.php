@@ -151,12 +151,12 @@
                     <td>
                         <select class="action">
                             <option value="">Action</option>
-                            <option value="refresh">Refresh</option>
                             <option value="properties">Edit</option>
+                            <option value="refresh">Read the Config</option>
+                            <option value="loadconfig">Write the Config</option>
                             <% if ((typeof update !== 'undefined') || (type === "bootloader")) { %>
                                 <option value="loadfirmware">Update Firmware</option>
                             <% } %>
-                            <option value="loadconfig">Update Config</option>
                         </select>
                     </td>
                     <td><%= DeviceName %></td>
