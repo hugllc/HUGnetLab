@@ -345,6 +345,11 @@ ul#flot-choice li {
     width: 800px;
     height: 300px;
 }
+
+.axisLabels, .xaxisLabel, .y1axisLabel, .y2axisLabel, .y3axisLabel, .y4axisLabel, .y5axisLabel, .y6axisLabel {
+    color: black !important;
+}
+
 /* Time Picker stuff */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }
