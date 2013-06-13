@@ -6,6 +6,9 @@
                         <th class="sorter-false">Actions</th>
                         <th class="sorter-hex">ID</th>
                         <th class="sorter-text">Name</th>
+                        <th class="sorter-text">Job</th>
+                        <th class="sorter-text">Location</th>
+                        <th class="sorter-text">Gateway</th>
                         <th class="sorter-text">Active</th>
                         <th class="sorter-numeric">Data Int<br />(Sec)</th>
                         <th class="sorter-usLongDate">Last Contact</th>
@@ -23,6 +26,9 @@
                         </td>
                         <td class="center"><%= DeviceID %></td>
                         <td><%= DeviceName %></td>
+                        <td><%= DeviceJob %></td>
+                        <td><%= DeviceLocation %></td>
+                        <td class="center"><%= GatewayKey %></td>
                         <td class="center"><% (Active == 1) ? print('Yes') : print('No'); %></td>
                         <td class="center"><%= PollInterval %></td>
                         <td>
