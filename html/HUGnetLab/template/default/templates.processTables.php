@@ -50,13 +50,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="right">Name</th>
+                        <th title="The name you want to call this table" class="right">Name</th>
                         <td>
                             <input type="text" name="name" value="<%= name %>"/>
                         </td>
                     </tr>
                     <tr>
-                        <th class="right">Arch</th>
+                        <th title="The architecture this table is for" class="right">Arch</th>
                         <td>
                             <select name="arch" class="type">
                                 <% for (key in {"ADuC":"ADuC"}) { %>
@@ -68,7 +68,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="right">Description</th>
+                        <th title="A description of what is in the table" class="right">Description</th>
                         <td>
                             <textarea name="desc" class="desc" class="left"><%= desc %></textarea>
                         </td>
@@ -82,7 +82,7 @@
                         var valid  = specs[key]['valid'];
                         var size   = specs[key]['size']
                         etext  = '<tr>';
-                        etext += '<th class="right">'+specs[key]['desc']+'</th><td>';
+                        etext += '<th'+showInfo(specs[key]['longDesc'], key)+' class="right">'+specs[key]['desc']+'</th><td>';
                         if (!isNaN(size)) {
                             etext += '<input type="text" name="'+efield+'" '
                                 + 'value="' + evalue + '" size="'+(size+2)+'" maxlength="'+size+'"/>';
