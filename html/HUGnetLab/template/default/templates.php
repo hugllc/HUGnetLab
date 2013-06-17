@@ -8,4 +8,5 @@
     require dirname(__FILE__)."/templates.data.php";
     require dirname(__FILE__)."/templates.export.php";
     require dirname(__FILE__)."/templates.tests.php";
+    require dirname(__FILE__)."/templates.runtime.php";
 ?>

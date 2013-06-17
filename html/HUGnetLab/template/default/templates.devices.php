@@ -129,6 +129,9 @@
         </script>
         <script type="text/template" id="DeviceListTemplate">
                 <form id="deviceListForm" method="POST" action="javascript:void(0);">
+                <div>
+                    <button class="newtest">New Test</button>
+                </div>
                 <table id="devTable" class="tablesorter {sortlist: [[2,0]]}">
                     <thead>
                     <tr>

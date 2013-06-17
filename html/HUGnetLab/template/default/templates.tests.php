@@ -37,17 +37,6 @@
                 </form>
         </script>
         <script type="text/template" id="TestListTemplate">
-                <h2 class="run stopped">
-                    Tests are STOPPED.
-                </h2>
-                <h2 class="stop running">
-                    Tests are RUNNING.
-                </h2>
-                <div>
-                    <button class="new">New Test</button>
-                    <button class="run">Run Tests</button>
-                    <button class="stop">Stop Tests</button>
-                </div>
                 <table id="devTable" class="tablesorter {sortlist: [[1,0]]}">
                     <thead>
                     <tr>
