@@ -1,23 +1,44 @@
 <!--  These are our tempaltes -->
         <script type="text/template" id="DeviceListViewTemplate">
-                <table id="devTable" class="tablesorter {sortlist: [[1,0]]}">
-                    <thead>
-                    <tr>
-                        <th class="sorter-false">Actions</th>
-                        <th class="sorter-hex">ID</th>
-                        <th class="sorter-text">Name</th>
-                        <th class="sorter-text">Job</th>
-                        <th class="sorter-text">Location</th>
-                        <th class="sorter-text">Gateway</th>
-                        <th class="sorter-text">Active</th>
-                        <th class="sorter-numeric">Data Int<br />(Sec)</th>
-                        <th class="sorter-usLongDate">Last Contact</th>
-                        <th class="sorter-usLongDate">Last Poll</th>
-                    </tr>
-                    </thead>
-                    <tbody id="DeviceListView">
-                    </tbody>
-                </table>
+            <form id="devListForm" method="POST" action="javascript:void(0);">
+            <div style="height: 2em;">
+                <div style="float: right; clear: both;">
+                    <select class="activeFilter">
+                        <option value="">Status</option>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <label for="fieldFilter" class="bold">Field:</label>
+                    <select class="fieldFilter">
+                        <option value="DeviceName">Name</option>
+                        <option value="DeviceJob">Job</option>
+                        <option value="DeviceLocation">Location</option>
+                        <option value="DeviceID">ID</option>
+                    </select>
+                    <label for="searchFilter" class="bold">Field:</label>
+                    <input type="text" class="searchFilter" />
+                    <button class="goFilter">Go</button>
+                </div>
+            </div>
+            <table id="devTable" class="tablesorter {sortlist: [[1,0]]}">
+                <thead>
+                <tr>
+                    <th class="sorter-false">Actions</th>
+                    <th class="sorter-hex">ID</th>
+                    <th class="sorter-text">Name</th>
+                    <th class="sorter-text">Job</th>
+                    <th class="sorter-text">Location</th>
+                    <th class="sorter-text">Gateway</th>
+                    <th class="sorter-text">Active</th>
+                    <th class="sorter-numeric">Data Int<br />(Sec)</th>
+                    <th class="sorter-usLongDate">Last Contact</th>
+                    <th class="sorter-usLongDate">Last Poll</th>
+                </tr>
+                </thead>
+                <tbody id="DeviceListView">
+                </tbody>
+            </table>
+            </form>
         </script>
         <script type="text/template" id="DeviceListViewEntryTemplate">
                         <td>
