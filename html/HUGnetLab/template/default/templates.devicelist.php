@@ -31,7 +31,7 @@
                     <th class="sorter-text">Gateway</th>
                     <th class="sorter-text">Active</th>
                     <th class="sorter-numeric">Data Int<br />(Sec)</th>
-                    <th class="sorter-usLongDate">Last Contact</th>
+                    <th class="sorter-usLongDate">Last History</th>
                     <th class="sorter-usLongDate">Last Poll</th>
                 </tr>
                 </thead>
@@ -53,7 +53,7 @@
                         <td class="center"><% (Active == 1) ? print('Yes') : print('No'); %></td>
                         <td class="center"><%= PollInterval %></td>
                         <td>
-                            <%= formatDate(params.LastContact) %>
+                            <%= formatDate(params.LastHistoryPush) %>
                         </td>
                         <td>
                             <span class="<% (LatePoll) ? print('error') : print(''); %>">
