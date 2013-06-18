@@ -53,7 +53,7 @@
                         <td class="center"><% (Active == 1) ? print('Yes') : print('No'); %></td>
                         <td class="center"><%= PollInterval %></td>
                         <td>
-                            <%= formatDate(params.LastHistoryPush) %>
+                            <%= formatDate(localParams.LastHistory) %>
                         </td>
                         <td>
                             <span class="<% (LatePoll) ? print('error') : print(''); %>">
