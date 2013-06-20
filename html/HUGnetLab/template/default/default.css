@@ -325,7 +325,7 @@ a.info {
 /* Flot Stuff */
 #flot-legend {
     background: white;
-    width: 800px;
+    min-width: 800px;
 }
 
 ul#flot-choice {
@@ -333,7 +333,7 @@ ul#flot-choice {
     list-style: none;
     display: block;
     padding: 0.5em;
-    width: 800px;
+    min-width: 800px;
 }
 ul#flot-choice li {
     display: inline-block;
@@ -342,7 +342,7 @@ ul#flot-choice li {
     padding: 2px;
 }
 #flot-graph {
-    width: 800px;
+    min-width: 800px;
     height: 300px;
 }
 
