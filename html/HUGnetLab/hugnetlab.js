@@ -200,4 +200,25 @@ $(function ()
             });
         }
     });
+    /**
+     * This function creates a clock showing UTC time.  It puts it in an element
+     * with the id 'UTCClock'.
+     * 
+     * @return none
+     */
+    HUGnetLab.UTCClock = function()
+    {
+        function pad(n){return n<10 ? '0'+n : n};
+        var d = new Date();
+        $("#UTCClock").html(
+            d.getUTCFullYear()+'-'
+            +pad(d.getUTCMonth()+1)+'-'
+            + pad(d.getUTCDate())+' '
+            + pad(d.getUTCHours())+':'
+            + pad(d.getUTCMinutes())+':'
+            + pad(d.getUTCSeconds())
+        );
+        var t = setTimeout(HUGnetLab.UTCClock, 500);
+    }
+
 });

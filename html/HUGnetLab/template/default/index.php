@@ -18,7 +18,8 @@
     </head>
     <body>
         <header>
-        <div id="header"><h1 class="header">{{title}}</h1></div>
+            <div id="header"><h1 class="header">{{title}}</h1></div>
+            <div style="float: right; width: 20em;"><span class="bold">UTC Time: </span><span id="UTCClock"></span>
         </header>
         <section>
         <div class="body">
@@ -52,6 +53,7 @@
                     /* Set up the popups */
                     $(document).ready(function(){
                         $(document).tooltip();
+                        HUGnetLab.UTCClock();
                     });
                 </script>
                 {{/view}}
