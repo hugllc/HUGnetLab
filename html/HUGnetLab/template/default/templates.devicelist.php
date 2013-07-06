@@ -46,7 +46,14 @@
                             <button class="export">Export</button>
                         </td>
                         <td class="center"><%= DeviceID %></td>
-                        <td><%= DeviceName %></td>
+                        <td>
+                            <%= DeviceName %>
+                            <%
+                                if (params.InfoLink) {
+                                    print('<a class="info" href="'+params.InfoLink+'" target="_blank"></a>');
+                                }
+                            %>
+                        </td>
                         <td><%= DeviceJob %></td>
                         <td><%= DeviceLocation %></td>
                         <td class="center"><%= GatewayKey %></td>

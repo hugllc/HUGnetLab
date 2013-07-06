@@ -11,7 +11,26 @@
 
 <script type="text/template" id="DataViewTemplate">
         <form id="pollForm" method="POST" action="javascript:void(0);">
-        <h2>View Test <%= DeviceName %></h2>
+        <%
+            if (params.ImageURL) {
+                var ImageURL = '<img src="'+params.ImageURL+'" class="experiment" alt="Experiment Log" title="Experiment Log"/>';
+            } else {
+                var ImageURL = '';
+            }
+            if (params.LogURL) {
+                print('<div><a href="'+params.LogURL+'" target="_blank">'+((ImageURL == "") ? 'Experiment Log' : ImageURL)+'</a></div>');
+            } else {
+                print(ImageURL);
+            }
+        %>
+        <h2>
+            View Test <%= DeviceName %>
+            <%
+                if (params.InfoLink) {
+                    print('<a class="info" href="'+params.InfoLink+'" target="_blank"></a>');
+                }
+            %>
+        </h2>
         <div>
             <div>
                 <div><button class="exportCSV">Export as CSV</button></div>
@@ -33,7 +52,11 @@
                 </div>
                 <div>
                     <label for="since" class="bold">From </label><input id="since" type="text" class="since" value="<%= sinceDate %>" />
+                </div>
+                <div>
                     <label for="until" class="bold">To </label><input id="until" type="text" class="until" value="<%= untilDate %>" />
+                </div>
+                <div>
                     <select id="type">
                         <% for (key in averageTypes) { %>
                             <option value="<%- key %>" <% (averageTypes[key] == type) && print('selected="selected"'); %>>
@@ -41,6 +64,8 @@
                             </option>
                         <% } %>
                     </select>
+                </div>
+                <div>
                     <input type="submit" name="submit" value="Go" />
                 </div>
             </div>

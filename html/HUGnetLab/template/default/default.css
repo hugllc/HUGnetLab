@@ -47,6 +47,9 @@ body {
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
+img.experiment {
+    float: right;
+}
 header {
     color: #FFFFFF;
 }

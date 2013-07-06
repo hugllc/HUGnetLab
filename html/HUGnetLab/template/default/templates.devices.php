@@ -31,6 +31,14 @@
                         <td><input type="text" class="params_InfoLink" value="<% (params.InfoLink) ? print(params.InfoLink) : ""; %>" /></td>
                     </tr>
                     <tr class="even">
+                        <th class="right">Image URL</th>
+                        <td><input type="text" class="params_ImageURL" value="<% (params.ImageURL) ? print(params.ImageURL) : ""; %>" /></td>
+                    </tr>
+                    <tr class="odd">
+                        <th class="right">Log URL</th>
+                        <td><input type="text" class="params_LogURL" value="<% (params.LogURL) ? print(params.LogURL) : ""; %>" /></td>
+                    </tr>
+                    <tr class="even">
                         <th class="right">Active</th>
                         <td>
                             <select name="Active" class="Active">
