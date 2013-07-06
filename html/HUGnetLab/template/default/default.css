@@ -49,6 +49,8 @@ body {
 }
 img.experiment {
     float: right;
+    max-height: 480px;
+    max-width: 640px;
 }
 header {
     color: #FFFFFF;
