@@ -16,7 +16,7 @@ create_ini()
     MYSQLPW=${RET}
 
     FILE=/etc/hugnet/config.ini
-    ROUTERSOCK=/tmp/HUGnetRouter
+    ROUTERSOCK=/var/run/hugnet/router.sock
     MYSQLSOCK=/var/run/mysqld/mysqld.sock
     FIRMWARE=http://downloads.hugllc.com/firmware
     GATEWAY=6
