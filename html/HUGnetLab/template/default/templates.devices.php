@@ -314,9 +314,13 @@
                         etext  = '<tr>';
                         etext += '<th'+showInfo(extraDesc, key)+'>'+extraText[key]+'</th><td>';
                         if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
-                            etext += '<input type="text" name="'+efield+'" '
-                                + 'value="' + evalue + '" size="'+(type+2)
-                                +'" maxlength="'+type+'"/>';
+                            if (type > 0) {
+                                etext += '<input type="text" name="'+efield+'" '
+                                    + 'value="' + evalue + '" size="'+(type+2)
+                                    +'" maxlength="'+type+'"/>';
+                            } else {
+                                etext += evalue;
+                            }
                         } else if (typeof type === 'object') {
                             etext += '<select name="'+efield+'" >';
                             for (q in type)
