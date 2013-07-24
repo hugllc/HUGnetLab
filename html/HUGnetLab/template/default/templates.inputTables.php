@@ -74,36 +74,7 @@
                         </td>
                     </tr>
                     <!-- Sensor Extra Parameters -->
-                    <%
-                    for (key in params) {
-                        var etext;
-                        var efield = 'params['+key+']';
-                        var evalue = params[key]['value'];
-                        var valid  = params[key]['valid'];
-                        var size   = params[key]['size']
-                        etext  = '<tr>';
-                        etext += '<th'+showInfo(params[key]['longDesc'], key)+' class="right">'+params[key]['desc']+'</th><td>';
-                        if (!isNaN(size)) {
-                            etext += '<input type="text" name="'+efield+'" '
-                                + 'value="' + evalue + '" size="'+(size+2)+'" maxlength="'+size+'"/>';
-                        } else if (typeof valid === 'object') {
-                            etext += '<select name="'+efield+'" >';
-                            for (q in valid)
-                            {
-                                etext += '<option value="'+q.replace('&', '&amp;')+'"';
-                                if (q == evalue) {
-                                    etext += ' selected="selected" ';
-                                }
-                                etext += '>'+valid[q]+'</option>';
-                            }
-                            etext += '</select>';
-                        } else {
-                            etext += evalue;
-                        }
-                        etext += '</td></tr>';
-                        print(etext);
-                    }
-                    %>
+                    <% print(tDefault.xTableTable(params, "params")) %>
                     </tr>
                 </table>
                 </form>

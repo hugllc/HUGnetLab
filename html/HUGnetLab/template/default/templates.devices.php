@@ -260,9 +260,9 @@
                 </div>
                 <table style="width: 100%;">
                     <tbody>
-                    <tr><th>Input #</th><td><%= input %></td></tr>
+                    <tr><th class="right">Input #</th><td><%= input %></td></tr>
                     <tr>
-                        <th>Input ID</th>
+                        <th class="right">Input ID</th>
                         <td>
                             <select name="id" class="id">
                                 <% for (key in validIds) { %>
@@ -274,19 +274,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Label</th>
+                        <th class="right">Label</th>
                         <td>
                             <input type="text" name="location" value="<%= location %>"/>
                         </td>
                     </tr>
                     <tr>
-                        <th>Driver</th>
+                        <th class="right">Driver</th>
                         <td>
                             <%= longName %>
                         </td>
                     </tr>
                     <tr>
-                        <th>Type</th>
+                        <th class="right">Type</th>
                         <td>
                             <select name="type" class="type">
                                 <% for (key in otherTypes) { %>
@@ -298,44 +298,18 @@
                         </td>
                     </tr>
                     <!-- Input Extra Parameters -->
-                    <%
-                    for (key in extraDefault) {
-                        var etext;
-                        var efield = 'extra['+key+']';
-                        var evalue;
-                        if ((extra == undefined)
-                            || (extra[key] == undefined)
-                        ) {
-                            evalue = extraDefault[key];
-                        } else {
-                            evalue = extra[key];
-                        }
-                        var type = extraValues[key];
-                        etext  = '<tr>';
-                        etext += '<th'+showInfo(extraDesc, key)+'>'+extraText[key]+'</th><td>';
-                        if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
-                            etext += '<input type="text" name="'+efield+'" '
-                                + 'value="' + evalue + '" size="'+(type+2)
-                                +'" maxlength="'+type+'"/>';
-                        } else if (typeof type === 'object') {
-                            etext += '<select name="'+efield+'" >';
-                            for (q in type)
-                            {
-                                etext += '<option value="'+q.replace('&', '&amp;')+'"';
-                                if (q == evalue) {
-                                    etext += ' selected="selected" ';
-                                }
-                                etext += '>'+type[q]+'</option>';
-                            }
-                            etext += '</select>';
-                        } else {
-                            etext += evalue;
-                        }
-                        etext += '</td></tr>';
-                        print(etext);
-                    }
-                    %>
+                    <tr><th colspan="2">Extra Parameters</th></tr>
+                    <% print(tDefault.ExtraTable(extra, extraDefault, extraDesc, extraValues, extraText, "extra")) %>
+                    <tr><th colspan="2">Input Table Entry</th></tr>
+                    <tr>
+                        <th class="right">Last Table Copied</th>
+                        <td><%= lastTable %></td>
                     </tr>
+                    <tr>
+                        <th class="right">Copy Table From</th>
+                        <td><% print(tDefault.iopOtherTables(otherTables, "setTable", parseInt(tableEntry.fixed))) %></td>
+                    </tr>
+                    <% print(tDefault.iopTableTable(fullEntry, "tableEntry", parseInt(tableEntry.fixed))) %>
                 </table>
                 </form>
         </script>
@@ -372,9 +346,9 @@
                 </div>
                 <table style="width: 100%;">
                     <tbody>
-                    <tr><th>Output #</th><td><%= output %></td></tr>
+                    <tr><th class="right">Output #</th><td><%= output %></td></tr>
                     <tr>
-                        <th>Output ID</th>
+                        <th class="right">Output ID</th>
                         <td>
                             <select name="id" class="id">
                                 <% for (key in validIds) { %>
@@ -386,19 +360,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Label</th>
+                        <th class="right">Label</th>
                         <td>
                             <input type="text" name="location" value="<%= location %>"/>
                         </td>
                     </tr>
                     <tr>
-                        <th>Driver</th>
+                        <th class="right">Driver</th>
                         <td>
                             <%= longName %>
                         </td>
                     </tr>
                     <tr>
-                        <th>Type</th>
+                        <th class="right">Type</th>
                         <td>
                             <select name="type" class="type">
                                 <% for (key in otherTypes) { %>
@@ -410,43 +384,14 @@
                         </td>
                     </tr>
                     <!-- Output Extra Parameters -->
-                    <%
-                    for (key in extraDefault) {
-                        var etext;
-                        var efield = 'extra['+key+']';
-                        var evalue;
-                        if ((extra == undefined)
-                            || (extra[key] == undefined)
-                        ) {
-                            evalue = extraDefault[key];
-                        } else {
-                            evalue = extra[key];
-                        }
-                        var type = extraValues[key];
-                        etext  = '<tr>';
-                        etext += '<th'+showInfo(extraDesc, key)+'>'+extraText[key]+'</th><td>';
-                        if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
-                            etext += '<input type="text" name="'+efield+'" '
-                                + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
-                        } else if (typeof type === 'object') {
-                            etext += '<select name="'+efield+'" >';
-                            for (q in type)
-                            {
-                                etext += '<option value="'+q.replace('&', '&amp;')+'"';
-                                if (q == evalue) {
-                                    etext += ' selected="selected" ';
-                                }
-                                etext += '>'+type[q]+'</option>';
-                            }
-                            etext += '</select>';
-                        } else {
-                            etext += evalue;
-                        }
-                        etext += '</td></tr>';
-                        print(etext);
-                    }
-                    %>
+                    <tr><th colspan="2">Extra Parameters</th></tr>
+                    <% print(tDefault.ExtraTable(extra, extraDefault, extraDesc, extraValues, extraText, "extra")) %>
+                    <tr><th colspan="2">Output Table Entry</th></tr>
+                    <tr>
+                        <th class="right">Copy Table From</th>
+                        <td><% print(tDefault.iopOtherTables(otherTables, "setTable", parseInt(tableEntry.fixed))) %></td>
                     </tr>
+                    <% print(tDefault.iopTableTable(fullEntry, "tableEntry", parseInt(tableEntry.fixed))) %>
                 </table>
                 </form>
         </script>
@@ -485,9 +430,9 @@
                 </div>
                 <table style="width: 100%;">
                     <tbody>
-                    <tr><th>Process #</th><td><%= process %></td></tr>
+                    <tr><th class="right">Process #</th><td><%= process %></td></tr>
                     <tr>
-                        <th>Process ID</th>
+                        <t class="right"h>Process ID</th>
                         <td>
                             <select name="id" class="id">
                                 <% for (key in validIds) { %>
@@ -499,19 +444,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Label</th>
+                        <th class="right">Label</th>
                         <td>
                             <input type="text" name="location" value="<%= location %>"/>
                         </td>
                     </tr>
                     <tr>
-                        <th>Driver</th>
+                        <th class="right">Driver</th>
                         <td>
                             <%= longName %>
                         </td>
                     </tr>
                     <tr>
-                        <th>Type</th>
+                        <th class="right">Type</th>
                         <td>
                             <select name="type" class="type">
                                 <% for (key in otherTypes) { %>
@@ -523,43 +468,14 @@
                         </td>
                     </tr>
                     <!-- Process Extra Parameters -->
-                    <%
-                    for (key in extraDefault) {
-                        var etext;
-                        var efield = 'extra['+key+']';
-                        var evalue;
-                        if ((extra == undefined)
-                            || (extra[key] == undefined)
-                        ) {
-                            evalue = extraDefault[key];
-                        } else {
-                            evalue = extra[key];
-                        }
-                        var type = extraValues[key];
-                        etext  = '<tr>';
-                        etext += '<th'+showInfo(extraDesc, key)+'>'+extraText[key]+'</th><td>';
-                        if ((parseFloat(type) == parseInt(type)) && !isNaN(type)) {
-                            etext += '<input type="text" name="'+efield+'" '
-                                + 'value="' + evalue + '" size="'+(type+2)+'" maxlength="'+type+'"/>';
-                        } else if (typeof type === 'object') {
-                            etext += '<select name="'+efield+'" >';
-                            for (q in type)
-                            {
-                                etext += '<option value="'+q.replace('&', '&amp;')+'"';
-                                if (q == evalue) {
-                                    etext += ' selected="selected" ';
-                                }
-                                etext += '>'+type[q]+'</option>';
-                            }
-                            etext += '</select>';
-                        } else {
-                            etext += evalue;
-                        }
-                        etext += '</td></tr>';
-                        print(etext);
-                    }
-                    %>
+                    <tr><th colspan="2">Extra Parameters</th></tr>
+                    <% print(tDefault.ExtraTable(extra, extraDefault, extraDesc, extraValues, extraText, "extra")) %>
+                    <tr><th colspan="2">Process Table Entry</th></tr>
+                    <tr>
+                        <th class="right">Copy Table From</th>
+                        <td><% print(tDefault.iopOtherTables(otherTables, "setTable", parseInt(tableEntry.fixed))) %></td>
                     </tr>
+                    <% print(tDefault.iopTableTable(fullEntry, "tableEntry", parseInt(tableEntry.fixed))) %>
                 </table>
                 </form>
         </script>

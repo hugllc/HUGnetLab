@@ -42,3 +42,106 @@ $(document).ready(function(){
         }
     });
 });
+var tDefault = {};
+$(function ()
+{
+    "use strict";
+
+    tDefault.iopOtherTables = function (valid, name, fixed)
+    {
+        fixed = (fixed != undefined) ? fixed : false;
+        var etext = "";
+        if (!fixed) {
+            etext += '<select id="'+name+'" name="'+name+'" >';
+            etext += '<option value="" selected="selected">Select Table</option>';
+            for (var q in valid)
+            {
+                etext += '<option value="'+q.replace('&', '&amp;')+'"';
+                etext += '>'+valid[q]+'</option>';
+            }
+            etext += '</select>';
+        }
+        return etext;
+    };
+
+    tDefault.iopTableTable = function (params, name, fixed)
+    {
+        fixed = (fixed != undefined) ? fixed : false;
+        var etext = "";
+        for (key in params) {
+            var efield = name+'['+key+']';
+            var evalue = params[key]['value'];
+            var valid  = params[key]['valid'];
+            var size   = params[key]['size']
+            if (!isNaN(size) && (size < 0)) {
+                continue;
+            }
+            etext += '<tr>';
+            etext += '<th'+HUGnet.viewHelpers.showInfo(params[key]['longDesc'], key)+' class="right">'+params[key]['desc']+'</th><td>';
+            if (!isNaN(size) && (size > 0) && !fixed) {
+                etext += '<input type="text" id="'+name+'" name="'+efield+'" '
+                    + 'value="' + evalue + '" size="'+(size+2)+'" maxlength="'+size+'"/>';
+            } else if ((typeof valid === 'object')){
+                if (fixed) {
+                    etext += valid[evalue];
+                } else {
+                    etext += '<select id="'+name+'" name="'+efield+'" >';
+                    for (var q in valid)
+                    {
+                        etext += '<option value="'+q.replace('&', '&amp;')+'"';
+                        if (q == evalue) {
+                            etext += ' selected="selected" ';
+                        }
+                        etext += '>'+valid[q]+'</option>';
+                    }
+                    etext += '</select>';
+                }
+            } else {
+                etext += evalue;
+            }
+            etext += '</td></tr>';
+        }
+        return etext;
+    };
+    tDefault.ExtraTable = function (extra, eDefault, desc, values, text, name)
+    {
+        var etext = "";
+        for (key in eDefault) {
+            var efield = name+'['+key+']';
+            var evalue;
+            if ((extra == undefined)
+                || (extra[key] == undefined)
+            ) {
+                evalue = eDefault[key];
+            } else {
+                evalue = extra[key];
+            }
+            var type = values[key];
+            if (!isNaN(type) && (type < 0)) {
+                continue;
+            }
+            etext += '<tr>';
+            etext += '<th'+HUGnet.viewHelpers.showInfo(desc, key)+' class="right">'+text[key]+'</th><td>';
+            if ((parseFloat(type) == parseInt(type)) && !isNaN(type) && (type > 0)) {
+                etext += '<input type="text" id="'+name+'" name="'+efield+'" '
+                    + 'value="' + evalue + '" size="'+(type+2)
+                    +'" maxlength="'+type+'"/>';
+            } else if (typeof type === 'object') {
+                etext += '<select id="'+name+'" name="'+efield+'" >';
+                for (var q in type)
+                {
+                    etext += '<option value="'+q.replace('&', '&amp;')+'"';
+                    if (q == evalue) {
+                        etext += ' selected="selected" ';
+                    }
+                    etext += '>'+type[q]+'</option>';
+                }
+                etext += '</select>';
+            } else {
+                etext += evalue;
+            }
+            etext += '</td></tr>';
+        }
+        return etext;
+    };
+});
