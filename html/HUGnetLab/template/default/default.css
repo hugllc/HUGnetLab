@@ -336,6 +336,7 @@ a.info {
 #flot-legend {
     background: white;
     min-width: 800px;
+    clear: both;
 }
 
 ul#flot-choice {
@@ -354,6 +355,7 @@ ul#flot-choice li {
 #flot-graph {
     min-width: 800px;
     height: 300px;
+    clear: both;
 }
 
 .axisLabels, .xaxisLabel, .y1axisLabel, .y2axisLabel, .y3axisLabel, .y4axisLabel, .y5axisLabel, .y6axisLabel {
