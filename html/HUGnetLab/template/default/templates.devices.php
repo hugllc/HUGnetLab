@@ -47,7 +47,6 @@
                             </select>
                         </td>
                     </tr>
-
                     <tr class="odd">
                         <th class="right">Role</th>
                         <td>
@@ -66,6 +65,15 @@
                             <select class="params_PushHistory">
                                <option value="1" <% (params.PushHistory == 1) && print('selected="selected"'); %>>Yes</option>
                                <option value="0" <% (params.PushHistory == 0) && print('selected="selected"'); %>>No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <th class="right">Publish</th>
+                        <td>
+                            <select name="Publish" class="Publish">
+                               <option value="1" <% (Publish == 1) && print('selected="selected"'); %>>Yes</option>
+                               <option value="0" <% (Publish == 0) && print('selected="selected"'); %>>No</option>
                             </select>
                         </td>
                     </tr>
