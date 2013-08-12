@@ -23,14 +23,22 @@
                 print(ImageURL);
             }
         %>
-        <h2>
-            View Test <%= DeviceName %>
+        <div>
             <%
                 if (params.InfoLink) {
                     print('<a class="info" href="'+params.InfoLink+'" target="_blank"></a>');
                 }
             %>
-        </h2>
+            <h2>
+                View Test <%= DeviceName %>
+            </h2>
+            <h3>
+                <% (DeviceLocation.length > 0) ? print(DeviceLocation) : print(""); %>
+            </h3>
+            <h3>
+                <% (DeviceJob.length > 0) ? print(DeviceJob) : print(""); %>
+            </h3>
+        </div>
         <div>
             <div>
                 <div><button class="exportCSV">Export as CSV</button></div>
