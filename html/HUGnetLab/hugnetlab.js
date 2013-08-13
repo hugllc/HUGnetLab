@@ -201,6 +201,37 @@ $(function ()
         }
     });
     /**
+    * This is the model that stores the devices.
+    *
+    * @category   JavaScript
+    * @package    HUGnetLib
+    * @subpackage Tests
+    * @author     Scott Price <prices@hugllc.com>
+    * @copyright  2012 Hunt Utilities Group, LLC
+    * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
+    * @version    Release: 0.9.7
+    * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
+    */
+    HUGnetLab.serverconfig = Backbone.View.extend({
+        data: {},
+        tabs: undefined,
+        initialize: function ()
+        {
+            if (!HUGnetLab.Devices) {
+                HUGnetLab.Devices = new HUGnet.Devices();
+                HUGnetLab.Devices.fetch();
+            }
+            this.render();
+        },
+        render: function ()
+        {
+            this.config = new HUGnet.ServerConfig({
+                el: "#tabs-serverconfig",
+                devices: HUGnetLab.Devices,
+            });
+        }
+    });
+    /**
      * This function creates a clock showing UTC time.  It puts it in an element
      * with the id 'UTCClock'.
      * 

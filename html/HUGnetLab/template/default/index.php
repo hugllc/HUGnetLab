@@ -32,12 +32,14 @@
                     {{#devices}}<li><a href="#tabs-devices">Devices</a></li>{{/devices}}
                     {{#tests}}<li><a href="#tabs-tests">Tests</a></li>{{/tests}}
                     {{#config}}<li><a href="#tabs-config">Configuration</a></li>{{/config}}
+                    {{#serverconfig}}<li><a href="#tabs-serverconfig">Configuration</a></li>{{/serverconfig}}
                 </ul>
                 </nav>
                 {{#datacollectors}}<div id="tabs-datacollectors">{{{datacollectors}}}</div>{{/datacollectors}}
                 {{#devices}}<div id="tabs-devices">{{{devices}}}</div>{{/devices}}
                 {{#tests}}<div id="tabs-tests">{{{tests}}}</div>{{/tests}}
                 {{#config}}<div id="tabs-config">{{{config}}}</div>{{/config}}
+                {{#serverconfig}}<div id="tabs-serverconfig">{{{serverconfig}}}</div>{{/serverconfig}}
                 <script type="text/javascript">
                     var tabs = $('#tabs').tabs({
                         tabTemplate: '<li><a href="#{href}">#{label}</a></li>',
