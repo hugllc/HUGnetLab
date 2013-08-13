@@ -345,6 +345,7 @@ ul#flot-choice {
     display: block;
     padding: 0.5em;
     min-width: 800px;
+    clear: both;
 }
 ul#flot-choice li {
     display: inline-block;
