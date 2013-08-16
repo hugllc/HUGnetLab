@@ -153,10 +153,18 @@
                 </form>
         </script>
         <script type="text/template" id="DeviceListTemplate">
-                <form id="deviceListForm" method="POST" action="javascript:void(0);">
                 <div>
-                    <button class="newtest">New Test</button>
+                    <button class="newtest" style="float:left;">New Test</button>
+                    <form style="float:left; margin-left: 3em;" id="importDevice" enctype="multipart/form-data" action="javascript:void(0);" method="POST">
+                        <!-- MAX_FILE_SIZE must precede the file input field -->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                        <!-- Name of input element determines name in $_FILES array -->
+                        <input type="button" class="importDevice" value="Import" />
+                        </span><input name="import" type="file" />
+                    </form>
                 </div>
+                <div style="clear:both;">
+                <form id="deviceListForm" method="POST" action="javascript:void(0);">
                 <table id="devTable" class="tablesorter {sortlist: [[2,0]]}">
                     <thead>
                     <tr>
@@ -174,6 +182,7 @@
                     </tbody>
                 </table>
                 </form>
+                </div>
         </script>
         <script type="text/template" id="DeviceEntryTemplate">
                     <td>
