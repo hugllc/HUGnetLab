@@ -99,6 +99,7 @@ $(function ()
                 el: "#tabs-tests",
                 id: "tabs-tests",
                 tests: HUGnetLab.Devices,
+                filter: {type: "test"}
             });
         }
     });
@@ -132,6 +133,7 @@ $(function ()
                 el: "#tabs-devices",
                 id: "tabs-devices",
                 devices: HUGnetLab.Devices,
+                filter: {}
             });
         }
     });
