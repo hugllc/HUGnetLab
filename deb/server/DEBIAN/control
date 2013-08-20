@@ -6,7 +6,7 @@ Homepage: http://dev.huglc.com/
 Version: %VERSION%
 Package: hugnetlab-server
 Architecture: all
-Breaks: hugnetlab, hugnetdatacollector
+Breaks: hugnetlab, hugnetlab-datacollector
 Pre-Depends: debconf
 Depends: apache2, openssh-server, conspy,
         mysql-server, phpmyadmin, debconf, hugnetlib-webapi,
