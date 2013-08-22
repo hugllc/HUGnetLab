@@ -33,5 +33,6 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var view = new HUGnetLab.view();
+        HUGnetLab.UTCClock();
     });
 </script>
