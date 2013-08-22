@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Scott Price <prices@hugllc.com>
 Homepage: http://dev.huglc.com/
 Version: %VERSION%
-Package: hugnetdatacollector
+Package: hugnetlab-datacollector
 Architecture: all
 Breaks: hugnetlab-server, hugnetlab
 Pre-Depends: debconf
