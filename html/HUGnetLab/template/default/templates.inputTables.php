@@ -74,7 +74,7 @@
                         </td>
                     </tr>
                     <!-- Sensor Extra Parameters -->
-                    <% print(tDefault.xTableTable(params, "params")) %>
+                    <% print(tDefault.iopTableTable(params, "params")) %>
                     </tr>
                 </table>
                 </form>

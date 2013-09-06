@@ -65,7 +65,8 @@ $(function ()
                 id: "tabs-view",
                 tests: this.devices,
                 url: 'index.php',
-                readonly: true
+                readonly: true,
+                filter: {type: "test", publish: "1"}
             });
         }
     });
@@ -198,6 +199,7 @@ $(function ()
         {
             this.config = new HUGnet.Config({
                 el: "#tabs-config",
+                id: "tabs-config",
                 devices: HUGnetLab.Devices,
             });
         }
@@ -229,6 +231,7 @@ $(function ()
         {
             this.config = new HUGnet.ServerConfig({
                 el: "#tabs-serverconfig",
+                id: "tabs-serverconfig",
                 devices: HUGnetLab.Devices,
             });
         }
