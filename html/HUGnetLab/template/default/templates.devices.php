@@ -450,7 +450,7 @@
                     <tbody>
                     <tr><th class="right">Process #</th><td><%= process %></td></tr>
                     <tr>
-                        <t class="right"h>Process ID</th>
+                        <th class="right">Process ID</th>
                         <td>
                             <select name="id" class="id">
                                 <% for (key in validIds) { %>
