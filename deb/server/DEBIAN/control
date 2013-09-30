@@ -8,8 +8,7 @@ Package: hugnetlab-server
 Architecture: all
 Breaks: hugnetlab, hugnetlab-datacollector
 Pre-Depends: debconf
-Depends: apache2, openssh-server, conspy,
-        mysql-server, phpmyadmin, debconf, hugnetlib-webapi,
+Depends: apache2, mysql-server, debconf, hugnetlib-webapi,
         hugnetlab-common (= %VERSION% ),
         hugnetlab-plugin-datacollectors (= %VERSION%),
         hugnetlab-plugin-devices (= %VERSION%),
