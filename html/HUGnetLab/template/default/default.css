@@ -31,6 +31,8 @@
 body {
     background-color: #d9d6c4;
     font-size: 9pt;
+    height: 100% !important;
+    width: 98% !important;
 }
 .body {
     background-color:#205700; /*#453821;*/
@@ -38,22 +40,29 @@ body {
     padding: 5px;
     margin-top: 0px;
 }
-#header {
+header {
     padding: 0px;
     min-width: 800px !important;
-    height: 50px;
+    height: 20px;
     /*background: url(../images/header.jpg) no-repeat;*/
     background-color:#205700; /*#453821;*/
     padding-bottom: 0px;
     margin-bottom: 0px;
+    color: #FFFFFF;
+}
+.content {
+    overflow: auto;
+    height: 550px !important;
+    margin: 2px;
+}
+.clock {
+    float: right; 
+    padding: 5px;
 }
 img.experiment {
     float: right;
     max-height: 480px;
     max-width: 640px;
-}
-header {
-    color: #FFFFFF;
 }
 
 .bold {
@@ -109,7 +118,7 @@ div.saving .save {
 
 h1.header {
     text-align: left;
-    padding: 10px;
+    padding: 5px;
     color: #f8f7f6;
 }
 

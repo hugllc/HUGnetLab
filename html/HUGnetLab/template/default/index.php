@@ -18,8 +18,10 @@
     </head>
     <body>
         <header>
-            <div id="header"><h1 class="header">{{title}}</h1></div>
-            <div style="float: right; width: 20em;"><span class="bold">UTC Time: </span><span id="UTCClock"></span>
+            <div id="header">
+                <div class="clock"><span class="bold">UTC Time: </span><span id="UTCClock"></span></div>
+                <h1 class="header">{{title}}</h1>
+            </div>
         </header>
         <section>
         <div class="body">
@@ -35,11 +37,11 @@
                     {{#serverconfig}}<li><a href="#tabs-serverconfig">Configuration</a></li>{{/serverconfig}}
                 </ul>
                 </nav>
-                {{#datacollectors}}<div id="tabs-datacollectors">{{{datacollectors}}}</div>{{/datacollectors}}
-                {{#devices}}<div id="tabs-devices">{{{devices}}}</div>{{/devices}}
-                {{#tests}}<div id="tabs-tests">{{{tests}}}</div>{{/tests}}
-                {{#config}}<div id="tabs-config">{{{config}}}</div>{{/config}}
-                {{#serverconfig}}<div id="tabs-serverconfig">{{{serverconfig}}}</div>{{/serverconfig}}
+                {{#datacollectors}}<div id="tabs-datacollectors" class="content">{{{datacollectors}}}</div>{{/datacollectors}}
+                {{#devices}}<div id="tabs-devices" class="content">{{{devices}}}</div>{{/devices}}
+                {{#tests}}<div id="tabs-tests" class="content">{{{tests}}}</div>{{/tests}}
+                {{#config}}<div id="tabs-config" class="content">{{{config}}}</div>{{/config}}
+                {{#serverconfig}}<div id="tabs-serverconfig" class="content">{{{serverconfig}}}</div>{{/serverconfig}}
                 <script type="text/javascript">
                     var tabs = $('#tabs').tabs({
                         tabTemplate: '<li><a href="#{href}">#{label}</a></li>',
