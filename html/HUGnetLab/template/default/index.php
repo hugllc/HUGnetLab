@@ -33,6 +33,7 @@
                     {{#datacollectors}}<li><a href="#tabs-datacollectors">Data Collectors</a></li>{{/datacollectors}}
                     {{#devices}}<li><a href="#tabs-devices">Devices</a></li>{{/devices}}
                     {{#tests}}<li><a href="#tabs-tests">Tests</a></li>{{/tests}}
+                    {{#outputs}}<li><a href="#tabs-outputs">Device Outputs</a></li>{{/outputs}}
                     {{#config}}<li><a href="#tabs-config">Configuration</a></li>{{/config}}
                     {{#serverconfig}}<li><a href="#tabs-serverconfig">Configuration</a></li>{{/serverconfig}}
                 </ul>
@@ -40,6 +41,7 @@
                 {{#datacollectors}}<div id="tabs-datacollectors" class="content">{{{datacollectors}}}</div>{{/datacollectors}}
                 {{#devices}}<div id="tabs-devices" class="content">{{{devices}}}</div>{{/devices}}
                 {{#tests}}<div id="tabs-tests" class="content">{{{tests}}}</div>{{/tests}}
+                {{#outputs}}<div id="tabs-outputs" class="content">{{{outputs}}}</div>{{/outputs}}
                 {{#config}}<div id="tabs-config" class="content">{{{config}}}</div>{{/config}}
                 {{#serverconfig}}<div id="tabs-serverconfig" class="content">{{{serverconfig}}}</div>{{/serverconfig}}
                 <script type="text/javascript">
