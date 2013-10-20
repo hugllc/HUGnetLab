@@ -17,7 +17,7 @@
         </script>
         <script type="text/template" id="OutputsListEntryTemplate">
                         <td>
-                            <button class="view">View</button>
+                            <button class="view">Controls</button>
                         </td>
                         <td class="center"><%= DeviceID %></td>
                         <td>
@@ -61,6 +61,7 @@
                 );
             }
           %>
+              <th>&nbsp;</th>
             </tr>
             <tr>
               <td><%= sqlUTCDate(params.LastPollData.Date * 1000) %></td>
@@ -69,19 +70,21 @@
                 print('<td align="center">'+params.LastPollData[key].value+'</td>');
             }
           %>
+              <td><button class="refresh">Refresh</button>
             </tr>
           </table>
 </script>
 <script type="text/template" id="OutputsControlChannelEntryTemplate">
               <th><%= label %></th>
               <td align="center"><%= value %></td>
-              <td><input type="text" name="value" value="<% print(value + 0); %>" /></td>
+              <td><input type="text" name="value" id="setValue" value="<% print(value + 0); %>" /></td>
+              <td><button class="setValue">Set</button><button class="getValue">Refresh</button>
 </script>
 <script type="text/template" id="OutputsControlChannelListTemplate">
           <table>
             <thead>
               <tr>
-                <th>Channel</th><th>Current Value</th><th>New Value</th>
+                <th>Channel</th><th>Current Value</th><th>New Value</th><th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>

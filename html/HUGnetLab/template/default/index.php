@@ -33,7 +33,7 @@
                     {{#datacollectors}}<li><a href="#tabs-datacollectors">Data Collectors</a></li>{{/datacollectors}}
                     {{#devices}}<li><a href="#tabs-devices">Devices</a></li>{{/devices}}
                     {{#tests}}<li><a href="#tabs-tests">Tests</a></li>{{/tests}}
-                    {{#outputs}}<li><a href="#tabs-outputs">Device Outputs</a></li>{{/outputs}}
+                    {{#outputs}}<li><a href="#tabs-outputs">Device Controls</a></li>{{/outputs}}
                     {{#config}}<li><a href="#tabs-config">Configuration</a></li>{{/config}}
                     {{#serverconfig}}<li><a href="#tabs-serverconfig">Configuration</a></li>{{/serverconfig}}
                 </ul>
