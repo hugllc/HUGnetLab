@@ -13,7 +13,8 @@ Depends: apache2, mysql-server, debconf,
         hugnetlib (>> 0.12.2), hugnetlib-webapi (>> 0.12.2),
         hugnetlab-common (= %VERSION%),
         hugnetlab-plugin-tests (= %VERSION%),
-        hugnetlab-plugin-config (= %VERSION%)
+        hugnetlab-plugin-config (= %VERSION%),
+        hugnetlab-plugin-control (= %VERSION%)
 Description: This is a meta package to install the hugnet lab system on a computer.
  This installs the HUGnetLab system, setting everything up so that it should run
  properly out of the box.
