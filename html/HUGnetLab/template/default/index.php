@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>
-            {{title}}{{#host}} on {{host}}{{/host}}
+            {{title}}
         </title>
         <link rel="stylesheet" href="HUGnetLab/template/default/default.css" />
         <link rel="stylesheet" href="HUGnetLab/template/default/theme.default.css" />

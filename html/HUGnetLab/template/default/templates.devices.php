@@ -155,6 +155,8 @@
         <script type="text/template" id="DeviceListTemplate">
                 <div>
                     <button class="newtest" style="float:left;">New Test</button>
+                    <button class="newfastvirtual" style="float:left;">New Fast Virtual</button>
+                    <button class="newslowvirtual" style="float:left;">New Slow Virtual</button>
                     <form style="float:left; margin-left: 3em;" id="importDevice" enctype="multipart/form-data" action="javascript:void(0);" method="POST">
                         <!-- MAX_FILE_SIZE must precede the file input field -->
                         <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
