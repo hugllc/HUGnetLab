@@ -33,6 +33,6 @@
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
-        var devices = new HUGnetLab.outputs();
+        var devices = new HUGnetLab.control();
     });
 </script>

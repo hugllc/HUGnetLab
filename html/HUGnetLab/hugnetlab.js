@@ -150,7 +150,7 @@ $(function ()
      * @version    Release: 0.9.7
      * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
      */
-    HUGnetLab.outputs = Backbone.View.extend({
+    HUGnetLab.control = Backbone.View.extend({
         data: {},
         tabs: undefined,
         initialize: function ()
