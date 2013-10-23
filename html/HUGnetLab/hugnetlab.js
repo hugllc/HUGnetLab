@@ -66,7 +66,7 @@ $(function ()
                 tests: this.devices,
                 url: 'index.php',
                 readonly: true,
-                filter: {type: "test", publish: "1"}
+                filter: {type: "test", Publish: "1"}
             });
         }
     });
