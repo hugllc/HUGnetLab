@@ -36,6 +36,7 @@
         <chmod file="${deb.common.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.common.staging}/DEBIAN/prerm" perm="ugo+rx"/>
         <chmod file="${deb.common.staging}/DEBIAN/postrm" perm="ugo+rx"/>
+        <delete file="${deb.common.staging}/var/www/configuration.ini" failonerror="false"/>
         <replaceregexp file="${deb.common.staging}/DEBIAN/control" byline="yes"
                     match="%VERSION%"
                     replace="${deb.version}"
