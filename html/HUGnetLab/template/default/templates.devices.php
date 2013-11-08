@@ -225,7 +225,7 @@
         </script>
         <script type="text/template" id="DeviceDataChannelEntryTemplate">
                     <td class="center"><%= channel %></td>
-                    <td><input type="text" name="label" value="<%= label %>"/><% (epChannel == null) && print("(Virtual)"); %>
+                    <td><%= label %><% (epChannel == null) && print(" (Virtual)"); %></td>
                     <td class="center">
                         <select name="dataType">
                             <option value="raw" <% (dataType == "raw") && print('selected="selected"'); %>>
@@ -265,7 +265,7 @@
         </script>
         <script type="text/template" id="DeviceControlChannelEntryTemplate">
                     <td class="center"><%= channel %></td>
-                    <td><input type="text" name="label" value="<%= label %>"/>
+                    <td><%= label %></td>
         </script>
 
 
