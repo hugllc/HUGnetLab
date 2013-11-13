@@ -175,6 +175,8 @@
                         <th class="sorter-hex">ID</th>
                         <th class="sorter-numeric">Serial #</th>
                         <th class="sorter-text">Active</th>
+                        <th class="sorter-text">Publish</th>
+                        <th class="sorter-text">Push History</th>
                         <th class="sorter-text">Hardware</th>
                         <th class="sorter-text">Firmware</th>
                         <th class="sorter-text">Type</th>
@@ -203,6 +205,8 @@
                     <td class="center"><%= DeviceID %></td>
                     <td class="center"><%= id %></td>
                     <td class="center"><% (Active == 1) ? print('Yes') : print('No'); %></td>
+                    <td class="center"><% (Publish == 1) ? print('Yes') : print('No'); %></td>
+                    <td class="center"><% (params.PushHistory == 1) ? print('Yes') : print('No'); %></td>
                     <td class="center"><%= HWPartNum %></td>
                     <td class="center"><%= FWPartNum %> <%= FWVersion %></td>
                     <td class="center"><%= type %></td>
