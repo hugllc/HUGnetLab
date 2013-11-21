@@ -10,4 +10,5 @@
     require dirname(__FILE__)."/templates.tests.php";
     require dirname(__FILE__)."/templates.outputslist.php";
     require dirname(__FILE__)."/templates.runtime.php";
+    require dirname(__FILE__)."/templates.configview.php";
 ?>
