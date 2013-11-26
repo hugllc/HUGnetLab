@@ -9,25 +9,57 @@
                 </div>
                 <div id="image">
                 </div>
-                <table style="width:100%;">
+                <table>
                     <tr>
-                        <td colspan="2">
-                            <table style="width:100%;">
-                                <tr>
-                                    <th>Data Channels</th>
-                                    <th>Control Channels</th>
-                                </tr>
-                                <tr>
-                                    <td style="vertical-align: top;">
-                                        <%= dataChannels %>
-                                    </td>
-                                    <td style="vertical-align: top;">
-                                        <%= controlChannels %>
-                                    </td>
-                                </tr>
-                            </table>
+                        <td style="vertical-align: top;">
+                            <%= dataChannels %>
+                        </td>
+                        <td style="vertical-align: top;">
+                            <%= controlChannels %>
                         </td>
                     </tr>
                 </table>
                 </form>
+        </script>
+        <script type="text/template" id="ConfigViewDataChannelListTemplate">
+                <table id="dataChannelTable">
+                    <thead>
+                    <tr>
+                        <th colspan="3">Data Channels</th>
+                    </tr>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th>Label</th>
+                        <th>Port(s)</th>
+                    </tr>
+                    </thead>
+                    <tbody id="channelList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="ConfigViewDataChannelEntryTemplate">
+                    <td class="center"><%= channel %></td>
+                    <td><%= label %></td>
+                    <td><%= port %></td>
+        </script>
+        <script type="text/template" id="ConfigViewControlChannelListTemplate">
+                <table id="controlChannelTable">
+                    <thead>
+                    <tr>
+                        <th colspan="3">Control Channels</th>
+                    </tr>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th>Label</th>
+                        <th>Port(s)</th>
+                    </tr>
+                    </thead>
+                    <tbody id="channelList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="ConfigViewControlChannelEntryTemplate">
+                    <td class="center"><%= channel %></td>
+                    <td><%= label %></td>
+                    <td><%= port %></td>
         </script>
