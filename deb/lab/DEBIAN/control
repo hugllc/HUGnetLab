@@ -10,7 +10,7 @@ Breaks: hugnetserver,hugnetdatacollector
 Pre-Depends: debconf
 Depends: apache2, mysql-server, debconf,
         hugnetfirmware, hugnetscripts-datacollector,
-        hugnetlib (>> 0.13.3), hugnetlib-webapi (>> 0.13.3), hugnetlib-images (>> 0.13.3)
+        hugnetlib (>> 0.13.3), hugnetlib-webapi (>> 0.13.3), hugnetlib-images (>> 0.13.3),
         hugnetlab-common (= %VERSION%),
         hugnetlab-plugin-tests (= %VERSION%),
         hugnetlab-plugin-config (= %VERSION%),
