@@ -77,6 +77,18 @@
                             </select>
                         </td>
                     </tr>
+                    <tr class="even">
+                        <th class="right">Daughter Board</th>
+                        <td>
+                            <select class="params_DaughterBoard">
+                                <% for (key in DaughterBoards) { %>
+                                    <option value="<%- key %>" <% (key == params.DaughterBoard) && print('selected="selected"'); %>>
+                                        <%= DaughterBoards[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
                     <tr class="even"><th class="right">Driver</th><td><%= Driver %></td></tr>
                     <tr class="odd"><th class="right">Hardware</th><td><%= HWPartNum %></td></tr>
                     <tr class="even"><th class="right">Firmware</th><td><%= FWPartNum %></td></tr>
