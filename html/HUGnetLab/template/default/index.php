@@ -30,6 +30,7 @@
                 {{^view}}
                 <nav>
                 <ul>
+                    {{#gateways}}<li><a href="#tabs-gateways">Gateways</a></li>{{/gateways}}
                     {{#datacollectors}}<li><a href="#tabs-datacollectors">Data Collectors</a></li>{{/datacollectors}}
                     {{#devices}}<li><a href="#tabs-devices">Devices</a></li>{{/devices}}
                     {{#tests}}<li><a href="#tabs-tests">Tests</a></li>{{/tests}}
@@ -38,6 +39,7 @@
                     {{#serverconfig}}<li><a href="#tabs-serverconfig">Configuration</a></li>{{/serverconfig}}
                 </ul>
                 </nav>
+                {{#gateways}}<div id="tabs-gateways" class="content">{{{gateways}}}</div>{{/gateways}}
                 {{#datacollectors}}<div id="tabs-datacollectors" class="content">{{{datacollectors}}}</div>{{/datacollectors}}
                 {{#devices}}<div id="tabs-devices" class="content">{{{devices}}}</div>{{/devices}}
                 {{#tests}}<div id="tabs-tests" class="content">{{{tests}}}</div>{{/tests}}

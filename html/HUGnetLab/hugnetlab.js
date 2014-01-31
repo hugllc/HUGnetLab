@@ -89,7 +89,7 @@ $(function ()
         {
             if (!HUGnetLab.Devices) {
                 HUGnetLab.Devices = new HUGnet.Devices();
-                HUGnetLab.Devices.fetch();
+//                HUGnetLab.Devices.fetch();
             }
             this.render();
         },
@@ -123,7 +123,7 @@ $(function ()
         {
             if (!HUGnetLab.Devices) {
                 HUGnetLab.Devices = new HUGnet.Devices();
-                HUGnetLab.Devices.fetch();
+//                HUGnetLab.Devices.fetch();
             }
             this.render();
         },
@@ -157,7 +157,7 @@ $(function ()
         {
             if (!HUGnetLab.Devices) {
                 HUGnetLab.Devices = new HUGnet.Devices();
-                HUGnetLab.Devices.fetch();
+//                HUGnetLab.Devices.fetch();
             }
             this.render();
         },
@@ -188,7 +188,7 @@ $(function ()
         tabs: undefined,
         initialize: function ()
         {
-            if (!HUGnetLab.Devices) {
+            if (!HUGnetLab.Datacollectors) {
                 HUGnetLab.Datacollectors = new HUGnet.Datacollectors();
                 HUGnetLab.Datacollectors.fetch();
             }
@@ -217,6 +217,44 @@ $(function ()
     * @version    Release: 0.9.7
     * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
     */
+    HUGnetLab.gateways = Backbone.View.extend({
+        data: {},
+        tabs: undefined,
+        initialize: function ()
+        {
+            if (!HUGnetLab.Gateways) {
+                HUGnetLab.Gateways = new HUGnet.Gateways();
+                HUGnetLab.Gateways.fetch();
+            }
+            if (!HUGnetLab.Devices) {
+                HUGnetLab.Devices = new HUGnet.Devices();
+            }
+            this.render();
+        },
+        render: function ()
+        {
+            var self = this;
+            this.gateways = new HUGnet.GatewayList({
+                el: "#tabs-gateways",
+                id: "tabs-gateways",
+                model: HUGnetLab.Gateways,
+                devices: HUGnetLab.Devices
+            });
+            this.gateways.render();
+        }
+    });
+    /**
+    * This is the model that stores the devices.
+    *
+    * @category   JavaScript
+    * @package    HUGnetLib
+    * @subpackage Tests
+    * @author     Scott Price <prices@hugllc.com>
+    * @copyright  2012 Hunt Utilities Group, LLC
+    * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
+    * @version    Release: 0.9.7
+    * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
+    */
     HUGnetLab.config = Backbone.View.extend({
         data: {},
         tabs: undefined,
@@ -224,7 +262,7 @@ $(function ()
         {
             if (!HUGnetLab.Devices) {
                 HUGnetLab.Devices = new HUGnet.Devices();
-                HUGnetLab.Devices.fetch();
+//                HUGnetLab.Devices.fetch();
             }
             this.render();
         },
@@ -256,7 +294,11 @@ $(function ()
         {
             if (!HUGnetLab.Devices) {
                 HUGnetLab.Devices = new HUGnet.Devices();
-                HUGnetLab.Devices.fetch();
+//                HUGnetLab.Devices.fetch();
+            }
+            if (!HUGnetLab.Gateways) {
+                HUGnetLab.Gateways = new HUGnet.Gateways();
+                HUGnetLab.Gateways.fetch();
             }
             this.render();
         },
@@ -266,6 +308,7 @@ $(function ()
                 el: "#tabs-serverconfig",
                 id: "tabs-serverconfig",
                 devices: HUGnetLab.Devices,
+                gateways: HUGnetLab.Gateways,
             });
         }
     });
