@@ -166,6 +166,7 @@
         </script>
         <script type="text/template" id="DeviceListTemplate">
                 <div>
+                    <button class="loadall" style="float:left;">Load All Devices</button>
                     <button class="newtest" style="float:left;">New Test</button>
                     <button class="newfastvirtual" style="float:left;">New Fast Virtual</button>
                     <button class="newslowvirtual" style="float:left;">New Slow Virtual</button>
