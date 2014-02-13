@@ -32,6 +32,7 @@
                 <ul>
                     {{#gateways}}<li><a href="#tabs-gateways">Gateways</a></li>{{/gateways}}
                     {{#datacollectors}}<li><a href="#tabs-datacollectors">Data Collectors</a></li>{{/datacollectors}}
+                    {{#gatewaydev}}<li><a href="#tabs-gatewaydev">Devices</a></li>{{/gatewaydev}}
                     {{#devices}}<li><a href="#tabs-devices">Devices</a></li>{{/devices}}
                     {{#tests}}<li><a href="#tabs-tests">Tests</a></li>{{/tests}}
                     {{#control}}<li><a href="#tabs-outputs">Device Controls</a></li>{{/control}}
@@ -41,6 +42,7 @@
                 </nav>
                 {{#gateways}}<div id="tabs-gateways" class="content">{{{gateways}}}</div>{{/gateways}}
                 {{#datacollectors}}<div id="tabs-datacollectors" class="content">{{{datacollectors}}}</div>{{/datacollectors}}
+                {{#gatewaydev}}<div id="tabs-gatewaydev" class="content">{{{gatewaydev}}}</div>{{/gatewaydev}}
                 {{#devices}}<div id="tabs-devices" class="content">{{{devices}}}</div>{{/devices}}
                 {{#tests}}<div id="tabs-tests" class="content">{{{tests}}}</div>{{/tests}}
                 {{#control}}<div id="tabs-outputs" class="content">{{{control}}}</div>{{/control}}

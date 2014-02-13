@@ -13,4 +13,5 @@
     require dirname(__FILE__)."/templates.runtime.php";
     require dirname(__FILE__)."/templates.configview.php";
     require dirname(__FILE__)."/templates.gatewaylist.php";
+    require dirname(__FILE__)."/templates.gatewaydevlist.php";
 ?>
