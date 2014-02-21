@@ -63,7 +63,6 @@ $(function ()
         }
         return etext;
     };
-
     tDefault.iopTableTable = function (params, name, fixed)
     {
         fixed = (fixed != undefined) ? fixed : false;

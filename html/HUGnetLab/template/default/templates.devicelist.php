@@ -3,8 +3,23 @@
             <form id="devListForm" method="POST" action="javascript:void(0);">
             <div style="height: 2em;">
                 <div style="float: right; clear: both;">
+                    <label for="gatewayFilter" class="bold">Gateway:</label>
+                    <select class="gatewayFilter">
+                        <%
+                        console.log(gateways);
+                    for (var q in gateways)
+                    {
+                    console.log(q);
+                        print('<option value="'+gateways[q].id+'"');
+                        print('>'+gateways[q].name+'</option>');
+                    }
+                    %>
+                        <option value="any">Any</option>
+                        <option value="all">All</option>
+                    </select>
+                    <label for="activeFilter" class="bold">Status:</label>
                     <select class="activeFilter">
-                        <option value="">Status</option>
+                        <option value="">Any</option>
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
