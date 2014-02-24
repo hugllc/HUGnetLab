@@ -51,6 +51,8 @@ $(function ()
         devices: {},
         initialize: function (options)
         {
+            this.Gateways = new HUGnet.Gateways();
+            this.Gateways.fetch();
             this.devices = new HUGnet.Devices({
                 url: 'index.php'
             });
@@ -64,6 +66,7 @@ $(function ()
                 el: "#tabs-view",
                 id: "tabs-view",
                 tests: this.devices,
+                gateways: this.Gateways,
                 url: 'index.php',
                 readonly: true,
                 filter: {type: "test", Publish: "1"}
