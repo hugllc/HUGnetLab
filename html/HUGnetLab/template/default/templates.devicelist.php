@@ -6,10 +6,8 @@
                     <label for="gatewayFilter" class="bold">Gateway:</label>
                     <select class="gatewayFilter">
                         <%
-                        console.log(gateways);
                     for (var q in gateways)
                     {
-                    console.log(q);
                         print('<option value="'+gateways[q].id+'"');
                         print('>'+gateways[q].name+'</option>');
                     }
