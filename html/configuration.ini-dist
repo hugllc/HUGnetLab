@@ -12,3 +12,4 @@ title = "HUGnetLab™"
 ;;
 device_publish = 1
 ;device_type = test
+device_gateway = -1

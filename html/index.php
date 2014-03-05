@@ -118,6 +118,7 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     $filters = array(
         "type" => "device_type",
         "Publish" => "device_publish",
+        "GatewayKey" => "device_gateway",
     );
     foreach ($filters as $key => $filter) {
         if (isset($config[$filter])) {
