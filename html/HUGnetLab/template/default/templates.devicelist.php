@@ -9,11 +9,14 @@
                     for (var q in gateways)
                     {
                         print('<option value="'+gateways[q].id+'"');
+                        if (gateways[q].id == GatewayKey) {
+                            print(' selected="selected" ');
+                        }
                         print('>'+gateways[q].name+'</option>');
                     }
                     %>
-                        <option value="any">Any</option>
-                        <option value="all">All</option>
+                        <option value="any" <% (GatewayKey == "any") && print('selected="selected"'); %>>Any</option>
+                        <option value="all" <% (GatewayKey == "all") && print('selected="selected"'); %>>All</option>
                     </select>
                     <label for="activeFilter" class="bold">Status:</label>
                     <select class="activeFilter">

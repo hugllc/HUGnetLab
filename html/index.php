@@ -109,30 +109,40 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     if (defined("HUGNETLIB_VERSION")) {
         $tData["HUGnetLibVersion"] = HUGNETLIB_VERSION;
     }
-    $params = array(
-        "GatewayKey"
-    );
-    $tData["params"]  = "var HUGnetParams = {\n";
-    $tData["params"] .= "    device_filter: {";
-    $sep = "";
-    $filters = array(
+    $params = array("device_filter" => array());
+    // Do the device filters
+    $filters_config = array(
         "type" => "device_type",
         "Publish" => "device_publish",
         "GatewayKey" => "device_gateway",
     );
-    foreach ($filters as $key => $filter) {
+    $filter_out = array();
+    foreach ($filters_config as $key => $filter) {
         if (isset($config[$filter])) {
-            $tData["params"] .= $sep."$key: \"".trim((string)$config[$filter])."\"";
-            $sep = ", ";
+            $params["device_filter"][$key] = trim((string)$config[$filter]);
         }
     }
-    $tData["params"] .= "}";
-    foreach ($params as $param) {
+    $filters_get = array(
+        "type" => "type",
+        "Active" => "Active",
+        "Publish" => "Publish",
+        "GatewayKey" => "GatewayKey",
+    );
+    foreach ($filters_get as $key => $filter) {
+        if (isset($_GET[$filter])) {
+            $params["device_filter"][$key] = trim((string)$_GET[$filter]);
+        }
+    }
+    
+    // Now do the params
+    $params_get = array(
+    );
+    foreach ($params_get as $param) {
         if (isset($_GET[$param])) {
-            $tData["params"] .= ",\n    $param: ".$_GET[$param];
+            $params[$param] = $_GET[$param];
         }
     }
-    $tData["params"] .= "\n};";
+    $tData["params"]  = "var HUGnetParams = ".json_encode($params).";\n";
     $plugins = array(
         "tests", "config", "view", "devices", "datacollectors", "serverconfig",
         "control", "gateways", "gatewaydev"

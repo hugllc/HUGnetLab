@@ -102,12 +102,12 @@ $(function ()
         render: function ()
         {
             var self = this;
-            this.tests = new HUGnet.DeviceList({
+            this.devices = new HUGnet.DeviceList({
                 el: "#tabs-devices",
                 id: "tabs-devices",
                 devices: HUGnetLab.Devices,
                 gateways: HUGnetLab.Gateways,
-                filter: HUGnetParams.device_filter
+                filter: HUGnetParams.device_filter,
             });
         }
     });
