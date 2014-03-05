@@ -115,13 +115,15 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     $tData["params"]  = "var HUGnetParams = {\n";
     $tData["params"] .= "    device_filter: {";
     $sep = "";
-    if (isset($config["device_publish"])) {
-        $tData["params"] .= "Publish: ".(int)$config["device_publish"];
-        $sep = ", ";
-    }
-    if (isset($config["device_type"])) {
-        $tData["params"] .= $sep.'type: "'.(string)$config["device_publish"].'"';
-        $sep = ", ";
+    $filters = array(
+        "type" => "device_type",
+        "Publish" => "device_publish",
+    );
+    foreach ($filters as $key => $filter) {
+        if (isset($config[$filter])) {
+            $tData["params"] .= $sep."$key: \"".trim((string)$config[$filter])."\"";
+            $sep = ", ";
+        }
     }
     $tData["params"] .= "}";
     foreach ($params as $param) {

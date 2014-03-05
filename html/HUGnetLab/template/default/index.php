@@ -15,7 +15,7 @@
         <script src="HUGnetLab/template/default/default.js" type="text/javascript"></script>
         <script src="HUGnetLab/hugnetlab.js" type="text/javascript"></script>
         <script type="text/javascript">
-{{params}}
+{{{params}}}
         </script>
 {{header}}
     </head>
