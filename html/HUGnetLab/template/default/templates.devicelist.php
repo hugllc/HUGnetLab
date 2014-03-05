@@ -34,6 +34,7 @@
                     <label for="searchFilter" class="bold">Field:</label>
                     <input type="text" class="searchFilter" />
                     <button class="goFilter">Go</button>
+                    <button class="resetFilter">Reset</button>
                 </div>
             </div>
             <table id="devTable" class="tablesorter {sortlist: [[1,0]]}">
