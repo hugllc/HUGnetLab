@@ -8,6 +8,6 @@ Package: hugnetlab-plugin-view
 Architecture: all
 Pre-Depends: debconf
 Depends: hugnetlab-common (= %VERSION%)
-Breaks: hugnetlab-plugin-tests, hugnetlab-plugin-config
+Breaks: hugnetlab-plugin-devices, hugnetlab-plugin-config
 Description: The plugin for configuration of a HUGnetLab system
  This is where everything is configured

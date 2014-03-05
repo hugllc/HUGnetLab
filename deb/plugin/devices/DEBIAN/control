@@ -7,7 +7,7 @@ Version: %VERSION%
 Package: hugnetlab-plugin-devices
 Architecture: all
 Pre-Depends: debconf
-Breaks: hugnetlab-plugin-view
+Breaks: hugnetlab-plugin-view, hugnetlab-plugin-tests
 Depends: hugnetlab-common (= %VERSION%)
 Description: The plugin for the device list for the HUGnet System
  This is where the devices can be viewed and the history viewed or exported.
