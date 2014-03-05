@@ -14,7 +14,10 @@
         <!-- This default.js must be loaded before hugnetlab.js.  It loads the underscore templates -->
         <script src="HUGnetLab/template/default/default.js" type="text/javascript"></script>
         <script src="HUGnetLab/hugnetlab.js" type="text/javascript"></script>
-        {{header}}
+        <script type="text/javascript">
+{{params}}
+        </script>
+{{header}}
     </head>
     <body>
         <header>

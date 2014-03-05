@@ -109,6 +109,27 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     if (defined("HUGNETLIB_VERSION")) {
         $tData["HUGnetLibVersion"] = HUGNETLIB_VERSION;
     }
+    $params = array(
+        "GatewayKey"
+    );
+    $tData["params"]  = "var HUGnetParams = {\n";
+    $tData["params"] .= "    device_filter: {";
+    $sep = "";
+    if (isset($config["device_publish"])) {
+        $tData["params"] .= "Publish: ".(int)$config["device_publish"];
+        $sep = ", ";
+    }
+    if (isset($config["device_type"])) {
+        $tData["params"] .= $sep.'type: "'.(string)$config["device_publish"].'"';
+        $sep = ", ";
+    }
+    $tData["params"] .= "}";
+    foreach ($params as $param) {
+        if (isset($_GET[$param])) {
+            $tData["params"] .= ",\n    $param: ".$_GET[$param];
+        }
+    }
+    $tData["params"] .= "\n};";
     $plugins = array(
         "tests", "config", "view", "devices", "datacollectors", "serverconfig",
         "control", "gateways", "gatewaydev"

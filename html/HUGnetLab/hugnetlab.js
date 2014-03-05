@@ -69,46 +69,7 @@ $(function ()
                 gateways: this.Gateways,
                 url: 'index.php',
                 readonly: true,
-                filter: {type: "test", Publish: "1"}
-            });
-        }
-    });
-    /**
-    * This is the model that stores the devices.
-    *
-    * @category   JavaScript
-    * @package    HUGnetLib
-    * @subpackage Tests
-    * @author     Scott Price <prices@hugllc.com>
-    * @copyright  2012 Hunt Utilities Group, LLC
-    * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
-    * @version    Release: 0.9.7
-    * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
-    */
-    HUGnetLab.tests = Backbone.View.extend({
-        data: {},
-        tabs: undefined,
-        initialize: function ()
-        {
-            if (!HUGnetLab.Gateways) {
-                HUGnetLab.Gateways = new HUGnet.Gateways();
-                HUGnetLab.Gateways.fetch();
-            }
-            if (!HUGnetLab.Devices) {
-                HUGnetLab.Devices = new HUGnet.Devices();
-//                HUGnetLab.Devices.fetch();
-            }
-            this.render();
-        },
-        render: function ()
-        {
-            var self = this;
-            this.tests = new HUGnet.TestSuite({
-                el: "#tabs-tests",
-                id: "tabs-tests",
-                tests: HUGnetLab.Devices,
-                filter: {type: "test"},
-                gateways: HUGnetLab.Gateways,
+                filter: HUGnetParams.device_filter
             });
         }
     });
@@ -146,7 +107,7 @@ $(function ()
                 id: "tabs-devices",
                 devices: HUGnetLab.Devices,
                 gateways: HUGnetLab.Gateways,
-                filter: {}
+                filter: HUGnetParams.device_filter
             });
         }
     });
