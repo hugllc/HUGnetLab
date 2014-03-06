@@ -15,8 +15,8 @@
                         print('>'+gateways[q].name+'</option>');
                     }
                     %>
-                        <option value="any" <% (GatewayKey == "any") && print('selected="selected"'); %>>Any</option>
                         <option value="all" <% (GatewayKey == "all") && print('selected="selected"'); %>>All</option>
+                        <option value="any" <% (GatewayKey == "any") && print('selected="selected"'); %>>Any</option>
                     </select>
                     <label for="activeFilter" class="bold">Status:</label>
                     <select class="activeFilter">
