@@ -272,6 +272,10 @@ $(function ()
                 HUGnetLab.Gateways = new HUGnet.Gateways();
                 HUGnetLab.Gateways.fetch();
             }
+            if (!HUGnetLab.Images) {
+                HUGnetLab.Images = new HUGnet.Images();
+                HUGnetLab.Images.fetch();
+            }
             this.render();
         },
         render: function ()
@@ -281,6 +285,7 @@ $(function ()
                 id: "tabs-serverconfig",
                 devices: HUGnetLab.Devices,
                 gateways: HUGnetLab.Gateways,
+                images: HUGnetLab.Images,
             });
         }
     });
