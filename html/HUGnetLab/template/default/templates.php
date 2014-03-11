@@ -4,6 +4,7 @@
     require dirname(__FILE__)."/templates.inputTables.php";
     require dirname(__FILE__)."/templates.devices.php";
     require dirname(__FILE__)."/templates.gateways.php";
+    require dirname(__FILE__)."/templates.gatewaylist.php";
     require dirname(__FILE__)."/templates.devicelist.php";
     require dirname(__FILE__)."/templates.datacollectorlist.php";
     require dirname(__FILE__)."/templates.data.php";
