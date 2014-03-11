@@ -246,12 +246,11 @@
                     <td><%= label %><% (epChannel == null) && print(" (Virtual)"); %></td>
                     <td class="center">
                         <select name="dataType">
-                            <option value="raw" <% (dataType == "raw") && print('selected="selected"'); %>>
-                                Raw
-                            </option>
-                            <option value="ignore" <% (dataType == "ignore") && print('selected="selected"'); %>>
-                                Ignore
-                            </option>
+                            <% for (key in validTypes) { %>
+                                <option value="<%- validTypes[key] %>" <% (validTypes[key] == dataType) && print('selected="selected"'); %>>
+                                    <%= validTypes[key] %>
+                                </option>
+                            <% } %>
                         </select>
                     </td>
                     <td class="center">
