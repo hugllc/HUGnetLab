@@ -40,11 +40,14 @@
             <div>
                 <form style="margin-left: 3em;" id="insertImage" enctype="multipart/form-data" action="javascript:void(0);" method="POST">
                     <!-- MAX_FILE_SIZE must precede the file input field -->
-                    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
                     <!-- Name of input element determines name in $_FILES array -->
                     <input type="button" class="insertImage" value="Insert Image" />
                     </span><input name="import" type="file" />
                 </form>
+            </div>
+            <div style="border: thin solid red;">
+                <%= svg %>
             </div>
             <div>
                 <form id="sensorForm" method="POST" action="javascript:void(0);">

@@ -13,11 +13,13 @@
     height="<%= height %>"
     id="<%= name %>-svg"
     >
-    <image';
-        id=""';
+    <image
+        x="0"
+        y="0"
+        id="<%= name %>"
+        xlink:href="data:<%= imagetype %>;base64,<%= image %>"
         height="<%= height %>"
         width="<%= width %>"
-        xlink:href="data:<%= imagetype %>;base64,  <%= image %>"
     />
 
     
