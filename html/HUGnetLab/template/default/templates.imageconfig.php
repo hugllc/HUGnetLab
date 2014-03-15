@@ -46,7 +46,7 @@
                     </span><input name="import" type="file" />
                 </form>
             </div>
-            <div style="border: thin solid red;">
+            <div align="center">
                 <%= svg %>
             </div>
             <div>
