@@ -50,9 +50,11 @@
                 <%= svg %>
             </div>
             <div>
-                <form id="sensorForm" method="POST" action="javascript:void(0);">
+                <form id="imageForm" method="POST" action="javascript:void(0);">
+                <input type="button" class="insertPoint" value="Insert Point" />
                 <div class="buttons floatright">
                     <button class="SaveImageConfig">Save</button>
+                    <button class="ApplyImageConfig">Apply</button>
                 </div>
                 <table style="width: 100%;">
                     <tbody>
@@ -73,6 +75,49 @@
                         <td>
                             <textarea name="desc" class="desc" class="left"><%= desc %></textarea>
                         </td>
+                    </tr>
+                    <tr>
+                        <th title="Data and text points in the image" class="center" colspan="2">Points</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <th>#</th>
+                                    <th title="The text before the value">Pretext</th>
+                                    <th title="The text after the value">Posttext</th>
+                                    <th title="The x value">X</th>
+                                    <th title="The y value">Y</th>
+                                    <th title="The color of the text">Text Color</th>
+                                    <th title="The color of the background">Background Color</th>
+                                </tr>
+<% _.each(points, function(point, index) { %>
+                                <tr rowindex="<%= index %>" class="datapoint">
+                                    <td>
+                                        <%= index %>
+                                    </td>
+                                    <td>
+                                        <input type="text" size="10" value="<%= point.pretext %>" id="pretext" />
+                                    </td>
+                                    <td>
+                                        <input type="text" size="10" value="<%= point.posttext %>" id="posttext" />
+                                    </td>
+                                    <td>
+                                        <input type="text" size="10" value="<%= point.x %>" id="x" />
+                                    </td>
+                                    <td>
+                                        <input type="text" size="10" value="<%= point.y %>" id="y" />
+                                    </td>
+                                    <td>
+                                        <input type="text" size="10" value="<%= point.color %>" id="color" />
+                                    </td>
+                                    <td>
+                                        <input type="text" size="10" value="<%= point.background %>" id="background" />
+                                    </td>
+                                </tr>
+<% }); %>
+                            </table>
+                        </th>
                     </tr>
                 </table>
                 </form>

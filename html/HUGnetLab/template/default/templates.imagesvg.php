@@ -22,7 +22,16 @@
         height="<%= height %>"
         width="<%= width %>"
     />
-
+    <% _.each(points, function(point, index) { %>
+    <text
+       style="fill:<%= point.color %>"
+       x="0"
+       y="0"
+       transform="translate(<%= point.x %>, <%= point.y %>)"
+       id="point<%= index %>">
+        <%= point.pretext %><%= point.value%> <%= point.units %><%= point.posttext %>
+    </text>
+    <% }); %>
     
     </svg>
 
