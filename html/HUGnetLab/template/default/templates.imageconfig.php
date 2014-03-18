@@ -52,9 +52,9 @@
             <div>
                 <form id="imageForm" method="POST" action="javascript:void(0);">
                 <div class="buttons floatright">
-                    <button class="insertPoint">Insert Point</button>
                     <button class="ApplyImageConfig">Save</button>
                     <button class="SaveImageConfig">Save & Close</button>
+                    <button class="insertPoint">Insert Point</button>
                 </div>
                 <table style="width: 100%; clear: both;">
                     <tbody>
