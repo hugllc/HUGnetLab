@@ -237,6 +237,10 @@ $(function ()
             if (!HUGnetLab.Devices) {
                 HUGnetLab.Devices = new HUGnet.Devices();
             }
+            if (!HUGnetLab.Images) {
+                HUGnetLab.Images = new HUGnet.Images();
+                HUGnetLab.Images.fetch();
+            }
             this.render();
         },
         render: function ()
@@ -245,6 +249,7 @@ $(function ()
                 el: "#tabs-config",
                 id: "tabs-config",
                 devices: HUGnetLab.Devices,
+                images: HUGnetLab.Images,
             });
         }
     });
