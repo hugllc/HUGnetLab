@@ -7,8 +7,8 @@
                 <table id="imageConfigTable" class="tablesorter {sortlist: [[1,0]]}">
                     <thead>
                     <tr>
-                        <th class="sorter-false">Actions</th>
-                        <th class="sorter-numeric">ID</th>
+                        <th class="sorter-false" width="5%">Actions</th>
+                        <th class="sorter-numeric" width="5%" class="center">ID</th>
                         <th class="sorter-text">Name</th>
                         <th class="sorter-text">Size</th>
                         <th class="sorter-text">Desc</th>
@@ -27,9 +27,9 @@
                         </select>
                     </td>
                     <td class="center"><%= id %></td>
-                    <td class="center"><%= name %></td>
-                    <td class="center"><%= height %>x<%= width %></td>
-                    <td class="center"><%= desc %></td>
+                    <td><%= name %></td>
+                    <td><%= height %>x<%= width %></td>
+                    <td><%= desc %></td>
         </script>
 
         <!--  These are our tempaltes -->
@@ -51,12 +51,12 @@
             </div>
             <div>
                 <form id="imageForm" method="POST" action="javascript:void(0);">
-                <input type="button" class="insertPoint" value="Insert Point" />
                 <div class="buttons floatright">
-                    <button class="SaveImageConfig">Save</button>
-                    <button class="ApplyImageConfig">Apply</button>
+                    <button class="insertPoint">Insert Point</button>
+                    <button class="ApplyImageConfig">Save</button>
+                    <button class="SaveImageConfig">Save & Close</button>
                 </div>
-                <table style="width: 100%;">
+                <table style="width: 100%; clear: both;">
                     <tbody>
                     <tr>
                         <th class="right">ID</th>
@@ -86,6 +86,7 @@
                                     <th>#</th>
                                     <th title="The text before the value">Pretext</th>
                                     <th title="The text after the value">Posttext</th>
+                                    <th title="The font size to use">Font Size</th>
                                     <th title="The x value">X</th>
                                     <th title="The y value">Y</th>
                                     <th title="The color of the text">Text Color</th>
@@ -104,6 +105,13 @@
                                     </td>
                                     <td class="center">
                                         <input type="text" size="10" value="<%= point.posttext %>" name="posttext" />
+                                    </td>
+                                    <td class="center">
+                                        <select name="fontsize">
+                                            <% for (var i=9;i<32;i++) { %>
+                                                <option value="<%= i %>" <% if (i == point.fontsize) print('selected="selected"'); %>><%= i %></option>
+                                            <% } %>
+                                        </select>
                                     </td>
                                     <td class="center">
                                         <input type="text" size="4" value="<%= point.x %>" name="x" />

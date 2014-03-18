@@ -24,7 +24,7 @@
     />
     <% _.each(points, function(point, index) { %>
     <text
-       style="fill:<%= point.color %>"
+       style="fill:<%= point.color %>; font-size:<%= point.fontsize %>pt;"
        x="0"
        y="0"
        transform="translate(<%= point.x %>, <%= point.y %>)"
