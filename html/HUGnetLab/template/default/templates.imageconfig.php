@@ -89,30 +89,42 @@
                                     <th title="The x value">X</th>
                                     <th title="The y value">Y</th>
                                     <th title="The color of the text">Text Color</th>
-                                    <th title="The color of the background">Background Color</th>
+                                    <th title="The color of the background">Background</th>
+                                    <th title="The device ID to get data from">Device ID</th>
+                                    <th title="The datachan on the device to get data from">Channel</th>
+                                    <th title="Check to delete this data point">Delete</th>
                                 </tr>
 <% _.each(points, function(point, index) { %>
                                 <tr rowindex="<%= index %>" class="datapoint">
-                                    <td>
+                                    <td class="center">
                                         <%= index %>
                                     </td>
-                                    <td>
-                                        <input type="text" size="10" value="<%= point.pretext %>" id="pretext" />
+                                    <td class="center">
+                                        <input type="text" size="10" value="<%= point.pretext %>" name="pretext" />
                                     </td>
-                                    <td>
-                                        <input type="text" size="10" value="<%= point.posttext %>" id="posttext" />
+                                    <td class="center">
+                                        <input type="text" size="10" value="<%= point.posttext %>" name="posttext" />
                                     </td>
-                                    <td>
-                                        <input type="text" size="10" value="<%= point.x %>" id="x" />
+                                    <td class="center">
+                                        <input type="text" size="4" value="<%= point.x %>" name="x" />
                                     </td>
-                                    <td>
-                                        <input type="text" size="10" value="<%= point.y %>" id="y" />
+                                    <td class="center">
+                                        <input type="text" size="4" value="<%= point.y %>" name="y" />
                                     </td>
-                                    <td>
-                                        <input type="text" size="10" value="<%= point.color %>" id="color" />
+                                    <td class="center">
+                                        <input type="text" size="7" value="<%= point.color %>" name="color" />
                                     </td>
-                                    <td>
-                                        <input type="text" size="10" value="<%= point.background %>" id="background" />
+                                    <td class="center">
+                                        <input type="text" size="7" value="<%= point.background %>" name="background" />
+                                    </td>
+                                    <td class="center">
+                                        <input type="text" size="6" value="<%= point.devid %>" name="devid" />
+                                    </td>
+                                    <td class="center">
+                                        <input type="text" size="2" value="<%= point.datachan %>" name="datachan" />
+                                    </td>
+                                    <td class="center">
+                                        <input type="checkbox" name="delete" />
                                     </td>
                                 </tr>
 <% }); %>
