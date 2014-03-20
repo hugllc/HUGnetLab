@@ -14,6 +14,21 @@
     height="<%= height %>"
     id="<%= name %>-svg"
     >
+    <defs>
+<% _.each(points, function(point, index) { %>
+        <filter x="0" y="0" width="1" height="1" id="background<%= index %>">
+            <feFlood flood-color="<%= point.background %>"/>
+        </filter>
+        <text
+        style="fill:<%= point.color %>; font-size:<%= point.fontsize %>pt;"
+        x="0"
+        y="0"
+        transform="translate(<%= point.x %>, <%= point.y %>)"
+        id="point<%= point.id %>"
+        ><%= point.pretext %><tspan id="point<%= point.id %>"><%= point.devid %>.<%= point.datachan %></tspan><%= point.posttext %>
+        </text>
+<% }); %>
+    </defs>
     <image
         x="0"
         y="0"
@@ -22,17 +37,10 @@
         height="<%= height %>"
         width="<%= width %>"
     />
-    <% _.each(points, function(point, index) { %>
-    <text
-       style="fill:<%= point.color %>; font-size:<%= point.fontsize %>pt;"
-       x="0"
-       y="0"
-       transform="translate(<%= point.x %>, <%= point.y %>)"
-       id="point<%= index %>">
-        <%= point.pretext %><%= point.value%> <%= point.units %><%= point.posttext %>
-    </text>
-    <% }); %>
-    
+<% _.each(points, function(point, index) { %>
+    <use xlink:href="#point<%= point.id %>" filter="url(#background<%= index %>)"/>
+    <use xlink:href="#point<%= point.id %>" />
+<% }); %>
     </svg>
 
 </script>

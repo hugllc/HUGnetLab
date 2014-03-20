@@ -12,6 +12,7 @@
                         <th class="sorter-text">Name</th>
                         <th class="sorter-text">Size</th>
                         <th class="sorter-text">Desc</th>
+                        <th class="sorter-text">Points</th>
                     </tr>
                     </thead>
                     <tbody id="ImageConfigList">
@@ -30,6 +31,7 @@
                     <td><%= name %></td>
                     <td><%= height %>x<%= width %></td>
                     <td><%= desc %></td>
+                    <td><%= length %></td>
         </script>
 
         <!--  These are our tempaltes -->
@@ -84,15 +86,16 @@
                             <table>
                                 <tr>
                                     <th>#</th>
-                                    <th title="The text before the value">Pretext</th>
-                                    <th title="The text after the value">Posttext</th>
+                                    <th title="The text before the value (Can be empty)">Pretext</th>
+                                    <th title="The text after the value (Can be empty)">Posttext</th>
                                     <th title="The font size to use">Font Size</th>
                                     <th title="The x value">X</th>
                                     <th title="The y value">Y</th>
+                                    <th title="The device ID to get data from (Can be empty)">Device ID</th>
+                                    <th title="The datachan on the device to get data from (Can be 'Date')">Channel</th>
+                                    <th title="Check this to show units">Units</th>
                                     <th title="The color of the text">Text Color</th>
                                     <th title="The color of the background">Background</th>
-                                    <th title="The device ID to get data from">Device ID</th>
-                                    <th title="The datachan on the device to get data from">Channel</th>
                                     <th title="Check to delete this data point">Delete</th>
                                 </tr>
 <% _.each(points, function(point, index) { %>
@@ -120,16 +123,19 @@
                                         <input type="text" size="4" value="<%= point.y %>" name="y" />
                                     </td>
                                     <td class="center">
-                                        <input type="text" size="7" value="<%= point.color %>" name="color" />
-                                    </td>
-                                    <td class="center">
-                                        <input type="text" size="7" value="<%= point.background %>" name="background" />
-                                    </td>
-                                    <td class="center">
                                         <input type="text" size="6" value="<%= point.devid %>" name="devid" />
                                     </td>
                                     <td class="center">
                                         <input type="text" size="2" value="<%= point.datachan %>" name="datachan" />
+                                    </td>
+                                    <td class="center">
+                                        <input type="checkbox" name="units" <% if (point.units == 1) print('checked="checked"'); %>/>
+                                    </td>
+                                    <td class="center">
+                                        <input type="text" size="7" value="<%= point.color %>" name="color" />
+                                    </td>
+                                    <td class="center">
+                                        <input type="text" size="7" value="<%= point.background %>" name="background" />
                                     </td>
                                     <td class="center">
                                         <input type="checkbox" name="delete" />
