@@ -24,6 +24,7 @@
     <include file="${basedir}/build/deb_plugin_config.xml"/>
     <include file="${basedir}/build/deb_plugin_serverconfig.xml"/>
     <include file="${basedir}/build/deb_plugin_devices.xml"/>
+    <include file="${basedir}/build/deb_plugin_images.xml"/>
     <include file="${basedir}/build/deb_plugin_control.xml"/>
     <include file="${basedir}/build/deb_plugin_datacollectors.xml"/>
     <include file="${basedir}/build/deb_plugin_view.xml"/>
@@ -38,11 +39,11 @@
         </delete>
     </target>
 
-<target name="setup" depends="deb.server.setup,deb.datacollector.setup,deb.lab.setup,deb.view.setup,deb.common.setup,deb.plugin_config.setup,deb.plugin_serverconfig.setup,deb.plugin_view.setup,deb.plugin_devices.setup,deb.plugin_datacollectors.setup,deb.plugin_control.setup" />
-<target name="deb" depends="deb.server.deb,deb.datacollector.deb,deb.lab.deb,deb.view.deb,deb.common.deb,deb.plugin_config.deb,deb.plugin_serverconfig.deb,deb.plugin_view.deb,deb.plugin_devices.deb,deb.plugin_datacollectors.deb,deb.plugin_control.deb" />
-<target name="post" depends="build,deb.server.post,deb.datacollector.post,deb.lab.post,deb.view.post,deb.common.post,deb.plugin_config.post,deb.plugin_serverconfig.post,deb.plugin_view.post,deb.plugin_devices.post,deb.plugin_datacollectors.post,deb.plugin_control.post" />
-<target name="testpost" depends="build,deb.server.testpost,deb.datacollector.testpost,deb.lab.testpost,deb.view.testpost,deb.common.testpost,deb.plugin_config.testpost,deb.plugin_serverconfig.testpost,deb.plugin_view.testpost,deb.plugin_devices.testpost,deb.plugin_datacollectors.testpost,deb.plugin_control.testpost" />
-<target name="rcpost" depends="build,deb.server.rcpost,deb.datacollector.rcpost,deb.lab.rcpost,deb.view.rcpost,deb.common.rcpost,deb.plugin_config.rcpost,deb.plugin_serverconfig.rcpost,deb.plugin_view.rcpost,deb.plugin_devices.rcpost,deb.plugin_datacollectors.rcpost,deb.plugin_control.rcpost" />
+<target name="setup" depends="deb.server.setup,deb.datacollector.setup,deb.lab.setup,deb.view.setup,deb.common.setup,deb.plugin_config.setup,deb.plugin_serverconfig.setup,deb.plugin_view.setup,deb.plugin_devices.setup,deb.plugin_datacollectors.setup,deb.plugin_control.setup,deb.plugin_images.setup" />
+<target name="deb" depends="deb.server.deb,deb.datacollector.deb,deb.lab.deb,deb.view.deb,deb.common.deb,deb.plugin_config.deb,deb.plugin_serverconfig.deb,deb.plugin_view.deb,deb.plugin_devices.deb,deb.plugin_datacollectors.deb,deb.plugin_control.deb,deb.plugin_images.deb" />
+<target name="post" depends="build,deb.server.post,deb.datacollector.post,deb.lab.post,deb.view.post,deb.common.post,deb.plugin_config.post,deb.plugin_serverconfig.post,deb.plugin_view.post,deb.plugin_devices.post,deb.plugin_datacollectors.post,deb.plugin_control.post,deb.plugin_images.post" />
+<target name="testpost" depends="build,deb.server.testpost,deb.datacollector.testpost,deb.lab.testpost,deb.view.testpost,deb.common.testpost,deb.plugin_config.testpost,deb.plugin_serverconfig.testpost,deb.plugin_view.testpost,deb.plugin_devices.testpost,deb.plugin_datacollectors.testpost,deb.plugin_control.testpost,deb.plugin_images.testpost" />
+<target name="rcpost" depends="build,deb.server.rcpost,deb.datacollector.rcpost,deb.lab.rcpost,deb.view.rcpost,deb.common.rcpost,deb.plugin_config.rcpost,deb.plugin_serverconfig.rcpost,deb.plugin_view.rcpost,deb.plugin_devices.rcpost,deb.plugin_datacollectors.rcpost,deb.plugin_control.rcpost,deb.plugin_images.rcpost" />
 
     <target name="postclean">
         <delete dir="${deb.staging}"/>
