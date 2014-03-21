@@ -145,7 +145,7 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     $tData["params"]  = "var HUGnetParams = ".json_encode($params).";\n";
     $plugins = array(
         "tests", "config", "view", "devices", "datacollectors", "serverconfig",
-        "control", "gateways", "gatewaydev"
+        "control", "gateways", "gatewaydev", "images"
     );
     foreach ($plugins as $name) {
         $value = get_file("HUGnetLab/plugins/".$name.".php");

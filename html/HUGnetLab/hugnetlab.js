@@ -123,6 +123,39 @@ $(function ()
      * @version    Release: 0.9.7
      * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
      */
+    HUGnetLab.images = Backbone.View.extend({
+        data: {},
+        tabs: undefined,
+        initialize: function ()
+        {
+            if (!HUGnetLab.Images) {
+                HUGnetLab.Images = new HUGnet.Images();
+                HUGnetLab.Images.fetch();
+            }
+            this.render();
+        },
+        render: function ()
+        {
+            var self = this;
+            this.images = new HUGnet.ImageList({
+                el: "#tabs-images",
+                id: "tabs-images",
+                images: HUGnetLab.Images,
+            });
+        }
+    });
+    /**
+     * This is the model that stores the devices.
+     *
+     * @category   JavaScript
+     * @package    HUGnetLib
+     * @subpackage Tests
+     * @author     Scott Price <prices@hugllc.com>
+     * @copyright  2012 Hunt Utilities Group, LLC
+     * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
+     * @version    Release: 0.9.7
+     * @link       https://dev.hugllc.com/index.php/Project:HUGnetLib
+     */
     HUGnetLab.control = Backbone.View.extend({
         data: {},
         tabs: undefined,
