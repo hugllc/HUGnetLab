@@ -12,6 +12,7 @@
                         <th class="sorter-text">Name</th>
                         <th class="sorter-text">Size</th>
                         <th class="sorter-text">Desc</th>
+                        <th class="sorter-text">Base Average</th>
                         <th class="sorter-text">Points</th>
                     </tr>
                     </thead>
@@ -31,6 +32,7 @@
                     <td><%= name %></td>
                     <td><%= height %>x<%= width %></td>
                     <td><%= desc %></td>
+                    <td><%= baseavg %></td>
                     <td><%= length %></td>
         </script>
 
@@ -76,6 +78,15 @@
                         <th title="A description of what is in the image" class="right">Description</th>
                         <td>
                             <textarea name="desc" class="desc" class="left"><%= desc %></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th title="Whether this image uses 30 second averages or 15 minute averages" class="right">Base Average</th>
+                        <td>
+                            <select type="text" name="baseavg">
+                                <option value="15MIN" <% if (baseavg == "15MIN") print('selected="selected"'); %>>slow (15 Minute)</option>
+                                <option value="30SEC" <% if (baseavg == "30SEC") print('selected="selected"'); %>>fast (30 Second)</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>

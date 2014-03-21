@@ -143,3 +143,22 @@
                 </form>
             </div>
         </script>
+<script type="text/template" id="ImageViewTemplate">
+        <form id="imageForm" method="POST" action="javascript:void(0);">
+        <h2>
+            Image: "<%= name %>"
+        </h2>
+        <div>
+            <label for="before" class="bold">On or Before </label><input id="before" type="text" class="before" value="<%= beforeDate %>" />
+            <select id="type">
+                <% for (key in averageTypes) { %>
+                    <option value="<%- key %>" <% (key == type) && print('selected="selected"'); %>>
+                        <%= averageTypes[key] %>
+                    </option>
+                <% } %>
+            </select>
+            <input type="submit" name="submit" value="Go" />
+            <label for="autorefresh" class="bold">Update with new data:</label><input id="autorefresh" type="checkbox" class="autorefresh" value="5" />
+        </div>
+        </form>
+</script>
