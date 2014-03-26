@@ -13,7 +13,7 @@ Depends: apache2, mysql-server, debconf,
         hugnetlab-common (= %VERSION% ),
         hugnetlab-plugin-datacollectors (= %VERSION%),
         hugnetlab-plugin-devices (= %VERSION%),
-        hugnetlab-plugin-images (= %VERSION%)
+        hugnetlab-plugin-images (= %VERSION%),
         hugnetlab-plugin-serverconfig (= %VERSION%)
 Description: This is a meta package to install the hugnet lab aggregation server on a computer.
  This installs the HUGnetLab aggregation server on a computer.  This computer will
