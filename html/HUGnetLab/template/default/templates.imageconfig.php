@@ -26,6 +26,7 @@
                         <select class="action">
                             <option value="">Action</option>
                             <option value="properties">Edit</option>
+                            <option value="delete">Delete</option>
                         </select>
                     </td>
                     <td class="center"><%= id %></td>
