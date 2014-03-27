@@ -113,6 +113,7 @@
                                 <tr rowindex="<%= index %>" class="datapoint">
                                     <td class="center">
                                         <%= index %>
+                                        <input type="hidden" value="<%= index %>" name="index" />
                                     </td>
                                     <td class="center">
                                         <input type="text" size="10" value="<%= point.pretext %>" name="pretext" />
