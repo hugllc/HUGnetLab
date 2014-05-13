@@ -125,10 +125,16 @@
                             <%= formatDate(params.LastMasterPush) %>
                         </td>
                     </tr>
-                    <tr class="odd">
+                    <tr class="even">
                         <th class="right">Last History to Master</th>
                         <td>
                             <%= formatDate(params.LastMasterHistoryPush) %>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <th class="right">Last Powerup</th>
+                        <td>
+                            <%= formatDate(params.LastStartup) %>
                         </td>
                     </tr>
                     <tr>
