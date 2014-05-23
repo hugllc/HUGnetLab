@@ -25,7 +25,14 @@
         y="0"
         transform="translate(<%= point.x %>, <%= point.y %>)"
         id="point<%= point.id %>"
-        ><%= point.pretext %><tspan id="point<%= point.id %>"><%= point.devid %>.<%= point.datachan %></tspan><%= point.posttext %>
+        >
+            <%= point.pretext %>
+            <tspan id="point<%= point.id %>">
+                <% if (point.devid != "") { %>
+                <%= point.devid %>.<%= point.datachan %>
+                <% } %>
+            </tspan>
+            <%= point.posttext %>
         </text>
 <% }); %>
     </defs>
