@@ -384,3 +384,13 @@ ul#flot-choice li {
 .no-close .ui-dialog-titlebar-close {
     display: none;
 }
+
+tr.datapointhilight td {
+    background-color: #FF0000;
+}
+
+svg .datapointhilight {
+    stroke:#FF0000;
+    stroke-width:1px;
+    stroke-opacity:1;
+}

@@ -95,7 +95,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <table>
+                            <table style="border-collapse:collapse">
                                 <tr>
                                     <th>#</th>
                                     <th title="The text before the value (Can be empty)">Pretext</th>
