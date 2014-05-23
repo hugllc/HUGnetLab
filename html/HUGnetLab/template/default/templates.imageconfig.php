@@ -31,7 +31,7 @@
                     </td>
                     <td class="center"><%= id %></td>
                     <td><%= name %></td>
-                    <td><%= height %>x<%= width %></td>
+                    <td><%= width %>x<%= height %></td>
                     <td><%= desc %></td>
                     <td><%= baseavg %></td>
                     <td><%= length %></td>
