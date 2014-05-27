@@ -139,7 +139,7 @@
                                         <input type="text" size="6" value="<%= point.devid %>" name="devid" />
                                     </td>
                                     <td class="center">
-                                        <input type="text" size="2" value="<%= point.datachan %>" name="datachan" />
+                                        <input type="text" size="4" value="<%= point.datachan %>" name="datachan" />
                                     </td>
                                     <td class="center">
                                         <input type="checkbox" name="units" <% if (point.units == 1) print('checked="checked"'); %>/>
