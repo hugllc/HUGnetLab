@@ -161,4 +161,5 @@
             <label for="autorefresh" class="bold">Update with new data:</label><input id="autorefresh" type="checkbox" class="autorefresh" value="5" />
         </div>
         </form>
+        <%= svg %>
 </script>
