@@ -107,7 +107,8 @@
                                     <th title="The datachan on the device to get data from (Can be 'Date')">Channel</th>
                                     <th title="Check this to show units">Units</th>
                                     <th title="The color of the text">Text Color</th>
-                                    <th title="The color of the background">Background</th>
+                                    <th title="This is the min and max values for autocoloring.  Leave blank if not using autocoloring.">Min & Max</th>
+                                    <th title="The color of the background.  Only fill in the top one if not using autocoloring.">Background</th>
                                     <th title="Check to delete this data point">Delete</th>
                                 </tr>
 <% _.each(points, function(point, index) { %>
@@ -145,10 +146,16 @@
                                         <input type="checkbox" name="units" <% if (point.units == 1) print('checked="checked"'); %>/>
                                     </td>
                                     <td class="center">
-                                        <input type="text" size="7" value="<%= point.color %>" name="color" />
+                                        <input type="text" size="7" value="<%= point.color %>" name="color" title="Text color" /><br />
+                                        <input type="text" size="7" value="<%= point.color1 %>" name="color1" title="Alternate text color for autocoloring" />
                                     </td>
                                     <td class="center">
-                                        <input type="text" size="7" value="<%= point.background %>" name="background" />
+                                        <input type="text" size="7" value="<%= point.valmin %>" name="valmin" title="The value for the minimum color.  Leave blank if not using autocoloring." /><br />
+                                        <input type="text" size="7" value="<%= point.valmax %>" name="valmax" title="The value for the maximum color.  Leave blank if not using autocoloring." />
+                                    </td>
+                                    <td class="center">
+                                        <input type="text" size="7" value="<%= point.background %>" name="background" title="The background color, or the minimum color for autocoloring." /><br />
+                                        <input type="text" size="7" value="<%= point.backgroundmax %>" name="backgroundmax" title="The maximum background color.  Leave blank if not autocoloring." />
                                     </td>
                                     <td class="center">
                                         <input type="checkbox" name="delete" />
