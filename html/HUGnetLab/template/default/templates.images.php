@@ -161,5 +161,11 @@
             <label for="autorefresh" class="bold">Update with new data:</label><input id="autorefresh" type="checkbox" class="autorefresh" value="5" />
         </div>
         </form>
-        <%= svg %>
+        <div>
+            <%= svg %>
+        </div>
+        <div>
+            <span class="bold">Image URL:</span>
+            <span id="url"><%= imgurl %></span>
+        </div>
 </script>
