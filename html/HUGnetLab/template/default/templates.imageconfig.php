@@ -91,6 +91,15 @@
                         </td>
                     </tr>
                     <tr>
+                        <th title="Whether or not to publish this image." class="right">Publish</th>
+                        <td>
+                            <select class="publish">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <th title="Data and text points in the image" class="center" colspan="2">Points</th>
                     </tr>
                     <tr>
