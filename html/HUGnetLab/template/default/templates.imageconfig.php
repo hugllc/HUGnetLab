@@ -11,6 +11,7 @@
                         <th class="sorter-numeric" width="5%" class="center">ID</th>
                         <th class="sorter-text">Name</th>
                         <th class="sorter-text">Size</th>
+                        <th class="sorter-text">Published</th>
                         <th class="sorter-text">Desc</th>
                         <th class="sorter-text">Base Average</th>
                         <th class="sorter-text">Points</th>
@@ -32,6 +33,7 @@
                     <td class="center"><%= id %></td>
                     <td><%= name %></td>
                     <td><%= width %>x<%= height %></td>
+                    <td><% (publish == 1) ? print('Yes') : print('No'); %></td>
                     <td><%= desc %></td>
                     <td><%= baseavg %></td>
                     <td><%= length %></td>
@@ -93,9 +95,9 @@
                     <tr>
                         <th title="Whether or not to publish this image." class="right">Publish</th>
                         <td>
-                            <select class="publish">
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
+                            <select name="publish">
+                                <option value="1" <% if (publish == "1") print('selected="selected"'); %>>Yes</option>
+                                <option value="0"<% if (publish == "0") print('selected="selected"'); %>>No</option>
                             </select>
                         </td>
                     </tr>
