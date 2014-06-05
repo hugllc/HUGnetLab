@@ -7,6 +7,6 @@ Version: %VERSION%
 Package: hugnetlab-plugin-images
 Architecture: all
 Pre-Depends: debconf
-Breaks: hugnetlab-plugin-view, hugnetlab-plugin-tests
+Breaks: hugnetlab-plugin-tests
 Depends: hugnetlab-common (= %VERSION%)
 Description: The plugin for to display images with HUGnet data in them.
