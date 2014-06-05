@@ -29,10 +29,13 @@
         <section>
         <div class="body">
             <div id="tabs">
-                {{#view}}<div id="tabs-view">{{{view}}}</div>{{/view}}
-                {{^view}}
                 <nav>
                 <ul>
+                    {{#view}}
+                    <li><a href="#tabs-view">Devices</a></li>
+                    {{#images}}<li><a href="#tabs-images">Images</a></li>{{/images}}
+                    {{/view}}
+                    {{^view}}
                     {{#gateways}}<li><a href="#tabs-gateways">Gateways</a></li>{{/gateways}}
                     {{#datacollectors}}<li><a href="#tabs-datacollectors">Data Collectors</a></li>{{/datacollectors}}
                     {{#gatewaydev}}<li><a href="#tabs-gatewaydev">Devices</a></li>{{/gatewaydev}}
@@ -42,8 +45,14 @@
                     {{#control}}<li><a href="#tabs-outputs">Device Controls</a></li>{{/control}}
                     {{#config}}<li><a href="#tabs-config">Configuration</a></li>{{/config}}
                     {{#serverconfig}}<li><a href="#tabs-serverconfig">Configuration</a></li>{{/serverconfig}}
+                    {{/view}}
                 </ul>
                 </nav>
+                {{#view}}
+                <div id="tabs-view">{{{view}}}</div>
+                {{#images}}<div id="tabs-images" class="content">{{{images}}}</div>{{/images}}
+                {{/view}}
+                {{^view}}
                 {{#gateways}}<div id="tabs-gateways" class="content">{{{gateways}}}</div>{{/gateways}}
                 {{#datacollectors}}<div id="tabs-datacollectors" class="content">{{{datacollectors}}}</div>{{/datacollectors}}
                 {{#gatewaydev}}<div id="tabs-gatewaydev" class="content">{{{gatewaydev}}}</div>{{/gatewaydev}}
@@ -53,6 +62,7 @@
                 {{#control}}<div id="tabs-outputs" class="content">{{{control}}}</div>{{/control}}
                 {{#config}}<div id="tabs-config" class="content">{{{config}}}</div>{{/config}}
                 {{#serverconfig}}<div id="tabs-serverconfig" class="content">{{{serverconfig}}}</div>{{/serverconfig}}
+                {{/view}}
                 <script type="text/javascript">
                     var tabs = $('#tabs').tabs({
                         tabTemplate: '<li><a href="#{href}">#{label}</a></li>',
@@ -71,7 +81,6 @@
                         HUGnetLab.UTCClock();
                     });
                 </script>
-                {{/view}}
             </div>
         </div>
         </section>

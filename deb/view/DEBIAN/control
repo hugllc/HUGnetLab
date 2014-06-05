@@ -9,6 +9,7 @@ Architecture: all
 Pre-Depends: debconf
 Depends: hugnetlab-common (= %VERSION%),
          hugnetlab-plugin-view (= %VERSION%),
+         hugnetlab-plugin-images (= %VERSION%),
          hugnetlib-js (>> 0.12.2)
-Breaks: hugnetlab-server,hugnetdatacollector,hugnetlab
+Breaks: hugnetlab-server,hugnetlab-datacollector,hugnetlab
 Description: This is the HUGnet User Interface
