@@ -157,7 +157,7 @@
                                         <input type="checkbox" name="units" <% if (point.units == 1) print('checked="checked"'); %>/>
                                     </td>
                                     <td class="center">
-                                        <input type="text" size="7" value="<%= point.color %>" name="color" title="Text color" /><br />
+                                        <input type="text" size="7" value="<%= point.color %>" name="color"/><br />
                                         <input type="text" size="7" value="<%= point.color1 %>" name="color1" />
                                     </td>
                                     <td class="center">
