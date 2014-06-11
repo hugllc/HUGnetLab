@@ -89,6 +89,15 @@
                             </select>
                         </td>
                     </tr>
+                    <tr class="odd">
+                        <th class="right">Watchdog</th>
+                        <td>
+                            <select name="params_Watchdog" class="params_Watchdog">
+                               <option value="1" <% (params.Watchdog == 1) && print('selected="selected"'); %>>Monitor</option>
+                               <option value="0" <% (params.Watchdog == 0) && print('selected="selected"'); %>>Ignore</option>
+                            </select>
+                        </td>
+                    </tr>
                     <tr class="even"><th class="right">Driver</th><td><%= Driver %></td></tr>
                     <tr class="odd"><th class="right">Hardware</th><td><%= HWPartNum %></td></tr>
                     <tr class="even"><th class="right">Firmware</th><td><%= FWPartNum %></td></tr>
