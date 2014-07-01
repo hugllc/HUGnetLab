@@ -222,6 +222,7 @@
                             <option value="">Action</option>
                             <option value="properties">Edit</option>
                             <option value="configview">Wiring Diagram</option>
+                            <option value="configsetview">Setup Device</option>
                             <option value="export">Export</option>
                             <option value="refresh">Read the Config</option>
                             <option value="loadconfig">Write the Config</option>

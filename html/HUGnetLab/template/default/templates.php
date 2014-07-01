@@ -13,6 +13,7 @@
     require dirname(__FILE__)."/templates.outputslist.php";
     require dirname(__FILE__)."/templates.runtime.php";
     require dirname(__FILE__)."/templates.configview.php";
+    require dirname(__FILE__)."/templates.configsetview.php";
     require dirname(__FILE__)."/templates.imageconfig.php";
     require dirname(__FILE__)."/templates.images.php";
     require dirname(__FILE__)."/templates.imagesvg.php";
