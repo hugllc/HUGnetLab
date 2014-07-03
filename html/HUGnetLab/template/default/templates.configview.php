@@ -9,15 +9,15 @@
                 </div>
                 <div id="image" style="width: 800px; height: 400px;">
                 </div>
-                <table>
+                <table style="width: 800px;">
                     <tr>
                         <td style="vertical-align: top;">
                             <%= functions %>
                         </td>
-                        <td style="vertical-align: top;">
+                        <td style="vertical-align: top; width: 25%;">
                             <%= dataChannels %>
                         </td>
-                        <td style="vertical-align: top;">
+                        <td style="vertical-align: top; width: 25%;">
                             <%= controlChannels %>
                         </td>
                     </tr>
@@ -25,7 +25,7 @@
                 </form>
         </script>
         <script type="text/template" id="ConfigViewDataChannelListTemplate">
-                <table id="dataChannelTable">
+                <table id="dataChannelTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th colspan="3">Data Channels</th>
@@ -42,11 +42,11 @@
         </script>
         <script type="text/template" id="ConfigViewDataChannelEntryTemplate">
                     <td class="center"><%= channel %></td>
-                    <td><%= label %></td>
-                    <td><%= port %></td>
+                    <td><%= label %> (<%= unitType %>)</td>
+                    <td style="white-space: nowrap;"><%= port.replace(new RegExp(',', 'g'), '<br />') %></td>
         </script>
         <script type="text/template" id="ConfigViewControlChannelListTemplate">
-                <table id="controlChannelTable">
+                <table id="controlChannelTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th colspan="3">Control Channels</th>
@@ -64,10 +64,10 @@
         <script type="text/template" id="ConfigViewControlChannelEntryTemplate">
                     <td class="center"><%= channel %></td>
                     <td><%= label %></td>
-                    <td><%= port %></td>
+                    <td style="white-space: nowrap;"><%= port.replace(new RegExp(',', 'g'), '<br />') %></td>
         </script>
         <script type="text/template" id="ConfigViewFunctionListTemplate">
-                <table id="functionTable">
+                <table id="functionTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th colspan="3">Functions</th>

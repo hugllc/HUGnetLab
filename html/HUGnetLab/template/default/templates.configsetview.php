@@ -9,12 +9,12 @@
                 </div>
                 <div id="image" style="width: 800px; height: 400px;">
                 </div>
-                <table>
+                <table style="width: 800px;">
                     <tr>
                         <td style="vertical-align: top;">
                             <%= functions %>
                         </td>
-                        <td style="vertical-align: top;">
+                        <td style="vertical-align: top;" style="width: 25%;">
                             <%= dataChannels %><br />
                             <%= controlChannels %>
                         </td>
@@ -23,7 +23,7 @@
                 </form>
         </script>
         <script type="text/template" id="ConfigSetViewDataChannelListTemplate">
-                <table id="dataChannelTable">
+                <table id="dataChannelTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th colspan="3">Data Channels</th>
@@ -44,7 +44,7 @@
                     <td><%= port %></td>
         </script>
         <script type="text/template" id="ConfigSetViewControlChannelListTemplate">
-                <table id="controlChannelTable">
+                <table id="controlChannelTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th colspan="3">Control Channels</th>
@@ -65,7 +65,7 @@
                     <td><%= port %></td>
         </script>
         <script type="text/template" id="ConfigSetViewFunctionListTemplate">
-                <table id="functionTable">
+                <table id="functionTable" style="width: 100%;">
                     <thead>
                     <tr>
                         <th colspan="3">Functions</th>
