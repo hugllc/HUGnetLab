@@ -9,12 +9,17 @@
                 </div>
                 <div id="image" style="width: 800px; height: 400px;">
                 </div>
+                <div>
+                    <button name="NewFunction">New Function</button>
+                    <button name="Save">Save</button>
+                    <button name="Apply">Apply</button>
+                </div>
                 <table style="width: 800px;">
                     <tr>
                         <td style="vertical-align: top;">
                             <%= functions %>
                         </td>
-                        <td style="vertical-align: top;" style="width: 25%;">
+                        <td style="vertical-align: top; width: 25%;">
                             <%= dataChannels %><br />
                             <%= controlChannels %>
                         </td>
@@ -41,7 +46,7 @@
         <script type="text/template" id="ConfigSetViewDataChannelEntryTemplate">
                     <td class="center"><%= channel %></td>
                     <td><%= label %></td>
-                    <td><%= port %></td>
+                    <td style="white-space: nowrap;"><%= port.replace(new RegExp(',', 'g'), '<br />') %></td>
         </script>
         <script type="text/template" id="ConfigSetViewControlChannelListTemplate">
                 <table id="controlChannelTable" style="width: 100%;">
@@ -62,7 +67,7 @@
         <script type="text/template" id="ConfigSetViewControlChannelEntryTemplate">
                     <td class="center"><%= channel %></td>
                     <td><%= label %></td>
-                    <td><%= port %></td>
+                    <td style="white-space: nowrap;"><%= port.replace(new RegExp(',', 'g'), '<br />') %></td>
         </script>
         <script type="text/template" id="ConfigSetViewFunctionListTemplate">
                 <table id="functionTable" style="width: 100%;">
@@ -73,6 +78,7 @@
                     <tr>
                         <th style="width: 5%;">#</th>
                         <th>Type</th>
+                        <th>Name</th>
                     </tr>
                     </thead>
                     <tbody id="fctList">
@@ -82,4 +88,5 @@
         <script type="text/template" id="ConfigSetViewFunctionEntryTemplate">
                     <td class="center"><%= id %></td>
                     <td><%= longName %></td>
+                    <td><%= params.name %></td>
         </script>
