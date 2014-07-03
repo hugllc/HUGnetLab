@@ -7,7 +7,7 @@
                 <div class="buttons floatright">
                     <button class="close">Close</button>
                 </div>
-                <div id="image">
+                <div id="image" style="width: 800px; height: 400px;">
                 </div>
                 <table>
                     <tr>
