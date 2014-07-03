@@ -12,6 +12,9 @@
                 <table>
                     <tr>
                         <td style="vertical-align: top;">
+                            <%= functions %>
+                        </td>
+                        <td style="vertical-align: top;">
                             <%= dataChannels %>
                         </td>
                         <td style="vertical-align: top;">
@@ -62,4 +65,23 @@
                     <td class="center"><%= channel %></td>
                     <td><%= label %></td>
                     <td><%= port %></td>
+        </script>
+        <script type="text/template" id="ConfigViewFunctionListTemplate">
+                <table id="functionTable">
+                    <thead>
+                    <tr>
+                        <th colspan="3">Functions</th>
+                    </tr>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th>Type</th>
+                    </tr>
+                    </thead>
+                    <tbody id="fctList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="ConfigViewFunctionEntryTemplate">
+                    <td class="center"><%= id %></td>
+                    <td><%= longName %></td>
         </script>
