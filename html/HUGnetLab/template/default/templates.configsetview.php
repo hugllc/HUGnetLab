@@ -5,14 +5,14 @@
         <script type="text/template" id="DeviceConfigSetViewTemplate">
                 <form id="deviceForm" method="POST" action="javascript:void(0);">
                 <div class="buttons floatright">
-                    <button class="close">Close</button>
                 </div>
                 <div id="image" style="width: 800px; height: 400px;">
                 </div>
                 <div>
                     <button name="NewFunction">New Function</button>
-                    <button name="Save">Save</button>
-                    <button name="Apply">Apply</button>
+                    <button name="Apply">Save</button>
+                    <button name="Save">Save & Exit</button>
+                    <button class="close">Cancel</button>
                 </div>
                 <table style="width: 800px;">
                     <tr>
@@ -88,5 +88,5 @@
         <script type="text/template" id="ConfigSetViewFunctionEntryTemplate">
                     <td class="center"><%= id %></td>
                     <td><%= longName %></td>
-                    <td><%= params.name %></td>
+                    <td><%= name %></td>
         </script>
