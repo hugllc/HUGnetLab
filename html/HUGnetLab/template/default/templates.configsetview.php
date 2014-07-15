@@ -84,9 +84,27 @@
                     <tbody id="fctList">
                     </tbody>
                 </table>
+                <% print("<sc" + "ript type='text/javascript'>"); %>
+                    function togFuncWrite(id) {
+                            $('#functionTable .functionread').show(); 
+                            $('#functionTable .functionwrite,#functionTable .functionread'+id).hide(); 
+                            $('#functionTable .functionwrite'+id).show();
+                    }
+                <% print("</sc"+"ript>"); %>
         </script>
         <script type="text/template" id="ConfigSetViewFunctionEntryTemplate">
-                    <td class="center"><%= id %></td>
-                    <td><%= longName %></td>
-                    <td><%= name %></td>
+                        <td onClick="togFuncWrite(<%= id %>)" class="center"><%= id %></td>
+                        <td onClick="togFuncWrite(<%= id %>)" 
+                            class="center functionread functionread<%= id %>"
+                            >
+                            <%= longName %>
+                        </td>
+                        <td onClick="togFuncWrite(<%= id %>)" 
+                            class="functionread functionread<%= id %>"
+                            >
+                            <%= name %>
+                        </td>
+                        <td style="display: none;" class="functionwrite functionwrite<%= id %>" colspan="2">
+                        Write Here
+                        </td>
         </script>

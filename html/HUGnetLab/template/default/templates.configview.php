@@ -82,6 +82,8 @@
                 </table>
         </script>
         <script type="text/template" id="ConfigViewFunctionEntryTemplate">
-                    <td class="center"><%= id %></td>
-                    <td><%= longName %></td>
+                    <tr>
+                        <td class="center"><%= id %></td>
+                        <td><%= longName %></td>
+                    </tr>
         </script>
