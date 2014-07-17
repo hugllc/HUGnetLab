@@ -9,10 +9,11 @@
                 <div id="image" style="width: 800px; height: 400px;">
                 </div>
                 <div>
-                    <button name="NewFunction">New Function</button>
-                    <button name="Apply">Save</button>
+                    <button type="submit" name="Apply">Save</button>
                     <button name="Save">Save & Exit</button>
                     <button class="close">Cancel</button>
+                    <button name="NewFunction">New Function</button>
+                    <span>Click on a row to edit it</span>
                 </div>
                 <table style="width: 800px;">
                     <tr>
@@ -93,7 +94,10 @@
                 <% print("</sc"+"ript>"); %>
         </script>
         <script type="text/template" id="ConfigSetViewFunctionEntryTemplate">
-                        <td onClick="togFuncWrite(<%= id %>)" class="center"><%= id %></td>
+                        <td onClick="togFuncWrite(<%= id %>)" class="center">
+                            <%= id %>
+                            <input type="hidden" name="id" value="<%= id %>" />
+                        </td>
                         <td onClick="togFuncWrite(<%= id %>)" 
                             class="center functionread functionread<%= id %>"
                             >
@@ -102,9 +106,26 @@
                         <td onClick="togFuncWrite(<%= id %>)" 
                             class="functionread functionread<%= id %>"
                             >
-                            <%= name %>
+                            <span id="name"><%= name %></span>
+                            <span id="remove" style="display: none;">(Removed on save)</span>
                         </td>
                         <td style="display: none;" class="functionwrite functionwrite<%= id %>" colspan="2">
-                        Write Here
+                            <table>
+                                <tr>
+                                    <th colspan="2">Basic Setup</th>
+                                </tr>
+                                <tr>
+                                    <th>Remove:</th>
+                                    <td>
+                                        <input type="checkbox" name="delete" onChange="if (this.checked) { $('.functionread<%= id %> span#remove').show(); } else { $('.functionread<%= id %> span#remove').hide(); };" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Name:</th>
+                                    <td>
+                                        <input type="text" name="name" value="<%= name %>" onBlur="$('.functionread<%= id %> span#name').html(this.value);" />
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
         </script>
