@@ -101,7 +101,7 @@
                         <td onClick="togFuncWrite(<%= id %>)" 
                             class="center functionread functionread<%= id %>"
                             >
-                            <%= longName %>
+                            <span id="type"><%= longName %></span>
                         </td>
                         <td onClick="togFuncWrite(<%= id %>)" 
                             class="functionread functionread<%= id %>"
@@ -115,17 +115,31 @@
                                     <th colspan="2">Basic Setup</th>
                                 </tr>
                                 <tr>
-                                    <th>Remove:</th>
+                                    <th class="right">Remove:</th>
                                     <td>
                                         <input type="checkbox" name="delete" onChange="if (this.checked) { $('.functionread<%= id %> span#remove').show(); } else { $('.functionread<%= id %> span#remove').hide(); };" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Name:</th>
+                                    <th class="right">Name:</th>
                                     <td>
                                         <input type="text" name="name" value="<%= name %>" onBlur="$('.functionread<%= id %> span#name').html(this.value);" />
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th class="right">Type:</th>
+                                    <td>
+                                        <select name="id" class="id" onChange="$('.functionread<%= id %> span#type').html(this.value);" >
+                                            <% for (key in validIds) { %>
+                                                <option value="<%- key %>" <% (key == id) && print('selected="selected"'); %>>
+                                                    <%= validIds[key] %>
+                                                </option>
+                                            <% } %>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr><th colspan="2">Extra Parameters</th></tr>
+                                <% print(tDefault.ExtraTable(extra, extraDefault, extraDesc, extraValues, extraText, "extra")) %>
                             </table>
                         </td>
         </script>
