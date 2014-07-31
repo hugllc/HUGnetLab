@@ -1,11 +1,11 @@
 <!--  These are our tempaltes -->
         <script type="text/template" id="AnnotationPropertiesTitleTemplate">
-            Annotation for <%= test %>:<%= testcol %>
+            Annotation for <% print(test.toString(16).toUpperCase()) %>:<%= testcol %>
         </script>
         <script type="text/template" id="AnnotationPropertiesTemplate">
                 <form id="annotationForm" method="POST" action="javascript:void(0);">
                 <table style="width:100%;">
-                    <tr class="even"><th class="right">ID</th><td><% print(test.toString(16)) %>:<%= testcol %> on <%= sqlUTCDate(testdate * 1000) %></td></tr>
+                    <tr class="even"><th class="right">ID</th><td><% print(test.toString(16).toUpperCase()) %>:<%= testcol %> on <%= sqlUTCDate(testdate * 1000) %></td></tr>
                     <tr class="odd">
                         <th class="right">Your Name</th>
                         <td><input type="text" name="author" value="<%= author %>"/></td>
@@ -18,6 +18,7 @@
                         <th class="right">&nbsp;</th>
                         <td>
                             <button name="save" class="save">Save</button>
+                            <button name="cancel" class="cancel">Cancel</button>
                         </td>
                     </tr>
                 </table>
