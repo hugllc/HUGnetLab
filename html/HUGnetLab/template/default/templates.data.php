@@ -74,6 +74,9 @@
                     </select>
                 </div>
                 <div>
+                    <label for="zoom" class="bold">Enable Zoom: </label><input name="zoom" type="checkbox" value="6" />
+                </div>
+                <div>
                     <input type="submit" name="submit" value="Go" />
                 </div>
             </div>
