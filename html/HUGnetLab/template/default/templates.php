@@ -17,4 +17,5 @@
     require dirname(__FILE__)."/templates.imageconfig.php";
     require dirname(__FILE__)."/templates.images.php";
     require dirname(__FILE__)."/templates.imagesvg.php";
+    require dirname(__FILE__)."/templates.annotations.php";
 ?>
