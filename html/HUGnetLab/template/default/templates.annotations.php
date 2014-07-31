@@ -10,10 +10,6 @@
                         <th class="right">Your Name</th>
                         <td><input type="text" name="author" value="<%= author %>"/></td>
                     </tr>
-                    <tr class="even">
-                        <th class="right">Title</th>
-                        <td><input type="text" name="title" value="<%= title %>"/></td>
-                    </tr>
                     <tr class="odd">
                         <th class="right">Text</th>
                         <td><textarea type="text" name="text"><%= text %></textarea></td>
@@ -28,29 +24,27 @@
                 </form>
         </script>
         <script type="text/template" id="AnnotationsTemplate">
-                <div>
-                </div>
-                <div style="clear:both;">
+                <h2>Annotations</h2>
                 <table id="annotationTable" class="tablesorter {sortlist: [[2,0]]}">
                     <thead>
                     <tr>
                         <th class="sorter-numeric" width="5%">id</th>
+                        <th class="sorter-text">Column</th>
+                        <th class="sorter-text">Date</th>
                         <th class="sorter-text">Author</th>
-                        <th class="sorter-text">Title</th>
+                        <th class="sorter-text">Text</th>
                     </tr>
                     </thead>
                     <tbody id="AnnotationList">
                     </tbody>
                 </table>
-                </div>
         </script>
         <script type="text/template" id="AnnotationEntryTemplate">
                         <td class="center"><%= id %></td>
+                        <td><%= testcol %></td>
+                        <td><%= sqlUTCDate(testdate * 1000) %></td>
                         <td><%= author %></td>
-                        <td><%= title %></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><%= text %></td>
+                        <td><%= text %></td>
         </script>
 
 
