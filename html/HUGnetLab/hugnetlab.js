@@ -108,6 +108,7 @@ $(function ()
                 devices: HUGnetLab.Devices,
                 gateways: HUGnetLab.Gateways,
                 filter: HUGnetParams.device_filter,
+                readonly: false,
             });
         }
     });

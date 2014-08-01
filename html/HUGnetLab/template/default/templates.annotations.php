@@ -1,6 +1,6 @@
 <!--  These are our tempaltes -->
         <script type="text/template" id="AnnotationPropertiesTitleTemplate">
-            Add Annotation for <% print(test.toString(16).toUpperCase()) %> on <%= sqlUTCDate(testdate * 1000) %>
+            Add Annotation for <% print(test.toString(16).toUpperCase()) %>
         </script>
         <script type="text/template" id="AnnotationPropertiesTemplate">
                 <form id="annotationForm" method="POST" action="javascript:void(0);">
@@ -26,12 +26,11 @@
         </script>
         <script type="text/template" id="AnnotationsTemplate">
                 <h2>Annotations</h2>
-                <table id="annotationTable" class="tablesorter {sortlist: [[2,0]]}">
+                <table id="annotationTable" class="tablesorter {sortlist: [[0,0]]}">
                     <thead>
                     <tr>
-                        <th class="sorter-numeric" width="5%">id</th>
-                        <th class="sorter-text">Date</th>
-                        <th class="sorter-text">Author</th>
+                        <th style="width: 20%;" class="sorter-text">Date</th>
+                        <th style="width: 20%;" class="sorter-text">Author</th>
                         <th class="sorter-text">Text</th>
                     </tr>
                     </thead>
@@ -40,7 +39,6 @@
                 </table>
         </script>
         <script type="text/template" id="AnnotationEntryTemplate">
-                        <td class="center"><%= id %></td>
                         <td><%= sqlUTCDate(testdate * 1000) %></td>
                         <td><%= author %></td>
                         <td><%= text %></td>
