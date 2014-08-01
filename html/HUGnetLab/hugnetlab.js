@@ -69,7 +69,8 @@ $(function ()
                 gateways: this.Gateways,
                 url: 'index.php',
                 readonly: true,
-                filter: HUGnetParams.device_filter
+                filter: HUGnetParams.device_filter,
+                DeviceID: HUGnetParams.DeviceID
             });
         }
     });
@@ -109,6 +110,7 @@ $(function ()
                 gateways: HUGnetLab.Gateways,
                 filter: HUGnetParams.device_filter,
                 readonly: false,
+                DeviceID: HUGnetParams.DeviceID
             });
         }
     });

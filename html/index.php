@@ -136,6 +136,7 @@ if (is_array($tasks[$task]) && in_array($action, $tasks[$task])) {
     
     // Now do the params
     $params_get = array(
+        "DeviceID"
     );
     foreach ($params_get as $param) {
         if (isset($_GET[$param])) {

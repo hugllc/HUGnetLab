@@ -53,10 +53,10 @@
                 {{#images}}<div id="tabs-images" class="content">{{{images}}}</div>{{/images}}
                 {{/view}}
                 {{^view}}
+                {{#devices}}<div id="tabs-devices" class="content">{{{devices}}}</div>{{/devices}}
                 {{#gateways}}<div id="tabs-gateways" class="content">{{{gateways}}}</div>{{/gateways}}
                 {{#datacollectors}}<div id="tabs-datacollectors" class="content">{{{datacollectors}}}</div>{{/datacollectors}}
                 {{#gatewaydev}}<div id="tabs-gatewaydev" class="content">{{{gatewaydev}}}</div>{{/gatewaydev}}
-                {{#devices}}<div id="tabs-devices" class="content">{{{devices}}}</div>{{/devices}}
                 {{#images}}<div id="tabs-images" class="content">{{{images}}}</div>{{/images}}
                 {{#tests}}<div id="tabs-tests" class="content">{{{tests}}}</div>{{/tests}}
                 {{#control}}<div id="tabs-outputs" class="content">{{{control}}}</div>{{/control}}
@@ -64,12 +64,18 @@
                 {{#serverconfig}}<div id="tabs-serverconfig" class="content">{{{serverconfig}}}</div>{{/serverconfig}}
                 {{/view}}
                 <script type="text/javascript">
+                    var index = $('#tabs a[href="#tabs-devices"]').parent().index();
                     var tabs = $('#tabs').tabs({
                         tabTemplate: '<li><a href="#{href}">#{label}</a></li>',
                         cookie: {
                             // store a session cookie
                             expires: 10
                         },
+                        <?php
+                            if (isset($_GET["DeviceID"])) {
+                                print "active: index,\n";
+                            }
+                        ?>
                         // This updates the tables when the tab is selected
                         activate:function(e, ui) {
                             $(ui.newPanel.selector + " .tablesorter").trigger("update");
