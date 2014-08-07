@@ -18,7 +18,7 @@
                         <th class="right">&nbsp;</th>
                         <td>
                             <button name="save" class="save">Save</button>
-                            <button name="cancel" class="cancel">Cancel</button>
+                            <button name="cancel" class="cancel">Delete</button>
                         </td>
                     </tr>
                 </table>
@@ -29,6 +29,9 @@
                 <table id="annotationTable" class="tablesorter {sortlist: [[0,0]]}">
                     <thead>
                     <tr>
+                        <% if (!readonly) { %>
+                        <th style="width: 5%;">Action</th>
+                        <% } %>
                         <th style="width: 20%;" class="sorter-text">Date</th>
                         <th style="width: 20%;" class="sorter-text">Author</th>
                         <th class="sorter-text">Text</th>
@@ -39,6 +42,9 @@
                 </table>
         </script>
         <script type="text/template" id="AnnotationEntryTemplate">
+                        <% if (!readonly) { %>
+                        <td><button name="edit">Edit</button></td>
+                        <% } %>
                         <td><%= sqlUTCDate(testdate * 1000) %></td>
                         <td><%= author %></td>
                         <td><%= text %></td>
