@@ -7,16 +7,16 @@
                 <div class="buttons floatright">
                     <button name="Execute">Set Config</button>
                 </div>
-                <div id="image" style="width: 800px; height: 400px;">
+                <div id="image" style="width: 800px; height: 400px; clear: both;">
                 </div>
-                <div>
+                <div style="clear: both;">
                     <button type="submit" name="Apply">Save</button>
                     <button name="Save">Save & Exit</button>
                     <button class="close">Cancel</button>
                     <button name="NewFunction">New Function</button>
                     <span>Click on a row to edit it</span>
                 </div>
-                <table style="width: 800px;">
+                <table style="width: 800px; clear: both;">
                     <tr>
                         <td style="vertical-align: top;">
                             <%= functions %>
