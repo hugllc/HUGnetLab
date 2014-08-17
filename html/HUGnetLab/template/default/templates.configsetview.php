@@ -5,6 +5,7 @@
         <script type="text/template" id="DeviceConfigSetViewTemplate">
                 <form id="deviceForm" method="POST" action="javascript:void(0);">
                 <div class="buttons floatright">
+                    <button name="Execute">Set Config</button>
                 </div>
                 <div id="image" style="width: 800px; height: 400px;">
                 </div>
@@ -129,9 +130,9 @@
                                 <tr>
                                     <th class="right">Type:</th>
                                     <td>
-                                        <select name="id" class="id" onChange="$('.functionread<%= id %> span#type').html(this.value);" >
+                                        <select name="driver" class="driver" onChange="$('.functionread<%= id %> span#type').html(this.value);" >
                                             <% for (key in validIds) { %>
-                                                <option value="<%- key %>" <% (key == id) && print('selected="selected"'); %>>
+                                                <option value="<%- key %>" <% (key == driver) && print('selected="selected"'); %>>
                                                     <%= validIds[key] %>
                                                 </option>
                                             <% } %>
