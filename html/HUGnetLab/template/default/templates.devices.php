@@ -151,6 +151,7 @@
                             <button class="inputList">Edit Inputs</button>
                             <button class="outputList">Edit Outputs</button>
                             <button class="processList">Edit Processes</button>
+                            <button class="powerList">Edit Power Ports</button>
                         </td>
                     </tr>
                     <tr>
@@ -556,3 +557,87 @@
         </script>
 
 
+        <!--  These are our tempaltes -->
+        <script type="text/template" id="DevicePowerPropertiesTitleTemplate">
+            Device <%= power %>:<%= location %>
+        </script>
+        <script type="text/template" id="DevicePowerPropertiesTemplate">
+                <form id="powerForm" method="POST" action="javascript:void(0);">
+                <div class="buttons floatright">
+                    <button class="save">Save</button>
+                </div>
+                <table style="width: 100%;">
+                    <tbody>
+                    <tr><th class="right">Power #</th><td><%= power %></td></tr>
+                    <tr>
+                        <th class="right">Power ID</th>
+                        <td>
+                            <select name="id" class="id">
+                                <% for (key in validIds) { %>
+                                    <option value="<%- key %>" <% (key == id) && print('selected="selected"'); %>>
+                                        <% print(parseInt(key, 10).toString(16).toUpperCase()) %>:<%= validIds[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="right">Label</th>
+                        <td>
+                            <input type="text" name="location" value="<%= location %>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="right">Driver</th>
+                        <td>
+                            <%= longName %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="right">Type</th>
+                        <td>
+                            <select name="type" class="type">
+                                <% for (key in otherTypes) { %>
+                                    <option value="<%- otherTypes[key] %>" <% (otherTypes[key] == type) && print('selected="selected"'); %>>
+                                        <%= otherTypes[key] %>
+                                    </option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Power Extra Parameters -->
+                    <tr><th colspan="2">Extra Parameters</th></tr>
+                    <% print(tDefault.ExtraTable(extra, extraDefault, extraDesc, extraValues, extraText, "extra")) %>
+                    <tr><th colspan="2">Power Table Entry</th></tr>
+                    <tr>
+                        <th class="right">Copy Table From</th>
+                        <td><% print(tDefault.iopOtherTables(otherTables, "setTable", parseInt(tableEntry.fixed))) %></td>
+                    </tr>
+                    <% print(tDefault.iopTableTable(fullEntry, "tableEntry", parseInt(tableEntry.fixed))) %>
+                </table>
+                </form>
+        </script>
+        <script type="text/template" id="DevicePowerListTemplate">
+                <table id="powerTable" style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%;">Action</th>
+                        <th style="width: 5%;">#</th>
+                        <th>Name</th>
+                        <th style="width: 5%;">Type</th>
+                    </tr>
+                    </thead>
+                    <tbody id="DeviceList">
+                    </tbody>
+                </table>
+        </script>
+        <script type="text/template" id="DevicePowerEntryTemplate">
+                    <td>
+                        <button class="properties">Edit</button>
+                    </td>
+                    <td class="center"><%= power %></td>
+                    <td><% (location.length > 0) ? print(location) : print("Power " + parseInt(power)); %></td>
+                    <td class="center"><%= type %></td>
+        </script>
+
+        
