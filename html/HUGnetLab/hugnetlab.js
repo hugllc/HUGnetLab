@@ -51,10 +51,12 @@ $(function ()
         devices: {},
         initialize: function (options)
         {
-            this.Gateways = new HUGnet.Gateways();
+            this.Gateways = new HUGnet.Gateways({
+                baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+            });
             this.Gateways.fetch();
             this.devices = new HUGnet.Devices({
-                url: 'index.php'
+                baseurl: '/HUGnetLib/HUGnetLibAPI.php'
             });
             this.devices.fetch();
             this.render();
@@ -92,11 +94,15 @@ $(function ()
         initialize: function ()
         {
             if (!HUGnetLab.Gateways) {
-                HUGnetLab.Gateways = new HUGnet.Gateways();
+                HUGnetLab.Gateways = new HUGnet.Gateways({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
                 HUGnetLab.Gateways.fetch();
             }
             if (!HUGnetLab.Devices) {
-                HUGnetLab.Devices = new HUGnet.Devices();
+                HUGnetLab.Devices = new HUGnet.Devices({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
             }
             this.render();
         },
@@ -132,7 +138,9 @@ $(function ()
         initialize: function ()
         {
             if (!HUGnetLab.Images) {
-                HUGnetLab.Images = new HUGnet.Images();
+                HUGnetLab.Images = new HUGnet.Images({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
                 HUGnetLab.Images.fetch();
             }
             this.render();
@@ -144,6 +152,7 @@ $(function ()
                 el: "#tabs-images",
                 id: "tabs-images",
                 images: HUGnetLab.Images,
+                baseurl: '/HUGnetLib/HUGnetLibAPI.php'
             });
         }
     });
@@ -165,11 +174,15 @@ $(function ()
         initialize: function ()
         {
             if (!HUGnetLab.Gateways) {
-                HUGnetLab.Gateways = new HUGnet.Gateways();
+                HUGnetLab.Gateways = new HUGnet.Gateways({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
                 HUGnetLab.Gateways.fetch();
             }
             if (!HUGnetLab.Devices) {
-                HUGnetLab.Devices = new HUGnet.Devices();
+                HUGnetLab.Devices = new HUGnet.Devices({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
             }
             this.render();
         },
@@ -202,7 +215,9 @@ $(function ()
         initialize: function ()
         {
             if (!HUGnetLab.Datacollectors) {
-                HUGnetLab.Datacollectors = new HUGnet.Datacollectors();
+                HUGnetLab.Datacollectors = new HUGnet.Datacollectors({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
                 HUGnetLab.Datacollectors.fetch();
             }
             this.render();
@@ -213,7 +228,8 @@ $(function ()
             this.datacollectors = new HUGnet.DatacollectorList({
                 el: "#tabs-datacollectors",
                 id: "tabs-datacollectors",
-                model: HUGnetLab.Datacollectors
+                model: HUGnetLab.Datacollectors,
+                baseurl: '/HUGnetLib/HUGnetLibAPI.php'
             });
             this.datacollectors.render();
         }
@@ -236,7 +252,9 @@ $(function ()
         initialize: function ()
         {
             if (!HUGnetLab.Gateways) {
-                HUGnetLab.Gateways = new HUGnet.Gateways();
+                HUGnetLab.Gateways = new HUGnet.Gateways({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
                 HUGnetLab.Gateways.fetch();
             }
             this.render();
@@ -271,11 +289,21 @@ $(function ()
         initialize: function ()
         {
             if (!HUGnetLab.Devices) {
-                HUGnetLab.Devices = new HUGnet.Devices();
+                HUGnetLab.Devices = new HUGnet.Devices({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
             }
             if (!HUGnetLab.Images) {
-                HUGnetLab.Images = new HUGnet.Images();
+                HUGnetLab.Images = new HUGnet.Images({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
                 HUGnetLab.Images.fetch();
+            }
+            if (!HUGnetLab.Datacollectors) {
+                HUGnetLab.Datacollectors = new HUGnet.Datacollectors({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
+                HUGnetLab.Datacollectors.fetch();
             }
             this.render();
         },
@@ -285,6 +313,7 @@ $(function ()
                 el: "#tabs-config",
                 id: "tabs-config",
                 devices: HUGnetLab.Devices,
+                datacollectors: HUGnetLab.Datacollectors,
                 images: HUGnetLab.Images,
             });
         }
@@ -307,14 +336,20 @@ $(function ()
         initialize: function ()
         {
             if (!HUGnetLab.Devices) {
-                HUGnetLab.Devices = new HUGnet.Devices();
+                HUGnetLab.Devices = new HUGnet.Devices({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
             }
             if (!HUGnetLab.Gateways) {
-                HUGnetLab.Gateways = new HUGnet.Gateways();
+                HUGnetLab.Gateways = new HUGnet.Gateways({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
                 HUGnetLab.Gateways.fetch();
             }
             if (!HUGnetLab.Images) {
-                HUGnetLab.Images = new HUGnet.Images();
+                HUGnetLab.Images = new HUGnet.Images({
+                    baseurl: '/HUGnetLib/HUGnetLibAPI.php'
+                });
                 HUGnetLab.Images.fetch();
             }
             this.render();
@@ -326,7 +361,9 @@ $(function ()
                 id: "tabs-serverconfig",
                 devices: HUGnetLab.Devices,
                 gateways: HUGnetLab.Gateways,
+                datacollectors: HUGnetLab.Datacollectors,
                 images: HUGnetLab.Images,
+                baseurl: '/HUGnetLib/HUGnetLibAPI.php',
             });
         }
     });
