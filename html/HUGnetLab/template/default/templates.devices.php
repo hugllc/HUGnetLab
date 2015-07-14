@@ -227,7 +227,7 @@
                             <option value="export">Export</option>
                             <option value="refresh">Read the Config</option>
                             <option value="loadconfig">Write the Config</option>
-                            <% if ((typeof update !== 'undefined') || (type === "bootloader")) { %>
+                            <% if (loadable) { %>
                                 <option value="loadfirmware">Update Firmware</option>
                             <% } %>
                         </select>

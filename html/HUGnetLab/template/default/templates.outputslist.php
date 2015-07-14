@@ -63,6 +63,7 @@
           %>
               <th>&nbsp;</th>
             </tr>
+            <% if (params.LastPollData) { %>
             <tr>
               <td><%= sqlUTCDate(params.LastPollData.Date * 1000) %></td>
           <%
@@ -72,6 +73,7 @@
           %>
               <td><button class="refresh">Refresh</button>
             </tr>
+            <% } %>
           </table>
 </script>
 <script type="text/template" id="OutputsControlChannelEntryTemplate">
