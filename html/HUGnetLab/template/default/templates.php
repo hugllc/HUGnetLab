@@ -1,4 +1,5 @@
 <?php
+    require dirname(__FILE__)."/templates.powerTables.php";
     require dirname(__FILE__)."/templates.processTables.php";
     require dirname(__FILE__)."/templates.outputTables.php";
     require dirname(__FILE__)."/templates.inputTables.php";

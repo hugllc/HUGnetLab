@@ -14,3 +14,9 @@ view/configuration.ini
 .kdev4
 *.kdev4
 include/plugins/*.php
+bin/
+composer.json
+composer.lock
+composer/
+node_modules/
+
