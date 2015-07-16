@@ -10,7 +10,7 @@
                         <th class="sorter-false">Actions</th>
                         <th class="sorter-numeric">ID</th>
                         <th class="sorter-text">Name</th>
-                        <th class="sorter-text">Arch</th>
+                        <th class="sorter-text">Type</th>
                         <th class="sorter-text">Desc</th>
                     </tr>
                     </thead>
@@ -56,7 +56,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th title="The architecture this table is for" class="right">Arch</th>
+                        <th title="The type of device this table is for" class="right">Type</th>
                         <td>
                             <select name="arch" class="type">
                                 <% for (key in archs) { %>
