@@ -22,8 +22,8 @@
         <copy todir="${deb.common.staging}">
             <fileset dir="${deb.common.setup}"/>
         </copy>
-        <mkdir dir="${deb.common.staging}/var/www"/>
-        <copy todir="${deb.common.staging}/var/www">
+        <mkdir dir="${deb.common.staging}/var/www/html"/>
+        <copy todir="${deb.common.staging}/var/www/html">
             <fileset dir="${deb.common.source}/html"/>
         </copy>
         <mkdir dir="${deb.common.staging}${deb.prefix}/share/php/HUGnetLab"/>
@@ -36,7 +36,7 @@
         <chmod file="${deb.common.staging}/DEBIAN/postinst" perm="ugo+rx"/>
         <chmod file="${deb.common.staging}/DEBIAN/prerm" perm="ugo+rx"/>
         <chmod file="${deb.common.staging}/DEBIAN/postrm" perm="ugo+rx"/>
-        <delete file="${deb.common.staging}/var/www/configuration.ini" failonerror="false"/>
+        <delete file="${deb.common.staging}/var/www/html/configuration.ini" failonerror="false"/>
         <replaceregexp file="${deb.common.staging}/DEBIAN/control" byline="yes"
                     match="%VERSION%"
                     replace="${deb.version}"
