@@ -8,7 +8,7 @@ Package: hugnetlab
 Architecture: all
 Breaks: hugnetserver,hugnetdatacollector
 Pre-Depends: debconf
-Depends: apache2, mysql-server, debconf,
+Depends: apache2, default-mysql-server, debconf,
         hugnetfirmware, hugnetscripts-datacollector,
         hugnetlib (>> 0.13.3), hugnetlib-webapi (>> 0.13.3), hugnetlib-images (>> 0.13.3),
         hugnetlab-common (= %VERSION%),
